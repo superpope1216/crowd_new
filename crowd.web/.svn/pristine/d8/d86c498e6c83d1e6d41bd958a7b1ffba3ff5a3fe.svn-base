@@ -1,0 +1,194 @@
+package com.wisedu.crowd.controller.kfzxx;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.http.HttpRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.wisedu.crowd.common.code.SzlbEnum;
+import com.wisedu.crowd.common.code.YesNoEnum;
+import com.wisedu.crowd.common.util.CommonUtil;
+import com.wisedu.crowd.common.util.ConditionUtil;
+import com.wisedu.crowd.common.util.DateUtil;
+import com.wisedu.crowd.common.util.DecimalUtil;
+import com.wisedu.crowd.common.util.StringUtil;
+import com.wisedu.crowd.controller.BaseController;
+import com.wisedu.crowd.entity.cwgl.extend.KfzzhmxInfoExtend;
+import com.wisedu.crowd.entity.cwgl.extend.XqfzhmxInfoExtend;
+import com.wisedu.crowd.entity.dto.PageInfo;
+import com.wisedu.crowd.entity.dto.QueryCondition;
+import com.wisedu.crowd.entity.yhgl.KfzxxInfo;
+import com.wisedu.crowd.interceptor.AuthIsKfzAnnotation;
+import com.wisedu.crowd.interceptor.AuthKfzAnnotation;
+import com.wisedu.crowd.interceptor.AuthXqfAnnotation;
+import com.wisedu.crowd.service.cwgl.KfzzhmxInfoService;
+import com.wisedu.crowd.service.cwgl.XqfzhmxInfoService;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.service.yhgl.KfzxxInfoService;
+
+@Controller
+@RequestMapping("kfzMoney")
+public class KfzMoneyController extends BaseController{
+	@Autowired
+	private KfzzhmxInfoService kfzzhmxInfoService;
+	@Autowired
+	private KfzxxInfoService kfzxxInfoService; 
+
+	@RequestMapping("index")
+	@AuthKfzAnnotation
+	public ModelAndView index() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		boolean isNbkfz=isNbkfz();
+		mv.addObject("isNbkfz", isNbkfz);
+		if(YesNoEnum.YES.getCode().equals(this.getKfzxx().getSfyfp())){
+			mv.addObject("sfyfp", true);
+		}else{
+			mv.addObject("sfyfp", false);
+		}
+		mv.addObject("zfbzh", this.getKfzxx().getZfbzh());
+		mv.setViewName("kfzgl/money/index");
+		return mv;
+	}
+	@RequestMapping("queryTotal")
+	@ResponseBody
+	@AuthXqfAnnotation
+	public DataResult<Double> queryTotal() throws Exception {
+
+		KfzzhmxInfoExtend queryKfzzhmxInfoExtend = new KfzzhmxInfoExtend();
+		queryKfzzhmxInfoExtend.setKfzid(this.getKfzxx().getWid());
+		queryKfzzhmxInfoExtend.setSzlbid(SzlbEnum.XMSR.getCode());
+		Double datas = kfzzhmxInfoService
+				.selectTotalMoney(ConditionUtil.createCondition(queryKfzzhmxInfoExtend), this.createCustomOperateLog())
+				.getDatas();
+
+		return DataResult.success(datas);
+
+	}
+
+	@RequestMapping("queryMonth")
+	@ResponseBody
+	@AuthKfzAnnotation
+	public DataResult<List<Map<String,Object>>> queryMonth() throws Exception {
+		String maxMonth = DateUtil.getCurrentMonthStr();
+		String minMonth = DateUtil.addMonth(maxMonth, -11);
+		KfzzhmxInfoExtend queryKfzzhmxInfoExtend = new KfzzhmxInfoExtend();
+		queryKfzzhmxInfoExtend.setKfzid(this.getKfzxx().getWid());
+		queryKfzzhmxInfoExtend.setSzlbid(SzlbEnum.XMSR.getCode());
+		queryKfzzhmxInfoExtend.setMinMonth(minMonth);
+		queryKfzzhmxInfoExtend.setMaxMonth(maxMonth);
+		List<Map<String, Object>> srDatas = kfzzhmxInfoService.selectTotalMoneyByMonth(
+				ConditionUtil.createCondition(queryKfzzhmxInfoExtend), this.createCustomOperateLog()).getDatas();
+		queryKfzzhmxInfoExtend.setSzlbid(SzlbEnum.TX.getCode());
+		List<Map<String, Object>> txDatas = kfzzhmxInfoService.selectTotalMoneyByMonth(
+				ConditionUtil.createCondition(queryKfzzhmxInfoExtend), this.createCustomOperateLog()).getDatas();
+		Map<String, Object> monthDatas = new HashMap<String, Object>();
+		Map<String, Object> monthTxDatas = new HashMap<String, Object>();
+		if (CommonUtil.isNotEmptyList(srDatas)) {
+			for(Map<String,Object> map:srDatas){
+				monthDatas.put(StringUtil.toStr(map.get("month")),map.get("je"));
+			}
+		}
+		if(CommonUtil.isNotEmptyList(txDatas)){
+			for(Map<String,Object> map:txDatas){
+				monthTxDatas.put(StringUtil.toStr(map.get("month")),map.get("je"));
+			}
+		}
+		Map<String, Object> monthMap = new LinkedHashMap<String, Object>();
+		Map<String, Object> monthTxMap = new LinkedHashMap<String, Object>();
+		for (int i = 0; i < 12; i++) {
+			if (monthDatas.containsKey(minMonth)) {
+				monthMap.put(minMonth, monthDatas.get(minMonth));
+			} else {
+				monthMap.put(minMonth, 0);
+			}
+			if(monthTxDatas.containsKey(minMonth)){
+				monthTxMap.put(minMonth, monthTxDatas.get(minMonth));
+			}else{
+				monthTxMap.put(minMonth, 0);
+			}
+			minMonth = DateUtil.addMonth(minMonth, 1);
+		}
+		List<Map<String,Object>> lstDatas=new ArrayList<Map<String,Object>>();
+		lstDatas.add(monthMap);
+		lstDatas.add(monthTxMap);
+		return DataResult.success(lstDatas);
+
+	}
+	@AuthKfzAnnotation
+	@ResponseBody
+	@RequestMapping("queryDetail")
+	public DataResult<List<KfzzhmxInfoExtend>> queryDetail(Integer pageNum,Integer pageSize) throws Exception{
+		PageInfo pageInfo=new PageInfo();
+		if(pageNum!=null){
+			pageInfo.setPageNum(pageNum);
+		}
+		if(pageSize!=null){
+			pageInfo.setPageSize(pageSize);
+		}
+		KfzzhmxInfoExtend queryKfzzhmxInfoExtend=new KfzzhmxInfoExtend();
+		queryKfzzhmxInfoExtend.setKfzid(this.getKfzxx().getWid());
+		QueryCondition<KfzzhmxInfoExtend> condition=ConditionUtil.createCondition(queryKfzzhmxInfoExtend);
+		condition.setPageInfo(pageInfo);
+		 DataResult<List<KfzzhmxInfoExtend>> datas=this.kfzzhmxInfoService.selectDisplayByCondition(condition, this.createCustomOperateLog());
+		
+		 return datas;
+				
+	}
+	
+	@AuthKfzAnnotation
+	@RequestMapping("queryTxsq")
+	@ResponseBody
+	public DataResult<Map<String,Object>> queryTxsq() throws Exception{
+		Map<String,Object> map=new HashMap<String,Object>();
+		//获取本月已提现的扣除个税和金额
+		KfzzhmxInfoExtend queryKfzzhmxInfoExtend=new KfzzhmxInfoExtend();
+		queryKfzzhmxInfoExtend.setMinMonth(DateUtil.getCurrentMonthStr());
+		queryKfzzhmxInfoExtend.setMaxMonth(DateUtil.getCurrentMonthStr());
+		queryKfzzhmxInfoExtend.setSzlbid(SzlbEnum.TX.getCode());
+		queryKfzzhmxInfoExtend.setKfzid(this.getKfzxx().getWid());
+		List<Map<String, Object>> txxx=kfzzhmxInfoService.selectTotalMoneyByMonth(ConditionUtil.createCondition(queryKfzzhmxInfoExtend), this.createCustomOperateLog()).getDatas();
+		if(CommonUtil.isNotEmptyList(txxx)){
+			for(Map<String,Object> tx:txxx){
+				map.putAll(tx);
+			}
+		}
+		//获取本月的已提现但还未结算的金额
+		queryKfzzhmxInfoExtend.setJszt(StringUtil.toShort(YesNoEnum.YES.getCode()));
+		List<Map<String, Object>> yjsTxxx=kfzzhmxInfoService.selectTotalMoneyByMonth(ConditionUtil.createCondition(queryKfzzhmxInfoExtend), this.createCustomOperateLog()).getDatas();
+		if(CommonUtil.isNotEmptyList(yjsTxxx)){
+			map.put("wjstxje",DecimalUtil.sub(DecimalUtil.toDecimal(map.get("je")), DecimalUtil.toDecimal(yjsTxxx.get(0).get("je"))));
+		}
+		
+		
+		KfzxxInfo kfzxxInfo=kfzxxInfoService.selectByPrimaryKey(this.getKfzxx().getWid(), this.createCustomOperateLog()).getDatas();
+		map.put("zhye", kfzxxInfo.getZhye());
+		map.put("sjh", this.getYhjbxx().getSjh());
+		map.put("zfbzh",this.getKfzxx().getZfbzh());
+		map.put("ktxje", DecimalUtil.sub(DecimalUtil.changeNull(kfzxxInfo.getZhye()), DecimalUtil.toDecimal(map.get("wjstxje"))));
+		return DataResult.success(map);
+	}
+	@AuthKfzAnnotation
+	@RequestMapping("calcuYkgs")
+	@ResponseBody
+	public DataResult<BigDecimal> calcuYkgs(BigDecimal txje) throws Exception{
+		return kfzzhmxInfoService.calcuYkgs(txje, this.createCustomOperateLog());
+	}
+	@AuthIsKfzAnnotation
+	@RequestMapping("applyTx")
+	@ResponseBody
+	public DataResult<Integer> applyTx(BigDecimal txje,String yzm,String zfbzh) throws Exception{
+		return kfzzhmxInfoService.applyTx(txje, yzm, zfbzh, this.createCustomOperateLog());
+	}
+}

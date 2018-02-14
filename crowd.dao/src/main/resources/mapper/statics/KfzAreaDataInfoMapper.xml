@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.statics.KfzAreaDataInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.statics.KfzAreaDataInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="AREA" property="area" jdbcType="VARCHAR" />
+    <result column="NUM" property="num" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, AREA, NUM
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_CROWD_STATICS_DEV_AREA
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_CROWD_STATICS_DEV_AREA
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.statics.KfzAreaDataInfo" >
+    insert into T_CROWD_STATICS_DEV_AREA (WID, AREA, NUM
+      )
+    values (#{wid,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{num,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.statics.KfzAreaDataInfo" >
+    insert into T_CROWD_STATICS_DEV_AREA
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="area != null" >
+        AREA,
+      </if>
+      <if test="num != null" >
+        NUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.statics.KfzAreaDataInfo" >
+    update T_CROWD_STATICS_DEV_AREA
+    <set >
+      <if test="area != null" >
+        AREA = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        NUM = #{num,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.statics.KfzAreaDataInfo" >
+    update T_CROWD_STATICS_DEV_AREA
+    set AREA = #{area,jdbcType=VARCHAR},
+      NUM = #{num,jdbcType=DECIMAL}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

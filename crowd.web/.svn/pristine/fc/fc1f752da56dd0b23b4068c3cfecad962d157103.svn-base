@@ -1,0 +1,92 @@
+package com.wisedu.crowd.controller.center;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.wisedu.crowd.common.util.CommonUtil;
+import com.wisedu.crowd.common.util.ConditionUtil;
+import com.wisedu.crowd.common.util.StringUtil;
+import com.wisedu.crowd.controller.BaseController;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.entity.dto.QueryCondition;
+import com.wisedu.crowd.entity.rwgl.extend.RwjbxxInfoExtend;
+import com.wisedu.crowd.entity.rwgl.extend.RwtbxxInfoExtend;
+import com.wisedu.crowd.entity.yhgl.XqfxxInfo;
+import com.wisedu.crowd.entity.yhgl.extend.XqfxxExtInfoExtend;
+import com.wisedu.crowd.service.rwgl.RwjbxxInfoService;
+import com.wisedu.crowd.service.rwgl.RwtbxxInfoService;
+import com.wisedu.crowd.service.yhgl.XqfxxExtInfoService;
+import com.wisedu.crowd.service.yhgl.XqfxxInfoService;
+
+@Controller
+@RequestMapping("rwxxDetail")
+public class RwxxDetailController extends BaseController{
+
+	@Autowired
+	private RwjbxxInfoService rwjbxxInfoService;
+	@Autowired
+	private RwtbxxInfoService rwtbxxInfoService;
+	@Autowired
+	private XqfxxInfoService xqfxxInfoService;
+	
+	@Autowired
+	private XqfxxExtInfoService xqfxxExtInfoService;
+	@RequestMapping("index")
+	public ModelAndView index(String rwid) throws Exception{
+		ModelAndView mv=new ModelAndView();
+		mv.addObject("rwid", rwid);
+		RwjbxxInfoExtend queryRwjbxxInfoExtend=new RwjbxxInfoExtend();
+		queryRwjbxxInfoExtend.setWid(rwid);
+		DataResult<List<RwjbxxInfoExtend>>  datas=rwjbxxInfoService.selectDisplayByCondition(ConditionUtil.createCondition(queryRwjbxxInfoExtend));
+		String xqfId="";
+		if(datas!=null && CommonUtil.isNotEmptyList(datas.getDatas())){
+			mv.addObject("rwjbxx", datas.getDatas().get(0));
+			xqfId=datas.getDatas().get(0).getXqfid();
+		}
+		RwtbxxInfoExtend queryRwtbxxInfoExtend=new RwtbxxInfoExtend();
+		queryRwtbxxInfoExtend.setRwid(rwid);
+		DataResult<Integer> rwtbxxData=rwtbxxInfoService.selectCountByCondition(ConditionUtil.createCondition(queryRwtbxxInfoExtend));
+		mv.addObject("rwtbxxCount",rwtbxxData.getDatas());
+		
+		if(!StringUtil.isEmpty(xqfId)){
+			DataResult<XqfxxInfo> xqfxxData=xqfxxInfoService.selectByPrimaryKey(xqfId,this.createCustomOperateLog());
+			mv.addObject("xqfxx",xqfxxData.getDatas());
+			XqfxxExtInfoExtend queryXqfxxExtInfoExtend=new XqfxxExtInfoExtend();
+			queryXqfxxExtInfoExtend.setXqfid(xqfId);
+			DataResult<List<XqfxxExtInfoExtend>> xqfxxExtInfoExtendDatas=xqfxxExtInfoService.selectByCondition(ConditionUtil.createCondition(queryXqfxxExtInfoExtend), this.createCustomOperateLog());
+			Integer score=100;
+			if(CommonUtil.isNotEmptyList(xqfxxExtInfoExtendDatas.getDatas())){
+				score=xqfxxExtInfoExtendDatas.getDatas().get(0).getScore();
+			}
+			mv.addObject("score",score);
+			
+		}
+		mv.setViewName("center/rwxx_detail");
+		return mv;
+	}
+	
+	@RequestMapping("queryRwxx")
+	@ResponseBody
+	public DataResult<RwjbxxInfoExtend> queryRwjbxxDetail(String rwid){
+		
+		RwjbxxInfoExtend queryRwjbxxInfoExtend=new RwjbxxInfoExtend();
+		queryRwjbxxInfoExtend.setWid(rwid);
+		DataResult<List<RwjbxxInfoExtend>>  datas=rwjbxxInfoService.selectDisplayByCondition(ConditionUtil.createCondition(queryRwjbxxInfoExtend));
+		if(datas!=null && CommonUtil.isNotEmptyList(datas.getDatas())){
+			return DataResult.success(datas.getDatas().get(0));
+		}
+		return DataResult.error("该需求不存在");
+	}
+	@RequestMapping("queryRwtbxx")
+	@ResponseBody
+	public DataResult<List<RwtbxxInfoExtend>> queryRwtbxxList(String rwid) throws Exception{
+		RwtbxxInfoExtend queryRwtbxxInfoExtend=new RwtbxxInfoExtend();
+		queryRwtbxxInfoExtend.setRwid(rwid);
+		return rwtbxxInfoService.selectDisplayByCondition(ConditionUtil.createCondition(queryRwtbxxInfoExtend));
+	}
+}

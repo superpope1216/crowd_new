@@ -1,0 +1,37 @@
+package com.wisedu.crowd.common.code;
+
+public enum DictionaryEnum {
+
+	T_CROWD_SJZD_RWKFKJ("T_CROWD_SJZD_RWKFKJ","开发框架"),
+	
+	T_CROWD_SJZD_RWXS("T_CROWD_SJZD_RWXS","需求形式"),
+	
+	T_CROWD_XMGL_ZJRWLX("T_CROWD_XMGL_ZJRWLX","需求类型"),
+	T_CROWD_XMGL_YWX("T_CROWD_XMGL_YWX","产品业务线"),
+	
+	T_CROWD_SJZD_YWXLB("T_CROWD_SJZD_YWXLB","部门业务线");
+    private String code;
+
+    private String name;
+
+    DictionaryEnum(String code, String name) {
+        this.code = code;
+        this.name = name;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}

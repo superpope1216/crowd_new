@@ -1,0 +1,57 @@
+/**
+ * Project Name:crowd.dao
+ * File Name:XqxxInfoExtendMapper.java
+ * Package Name:com.wisedu.crowd.dao.xxgl.extend
+ * Date:2017年12月7日下午6:24:25
+ * Copyright (c) 2017, 01113232@wisedu.com All Rights Reserved.
+ *
+*/
+
+package com.wisedu.crowd.dao.xxgl.extend;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.wisedu.crowd.entity.dto.QueryCondition;
+import com.wisedu.crowd.entity.xxgl.extend.XqxxInfoExtend;
+
+/**
+ * ClassName:XqxxInfoExtendMapper <br/>
+ * Function: TODO ADD FUNCTION. <br/>
+ * Reason:	 TODO ADD REASON. <br/>
+ * Date:     2017年12月7日 下午6:24:25 <br/>
+ * @author   dell
+ * @version  
+ * @since    JDK 1.6
+ * @see 	 
+ */
+public interface XqxxInfoExtendMapper {
+
+    /**
+     * 
+     * 根据条件查询消息
+     *
+     * @author dell
+     * @param record
+     * @return
+     * @since JDK 1.6
+     */
+    List<XqxxInfoExtend> selectByCondition(QueryCondition<XqxxInfoExtend> record);
+    
+    /**
+     * 
+     * 标记消息为已读
+     *
+     * @author dell
+     * @param wids
+     * @return
+     * @since JDK 1.6
+     */
+    int markXqxxInfo(@Param(value = "wids") String[] wids, @Param(value = "sfyd") String sfyd);
+    
+    int batchDeleteXqxxInfo(@Param(value = "wids") String[] wids);
+    
+    int selectCountByCondition(QueryCondition<XqxxInfoExtend> condition);
+}
+

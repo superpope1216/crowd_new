@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.kcgl.SelectCoursesMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.kcgl.SelectCourses" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="COUNT" property="count" jdbcType="VARCHAR" />
+    <result column="USERID" property="userid" jdbcType="VARCHAR" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="COURSENAME" property="coursename" jdbcType="VARCHAR" />
+    <result column="COURSEOPENID" property="courseopenid" jdbcType="VARCHAR" />
+    <result column="OPENCOURSENAME" property="opencoursename" jdbcType="VARCHAR" />
+    <result column="PROVINCE" property="province" jdbcType="VARCHAR" />
+    <result column="CITY" property="city" jdbcType="VARCHAR" />
+    <result column="SELECTTIMEDATE" property="selecttimedate" jdbcType="VARCHAR" />
+    <result column="SELECTDATE" property="selectdate" jdbcType="VARCHAR" />
+    <result column="IPADDRESS" property="ipaddress" jdbcType="VARCHAR" />
+    <result column="COURSEID" property="courseid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, ID, COUNT, USERID, USERNAME, COURSENAME, COURSEOPENID, OPENCOURSENAME, PROVINCE, 
+    CITY, SELECTTIMEDATE, SELECTDATE, IPADDRESS, COURSEID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_kcgl_select_courses
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_kcgl_select_courses
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.kcgl.SelectCourses" >
+    insert into t_crowd_kcgl_select_courses (WID, ID, COUNT, 
+      USERID, USERNAME, COURSENAME, 
+      COURSEOPENID, OPENCOURSENAME, PROVINCE, 
+      CITY, SELECTTIMEDATE, SELECTDATE, 
+      IPADDRESS, COURSEID)
+    values (#{wid,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, #{count,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{coursename,jdbcType=VARCHAR}, 
+      #{courseopenid,jdbcType=VARCHAR}, #{opencoursename,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{selecttimedate,jdbcType=VARCHAR}, #{selectdate,jdbcType=VARCHAR}, 
+      #{ipaddress,jdbcType=VARCHAR}, #{courseid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.kcgl.SelectCourses" >
+    insert into t_crowd_kcgl_select_courses
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="count != null" >
+        COUNT,
+      </if>
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="coursename != null" >
+        COURSENAME,
+      </if>
+      <if test="courseopenid != null" >
+        COURSEOPENID,
+      </if>
+      <if test="opencoursename != null" >
+        OPENCOURSENAME,
+      </if>
+      <if test="province != null" >
+        PROVINCE,
+      </if>
+      <if test="city != null" >
+        CITY,
+      </if>
+      <if test="selecttimedate != null" >
+        SELECTTIMEDATE,
+      </if>
+      <if test="selectdate != null" >
+        SELECTDATE,
+      </if>
+      <if test="ipaddress != null" >
+        IPADDRESS,
+      </if>
+      <if test="courseid != null" >
+        COURSEID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="coursename != null" >
+        #{coursename,jdbcType=VARCHAR},
+      </if>
+      <if test="courseopenid != null" >
+        #{courseopenid,jdbcType=VARCHAR},
+      </if>
+      <if test="opencoursename != null" >
+        #{opencoursename,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="selecttimedate != null" >
+        #{selecttimedate,jdbcType=VARCHAR},
+      </if>
+      <if test="selectdate != null" >
+        #{selectdate,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaddress != null" >
+        #{ipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="courseid != null" >
+        #{courseid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.kcgl.SelectCourses" >
+    update t_crowd_kcgl_select_courses
+    <set >
+      <if test="id != null" >
+        ID = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        COUNT = #{count,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        USERID = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="coursename != null" >
+        COURSENAME = #{coursename,jdbcType=VARCHAR},
+      </if>
+      <if test="courseopenid != null" >
+        COURSEOPENID = #{courseopenid,jdbcType=VARCHAR},
+      </if>
+      <if test="opencoursename != null" >
+        OPENCOURSENAME = #{opencoursename,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        PROVINCE = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="selecttimedate != null" >
+        SELECTTIMEDATE = #{selecttimedate,jdbcType=VARCHAR},
+      </if>
+      <if test="selectdate != null" >
+        SELECTDATE = #{selectdate,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaddress != null" >
+        IPADDRESS = #{ipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="courseid != null" >
+        COURSEID = #{courseid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.kcgl.SelectCourses" >
+    update t_crowd_kcgl_select_courses
+    set ID = #{id,jdbcType=VARCHAR},
+      COUNT = #{count,jdbcType=VARCHAR},
+      USERID = #{userid,jdbcType=VARCHAR},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      COURSENAME = #{coursename,jdbcType=VARCHAR},
+      COURSEOPENID = #{courseopenid,jdbcType=VARCHAR},
+      OPENCOURSENAME = #{opencoursename,jdbcType=VARCHAR},
+      PROVINCE = #{province,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      SELECTTIMEDATE = #{selecttimedate,jdbcType=VARCHAR},
+      SELECTDATE = #{selectdate,jdbcType=VARCHAR},
+      IPADDRESS = #{ipaddress,jdbcType=VARCHAR},
+      COURSEID = #{courseid,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

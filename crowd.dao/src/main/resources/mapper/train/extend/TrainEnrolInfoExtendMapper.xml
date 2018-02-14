@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.train.extend.TrainEnrolInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.train.extend.TrainEnrolInfoExtend" 
+  	extends="com.wisedu.crowd.dao.train.TrainEnrolInfoMapper.BaseResultMap">
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.wisedu.crowd.entity.train.extend.TrainEnrolInfoExtend" 
+  extends="BaseResultMap">
+    <result column="QKMS" property="qkms" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_crowd_train_enrol.WID, t_crowd_train_enrol.PXID, 
+    t_crowd_train_enrol.XYID, t_crowd_train_enrol.JCJNJC, 
+    t_crowd_train_enrol.KCJZ, t_crowd_train_enrol.CQL, 
+    t_crowd_train_enrol.KHSJ, t_crowd_train_enrol.KHJG, 
+    t_crowd_train_enrol.NLPG, t_crowd_train_enrol.ZSBH, 
+    t_crowd_train_enrol.FJ, t_crowd_train_enrol.YYKHSJ, 
+    t_crowd_train_enrol.BMZT, t_crowd_train_enrol.YYKHZT,
+    t_crowd_train_enrol.DZZS
+  </sql>
+  <sql id="Blob_Column_List" >
+    t_crowd_train_enrol.QKMS
+  </sql>
+  <resultMap id="BaseDisplayResultMap"
+		type="com.wisedu.crowd.entity.train.extend.TrainEnrolInfoExtend" extends="com.wisedu.crowd.dao.train.TrainEnrolInfoMapper.BaseResultMap">
+		<result column="pxrwbh" property="pxrwbh" jdbcType="VARCHAR" />
+		<result column="pxdd" property="pxdd" jdbcType="VARCHAR" />
+		<result column="pxkc_display" property="pxkcDisplay" jdbcType="VARCHAR" />
+		<result column="pxkssj" property="pxkssj" jdbcType="VARCHAR" />
+		<result column="pxjssj" property="pxjssj" jdbcType="VARCHAR" />
+		<result column="bmzt_display" property="bmztDisplay" jdbcType="VARCHAR" />
+		<result column="yykhzt_display" property="yykhztDisplay" jdbcType="VARCHAR" />
+		<result column="khjg_display" property="khjgDisplay" jdbcType="VARCHAR" />
+		<result column="jcnljcdz" property="jcnljcdz" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="BaseEnrolResultMap"
+		type="com.wisedu.crowd.entity.train.extend.TrainEnrolInfoExtend" extends="com.wisedu.crowd.dao.train.TrainEnrolInfoMapper.BaseResultMap">
+		<result column="xm" property="xm" jdbcType="VARCHAR" />
+		<result column="sj" property="sj" jdbcType="VARCHAR" />
+		<result column="qq" property="qq" jdbcType="VARCHAR" />
+		<result column="bmzt_display" property="bmztDisplay" jdbcType="VARCHAR" />
+		<result column="yykhzt_display" property="yykhztDisplay" jdbcType="VARCHAR" />
+		<result column="khjg_display" property="khjgDisplay" jdbcType="VARCHAR" />
+		<result column="nlpg_display" property="nlpgDisplay" jdbcType="VARCHAR" />
+	</resultMap>
+  <sql id="sqlWhere">
+		<if test='query!=null'>
+			<if test='query.wid!=null and query.wid!=""'>
+				AND t_crowd_train_enrol.wid=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.pxid!=null'>
+				AND t_crowd_train_enrol.pxid=#{query.pxid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.xyid!=null'>
+				AND t_crowd_train_enrol.xyid=#{query.xyid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.bmzt!=null'>
+				AND t_crowd_train_enrol.bmzt=#{query.bmzt,jdbcType=VARCHAR}
+			</if>
+			<if test='query.yykhzt!=null'>
+				AND t_crowd_train_enrol.yykhzt=#{query.yykhzt,jdbcType=VARCHAR}
+			</if>
+			<if test='query.khjg!=null'>
+				AND t_crowd_train_enrol.khjg=#{query.khjg,jdbcType=VARCHAR}
+			</if>
+			<if test='query.bmzts!=null'>
+				AND t_crowd_train_enrol.bmzt IN
+				<foreach index="index" item="item" collection="query.bmzts"
+					open="(" close=")" separator=",">
+					${item}
+				</foreach>
+			</if>
+			<if test='query.yykhzts!=null'>
+				AND t_crowd_train_enrol.yykhzt IN
+				<foreach index="index" item="item" collection="query.yykhzts"
+					open="(" close=")" separator=",">
+					${item}
+				</foreach>
+			</if>
+			<if test='query.khjgs!=null'>
+				AND t_crowd_train_enrol.khjg IN
+				<foreach index="index" item="item" collection="query.khjgs"
+					open="(" close=")" separator=",">
+					${item}
+				</foreach>
+			</if>
+			<if test='query.pxrwbh!=null and query.pxrwbh!=""'>
+				AND t_crowd_train_basicinfo.pxrwbh LIKE
+				MYCONCAT('%',#{query.pxrwbh,jdbcType=VARCHAR},'%')
+			</if>
+			<if test='query.minKhyf!=null and query.minKhyf!=""'>
+				AND t_crowd_train_enrol.KHSJ<![CDATA[>=]]>#{query.minKhyf,jdbcType=VARCHAR}
+			</if>
+			<if test='query.maxKhyf!=null and query.maxKhyf!=""'>
+				AND t_crowd_train_enrol.KHSJ<![CDATA[<=]]>#{query.maxKhyf,jdbcType=VARCHAR}
+			</if>
+		</if>
+	</sql>
+	<sql id="sqlOrder">
+		ORDER BY
+		<choose>
+			<when test="orderBy!=null">
+				<foreach collection="orderBy" item="item" open=" " close=" "
+					separator=",">
+					${item}
+				</foreach>
+			</when>
+			<otherwise>
+				t_crowd_train_enrol.wid
+			</otherwise>
+		</choose>
+	</sql>
+	<select id="selectByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="ResultMapWithBLOBs">
+		SELECT
+		<include refid="Base_Column_List" />
+		,<include refid="Blob_Column_List"/>
+		FROM t_crowd_train_enrol
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+		<include refid="sqlOrder"/>
+	</select>
+	<select id="selectCountByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultType="int">
+		SELECT COUNT(0) FROM T_CROWD_TRAIN_ENROL
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+	</select>
+	
+	<select id="selectDisplayByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseDisplayResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		,T_CROWD_TRAIN_BASICINFO.PXRWBH AS PXRWBH
+		,T_CROWD_TRAIN_BASICINFO.PXDD AS PXDD
+		,T_CROWD_SJZD_PXKC.LBMC AS PXKC_DISPLAY
+		,T_CROWD_TRAIN_PLAN.PXKSSJ AS PXKSSJ
+		,T_CROWD_TRAIN_PLAN.PXJSSJ AS PXJSSJ
+		,T_CROWD_SJZD_BMZT.LBMC AS BMZT_DISPLAY
+		,T_CROWD_SJZD_YYKHZT.LBMC AS YYKHZT_DISPLAY
+		,T_CROWD_SJZD_KHJG.LBMC AS KHJG_DISPLAY
+		,T_CROWD_TRAIN_PLAN.JCNLJCDZ AS JCNLJCDZ
+		FROM T_CROWD_TRAIN_ENROL T_CROWD_TRAIN_ENROL
+		LEFT JOIN T_CROWD_TRAIN_BASICINFO T_CROWD_TRAIN_BASICINFO
+		ON T_CROWD_TRAIN_ENROL.PXID = T_CROWD_TRAIN_BASICINFO.WID
+		LEFT JOIN T_CROWD_TRAIN_PLAN T_CROWD_TRAIN_PLAN
+		ON T_CROWD_TRAIN_PLAN.PXID = T_CROWD_TRAIN_ENROL.PXID
+		LEFT JOIN T_CROWD_SJZD_PXKC T_CROWD_SJZD_PXKC
+		ON T_CROWD_SJZD_PXKC.LBDM = T_CROWD_TRAIN_BASICINFO.PXKC AND T_CROWD_SJZD_PXKC.SFSY = 1
+		LEFT JOIN T_CROWD_SJZD_BMZT T_CROWD_SJZD_BMZT
+		ON T_CROWD_SJZD_BMZT.LBDM = T_CROWD_TRAIN_ENROL.BMZT AND T_CROWD_SJZD_BMZT.SFSY = 1
+		LEFT JOIN T_CROWD_SJZD_YYKHZT T_CROWD_SJZD_YYKHZT
+		ON T_CROWD_SJZD_YYKHZT.LBDM = T_CROWD_TRAIN_ENROL.YYKHZT AND T_CROWD_SJZD_YYKHZT.SFSY = 1
+		LEFT JOIN T_CROWD_SJZD_KHJG T_CROWD_SJZD_KHJG
+		ON T_CROWD_SJZD_KHJG.LBDM = T_CROWD_TRAIN_ENROL.KHJG AND T_CROWD_SJZD_KHJG.SFSY = 1
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+		<include refid="sqlOrder" />
+
+	</select>
+	<select id="selectEnrolByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseEnrolResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		,T_CROWD_TRAIN_STUDENT.XM AS XM
+		,T_CROWD_TRAIN_STUDENT.SJ AS SJ
+		,T_CROWD_TRAIN_STUDENT.QQ AS QQ
+		,T_CROWD_SJZD_BMZT.LBMC AS BMZT_DISPLAY
+		,T_CROWD_SJZD_YYKHZT.LBMC AS YYKHZT_DISPLAY
+		,T_CROWD_SJZD_KHJG.LBMC AS KHJG_DISPLAY
+		,T_CROWD_SJZD_NLPG.LBMC AS NLPG_DISPLAY
+		FROM T_CROWD_TRAIN_ENROL T_CROWD_TRAIN_ENROL
+		LEFT JOIN T_CROWD_TRAIN_STUDENT T_CROWD_TRAIN_STUDENT
+		ON T_CROWD_TRAIN_STUDENT.WID = T_CROWD_TRAIN_ENROL.XYID
+		LEFT JOIN T_CROWD_SJZD_BMZT T_CROWD_SJZD_BMZT
+		ON T_CROWD_SJZD_BMZT.LBDM = T_CROWD_TRAIN_ENROL.BMZT AND T_CROWD_SJZD_BMZT.SFSY = 1
+		LEFT JOIN T_CROWD_SJZD_YYKHZT T_CROWD_SJZD_YYKHZT
+		ON T_CROWD_SJZD_YYKHZT.LBDM = T_CROWD_TRAIN_ENROL.YYKHZT AND T_CROWD_SJZD_YYKHZT.SFSY = 1
+		LEFT JOIN T_CROWD_SJZD_KHJG T_CROWD_SJZD_KHJG
+		ON T_CROWD_SJZD_KHJG.LBDM = T_CROWD_TRAIN_ENROL.KHJG AND T_CROWD_SJZD_KHJG.SFSY = 1
+		LEFT JOIN T_CROWD_SJZD_NLPG T_CROWD_SJZD_NLPG
+		ON T_CROWD_SJZD_NLPG.LBDM = T_CROWD_TRAIN_ENROL.NLPG AND T_CROWD_SJZD_NLPG.SFSY = 1
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+		<include refid="sqlOrder" />
+	</select>
+</mapper>

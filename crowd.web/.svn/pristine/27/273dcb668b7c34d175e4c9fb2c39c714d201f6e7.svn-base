@@ -1,0 +1,190 @@
+<%@page import="com.wisedu.crowd.entity.yhgl.extend.YhjbxxInfoExtend"%>
+<%@page import="com.wisedu.crowd.common.util.ConstantsUtil"%>
+<%@page import="com.wisedu.crowd.common.util.StringUtil"%>
+<%@page import="com.wisedu.crowd.common.util.EncryptUtil"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+    Object userInfoObj = session.getAttribute(ConstantsUtil.SESSION_YHJBXX);
+	Object kfzInfoObj = session.getAttribute(ConstantsUtil.SESSION_KFZXX);
+	Object xqfInfoObj = session.getAttribute(ConstantsUtil.SESSION_XQFXX);
+	YhjbxxInfoExtend yhjbxxInfoExtend = null;
+	String param = "3";
+	if (userInfoObj != null) {
+		yhjbxxInfoExtend = (YhjbxxInfoExtend) userInfoObj;
+		
+        param += "&" + yhjbxxInfoExtend.getWid() + "&crowduserinfo&" + yhjbxxInfoExtend.getSjh() + "&"
+                + (StringUtil.isEmpty(kfzInfoObj) ? 0 : 1) + "&" + (StringUtil.isEmpty(xqfInfoObj) ? 0 : 1);
+    }
+	String token = EncryptUtil.encrypt(param);
+	
+	
+%>
+<style>
+.badge {
+	display: inline-block;
+	min-width: 10px;
+	padding: 3px 7px;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 1;
+	color: #fff;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	background-color: red;
+	border-radius: 10px
+}
+
+.badge:empty {
+	display: none
+}
+
+.btn .badge {
+	position: relative;
+	top: -1px
+}
+</style>
+<div class="head-box">
+	<div class="container">
+
+		<div class="head-left">
+			<div class="head-left-wrapper">
+				<div class="head-left-slide">
+					<p>欢迎光临CROWD智慧校园云工场</p>
+					<font> <a
+						href="<%=request.getContextPath()%>/publishing/index"
+						style="margin-left: 10px; color: #fff;">我有需求</a> <a
+						href="<%=request.getContextPath()%>/center/index"
+						style="margin-left: 10px; color: #fff;">我想投标</a>
+					</font>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="head-right">
+			<ul class="nav navbar-nav  top-menu">
+
+				<%@include file="/jsp/user_dropdown.jsp"%>
+
+				<!-- 				<li class="dropdown shopcut"><a href="javascript:void(0)" -->
+				<li class="dropdown shopcut"><a
+					href="<%=request.getContextPath()%>/demandMessage/index"
+					title="消息中心" target="_blank" role="button"
+					style="padding-top: 10px; padding-bottom: 10px;"> <i
+						class="fa fa-bell" style="color: #fff;"
+						aria-hidden="true"></i> <span
+						class="badge badge-danger up  topcart-goodnum btn-danger" id="spanMessageCount" >0</span>
+				</a>
+					</li>
+			</ul>
+
+		</div>
+
+	</div>
+</div>
+
+<nav style="background:#FFF;">
+	<div class="neck-box">
+		<div class="container">
+
+			<div class="logo-box">
+				<a href="<%=request.getContextPath()%>/index.jsp" title="智慧校园云工场"
+					target='_self'> <img
+					src="<%=request.getContextPath()%>/statics/images/header/logo.png"
+					alt="智慧校园云工场"> <img
+					src="<%=request.getContextPath()%>/statics/images/header/logo.png"
+					alt="智慧校园云工场">
+				</a>
+			</div>
+
+			<div class="search-box">
+				<div class="search-cut">
+					<p></p>
+
+					<form method="get" >
+						<input type="text" name="txtAllSearch" value="${condition}" id="txtAllSearch">
+						<button class="fa fa-search" type="button" id="btnAllSearch"></button>
+					</form>
+
+				</div>
+			</div>
+
+			<div class="nav-box ">
+				<div class="nav-cut">
+					<ul class="nav-ul">
+
+						<li class="nav-li "><a
+							href="<%=request.getContextPath()%>/index.jsp" title="首页">首页</a></li>
+
+						<li class="nav-li   margin-left-0"><a
+							href="<%=request.getContextPath()%>/center/index" title="众包大厅">众包大厅</a></li>
+
+						<li class="nav-li  navs margin-left-0"><a
+							href="javascript:void(0);" title="技能中心">培训中心</a></li>
+							
+						 <li class="nav-li  navs margin-left-0"><a
+							href="<%=request.getContextPath()%>/estimateStandard/index" title="估价标准">估价标准</a></li>
+
+						<li class="nav-li   margin-left-0"><a
+							href="http://bbs.wisedu.com" target="_blank" title="互动社区">互动社区</a></li>
+<!-- 						<li class="nav-li   margin-left-0"><a
+							href="javascript:void(0);" title="应用商店">应用商店</a></li> -->
+						<li class="nav-li   margin-left-0"><a
+							href="javascript:void(0);" title="帮助中心">帮助中心</a></li>
+					</ul>
+				</div>
+
+				<div class="nav-hover">
+
+					<ul></ul>
+
+					<ul>
+
+					</ul>
+
+					<ul>
+						<li><a href="<%=request.getContextPath()%>/download/index"
+							title="新手入门">新手入门</a></li>
+						<li><a href="http://crowd.wisedu.com/crowd/document/index?token=<%=token%>" target="_blank" title="在线文档">在线文档</a></li>
+						<li><a href="http://crowd.campusphere.cn/home/index.mooc" target="_blank" title="在线视频">在线视频</a></li>
+						<li><a href="<%=request.getContextPath() %>/trainApply/index" title="培训申请">培训申请</a></li>
+						<li><a href="<%=request.getContextPath() %>/trainCenter/index" title="培训报名">培训报名</a></li>
+
+					</ul>
+
+					<ul>
+
+					</ul>
+					<ul>
+
+					</ul>
+
+					<ul>
+						<li><a
+							href="<%=request.getContextPath() %>/help/about" title="关于我们">关于我们</a></li>
+						<li><a
+							href="../news/news.php?lang=cn&class2=5" title="技能认证">技能认证</a></li>
+						<li><a
+							href="<%=request.getContextPath() %>/yjsjsm/index" title="建议与反馈">建议与反馈</a></li>
+						<li><a
+							href="../news/news.php?lang=cn&class2=5" title="平台流程">平台流程</a></li>
+						<li><a
+							href="<%=request.getContextPath() %>/ptxz/index" title="平台规约">平台规约</a></li>
+						<li><a
+							href="../news/news.php?lang=cn&class2=5" title="联系我们">联系我们</a></li>
+					</ul>
+
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</nav>
+<script
+	src="<%=request.getContextPath()%>/statics/plugins/vendor/jquery_lazyload/jquery-1.11.0.min.js"></script>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/statics/pagejs/common/header.js"></script>
+

@@ -1,0 +1,43 @@
+package com.wisedu.crowd.controller.kfzxx;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.common.util.CommonUtil;
+import com.wisedu.crowd.common.util.PageUtil;
+import com.wisedu.crowd.controller.BaseController;
+import com.wisedu.crowd.entity.dto.PageInfo;
+import com.wisedu.crowd.entity.dto.QueryCondition;
+import com.wisedu.crowd.entity.yhgl.extend.KfzxxInfoExtend;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.service.yhgl.KfzxxInfoService;
+
+@Controller
+@RequestMapping("kfzxx")
+public class PersonController extends BaseController{
+
+	
+	@Autowired
+	private KfzxxInfoService kfzxxInfoService;
+	
+	@RequestMapping("index")
+	public String index(Model model) throws Exception{
+		
+		KfzxxInfoExtend kfzxxInfoExtend=new KfzxxInfoExtend();
+		kfzxxInfoExtend.setYhid(this.getYhId());
+		QueryCondition<KfzxxInfoExtend> condition=new QueryCondition<>();
+		/*PageInfo page=PageUtil.cratePageInfo(null, null);
+		condition.setPageInfo(page);*/
+		condition.setQuery(kfzxxInfoExtend);
+		DataResult<List<KfzxxInfoExtend>> result=kfzxxInfoService.selectByCondition(condition,this.createCustomOperateLog());
+		if(CommonUtil.isNotEmptyList(result.getDatas())){
+		model.addAttribute("kfzxx", result.getDatas().get(0));
+		}
+		return "/kfzgl/kfzxx/index";
+	}
+}

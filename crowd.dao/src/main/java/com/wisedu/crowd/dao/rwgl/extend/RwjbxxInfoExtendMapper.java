@@ -1,0 +1,37 @@
+package com.wisedu.crowd.dao.rwgl.extend;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.wisedu.crowd.entity.dto.QueryCondition;
+import com.wisedu.crowd.entity.rwgl.extend.RwjbxxInfoExtend;
+
+public interface RwjbxxInfoExtendMapper {
+  
+	List<RwjbxxInfoExtend> selectDisplayByCondition(QueryCondition<RwjbxxInfoExtend> record);
+	
+	List<RwjbxxInfoExtend> selectByCondition(QueryCondition<RwjbxxInfoExtend> record);
+	
+	
+	List<RwjbxxInfoExtend> selectDisplayByLikeCondition(QueryCondition<RwjbxxInfoExtend> record);
+
+	
+	/**
+	 * 大厅众包专用
+	 * @param record
+	 * @return
+	 */
+	List<RwjbxxInfoExtend> selectForCenter(QueryCondition<RwjbxxInfoExtend> record);
+	
+	Integer selectCountByCondition(QueryCondition<RwjbxxInfoExtend> record);
+	Map<String,BigDecimal> selectSumMoney(QueryCondition<RwjbxxInfoExtend> record);
+	
+	Integer selectCountHasTb(@Param("xqfid") String xqfid,@Param("xmzt") Integer xmzt);
+	
+	List<Map<String,Object>> selectNewZbxx();
+	
+	BigDecimal selectSumZbjeByKfzid(@Param("kfzid") String kfzid);
+}

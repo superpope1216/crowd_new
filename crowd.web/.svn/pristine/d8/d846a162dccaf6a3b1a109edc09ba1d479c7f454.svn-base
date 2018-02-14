@@ -1,0 +1,56 @@
+
+
+.mesnav{
+	height:46px;
+	line-height:46px;
+	padding: 0 10px 15px 0;
+	font-size: 12px;
+}
+
+.kbtn26 {
+  height:26px;
+  line-height: 26px;
+}
+
+.kbtn {
+  display: inline-block;
+  padding:0 1em;
+  border-radius:2px;
+  text-align:center;
+  border:0;
+  cursor:pointer;
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -o-box-sizing:border-box;
+  box-sizing:border-box;
+}
+.kbtn:hover {
+  text-decoration: none;
+}
+.kbtn_default {
+  background: #fcfcfc;
+  color:#696969;
+  border:1px solid #dadada;
+}
+.kbtn_default:hover  {
+  background: #f6f6f6;
+}
+
+.mestitle {
+    border-right: 1px solid #eae9e9;
+	padding-right:15px;
+	margin:13px 15px 0 0;
+	float:left;
+}
+.mestitle h1 {
+	font-size:18px;
+}
+
+.message-unread{
+	font-weight: 800;
+	color: #444;
+}
+
+.table td a{
+	margin-right:5px;
+}

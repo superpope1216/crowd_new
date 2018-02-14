@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<li role="presentation"><a
+							href="<%=request.getContextPath() %>/kfzxx/index"
+							role="menuitem"><i class="icon wb-user" aria-hidden="true"></i>
+								我是开发者</a></li>
+						<li role="presentation"><a
+							href="<%=request.getContextPath() %>/kfzxx/index"
+							role="menuitem"><i class="icon wb-user" aria-hidden="true"></i>
+								我是需求方</a></li>
+
+						<li role="presentation"><a
+							href="<%=request.getContextPath() %>/favority/index?flag=favortity"
+							role="menuitem"><i class="icon wb-heart" aria-hidden="true"></i>
+								我的收藏</a></li>
+						<li role="presentation"><a
+							href="https://show.metinfo.cn/muban/M1156014/381/shop/discount.php?lang=cn"
+							role="menuitem"><i class="icon wb-bookmark"
+								aria-hidden="true"></i> 我的培训</a></li>
+
+						<li role="presentation"><a
+							href="https://show.metinfo.cn/muban/M1156014/381/member/basic.php?lang=cn&nojump=1"
+							target="_blank" role="menuitem"><i class="icon wb-settings"
+								aria-hidden="true"></i> 账户设置</a></li>
+						<li class="divider" role="presentation"></li>
+						<li role="presentation"><a
+							href="javascript:void(0);"
+							role="menuitem"><i class="icon wb-power" aria-hidden="true"></i>
+								退出</a></li>

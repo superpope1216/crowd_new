@@ -1,0 +1,135 @@
+package com.wisedu.crowd.entity.zygl;
+
+import java.io.Serializable;
+
+public class VpnInfo implements Serializable{
+    /**
+     * serialVersionUID:TODO(用一句话描述这个变量表示什么).
+     * @since JDK 1.6
+     */
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * WID
+     */
+    private String wid;
+
+    /**
+     * VPN账号
+     */
+    private String vpmzh;
+
+    /**
+     * VPN密码
+     */
+    private String vpnmm;
+
+    /**
+     * VPN地址
+     */
+    private String vpndz;
+
+    /**
+     * 资源申请ID
+     */
+    private String zysqid;
+
+    /**
+     * WID
+     * @return WID WID
+     */
+    public String getWid() {
+        return wid;
+    }
+
+    /**
+     * WID
+     * @param wid WID
+     */
+    public void setWid(String wid) {
+        this.wid = wid == null ? null : wid.trim();
+    }
+
+    /**
+     * VPN账号
+     * @return VPMZH VPN账号
+     */
+    public String getVpmzh() {
+        return vpmzh;
+    }
+
+    /**
+     * VPN账号
+     * @param vpmzh VPN账号
+     */
+    public void setVpmzh(String vpmzh) {
+        this.vpmzh = vpmzh == null ? null : vpmzh.trim();
+    }
+
+    /**
+     * VPN密码
+     * @return VPNMM VPN密码
+     */
+    public String getVpnmm() {
+        return vpnmm;
+    }
+
+    /**
+     * VPN密码
+     * @param vpnmm VPN密码
+     */
+    public void setVpnmm(String vpnmm) {
+        this.vpnmm = vpnmm == null ? null : vpnmm.trim();
+    }
+
+    /**
+     * VPN地址
+     * @return VPNDZ VPN地址
+     */
+    public String getVpndz() {
+        return vpndz;
+    }
+
+    /**
+     * VPN地址
+     * @param vpndz VPN地址
+     */
+    public void setVpndz(String vpndz) {
+        this.vpndz = vpndz == null ? null : vpndz.trim();
+    }
+
+    /**
+     * 资源申请ID
+     * @return ZYSQID 资源申请ID
+     */
+    public String getZysqid() {
+        return zysqid;
+    }
+
+    /**
+     * 资源申请ID
+     * @param zysqid 资源申请ID
+     */
+    public void setZysqid(String zysqid) {
+        this.zysqid = zysqid == null ? null : zysqid.trim();
+    }
+
+    /**
+     *
+     * @mbggenerated 2018-01-12
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", wid=").append(wid);
+        sb.append(", vpmzh=").append(vpmzh);
+        sb.append(", vpnmm=").append(vpnmm);
+        sb.append(", vpndz=").append(vpndz);
+        sb.append(", zysqid=").append(zysqid);
+        sb.append("]");
+        return sb.toString();
+    }
+}

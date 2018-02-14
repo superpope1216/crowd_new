@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.rwgl.RwjbxxExtInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.rwgl.RwjbxxExtInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="RWID" property="rwid" jdbcType="VARCHAR" />
+    <result column="XMBH" property="xmbh" jdbcType="VARCHAR" />
+    <result column="YWXBM" property="ywxbm" jdbcType="VARCHAR" />
+    <result column="MKBH" property="mkbh" jdbcType="VARCHAR" />
+    <result column="FB" property="fb" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, RWID, XMBH, YWXBM, MKBH, FB
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_xmgl_rwjbxx_ext
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_xmgl_rwjbxx_ext
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.rwgl.RwjbxxExtInfo" >
+    insert into t_crowd_xmgl_rwjbxx_ext (WID, RWID, XMBH, 
+      YWXBM, MKBH, FB)
+    values (#{wid,jdbcType=VARCHAR}, #{rwid,jdbcType=VARCHAR}, #{xmbh,jdbcType=VARCHAR}, 
+      #{ywxbm,jdbcType=VARCHAR}, #{mkbh,jdbcType=VARCHAR}, #{fb,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.rwgl.RwjbxxExtInfo" >
+    insert into t_crowd_xmgl_rwjbxx_ext
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="rwid != null" >
+        RWID,
+      </if>
+      <if test="xmbh != null" >
+        XMBH,
+      </if>
+      <if test="ywxbm != null" >
+        YWXBM,
+      </if>
+      <if test="mkbh != null" >
+        MKBH,
+      </if>
+      <if test="fb != null" >
+        FB,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="rwid != null" >
+        #{rwid,jdbcType=VARCHAR},
+      </if>
+      <if test="xmbh != null" >
+        #{xmbh,jdbcType=VARCHAR},
+      </if>
+      <if test="ywxbm != null" >
+        #{ywxbm,jdbcType=VARCHAR},
+      </if>
+      <if test="mkbh != null" >
+        #{mkbh,jdbcType=VARCHAR},
+      </if>
+      <if test="fb != null" >
+        #{fb,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.rwgl.RwjbxxExtInfo" >
+    update t_crowd_xmgl_rwjbxx_ext
+    <set >
+      <if test="rwid != null" >
+        RWID = #{rwid,jdbcType=VARCHAR},
+      </if>
+      <if test="xmbh != null" >
+        XMBH = #{xmbh,jdbcType=VARCHAR},
+      </if>
+      <if test="ywxbm != null" >
+        YWXBM = #{ywxbm,jdbcType=VARCHAR},
+      </if>
+      <if test="mkbh != null" >
+        MKBH = #{mkbh,jdbcType=VARCHAR},
+      </if>
+      <if test="fb != null" >
+        FB = #{fb,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.rwgl.RwjbxxExtInfo" >
+    update t_crowd_xmgl_rwjbxx_ext
+    set RWID = #{rwid,jdbcType=VARCHAR},
+      XMBH = #{xmbh,jdbcType=VARCHAR},
+      YWXBM = #{ywxbm,jdbcType=VARCHAR},
+      MKBH = #{mkbh,jdbcType=VARCHAR},
+      FB = #{fb,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

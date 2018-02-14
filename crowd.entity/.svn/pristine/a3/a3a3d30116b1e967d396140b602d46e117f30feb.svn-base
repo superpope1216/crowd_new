@@ -1,0 +1,510 @@
+package com.wisedu.crowd.entity.yhgl;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+
+public class XqfxxInfo implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+     * 
+     */
+    private String wid;
+
+    /**
+     * 
+     */
+    private String yhid;
+
+    /**
+     * 
+     */
+    private String xqfdwmc;
+
+    /**
+     * 
+     */
+    private String szdq;
+
+    /**
+     * 
+     */
+    private String xm;
+
+    /**
+     * 
+     */
+    private String nc;
+
+    /**
+     * 
+     */
+    private String sfzjh;
+
+    /**
+     * 
+     */
+    private String gh;
+
+    /**
+     * 
+     */
+    private String lxydzyx;
+
+    /**
+     * 
+     */
+    private BigDecimal zhye;
+
+    /**
+     * 
+     */
+    private BigDecimal zhdjye;
+
+    /**
+     * 
+     */
+    private Date czsj;
+
+    /**
+     * 
+     */
+    private String czzip;
+
+    /**
+     * 0待审核1审核通过2审核不通过
+     */
+    private Short shzt;
+
+    /**
+     * 
+     */
+    private String shyj;
+
+    /**
+     * 
+     */
+    private Short xqflb;
+
+    /**
+     * 
+     */
+    private String ssgs;
+
+    /**
+     * 
+     */
+    private String ssywx;
+
+    /**
+     * 身份证正面ID
+     */
+    private String zpfjid;
+
+    /**
+     * QQ
+     */
+    private String qqh;
+
+    /**
+     * 微信号
+     */
+    private String wxh;
+
+    /**
+     * 支付宝账号
+     */
+    private String zfbzh;
+
+    /**
+     * 
+     * @return WID 
+     */
+    public String getWid() {
+        return wid;
+    }
+
+    /**
+     * 
+     * @param wid 
+     */
+    public void setWid(String wid) {
+        this.wid = wid == null ? null : wid.trim();
+    }
+
+    /**
+     * 
+     * @return YHID 
+     */
+    public String getYhid() {
+        return yhid;
+    }
+
+    /**
+     * 
+     * @param yhid 
+     */
+    public void setYhid(String yhid) {
+        this.yhid = yhid == null ? null : yhid.trim();
+    }
+
+    /**
+     * 
+     * @return XQFDWMC 
+     */
+    public String getXqfdwmc() {
+        return xqfdwmc;
+    }
+
+    /**
+     * 
+     * @param xqfdwmc 
+     */
+    public void setXqfdwmc(String xqfdwmc) {
+        this.xqfdwmc = xqfdwmc == null ? null : xqfdwmc.trim();
+    }
+
+    /**
+     * 
+     * @return SZDQ 
+     */
+    public String getSzdq() {
+        return szdq;
+    }
+
+    /**
+     * 
+     * @param szdq 
+     */
+    public void setSzdq(String szdq) {
+        this.szdq = szdq == null ? null : szdq.trim();
+    }
+
+    /**
+     * 
+     * @return XM 
+     */
+    public String getXm() {
+        return xm;
+    }
+
+    /**
+     * 
+     * @param xm 
+     */
+    public void setXm(String xm) {
+        this.xm = xm == null ? null : xm.trim();
+    }
+
+    /**
+     * 
+     * @return NC 
+     */
+    public String getNc() {
+        return nc;
+    }
+
+    /**
+     * 
+     * @param nc 
+     */
+    public void setNc(String nc) {
+        this.nc = nc == null ? null : nc.trim();
+    }
+
+    /**
+     * 
+     * @return SFZJH 
+     */
+    public String getSfzjh() {
+        return sfzjh;
+    }
+
+    /**
+     * 
+     * @param sfzjh 
+     */
+    public void setSfzjh(String sfzjh) {
+        this.sfzjh = sfzjh == null ? null : sfzjh.trim();
+    }
+
+    /**
+     * 
+     * @return GH 
+     */
+    public String getGh() {
+        return gh;
+    }
+
+    /**
+     * 
+     * @param gh 
+     */
+    public void setGh(String gh) {
+        this.gh = gh == null ? null : gh.trim();
+    }
+
+    /**
+     * 
+     * @return LXYDZYX 
+     */
+    public String getLxydzyx() {
+        return lxydzyx;
+    }
+
+    /**
+     * 
+     * @param lxydzyx 
+     */
+    public void setLxydzyx(String lxydzyx) {
+        this.lxydzyx = lxydzyx == null ? null : lxydzyx.trim();
+    }
+
+    /**
+     * 
+     * @return ZHYE 
+     */
+    public BigDecimal getZhye() {
+        return zhye;
+    }
+
+    /**
+     * 
+     * @param zhye 
+     */
+    public void setZhye(BigDecimal zhye) {
+        this.zhye = zhye;
+    }
+
+    /**
+     * 
+     * @return ZHDJYE 
+     */
+    public BigDecimal getZhdjye() {
+        return zhdjye;
+    }
+
+    /**
+     * 
+     * @param zhdjye 
+     */
+    public void setZhdjye(BigDecimal zhdjye) {
+        this.zhdjye = zhdjye;
+    }
+
+    /**
+     * 
+     * @return CZSJ 
+     */
+    public Date getCzsj() {
+        return czsj;
+    }
+
+    /**
+     * 
+     * @param czsj 
+     */
+    public void setCzsj(Date czsj) {
+        this.czsj = czsj;
+    }
+
+    /**
+     * 
+     * @return CZZIP 
+     */
+    public String getCzzip() {
+        return czzip;
+    }
+
+    /**
+     * 
+     * @param czzip 
+     */
+    public void setCzzip(String czzip) {
+        this.czzip = czzip == null ? null : czzip.trim();
+    }
+
+    /**
+     * 0待审核1审核通过2审核不通过
+     * @return SHZT 0待审核1审核通过2审核不通过
+     */
+    public Short getShzt() {
+        return shzt;
+    }
+
+    /**
+     * 0待审核1审核通过2审核不通过
+     * @param shzt 0待审核1审核通过2审核不通过
+     */
+    public void setShzt(Short shzt) {
+        this.shzt = shzt;
+    }
+
+    /**
+     * 
+     * @return SHYJ 
+     */
+    public String getShyj() {
+        return shyj;
+    }
+
+    /**
+     * 
+     * @param shyj 
+     */
+    public void setShyj(String shyj) {
+        this.shyj = shyj == null ? null : shyj.trim();
+    }
+
+    /**
+     * 
+     * @return XQFLB 
+     */
+    public Short getXqflb() {
+        return xqflb;
+    }
+
+    /**
+     * 
+     * @param xqflb 
+     */
+    public void setXqflb(Short xqflb) {
+        this.xqflb = xqflb;
+    }
+
+    /**
+     * 
+     * @return SSGS 
+     */
+    public String getSsgs() {
+        return ssgs;
+    }
+
+    /**
+     * 
+     * @param ssgs 
+     */
+    public void setSsgs(String ssgs) {
+        this.ssgs = ssgs == null ? null : ssgs.trim();
+    }
+
+    /**
+     * 
+     * @return SSYWX 
+     */
+    public String getSsywx() {
+        return ssywx;
+    }
+
+    /**
+     * 
+     * @param ssywx 
+     */
+    public void setSsywx(String ssywx) {
+        this.ssywx = ssywx == null ? null : ssywx.trim();
+    }
+
+    /**
+     * 身份证正面ID
+     * @return zpfjid 身份证正面ID
+     */
+    public String getZpfjid() {
+        return zpfjid;
+    }
+
+    /**
+     * 身份证正面ID
+     * @param zpfjid 身份证正面ID
+     */
+    public void setZpfjid(String zpfjid) {
+        this.zpfjid = zpfjid == null ? null : zpfjid.trim();
+    }
+
+    /**
+     * QQ
+     * @return qqh QQ
+     */
+    public String getQqh() {
+        return qqh;
+    }
+
+    /**
+     * QQ
+     * @param qqh QQ
+     */
+    public void setQqh(String qqh) {
+        this.qqh = qqh == null ? null : qqh.trim();
+    }
+
+    /**
+     * 微信号
+     * @return wxh 微信号
+     */
+    public String getWxh() {
+        return wxh;
+    }
+
+    /**
+     * 微信号
+     * @param wxh 微信号
+     */
+    public void setWxh(String wxh) {
+        this.wxh = wxh == null ? null : wxh.trim();
+    }
+
+    /**
+     * 支付宝账号
+     * @return zfbzh 支付宝账号
+     */
+    public String getZfbzh() {
+        return zfbzh;
+    }
+
+    /**
+     * 支付宝账号
+     * @param zfbzh 支付宝账号
+     */
+    public void setZfbzh(String zfbzh) {
+        this.zfbzh = zfbzh == null ? null : zfbzh.trim();
+    }
+
+    /**
+     *
+     * @mbggenerated 2017-11-23
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", wid=").append(wid);
+        sb.append(", yhid=").append(yhid);
+        sb.append(", xqfdwmc=").append(xqfdwmc);
+        sb.append(", szdq=").append(szdq);
+        sb.append(", xm=").append(xm);
+        sb.append(", nc=").append(nc);
+        sb.append(", sfzjh=").append(sfzjh);
+        sb.append(", gh=").append(gh);
+        sb.append(", lxydzyx=").append(lxydzyx);
+        sb.append(", zhye=").append(zhye);
+        sb.append(", zhdjye=").append(zhdjye);
+        sb.append(", czsj=").append(czsj);
+        sb.append(", czzip=").append(czzip);
+        sb.append(", shzt=").append(shzt);
+        sb.append(", shyj=").append(shyj);
+        sb.append(", xqflb=").append(xqflb);
+        sb.append(", ssgs=").append(ssgs);
+        sb.append(", ssywx=").append(ssywx);
+        sb.append(", zpfjid=").append(zpfjid);
+        sb.append(", qqh=").append(qqh);
+        sb.append(", wxh=").append(wxh);
+        sb.append(", zfbzh=").append(zfbzh);
+        sb.append("]");
+        return sb.toString();
+    }
+}

@@ -1,0 +1,177 @@
+pearl-icon {
+	font-size: 14px !important;
+}
+
+.pearl-icon, .pearl-number {
+	width: 28px !important;
+	height: 28px !important;
+	line-height: 25px !important;
+}
+
+.pearl-title {
+	font-size: 14px !important;
+}
+
+.pearl.current .pearl-icon, .pearl.current .pearl-number {
+	transform: scale(1) !important;
+}
+
+.my-fa-text {
+	font-size: 12px !important;
+	color: #666 !important;
+}
+
+.my-fa-i-border {
+	border: solid 2px #eee !important;
+}
+
+.my-bg-color {
+	background: #89bceb !important;
+}
+
+.my-text-color {
+	font-size: 12px !important;
+	color: #89bceb !important;
+}
+
+.my-table-responsive {
+	overflow-x: hidden !important;
+}
+
+.my-border-color {
+	border-color: #89bceb !important;
+}
+
+.my-form-bz {
+	font-size: 12px !important;
+}
+
+.my-padding-8 {
+	padding: 6px !important;
+}
+
+.my-mb-10 {
+	margin-bottom: 10px !important;
+}
+
+.my-ml-0 {
+	margin-left: 0px !important;
+}
+
+.my-ml-10 {
+	margin-left: 10px !important;
+}
+
+.my-ml-15 {
+	margin-left: 15px !important;
+}
+
+.my-mt-0 {
+	margin-top: 0px !important;
+}
+
+.my-mt-5 {
+	margin-top: 5px !important;
+}
+
+.my-mt-10 {
+	margin-top: 10px !important;
+}
+
+.my-mt-15 {
+	margin-top: 15px !important;
+}
+
+.my-mt-20 {
+	margin-top: 20px !important;
+}
+
+.my-mt-30 {
+	margin-top: 30px !important;
+}
+
+.my-mt-40 {
+	margin-top: 40px !important;
+}
+
+.my-image img {
+	cursor: pointer;
+	transition: all 0.6s;
+}
+
+.my-image img:hover {
+	transform: scale(1.4);
+}
+
+.my-cart {
+	
+}
+
+.my-cart-panel {
+	border-color: #fff !important;
+	margin-bottom: 20px  !important;
+	background-color: #fff  !important;
+	border: 1px solid transparent  !important;
+	border-radius: 4px !important; 
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05)  !important;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .05)  !important;
+}
+
+.my-cart-panel-body {
+	padding: 15px 15px 0px 15px !important;
+}
+
+.my-cart img {
+	width: 100%  !important;
+	height: 170px  !important;
+	border: 5px solid #ecf0f1  !important;
+	margin-bottom: 7px  !important;
+}
+
+.my-cart hr {
+	margin-top: 10px  !important;
+	margin-bottom: 10px  !important;
+}
+
+.my-cart h4.title-real-estates a {
+	color: #f39c12  !important;
+}
+
+.my-cart h4.title-real-estates a:hover {
+	-webkit-transition: all 1s ease  !important;
+	-moz-transition: all 1s ease  !important;
+	-ms-transition: all 1s ease  !important;
+	-o-transition: all 1s ease  !important;
+	transition: all 1s ease  !important;
+	color: #f1c40f  !important;
+}
+
+.my-cart h4 span {
+	color: #f1c40f  !important;
+}
+
+.my-cart .label {
+	display: inline  !important;
+	padding: .2em .6em .3em  !important;
+	font-size: 75%  !important;
+	font-weight: 700  !important;
+	line-height: 1  !important;
+	color: #fff  !important;
+	text-align: center !important;
+	white-space: nowrap !important;
+	vertical-align: baseline !important;
+	border-radius: .25em  !important;
+}
+
+.my-cart .label-danger {
+	background-color: #d9534f  !important;
+}
+
+.my-panel-body{
+ 		
+ 	}
+@media (max-width: 768px) {
+ 	.my-panel-body{
+ 		padding:1px !important;
+ 	}
+}

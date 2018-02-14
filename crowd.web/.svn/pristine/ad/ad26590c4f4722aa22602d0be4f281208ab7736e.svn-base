@@ -1,0 +1,177 @@
+package com.wisedu.crowd.controller.kfzxx;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.wisedu.crowd.common.code.NwbEnum;
+import com.wisedu.crowd.common.code.RwxqlxEnum;
+import com.wisedu.crowd.common.code.RwztStateEnum;
+import com.wisedu.crowd.common.code.XtcsEnum;
+import com.wisedu.crowd.common.code.YesNoEnum;
+import com.wisedu.crowd.common.util.CommonUtil;
+import com.wisedu.crowd.common.util.ConditionUtil;
+import com.wisedu.crowd.common.util.DecimalUtil;
+import com.wisedu.crowd.common.util.StringUtil;
+import com.wisedu.crowd.controller.BaseController;
+import com.wisedu.crowd.entity.dto.PageInfo;
+import com.wisedu.crowd.entity.rwgl.extend.RwjbxxInfoExtend;
+import com.wisedu.crowd.entity.rwgl.extend.RwztbglsInfoExtend;
+import com.wisedu.crowd.entity.xtgl.extend.XtcsbInfoExtend;
+import com.wisedu.crowd.entity.yhgl.KfzxxInfo;
+import com.wisedu.crowd.entity.yhgl.extend.XqfbpjgInfoExtend;
+import com.wisedu.crowd.interceptor.AuthIsKfzAnnotation;
+import com.wisedu.crowd.interceptor.AuthKfzAnnotation;
+import com.wisedu.crowd.service.dictionary.DictionaryService;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.service.rwgl.RwjbxxInfoService;
+import com.wisedu.crowd.service.rwgl.RwztbglsInfoService;
+import com.wisedu.crowd.service.xtgl.XtcsbInfoService;
+import com.wisedu.crowd.service.yhgl.KfzxxInfoService;
+import com.wisedu.crowd.service.yhgl.XqfbpjgInfoService;
+
+@Controller
+@RequestMapping("kfzOrderAction")
+public class KfzOrderActionController extends BaseController{
+	@Autowired
+	private RwjbxxInfoService rwjbxxInfoService;
+	@Autowired
+	private XtcsbInfoService xtcsbInfoService;
+	
+	@Autowired
+	private KfzxxInfoService kfzxxInfoService;
+	
+	@Autowired
+	private DictionaryService dictionaryService;
+	@Autowired
+	private RwztbglsInfoService rwztbglsInfoService;
+	
+	@Autowired
+	private XqfbpjgInfoService xqfbpjgInfoService;
+	@RequestMapping("index")
+	@AuthKfzAnnotation
+	public ModelAndView index(String rwid) throws Exception {
+		ModelAndView mv=new ModelAndView();
+		RwjbxxInfoExtend queryRwjbxxInfoExtend=new RwjbxxInfoExtend();
+		queryRwjbxxInfoExtend.setWid(rwid);
+		queryRwjbxxInfoExtend.setNeedKfzxx(true);
+		queryRwjbxxInfoExtend.setNeedXqfxx(true);
+		queryRwjbxxInfoExtend.setNeedBugZrr(true);
+		DataResult<List<RwjbxxInfoExtend>> rwjbxxDatas=rwjbxxInfoService.selectDisplayByCondition(ConditionUtil.createCondition(queryRwjbxxInfoExtend));
+		if(CommonUtil.isNotEmptyList(rwjbxxDatas.getDatas())){
+			RwjbxxInfoExtend rwjbxxInfo=rwjbxxDatas.getDatas().get(0);
+			mv.addObject("rwjbxx", rwjbxxInfo);
+			
+			
+			//需求总金额,如果是BUG类型且修改人和开发者是同一个人，则获得总金额为0
+			BigDecimal allMoney=DecimalUtil.ZERO;
+			if(RwxqlxEnum.BUG.getCode().equals(StringUtil.toStr(rwjbxxInfo.getRwlx())) && rwjbxxInfo.getKfzid().equals(rwjbxxInfo.getBugZrr())){
+				allMoney=DecimalUtil.ZERO;
+				
+			}else{
+					allMoney=DecimalUtil.toDecimal(rwjbxxInfo.getZbje());
+			}
+			allMoney=DecimalUtil.add(allMoney, DecimalUtil.changeNull(DecimalUtil.toDecimal(rwjbxxInfo.getPtbzje())));
+			mv.addObject("allMoney",allMoney);
+			BigDecimal xmyssqbl=DecimalUtil.ONE_HUNDRED;
+			BigDecimal yyptsqbl=DecimalUtil.ZERO;
+			if(!StringUtil.isEmpty(rwjbxxInfo.getKfzid())){
+				DataResult<KfzxxInfo> kfzxxInfoDatas=kfzxxInfoService.selectByPrimaryKey(rwjbxxInfo.getKfzid(), this.createCustomOperateLog());
+				if(kfzxxInfoDatas.getDatas()!=null){
+					XtcsbInfoExtend queryXtcsbInfoExtend1=new XtcsbInfoExtend();
+					XtcsbInfoExtend queryXtcsbInfoExtend2=new XtcsbInfoExtend();
+					if(NwbEnum.NB.getCode().equals(kfzxxInfoDatas.getDatas().getKfzlb())){//内部开发者
+						queryXtcsbInfoExtend1.setCsmc(XtcsEnum.NBKFZ_XMGL_XMYSJDFKBL.getCode());
+						queryXtcsbInfoExtend2.setCsmc(XtcsEnum.NBKFZ_XMGL_YYPTYJSQBL.getCode());
+					}else{
+						queryXtcsbInfoExtend1.setCsmc(XtcsEnum.WBKFZ_XMGL_XMYSJDFKBL.getCode());
+						queryXtcsbInfoExtend2.setCsmc(XtcsEnum.WBKFZ_XMGL_YYPTYJSQBL.getCode());
+					}
+					DataResult<List<XtcsbInfoExtend>> xmyssqblDatas=xtcsbInfoService.selectByCondition(queryXtcsbInfoExtend1);
+					DataResult<List<XtcsbInfoExtend>> yyptsqblDatas=xtcsbInfoService.selectByCondition(queryXtcsbInfoExtend2);
+					xmyssqbl=DecimalUtil.toDecimal(xmyssqblDatas.getDatas().get(0).getCsz());
+					yyptsqbl=DecimalUtil.toDecimal(yyptsqblDatas.getDatas().get(0).getCsz());
+					mv.addObject("xmyssqbl", xmyssqbl);
+					mv.addObject("yyptsqblDatas", yyptsqbl);
+				}
+			}
+			boolean needSh=rwjbxxInfoService.checkNeedSh(rwjbxxInfo);
+			
+			if(needSh){
+				BigDecimal ysje=DecimalUtil.div(DecimalUtil.mul(allMoney, xmyssqbl),DecimalUtil.ONE_HUNDRED);
+				BigDecimal shje=DecimalUtil.sub(allMoney, DecimalUtil.div(DecimalUtil.mul(allMoney, xmyssqbl),DecimalUtil.ONE_HUNDRED));
+				BigDecimal ptbz_ysje=DecimalUtil.div(DecimalUtil.mul(DecimalUtil.toDecimal(rwjbxxInfo.getPtbzje()), xmyssqbl),DecimalUtil.ONE_HUNDRED);
+				BigDecimal ptbz_shje=DecimalUtil.sub(DecimalUtil.toDecimal(rwjbxxInfo.getPtbzje()), DecimalUtil.div(DecimalUtil.mul(DecimalUtil.toDecimal(rwjbxxInfo.getPtbzje()), xmyssqbl),DecimalUtil.ONE_HUNDRED));
+				mv.addObject("ysje", ysje);
+				mv.addObject("shje", shje);
+				
+				mv.addObject("ptbz_ysje", ptbz_ysje);
+				mv.addObject("ptbz_shje", ptbz_shje);
+				mv.addObject("total_ysje", DecimalUtil.add(ysje, ptbz_ysje));
+				mv.addObject("total_shje", DecimalUtil.add(shje, ptbz_shje));
+			}else{
+				mv.addObject("ysje", allMoney);
+				mv.addObject("ptbz_ysje", rwjbxxInfo.getPtbzje());
+				mv.addObject("total_ysje", DecimalUtil.add(allMoney, DecimalUtil.toDecimal(rwjbxxInfo.getPtbzje())));
+			}
+			mv.addObject("sfxysh",needSh);
+		}
+		RwztbglsInfoExtend queryRwztbglsInfoExtend=new RwztbglsInfoExtend();
+		queryRwztbglsInfoExtend.setXmid(rwid);
+		queryRwztbglsInfoExtend.setZt(StringUtil.toShort(RwztStateEnum.YSZ.getCode()));
+		mv.addObject("ysz", rwztbglsInfoService.selectByCondition(ConditionUtil.createCondition(queryRwztbglsInfoExtend, new PageInfo(1,1), Arrays.asList("t_crowd_xmgl_rwztbgls.CZSJ DESC")), this.createCustomOperateLog()).getDatas());
+		
+		queryRwztbglsInfoExtend.setZt(StringUtil.toShort(RwztStateEnum.SHZ.getCode()));
+		mv.addObject("ystg", rwztbglsInfoService.selectByCondition(ConditionUtil.createCondition(queryRwztbglsInfoExtend, new PageInfo(1,1), Arrays.asList("t_crowd_xmgl_rwztbgls.CZSJ DESC")), this.createCustomOperateLog()).getDatas());
+		queryRwztbglsInfoExtend.setZt(null);
+		List<Short> zts=new ArrayList<Short>();
+		zts.add(StringUtil.toShort(RwztStateEnum.SHZ.getCode()));
+		zts.add(StringUtil.toShort(RwztStateEnum.SHJSDQR.getCode()));
+		mv.addObject("sqshjs", rwztbglsInfoService.selectByCondition(ConditionUtil.createCondition(queryRwztbglsInfoExtend, new PageInfo(1,1), Arrays.asList("t_crowd_xmgl_rwztbgls.CZSJ DESC")), this.createCustomOperateLog()).getDatas());
+		queryRwztbglsInfoExtend.setZts(null);
+		queryRwztbglsInfoExtend.setZt(StringUtil.toShort(RwztStateEnum.DPJ.getCode()));
+		mv.addObject("rwid", rwid);
+		mv.addObject("shjs", rwztbglsInfoService.selectByCondition(ConditionUtil.createCondition(queryRwztbglsInfoExtend, new PageInfo(1,1), Arrays.asList("t_crowd_xmgl_rwztbgls.CZSJ DESC")), this.createCustomOperateLog()).getDatas());
+		mv.setViewName("kfzgl/rwgl/orderAction");
+		XqfbpjgInfoExtend queryXqfbpjgInfoExtend=new XqfbpjgInfoExtend();
+		queryXqfbpjgInfoExtend.setSsxmid(rwid);
+		
+		List<XqfbpjgInfoExtend> xqfbgjjgLists=xqfbpjgInfoService.selectByCondition(ConditionUtil.createCondition(queryXqfbpjgInfoExtend), this.createCustomOperateLog()).getDatas();
+		if(CommonUtil.isNotEmptyList(xqfbgjjgLists)){
+			mv.addObject("score", xqfbgjjgLists.get(0).getPjjg());
+			mv.addObject("content", xqfbgjjgLists.get(0).getPjnr());
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value="applyAccept",method=RequestMethod.POST)
+	@ResponseBody
+	@AuthIsKfzAnnotation
+	public DataResult<Integer> applyAccept(String rwid,Integer score,String content) throws Exception{
+		return rwjbxxInfoService.applyAccept(rwid, score,content,this.createCustomOperateLog());
+	}
+	
+	@RequestMapping(value="pj",method=RequestMethod.POST)
+	@AuthIsKfzAnnotation
+	@ResponseBody
+	public DataResult<Integer> pj(String rwid,Integer score,String content) throws Exception{
+		return rwjbxxInfoService.kfzDoPj(rwid, score, content, this.createCustomOperateLog());
+	}
+	
+	@RequestMapping(value="applyEndSale",method=RequestMethod.POST)
+	@AuthIsKfzAnnotation
+	@ResponseBody
+	public DataResult<Integer> applyEndSale(String rwid) throws Exception{
+		return rwjbxxInfoService.applyEndSale(rwid,this.createCustomOperateLog());
+	}
+	
+}

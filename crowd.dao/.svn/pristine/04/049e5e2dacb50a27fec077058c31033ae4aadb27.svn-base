@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="com.wisedu.crowd.dao.statics.extend.TrainEnrolDataInfoExtendMapper">
+	<resultMap id="BaseResultMap"
+		type="com.wisedu.crowd.entity.statics.extend.TrainEnrolDataInfoExtend"
+		extends="com.wisedu.crowd.dao.statics.TrainEnrolDataInfoMapper.BaseResultMap">
+
+	</resultMap>
+	<sql id="Base_Column_List">
+		T_CROWD_STATICS_ENROL_DATA.WID, T_CROWD_STATICS_ENROL_DATA.KHYF,
+		T_CROWD_STATICS_ENROL_DATA.TGRS, T_CROWD_STATICS_ENROL_DATA.BTGRS,
+		T_CROWD_STATICS_ENROL_DATA.ZRS
+	</sql>
+	<sql id="sqlWhere">
+		<if test='query!=null'>
+			<if test='query.wid!=null and query.wid!=""'>
+				AND T_CROWD_STATICS_ENROL_DATA.WID=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.khyf!=null and query.khyf!=""'>
+				AND T_CROWD_STATICS_ENROL_DATA.KHYF=#{query.khyf,jdbcType=VARCHAR}
+			</if>
+			<if test='query.minKhyf!=null and query.minKhyf!=""'>
+			   AND  T_CROWD_STATICS_ENROL_DATA.KHYF<![CDATA[>=]]>#{query.minKhyf,jdbcType=VARCHAR}
+			</if>
+			<if test='query.maxKhyf!=null and query.maxKhyf!=""'>
+			   AND  T_CROWD_STATICS_ENROL_DATA.KHYF<![CDATA[<=]]>#{query.maxKhyf,jdbcType=VARCHAR}
+			</if>
+		</if>
+	</sql>
+	<sql id="sqlOrder">
+		ORDER BY 
+		<choose>
+			<when test="orderBy!=null">
+				<foreach collection="orderBy" close=" " item="item" separator="," open=" ">
+					${item}
+				</foreach>
+			</when>
+			<otherwise>
+				T_CROWD_STATICS_ENROL_DATA.KHYF
+			</otherwise>
+		</choose>
+	</sql>
+	<delete id="sqlWhere" parameterType="com.wisedu.crowd.entity.dto.QueryCondition">
+		DELETE FROM 
+		T_CROWD_STATICS_ENROL_DATA
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+	</delete>
+	<select id="selectDisplayByCondition" resultMap="BaseResultMap" parameterType="com.wisedu.crowd.entity.dto.QueryCondition">
+		SELECT 
+		<include refid="Base_Column_List"/>
+		FROM T_CROWD_STATICS_ENROL_DATA
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+		<include refid="sqlOrder"></include>
+	</select>
+</mapper>

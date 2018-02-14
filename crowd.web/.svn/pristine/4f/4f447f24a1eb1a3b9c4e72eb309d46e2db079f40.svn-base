@@ -1,0 +1,318 @@
+package com.wisedu.crowd.controller.center;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.wisedu.crowd.common.code.DictionaryEnum;
+import com.wisedu.crowd.common.code.YesNoEnum;
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.common.util.CommonUtil;
+import com.wisedu.crowd.common.util.ConditionUtil;
+import com.wisedu.crowd.common.util.ConstantsUtil;
+import com.wisedu.crowd.common.util.DateUtil;
+import com.wisedu.crowd.common.util.StringUtil;
+import com.wisedu.crowd.controller.BaseController;
+import com.wisedu.crowd.entity.cwgl.extend.KfzzhmxInfoExtend;
+import com.wisedu.crowd.entity.dictionary.DictionaryInfo;
+import com.wisedu.crowd.entity.dto.PageInfo;
+import com.wisedu.crowd.entity.dto.QueryCondition;
+import com.wisedu.crowd.entity.rwgl.RwjbxxExtInfo;
+import com.wisedu.crowd.entity.rwgl.RwjbxxInfo;
+import com.wisedu.crowd.entity.rwgl.XmjbxxInfo;
+import com.wisedu.crowd.entity.rwgl.extend.CpmlInfoExtend;
+import com.wisedu.crowd.entity.rwgl.extend.RwjbxxExtInfoExtend;
+import com.wisedu.crowd.entity.rwgl.extend.XmjbxxInfoExtend;
+import com.wisedu.crowd.entity.statics.extend.KfzzfInfoExtend;
+import com.wisedu.crowd.entity.statics.extend.XqfzfInfoExtend;
+import com.wisedu.crowd.interceptor.AuthIsXqfAnnotation;
+import com.wisedu.crowd.service.cwgl.KfzzhmxInfoService;
+import com.wisedu.crowd.service.dictionary.DictionaryService;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.service.rwgl.CpmlInfoService;
+import com.wisedu.crowd.service.rwgl.RwjbxxExtInfoService;
+import com.wisedu.crowd.service.rwgl.RwjbxxInfoService;
+import com.wisedu.crowd.service.rwgl.XmjbxxInfoService;
+import com.wisedu.crowd.service.statics.KfzzfInfoService;
+import com.wisedu.crowd.service.statics.XqfzfInfoService;
+
+@Controller
+@RequestMapping("publishing")
+public class PublishingController extends BaseController{
+
+	@Autowired
+	private DictionaryService dictionaryService;
+	
+	@Autowired
+	private XmjbxxInfoService xmjbxxInfoService;
+	@Autowired
+	private CpmlInfoService cpmlInfoService;
+	@Autowired
+	private RwjbxxInfoService rwjbxxInfoService;
+	
+	@Autowired
+	private RwjbxxExtInfoService rwjbxxExtInfoService;
+	@Autowired
+	private KfzzfInfoService kfzzfInfoService;
+	@Autowired
+	private XqfzfInfoService xqfzfInfoService;
+	
+
+	@Autowired
+	private KfzzhmxInfoService kfzzhmxInfoService;
+	@AuthIsXqfAnnotation
+	@RequestMapping("index")
+	public ModelAndView index(String rwid,String rePublish) throws Exception{
+		ModelAndView mv=new ModelAndView();
+		//List<DictionaryInfo> rwkjList=dictionaryService.selectByCondtion(DictionaryEnum.T_CROWD_SJZD_RWKFKJ, null);
+		List<DictionaryInfo> rwxsList=dictionaryService.selectByCondtion(DictionaryEnum.T_CROWD_SJZD_RWXS, null);
+		List<DictionaryInfo> rwlxList=dictionaryService.selectByCondtion(DictionaryEnum.T_CROWD_XMGL_ZJRWLX, null);
+		List<DictionaryInfo> ywxList=dictionaryService.selectByCondtion(DictionaryEnum.T_CROWD_XMGL_YWX, null);
+		List<DictionaryInfo> jjrwList=dictionaryService.selectByCondtion(DictionaryEnum.T_CROWD_SJZD_JJRW, null);
+		
+		//XmjbxxInfoExtend queryXmjbxxInfo=new XmjbxxInfoExtend();
+		//queryXmjbxxInfo.setXmbh(ConstantsUtil.XMJBXX_TS_BH);
+		//DataResult<List<XmjbxxInfo>> xmjbxxInfo=xmjbxxInfoService.selectByCondition(queryXmjbxxInfo);
+		mv.setViewName("center/publishing");
+		//mv.addObject("kfkj", rwkjList);
+		mv.addObject("rwxs", rwxsList);
+		mv.addObject("rwlx", rwlxList);
+		mv.addObject("ywx", ywxList);
+		mv.addObject("jjrw", jjrwList);
+		mv.addObject("date",DateUtil.getCurrentDateStr());
+		
+		if(!StringUtil.isEmpty(rwid)){
+			DataResult<RwjbxxInfo> rwjbxxInfo=rwjbxxInfoService.selectByPrimaryKey(rwid);
+			if(rwjbxxInfo.getDatas()!=null){
+				if("1".equals(StringUtil.toStr(rePublish))){
+					rwjbxxInfo.getDatas().setWid(null);
+					rwjbxxInfo.getDatas().setZbjzrq(null);
+					rwjbxxInfo.getDatas().setJfrq(null);
+					rwjbxxInfo.getDatas().setSfjj(null);
+				}
+				mv.addObject("rwjbxx",rwjbxxInfo.getDatas());
+			}
+			
+			RwjbxxExtInfoExtend queryRwjbxxExtInfoExtend=new RwjbxxExtInfoExtend();
+			queryRwjbxxExtInfoExtend.setRwid(rwid);
+			DataResult<List<RwjbxxExtInfoExtend>> rwjbxxExtInfoDatas=rwjbxxExtInfoService.selectByCondition(ConditionUtil.createCondition(queryRwjbxxExtInfoExtend),this.createCustomOperateLog());
+			if(CommonUtil.isNotEmptyList(rwjbxxExtInfoDatas.getDatas())){
+				if("1".equals(StringUtil.toStr(rePublish))){
+					rwjbxxExtInfoDatas.getDatas().get(0).setWid(null);
+					rwjbxxExtInfoDatas.getDatas().get(0).setRwid(null);
+					
+				}
+				mv.addObject("rwjbxxExt",rwjbxxExtInfoDatas.getDatas().get(0));
+				DataResult<List<DictionaryInfo>> cpmlDatas=getCpml(rwjbxxExtInfoDatas.getDatas().get(0).getYwxbm());
+				if(CommonUtil.isNotEmptyList(cpmlDatas.getDatas())){
+					mv.addObject("cpml",cpmlDatas.getDatas());
+				}
+			}
+			
+					
+		}
+		long token=DateUtil.getCurrentFormatDate().getTime();
+		mv.addObject("token",token);
+		request.getSession().setAttribute(ConstantsUtil.TOKEN, token);
+		//mv.addObject("xmxx",xmjbxxInfo.getDatas());
+		return mv;
+	}
+	@AuthIsXqfAnnotation
+	@RequestMapping("xmxxs")
+	@ResponseBody
+	public DataResult<List<XmjbxxInfo>> queryXmjbxx(String condition) throws Exception{
+		XmjbxxInfoExtend queryXmjbxxInfo=new XmjbxxInfoExtend();
+		queryXmjbxxInfo.setSfsy(StringUtil.toInt(YesNoEnum.YES.getCode()));
+		if(StringUtil.isEmpty(condition)){
+			queryXmjbxxInfo.setXmbh(ConstantsUtil.XMJBXX_TS_BH);
+		}else{
+			queryXmjbxxInfo.setCondition(condition.toUpperCase());
+		}
+		return xmjbxxInfoService.selectByCondition(ConditionUtil.createCondition(queryXmjbxxInfo),this.createCustomOperateLog());
+	}
+	@AuthIsXqfAnnotation
+	@RequestMapping("cpmls")
+	@ResponseBody
+	public DataResult<List<DictionaryInfo>> queryCpmlByYwxbm(String ywxbm) throws Exception{
+		
+		
+		return getCpml(ywxbm);
+	}
+	
+	private DataResult<List<DictionaryInfo>> getCpml(String ywxbm){
+		CpmlInfoExtend queryCpmlInfoExtend=new CpmlInfoExtend();
+		queryCpmlInfoExtend.setYwxbm(ywxbm);
+		DataResult<List<CpmlInfoExtend>> datas=cpmlInfoService.selectByCondition(queryCpmlInfoExtend);
+		List<DictionaryInfo> dicList=new ArrayList<DictionaryInfo>();
+		if(datas!=null && datas.getDatas()!=null){
+			List<CpmlInfoExtend> cpmlInfoList= 	datas.getDatas();
+			for(CpmlInfoExtend cpmlInfoExtend:cpmlInfoList){
+				DictionaryInfo dictionaryInfo=new DictionaryInfo();
+				dictionaryInfo.setWid(cpmlInfoExtend.getWid());
+				dictionaryInfo.setLbdm(cpmlInfoExtend.getBm());
+				dictionaryInfo.setLbmc(cpmlInfoExtend.getMc());
+				dicList.add(dictionaryInfo);
+			}
+		}
+		DataResult<List<DictionaryInfo>> dicData=new DataResult<List<DictionaryInfo>>();
+		dicData.setCode(datas.getCode());
+		dicData.setMsg(datas.getMsg());
+		dicData.setPageInfo(datas.getPageInfo());
+		dicData.setDatas(dicList);
+		dicData.setSuccess(true);
+		return dicData;
+	}
+	@AuthIsXqfAnnotation
+	@RequestMapping("fbxxs")
+	@ResponseBody
+	public DataResult<List<DictionaryInfo>> queryFbxxsByXmbh(String xmbh) throws Exception{
+		
+		DataResult<List<DictionaryInfo>> datas=dictionaryService.selectFbxxByCondition(xmbh);
+		return datas; 
+	}
+	@InitBinder("rwjbxxInfo")
+	public void initBinderRwjbxxForm(WebDataBinder binder){
+		binder.setFieldDefaultPrefix("rwjbxxInfo.");
+		binder.registerCustomEditor(Date.class,   new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true)); 
+	}
+	
+	@InitBinder("rwjbxxExtInfo")
+	public void initBinderRwjbxxExtForm(WebDataBinder binder){
+		binder.setFieldDefaultPrefix("rwjbxxExtInfo.");
+	}
+	@RequestMapping(value="publishing",method=RequestMethod.POST)
+	@ResponseBody
+	@AuthIsXqfAnnotation
+	public DataResult<Integer> publishing(RwjbxxInfo rwjbxxInfo,RwjbxxExtInfo rwjbxxExtInfo,String token,HttpServletRequest request) throws Exception{
+	
+		if(StringUtil.isEmpty(token)){
+			throw new ServiceException("token不能为空！");
+		}
+		String sessionToken=StringUtil.toStr(request.getSession().getAttribute(ConstantsUtil.TOKEN));
+		if(token.equals(sessionToken)){
+			rwjbxxInfoService.publishing(rwjbxxInfo, rwjbxxExtInfo, "1", this.createCustomOperateLog());
+			request.getSession().setAttribute(ConstantsUtil.TOKEN, "");
+		}
+		
+		return DataResult.success(1);
+	}
+	
+	@RequestMapping(value="publishingCg",method=RequestMethod.POST)
+	@ResponseBody
+	@AuthIsXqfAnnotation
+	public DataResult<Integer> publishingCg(RwjbxxInfo rwjbxxInfo,RwjbxxExtInfo rwjbxxExtInfo,String token,HttpServletRequest request) throws Exception{
+	
+		if(StringUtil.isEmpty(token)){
+			throw new ServiceException("token不能为空！");
+		}
+		String sessionToken=StringUtil.toStr(request.getSession().getAttribute(ConstantsUtil.TOKEN));
+		if(token.equals(sessionToken)){
+			rwjbxxInfoService.publishing(rwjbxxInfo, rwjbxxExtInfo, "2", this.createCustomOperateLog());
+			request.getSession().setAttribute(ConstantsUtil.TOKEN, "");
+		}
+		
+		return DataResult.success(1);
+	}
+	
+	
+	@RequestMapping("selectCompany")
+	@ResponseBody
+	public DataResult<List<Map<String,Object>>> selectCompanyStatic() throws Exception{
+		QueryCondition<KfzzhmxInfoExtend> queryConditon=new QueryCondition<KfzzhmxInfoExtend>();
+		KfzzhmxInfoExtend queryKfzzhmxInfoExtend=new KfzzhmxInfoExtend();
+		queryKfzzhmxInfoExtend.setSfytd(StringUtil.toInt(YesNoEnum.YES.getCode()));
+		queryConditon.setQuery(queryKfzzhmxInfoExtend);
+		PageInfo pageInfo=new PageInfo();
+		pageInfo.setPageNum(1);
+		pageInfo.setPageSize(10);
+		queryConditon.setPageInfo(pageInfo);
+		List<String> orders=new ArrayList<String>();
+		orders.add("SUM(T_CROWD_CWGL_KFZZHMX.JE) DESC ");
+		queryConditon.setOrderBy(orders);
+		return kfzzhmxInfoService.selectDisplayTotalMoney(queryConditon, this.createCustomOperateLog());
+	}
+	@RequestMapping("selectPerson")
+	@ResponseBody
+	public DataResult<List<Map<String,Object>>> selectPersonStatic() throws Exception{
+		QueryCondition<KfzzhmxInfoExtend> queryConditon=new QueryCondition<KfzzhmxInfoExtend>();
+		KfzzhmxInfoExtend queryKfzzhmxInfoExtend=new KfzzhmxInfoExtend();
+		queryKfzzhmxInfoExtend.setSfytd(StringUtil.toInt(YesNoEnum.NO.getCode()));
+		queryConditon.setQuery(queryKfzzhmxInfoExtend);
+		PageInfo pageInfo=new PageInfo();
+		pageInfo.setPageNum(1);
+		pageInfo.setPageSize(10);
+		queryConditon.setPageInfo(pageInfo);
+		List<String> orders=new ArrayList<String>();
+		orders.add("SUM(T_CROWD_CWGL_KFZZHMX.JE) DESC ");
+		queryConditon.setOrderBy(orders);
+		return kfzzhmxInfoService.selectDisplayTotalMoney(queryConditon, this.createCustomOperateLog());
+	}
+	
+	@RequestMapping("selectNewTb")
+	@ResponseBody
+	public DataResult<List<Map<String,Object>>> selectNewTb() throws Exception{
+		PageInfo pageInfo=new PageInfo();
+		pageInfo.setPageNum(1);
+		pageInfo.setPageSize(5);
+		List<Map<String,Object>> datas=rwjbxxInfoService.selectNewZbxx(pageInfo, this.createCustomOperateLog()).getDatas();
+		if(CommonUtil.isNotEmptyList(datas)){
+			for(Map<String,Object> map:datas){
+				String strData=StringUtil.toStr(map.get("CZSJ"));
+				Date startDate=DateUtil.parseDateTime(strData);
+				Date endDate=DateUtil.getCurrentDate();
+				
+				long time=DateUtil.getMinutesBetween(startDate, endDate);
+				String dw="分";
+				if(time>=60){
+					time=DateUtil.getHoursBetween(startDate, endDate);
+					dw="小时";
+					if(time>=24){
+						time=DateUtil.getDaysBetween(DateUtil.formatDate(startDate), DateUtil.formatDate(endDate));
+						dw="天";
+					}
+				}
+				map.put("ts", time);
+				map.put("dw", dw);
+			}
+		}
+		return DataResult.success(datas);
+	}
+	
+	@RequestMapping("selectDeveloperStar")
+	@ResponseBody
+	public DataResult<List<KfzzfInfoExtend>> selectDeveloperStar() throws Exception{
+		PageInfo pageInfo = new PageInfo();
+		pageInfo.setPageNum(1);
+		pageInfo.setPageSize(5);
+		KfzzfInfoExtend queryKfzzfInfoExtend = new KfzzfInfoExtend();
+		queryKfzzfInfoExtend.setMonth(DateUtil.getLstMonth());
+		QueryCondition<KfzzfInfoExtend> queryCondition = new QueryCondition<KfzzfInfoExtend>(queryKfzzfInfoExtend, pageInfo);
+		return kfzzfInfoService.selectByCondition(queryCondition, this.createCustomOperateLog());
+	}
+	
+	@RequestMapping("selectDemanderStar")
+	@ResponseBody
+	public DataResult<List<XqfzfInfoExtend>> selectDemanderStar() throws Exception{
+		PageInfo pageInfo = new PageInfo();
+		pageInfo.setPageNum(1);
+		pageInfo.setPageSize(5);
+		XqfzfInfoExtend queryXqfzfInfoExtend = new XqfzfInfoExtend();
+		queryXqfzfInfoExtend.setMonth(DateUtil.getLstMonth());
+		QueryCondition<XqfzfInfoExtend> queryCondition = new QueryCondition<XqfzfInfoExtend>(queryXqfzfInfoExtend, pageInfo);
+		return xqfzfInfoService.selectByCondition(queryCondition, this.createCustomOperateLog());
+	}
+}

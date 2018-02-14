@@ -1,0 +1,39 @@
+package com.wisedu.crowd.service.yhgl;
+
+import java.util.List;
+
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.entity.log.CustomOperateLog;
+import com.wisedu.crowd.entity.yhgl.YhjbxxInfo;
+import com.wisedu.crowd.entity.yhgl.extend.YhjbxxInfoExtend;
+import com.wisedu.crowd.service.dto.DataResult;
+
+public interface YhjbxxInfoService {
+	 /**
+//    *
+//    * @mbggenerated 2017-11-02
+//    */
+   int deleteByPrimaryKey(String wid) throws ServiceException;
+   
+   YhjbxxInfo saveYhjbxxInfo(YhjbxxInfo record,CustomOperateLog log) throws ServiceException;
+
+  
+
+   /**
+    *
+    * @mbggenerated 2017-11-02
+    */
+   YhjbxxInfo selectByPrimaryKey(String wid) throws ServiceException;
+
+//   
+   List<YhjbxxInfoExtend> selectByCondition(YhjbxxInfoExtend condition) throws ServiceException;
+   /**
+    * 用户注册
+    * @param yhjbxxInfo
+    * @param confirmPassword
+    * @throws ServiceException
+    */
+   YhjbxxInfoExtend register(YhjbxxInfoExtend yhjbxxInfo,String confirmPassword,CustomOperateLog log) throws ServiceException;
+   
+   DataResult<YhjbxxInfoExtend> login(String userName,String password,CustomOperateLog log) throws ServiceException;
+}

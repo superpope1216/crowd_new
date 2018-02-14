@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.statics.KfzzfInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.statics.KfzzfInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="KFZID" property="kfzid" jdbcType="VARCHAR" />
+    <result column="KFZXM" property="kfzxm" jdbcType="VARCHAR" />
+    <result column="YWX" property="ywx" jdbcType="VARCHAR" />
+    <result column="GRZP" property="grzp" jdbcType="VARCHAR" />
+    <result column="ZBDF" property="zbdf" jdbcType="DECIMAL" />
+    <result column="YSDF" property="ysdf" jdbcType="DECIMAL" />
+    <result column="YQDF" property="yqdf" jdbcType="DECIMAL" />
+    <result column="BUGDF" property="bugdf" jdbcType="DECIMAL" />
+    <result column="PJDF" property="pjdf" jdbcType="DECIMAL" />
+    <result column="RBDF" property="rbdf" jdbcType="DECIMAL" />
+    <result column="GZLDF" property="gzldf" jdbcType="DECIMAL" />
+    <result column="SCORE" property="score" jdbcType="DECIMAL" />
+    <result column="MONTH" property="month" jdbcType="VARCHAR" />
+    <result column="WGXMS" property="wgxms" jdbcType="DECIMAL" />
+    <result column="JE" property="je" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, KFZID, KFZXM, YWX, GRZP, ZBDF, YSDF, YQDF, BUGDF, PJDF, RBDF, GZLDF, SCORE, 
+    MONTH, WGXMS, JE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_static_kfzdf_total
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_static_kfzdf_total
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.statics.KfzzfInfo" >
+    insert into t_crowd_static_kfzdf_total (WID, KFZID, KFZXM, 
+      YWX, GRZP, ZBDF, YSDF, 
+      YQDF, BUGDF, PJDF, 
+      RBDF, GZLDF, SCORE, 
+      MONTH, WGXMS, JE)
+    values (#{wid,jdbcType=VARCHAR}, #{kfzid,jdbcType=VARCHAR}, #{kfzxm,jdbcType=VARCHAR}, 
+      #{ywx,jdbcType=VARCHAR}, #{grzp,jdbcType=VARCHAR}, #{zbdf,jdbcType=DECIMAL}, #{ysdf,jdbcType=DECIMAL}, 
+      #{yqdf,jdbcType=DECIMAL}, #{bugdf,jdbcType=DECIMAL}, #{pjdf,jdbcType=DECIMAL}, 
+      #{rbdf,jdbcType=DECIMAL}, #{gzldf,jdbcType=DECIMAL}, #{score,jdbcType=DECIMAL}, 
+      #{month,jdbcType=VARCHAR}, #{wgxms,jdbcType=DECIMAL}, #{je,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.statics.KfzzfInfo" >
+    insert into t_crowd_static_kfzdf_total
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="kfzid != null" >
+        KFZID,
+      </if>
+      <if test="kfzxm != null" >
+        KFZXM,
+      </if>
+      <if test="ywx != null" >
+        YWX,
+      </if>
+      <if test="grzp != null" >
+        GRZP,
+      </if>
+      <if test="zbdf != null" >
+        ZBDF,
+      </if>
+      <if test="ysdf != null" >
+        YSDF,
+      </if>
+      <if test="yqdf != null" >
+        YQDF,
+      </if>
+      <if test="bugdf != null" >
+        BUGDF,
+      </if>
+      <if test="pjdf != null" >
+        PJDF,
+      </if>
+      <if test="rbdf != null" >
+        RBDF,
+      </if>
+      <if test="gzldf != null" >
+        GZLDF,
+      </if>
+      <if test="score != null" >
+        SCORE,
+      </if>
+      <if test="month != null" >
+        MONTH,
+      </if>
+      <if test="wgxms != null" >
+        WGXMS,
+      </if>
+      <if test="je != null" >
+        JE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="kfzid != null" >
+        #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="kfzxm != null" >
+        #{kfzxm,jdbcType=VARCHAR},
+      </if>
+      <if test="ywx != null" >
+        #{ywx,jdbcType=VARCHAR},
+      </if>
+      <if test="grzp != null" >
+        #{grzp,jdbcType=VARCHAR},
+      </if>
+      <if test="zbdf != null" >
+        #{zbdf,jdbcType=DECIMAL},
+      </if>
+      <if test="ysdf != null" >
+        #{ysdf,jdbcType=DECIMAL},
+      </if>
+      <if test="yqdf != null" >
+        #{yqdf,jdbcType=DECIMAL},
+      </if>
+      <if test="bugdf != null" >
+        #{bugdf,jdbcType=DECIMAL},
+      </if>
+      <if test="pjdf != null" >
+        #{pjdf,jdbcType=DECIMAL},
+      </if>
+      <if test="rbdf != null" >
+        #{rbdf,jdbcType=DECIMAL},
+      </if>
+      <if test="gzldf != null" >
+        #{gzldf,jdbcType=DECIMAL},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=DECIMAL},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="wgxms != null" >
+        #{wgxms,jdbcType=DECIMAL},
+      </if>
+      <if test="je != null" >
+        #{je,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.statics.KfzzfInfo" >
+    update t_crowd_static_kfzdf_total
+    <set >
+      <if test="kfzid != null" >
+        KFZID = #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="kfzxm != null" >
+        KFZXM = #{kfzxm,jdbcType=VARCHAR},
+      </if>
+      <if test="ywx != null" >
+        YWX = #{ywx,jdbcType=VARCHAR},
+      </if>
+      <if test="grzp != null" >
+        GRZP = #{grzp,jdbcType=VARCHAR},
+      </if>
+      <if test="zbdf != null" >
+        ZBDF = #{zbdf,jdbcType=DECIMAL},
+      </if>
+      <if test="ysdf != null" >
+        YSDF = #{ysdf,jdbcType=DECIMAL},
+      </if>
+      <if test="yqdf != null" >
+        YQDF = #{yqdf,jdbcType=DECIMAL},
+      </if>
+      <if test="bugdf != null" >
+        BUGDF = #{bugdf,jdbcType=DECIMAL},
+      </if>
+      <if test="pjdf != null" >
+        PJDF = #{pjdf,jdbcType=DECIMAL},
+      </if>
+      <if test="rbdf != null" >
+        RBDF = #{rbdf,jdbcType=DECIMAL},
+      </if>
+      <if test="gzldf != null" >
+        GZLDF = #{gzldf,jdbcType=DECIMAL},
+      </if>
+      <if test="score != null" >
+        SCORE = #{score,jdbcType=DECIMAL},
+      </if>
+      <if test="month != null" >
+        MONTH = #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="wgxms != null" >
+        WGXMS = #{wgxms,jdbcType=DECIMAL},
+      </if>
+      <if test="je != null" >
+        JE = #{je,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.statics.KfzzfInfo" >
+    update t_crowd_static_kfzdf_total
+    set KFZID = #{kfzid,jdbcType=VARCHAR},
+      KFZXM = #{kfzxm,jdbcType=VARCHAR},
+      YWX = #{ywx,jdbcType=VARCHAR},
+      GRZP = #{grzp,jdbcType=VARCHAR},
+      ZBDF = #{zbdf,jdbcType=DECIMAL},
+      YSDF = #{ysdf,jdbcType=DECIMAL},
+      YQDF = #{yqdf,jdbcType=DECIMAL},
+      BUGDF = #{bugdf,jdbcType=DECIMAL},
+      PJDF = #{pjdf,jdbcType=DECIMAL},
+      RBDF = #{rbdf,jdbcType=DECIMAL},
+      GZLDF = #{gzldf,jdbcType=DECIMAL},
+      SCORE = #{score,jdbcType=DECIMAL},
+      MONTH = #{month,jdbcType=VARCHAR},
+      WGXMS = #{wgxms,jdbcType=DECIMAL},
+      JE = #{je,jdbcType=DECIMAL}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

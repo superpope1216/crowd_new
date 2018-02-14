@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.rwgl.BugZrrInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.rwgl.BugZrrInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="KFZID" property="kfzid" jdbcType="VARCHAR" />
+    <result column="RWID" property="rwid" jdbcType="VARCHAR" />
+    <result column="SHR" property="shr" jdbcType="VARCHAR" />
+    <result column="SHSJ" property="shsj" jdbcType="VARCHAR" />
+    <result column="QRLY" property="qrly" jdbcType="VARCHAR" />
+    <result column="BGXGR" property="bgxgr" jdbcType="VARCHAR" />
+    <result column="BGZRRGH" property="bgzrrgh" jdbcType="VARCHAR" />
+    <result column="BGZRRXM" property="bgzrrxm" jdbcType="VARCHAR" />
+    <result column="JSGSBM" property="jsgsbm" jdbcType="VARCHAR" />
+    <result column="JSZT" property="jszt" jdbcType="DECIMAL" />
+    <result column="JSRQ" property="jsrq" jdbcType="VARCHAR" />
+    <result column="SFXYTP" property="sfxytp" jdbcType="DECIMAL" />
+    <result column="TPZT" property="tpzt" jdbcType="DECIMAL" />
+    <result column="ZZSHZRR" property="zzshzrr" jdbcType="VARCHAR" />
+    <result column="SHBTGYY" property="shbtgyy" jdbcType="VARCHAR" />
+    <result column="BUGFL" property="bugfl" jdbcType="INTEGER" />
+    <result column="SFMQZRR" property="sfmqzrr" jdbcType="INTEGER" />
+    <result column="SFMQSBUG" property="sfmqsbug" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, KFZID, RWID, SHR, SHSJ, QRLY, BGXGR, BGZRRGH, BGZRRXM, JSGSBM, JSZT, JSRQ, SFXYTP, 
+    TPZT, ZZSHZRR, SHBTGYY, BUGFL, SFMQZRR, SFMQSBUG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_xmgl_rwjbxx_bugzrr
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_xmgl_rwjbxx_bugzrr
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.rwgl.BugZrrInfo" >
+    insert into t_crowd_xmgl_rwjbxx_bugzrr (WID, KFZID, RWID, 
+      SHR, SHSJ, QRLY, BGXGR, 
+      BGZRRGH, BGZRRXM, JSGSBM, 
+      JSZT, JSRQ, SFXYTP, 
+      TPZT, ZZSHZRR, SHBTGYY, 
+      BUGFL, SFMQZRR, SFMQSBUG
+      )
+    values (#{wid,jdbcType=VARCHAR}, #{kfzid,jdbcType=VARCHAR}, #{rwid,jdbcType=VARCHAR}, 
+      #{shr,jdbcType=VARCHAR}, #{shsj,jdbcType=VARCHAR}, #{qrly,jdbcType=VARCHAR}, #{bgxgr,jdbcType=VARCHAR}, 
+      #{bgzrrgh,jdbcType=VARCHAR}, #{bgzrrxm,jdbcType=VARCHAR}, #{jsgsbm,jdbcType=VARCHAR}, 
+      #{jszt,jdbcType=DECIMAL}, #{jsrq,jdbcType=VARCHAR}, #{sfxytp,jdbcType=DECIMAL}, 
+      #{tpzt,jdbcType=DECIMAL}, #{zzshzrr,jdbcType=VARCHAR}, #{shbtgyy,jdbcType=VARCHAR}, 
+      #{bugfl,jdbcType=INTEGER}, #{sfmqzrr,jdbcType=INTEGER}, #{sfmqsbug,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.rwgl.BugZrrInfo" >
+    insert into t_crowd_xmgl_rwjbxx_bugzrr
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="kfzid != null" >
+        KFZID,
+      </if>
+      <if test="rwid != null" >
+        RWID,
+      </if>
+      <if test="shr != null" >
+        SHR,
+      </if>
+      <if test="shsj != null" >
+        SHSJ,
+      </if>
+      <if test="qrly != null" >
+        QRLY,
+      </if>
+      <if test="bgxgr != null" >
+        BGXGR,
+      </if>
+      <if test="bgzrrgh != null" >
+        BGZRRGH,
+      </if>
+      <if test="bgzrrxm != null" >
+        BGZRRXM,
+      </if>
+      <if test="jsgsbm != null" >
+        JSGSBM,
+      </if>
+      <if test="jszt != null" >
+        JSZT,
+      </if>
+      <if test="jsrq != null" >
+        JSRQ,
+      </if>
+      <if test="sfxytp != null" >
+        SFXYTP,
+      </if>
+      <if test="tpzt != null" >
+        TPZT,
+      </if>
+      <if test="zzshzrr != null" >
+        ZZSHZRR,
+      </if>
+      <if test="shbtgyy != null" >
+        SHBTGYY,
+      </if>
+      <if test="bugfl != null" >
+        BUGFL,
+      </if>
+      <if test="sfmqzrr != null" >
+        SFMQZRR,
+      </if>
+      <if test="sfmqsbug != null" >
+        SFMQSBUG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="kfzid != null" >
+        #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="rwid != null" >
+        #{rwid,jdbcType=VARCHAR},
+      </if>
+      <if test="shr != null" >
+        #{shr,jdbcType=VARCHAR},
+      </if>
+      <if test="shsj != null" >
+        #{shsj,jdbcType=VARCHAR},
+      </if>
+      <if test="qrly != null" >
+        #{qrly,jdbcType=VARCHAR},
+      </if>
+      <if test="bgxgr != null" >
+        #{bgxgr,jdbcType=VARCHAR},
+      </if>
+      <if test="bgzrrgh != null" >
+        #{bgzrrgh,jdbcType=VARCHAR},
+      </if>
+      <if test="bgzrrxm != null" >
+        #{bgzrrxm,jdbcType=VARCHAR},
+      </if>
+      <if test="jsgsbm != null" >
+        #{jsgsbm,jdbcType=VARCHAR},
+      </if>
+      <if test="jszt != null" >
+        #{jszt,jdbcType=DECIMAL},
+      </if>
+      <if test="jsrq != null" >
+        #{jsrq,jdbcType=VARCHAR},
+      </if>
+      <if test="sfxytp != null" >
+        #{sfxytp,jdbcType=DECIMAL},
+      </if>
+      <if test="tpzt != null" >
+        #{tpzt,jdbcType=DECIMAL},
+      </if>
+      <if test="zzshzrr != null" >
+        #{zzshzrr,jdbcType=VARCHAR},
+      </if>
+      <if test="shbtgyy != null" >
+        #{shbtgyy,jdbcType=VARCHAR},
+      </if>
+      <if test="bugfl != null" >
+        #{bugfl,jdbcType=INTEGER},
+      </if>
+      <if test="sfmqzrr != null" >
+        #{sfmqzrr,jdbcType=INTEGER},
+      </if>
+      <if test="sfmqsbug != null" >
+        #{sfmqsbug,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.rwgl.BugZrrInfo" >
+    update t_crowd_xmgl_rwjbxx_bugzrr
+    <set >
+      <if test="kfzid != null" >
+        KFZID = #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="rwid != null" >
+        RWID = #{rwid,jdbcType=VARCHAR},
+      </if>
+      <if test="shr != null" >
+        SHR = #{shr,jdbcType=VARCHAR},
+      </if>
+      <if test="shsj != null" >
+        SHSJ = #{shsj,jdbcType=VARCHAR},
+      </if>
+      <if test="qrly != null" >
+        QRLY = #{qrly,jdbcType=VARCHAR},
+      </if>
+      <if test="bgxgr != null" >
+        BGXGR = #{bgxgr,jdbcType=VARCHAR},
+      </if>
+      <if test="bgzrrgh != null" >
+        BGZRRGH = #{bgzrrgh,jdbcType=VARCHAR},
+      </if>
+      <if test="bgzrrxm != null" >
+        BGZRRXM = #{bgzrrxm,jdbcType=VARCHAR},
+      </if>
+      <if test="jsgsbm != null" >
+        JSGSBM = #{jsgsbm,jdbcType=VARCHAR},
+      </if>
+      <if test="jszt != null" >
+        JSZT = #{jszt,jdbcType=DECIMAL},
+      </if>
+      <if test="jsrq != null" >
+        JSRQ = #{jsrq,jdbcType=VARCHAR},
+      </if>
+      <if test="sfxytp != null" >
+        SFXYTP = #{sfxytp,jdbcType=DECIMAL},
+      </if>
+      <if test="tpzt != null" >
+        TPZT = #{tpzt,jdbcType=DECIMAL},
+      </if>
+      <if test="zzshzrr != null" >
+        ZZSHZRR = #{zzshzrr,jdbcType=VARCHAR},
+      </if>
+      <if test="shbtgyy != null" >
+        SHBTGYY = #{shbtgyy,jdbcType=VARCHAR},
+      </if>
+      <if test="bugfl != null" >
+        BUGFL = #{bugfl,jdbcType=INTEGER},
+      </if>
+      <if test="sfmqzrr != null" >
+        SFMQZRR = #{sfmqzrr,jdbcType=INTEGER},
+      </if>
+      <if test="sfmqsbug != null" >
+        SFMQSBUG = #{sfmqsbug,jdbcType=INTEGER},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.rwgl.BugZrrInfo" >
+    update t_crowd_xmgl_rwjbxx_bugzrr
+    set KFZID = #{kfzid,jdbcType=VARCHAR},
+      RWID = #{rwid,jdbcType=VARCHAR},
+      SHR = #{shr,jdbcType=VARCHAR},
+      SHSJ = #{shsj,jdbcType=VARCHAR},
+      QRLY = #{qrly,jdbcType=VARCHAR},
+      BGXGR = #{bgxgr,jdbcType=VARCHAR},
+      BGZRRGH = #{bgzrrgh,jdbcType=VARCHAR},
+      BGZRRXM = #{bgzrrxm,jdbcType=VARCHAR},
+      JSGSBM = #{jsgsbm,jdbcType=VARCHAR},
+      JSZT = #{jszt,jdbcType=DECIMAL},
+      JSRQ = #{jsrq,jdbcType=VARCHAR},
+      SFXYTP = #{sfxytp,jdbcType=DECIMAL},
+      TPZT = #{tpzt,jdbcType=DECIMAL},
+      ZZSHZRR = #{zzshzrr,jdbcType=VARCHAR},
+      SHBTGYY = #{shbtgyy,jdbcType=VARCHAR},
+      BUGFL = #{bugfl,jdbcType=INTEGER},
+      SFMQZRR = #{sfmqzrr,jdbcType=INTEGER},
+      SFMQSBUG = #{sfmqsbug,jdbcType=INTEGER}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

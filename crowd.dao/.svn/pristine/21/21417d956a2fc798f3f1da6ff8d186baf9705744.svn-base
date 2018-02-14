@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.statics.RwjbxxRwxsDataInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.statics.RwjbxxRwxsDataInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="KFXS" property="kfxs" jdbcType="VARCHAR" />
+    <result column="FBRWS" property="fbrws" jdbcType="DECIMAL" />
+    <result column="FBRWJE" property="fbrwje" jdbcType="DECIMAL" />
+    <result column="WGRWS" property="wgrws" jdbcType="DECIMAL" />
+    <result column="WGRWJE" property="wgrwje" jdbcType="DECIMAL" />
+    <result column="YEAR" property="year" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, KFXS, FBRWS, FBRWJE, WGRWS, WGRWJE,YEAR
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_CROWD_STATICS_RWJBXX_DATADET
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_CROWD_STATICS_RWJBXX_DATADET
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.statics.RwjbxxRwxsDataInfo" >
+    insert into T_CROWD_STATICS_RWJBXX_DATADET (WID, KFXS, FBRWS, 
+      FBRWJE, WGRWS, WGRWJE,YEAR
+      )
+    values (#{wid,jdbcType=VARCHAR}, #{kfxs,jdbcType=VARCHAR}, #{fbrws,jdbcType=DECIMAL}, 
+      #{fbrwje,jdbcType=DECIMAL}, #{wgrws,jdbcType=DECIMAL}, #{wgrwje,jdbcType=DECIMAL}
+      , #{year,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.statics.RwjbxxRwxsDataInfo" >
+    insert into T_CROWD_STATICS_RWJBXX_DATADET
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="kfxs != null" >
+        KFXS,
+      </if>
+      <if test="fbrws != null" >
+        FBRWS,
+      </if>
+      <if test="fbrwje != null" >
+        FBRWJE,
+      </if>
+      <if test="wgrws != null" >
+        WGRWS,
+      </if>
+      <if test="wgrwje != null" >
+        WGRWJE,
+      </if>
+      <if test="year != null" >
+        YEAR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="kfxs != null" >
+        #{kfxs,jdbcType=VARCHAR},
+      </if>
+      <if test="fbrws != null" >
+        #{fbrws,jdbcType=DECIMAL},
+      </if>
+      <if test="fbrwje != null" >
+        #{fbrwje,jdbcType=DECIMAL},
+      </if>
+      <if test="wgrws != null" >
+        #{wgrws,jdbcType=DECIMAL},
+      </if>
+      <if test="wgrwje != null" >
+        #{wgrwje,jdbcType=DECIMAL},
+      </if>
+        <if test="year != null" >
+        #{year,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.statics.RwjbxxRwxsDataInfo" >
+    update T_CROWD_STATICS_RWJBXX_DATADET
+    <set >
+      <if test="kfxs != null" >
+        KFXS = #{kfxs,jdbcType=VARCHAR},
+      </if>
+      <if test="fbrws != null" >
+        FBRWS = #{fbrws,jdbcType=DECIMAL},
+      </if>
+      <if test="fbrwje != null" >
+        FBRWJE = #{fbrwje,jdbcType=DECIMAL},
+      </if>
+      <if test="wgrws != null" >
+        WGRWS = #{wgrws,jdbcType=DECIMAL},
+      </if>
+      <if test="wgrwje != null" >
+        WGRWJE = #{wgrwje,jdbcType=DECIMAL},
+      </if>
+       <if test="year != null" >
+        YEAR = #{year,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.statics.RwjbxxRwxsDataInfo" >
+    update T_CROWD_STATICS_RWJBXX_DATADET
+    set KFXS = #{kfxs,jdbcType=VARCHAR},
+      FBRWS = #{fbrws,jdbcType=DECIMAL},
+      FBRWJE = #{fbrwje,jdbcType=DECIMAL},
+      WGRWS = #{wgrws,jdbcType=DECIMAL},
+      WGRWJE = #{wgrwje,jdbcType=DECIMAL},
+      YEAR = #{year,jdbcType=DECIMAL}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

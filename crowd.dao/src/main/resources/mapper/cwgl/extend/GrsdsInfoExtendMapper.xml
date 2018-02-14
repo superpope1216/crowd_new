@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.cwgl.extend.GrsdsInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.cwgl.extend.GrsdsInfoExtend" 
+  extends="com.wisedu.crowd.dao.cwgl.GrsdsInfoMapper.BaseResultMap">
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_crowd_cwgl_grsds.wid, t_crowd_cwgl_grsds.jexx, 
+    t_crowd_cwgl_grsds.jesx, t_crowd_cwgl_grsds.sl, 
+    t_crowd_cwgl_grsds.sskcf, t_crowd_cwgl_grsds.qzd, 
+    t_crowd_cwgl_grsds.sfsy, t_crowd_cwgl_grsds.px
+  </sql>
+  <select id="selectByMoney" parameterType="java.math.BigDecimal"
+  	resultMap="BaseResultMap">
+  		SELECT 
+  		<include refid="Base_Column_List"/>
+  		FROM t_crowd_cwgl_grsds
+  		WHERE
+  		jexx<![CDATA[<]]>#{money}
+  		AND jesx<![CDATA[>=]]>#{money}
+  	</select>
+</mapper>

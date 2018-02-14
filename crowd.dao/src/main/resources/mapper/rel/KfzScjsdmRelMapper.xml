@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.rel.KfzScjsdmRelMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.rel.KfzScjsdmRel" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="KFZID" property="kfzid" jdbcType="VARCHAR" />
+    <result column="YHID" property="yhid" jdbcType="VARCHAR" />
+    <result column="LBDM" property="lbdm" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, KFZID, YHID, LBDM
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_rel_kfzid_scjsdm
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_rel_kfzid_scjsdm
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.rel.KfzScjsdmRel" >
+    insert into t_crowd_rel_kfzid_scjsdm (WID, KFZID, YHID, 
+      LBDM)
+    values (#{wid,jdbcType=VARCHAR}, #{kfzid,jdbcType=VARCHAR}, #{yhid,jdbcType=VARCHAR}, 
+      #{lbdm,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.rel.KfzScjsdmRel" >
+    insert into t_crowd_rel_kfzid_scjsdm
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="kfzid != null" >
+        KFZID,
+      </if>
+      <if test="yhid != null" >
+        YHID,
+      </if>
+      <if test="lbdm != null" >
+        LBDM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="kfzid != null" >
+        #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhid != null" >
+        #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="lbdm != null" >
+        #{lbdm,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.rel.KfzScjsdmRel" >
+    update t_crowd_rel_kfzid_scjsdm
+    <set >
+      <if test="kfzid != null" >
+        KFZID = #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhid != null" >
+        YHID = #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="lbdm != null" >
+        LBDM = #{lbdm,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.rel.KfzScjsdmRel" >
+    update t_crowd_rel_kfzid_scjsdm
+    set KFZID = #{kfzid,jdbcType=VARCHAR},
+      YHID = #{yhid,jdbcType=VARCHAR},
+      LBDM = #{lbdm,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

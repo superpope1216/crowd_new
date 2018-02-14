@@ -1,0 +1,94 @@
+package com.wisedu.crowd.service.data.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.common.util.PageUtil;
+import com.wisedu.crowd.dao.data.DataDelayInfoMapper;
+import com.wisedu.crowd.dao.data.extend.DataDelayInfoExtendMapper;
+import com.wisedu.crowd.entity.data.DataDelayInfo;
+import com.wisedu.crowd.entity.data.extend.DataDelayInfoExtend;
+import com.wisedu.crowd.entity.dto.QueryCondition;
+import com.wisedu.crowd.entity.log.CustomOperateLog;
+import com.wisedu.crowd.entity.statics.extend.KfzjlMonthExtend;
+import com.wisedu.crowd.service.data.DataDelayInfoService;
+import com.wisedu.crowd.service.dto.DataResult;
+
+/**
+ * 需求延期详情
+ * @author wisedu
+ *
+ */
+@Service("dataDelayInfoService")
+public class DataDelayInfoServiceImpl implements DataDelayInfoService{
+
+	@Autowired
+	private DataDelayInfoMapper dataDelayInfoMapper;
+	
+	@Autowired
+	private DataDelayInfoExtendMapper dataDelayInfoExendMapper;
+	@Override
+	public DataResult<Integer> deleteByPrimaryKey(String wid, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(dataDelayInfoMapper.deleteByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<Integer> insertSelective(DataDelayInfo record, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(dataDelayInfoMapper.insertSelective(record));
+	}
+
+	@Override
+	public DataResult<DataDelayInfo> selectByPrimaryKey(String wid, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(dataDelayInfoMapper.selectByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<Integer> updateByPrimaryKeySelective(DataDelayInfo record, CustomOperateLog log)
+			throws ServiceException {
+		return DataResult.success(dataDelayInfoMapper.updateByPrimaryKeySelective(record));
+	}
+
+	@Override
+	public DataResult<Integer> deleteByCondition(QueryCondition<DataDelayInfoExtend> condition, CustomOperateLog log)
+			throws ServiceException {
+		return DataResult.success(dataDelayInfoExendMapper.deleteByCondition(condition));
+	}
+
+	@Override
+	public DataResult<List<DataDelayInfoExtend>> selectDisplayByCondition(QueryCondition<DataDelayInfoExtend> condition,
+			CustomOperateLog log) throws ServiceException {
+		if (condition.getPageInfo() != null) {
+            Page<DataDelayInfoExtend> page = PageHelper.startPage(condition.getPageInfo().getPageNum(),
+            		condition.getPageInfo().getPageSize());
+            List<DataDelayInfoExtend> datas = dataDelayInfoExendMapper.selectDisplayByCondition(condition);
+
+            DataResult<List<DataDelayInfoExtend>> dataResult = DataResult.success(datas);
+            dataResult.setPageInfo(PageUtil.changePageInfo(page));
+            return dataResult;
+        } else {
+            return DataResult.success(dataDelayInfoExendMapper.selectDisplayByCondition(condition));
+        }
+	}
+
+	@Override
+	public DataResult<List<DataDelayInfoExtend>> selectByCondition(QueryCondition<DataDelayInfoExtend> condition,
+			CustomOperateLog log) throws ServiceException {
+		if (condition.getPageInfo() != null) {
+            Page<DataDelayInfoExtend> page = PageHelper.startPage(condition.getPageInfo().getPageNum(),
+            		condition.getPageInfo().getPageSize());
+            List<DataDelayInfoExtend> datas = dataDelayInfoExendMapper.selectByCondition(condition);
+
+            DataResult<List<DataDelayInfoExtend>> dataResult = DataResult.success(datas);
+            dataResult.setPageInfo(PageUtil.changePageInfo(page));
+            return dataResult;
+        } else {
+            return DataResult.success(dataDelayInfoExendMapper.selectByCondition(condition));
+        }
+	}
+
+}

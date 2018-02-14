@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisedu.crowd.dao.role.extend.GroupUserInfoExtendMapper">
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.role.extend.GroupUserInfoExtend"
+  extends="com.wisedu.crowd.dao.role.GroupUserInfoMapper.BaseResultMap">
+  </resultMap>
+  <sql id="Base_Column_List">
+    T_CROWD_GROUP_USER.WID, T_CROWD_GROUP_USER.YHID, 
+    T_CROWD_GROUP_USER.YHLB, T_CROWD_GROUP_USER.YHZID
+  </sql>
+  <sql id="sqlWhere">
+		<if test='query!=null'>
+			<if test='query.wid!=null and query.wid!=""'>
+				AND T_CROWD_GROUP_USER.wid=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.yhid!=null and query.yhid!=""'>
+				AND T_CROWD_GROUP_USER.yhid=#{query.yhid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.yhlb!=null'>
+				AND T_CROWD_GROUP_USER.yhlb=#{query.yhlb,jdbcType=DECIMAL}
+			</if>
+			<if test='query.yhzid!=null and query.yhzid!=""'>
+				AND T_CROWD_GROUP_USER.yhzid=#{query.yhzid,jdbcType=VARCHAR}
+			</if>
+		</if>
+	</sql>
+	<select id="selectDisplayByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List"/>
+		FROM T_CROWD_GROUP_USER
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+	</select>
+</mapper>

@@ -1,0 +1,2315 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE HTML>
+<html class="  ">
+<%@ include file="/jsp/top.jsp" %>
+<link rel='stylesheet' href='<%=request.getContextPath() %>/statics/css/main.css'>
+<body>
+<!--[if lte IE 8]>
+<div class="text-center padding-top-50 padding-bottom-50 bg-blue-grey-100">
+  <p class="browserupgrade font-size-18">
+	你正在使用一个<strong>过时</strong>的浏览器。请<a href="http://browsehappy.com/" target="_blank">升级您的浏览器</a>，以提高您的体验。
+  </p>
+</div>
+<![endif]-->
+<div class="load-box"></div>
+<header>
+
+  <div class="advert-box " data-height="110|90|45">
+    <a href="http://www.baidu.com/" target="_blank" title="链接关键词">
+	  <img data-original="https://images.metinfo.cn/muban/M1156014/381/upload/201710/1507363642.jpg" data-size="1920_110" alt="图片关键词">
+	</a>
+  </div>
+
+  <div class="head-box">
+    <div class="container">
+
+        <div class="head-left">
+          <div class="head-left-wrapper">
+            <div class="head-left-slide">
+              <p>欢迎光临美魅化妆品有限公司，微信号：<em>meimei</em> 咨询购买哦！</p>
+
+    <font>
+
+				<hr><a id="met-weixins"><i class="fa fa-weixin" data-plugin="webuiPopover" data-trigger="hover" data-animation="pop" data-placement='bottom' data-width='130' data-padding='0' data-content="<img src='upload/201501/1422258610.jpg' alt='化妆品商城-化妆品商城' style='width: 120px;display:block;margin:auto;'>"></i></a>
+
+				<hr><a href="http://wpa.qq.com/msgrd?v=3&uin=4000084433&site=qq&menu=yes" rel="nofollow" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+
+				<hr><a href="" rel="nofollow" target="_blank"><i class="fa fa-weibo"></i></a>
+
+  </font>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="head-right">
+
+	<a class="login" href="https://show.metinfo.cn/muban/M1156014/381/member/login.php?lang=cn">登录</a>
+	<hr>
+	<a class="login" href="https://show.metinfo.cn/muban/M1156014/381/member/register_include.php?lang=cn">注册</a>
+	<a class="discount" href="https://show.metinfo.cn/muban/M1156014/381/shop/discount.php?lang=cn">
+	  <i class="icon wb-payment"></i>
+	  <font>购物优惠券</font>
+	</a>
+	<li class="dropdown shopcut">
+		<a
+			href="javascript:void(0)"
+			title="购物车"
+			data-toggle="dropdown"
+			aria-expanded="false"
+			data-animation="slide-bottom10"
+			role="button"
+		>
+			<i class="icon wb-shopping-cart" aria-hidden="true"></i>
+			<font>购物车</font>
+			<span class="badge badge-danger up hide topcart-goodnum"></span>
+		</a>
+		<ul class="dropdown-menu dropdown-menu-right dropdown-menu-media topcartremove animation-slide-bottom10" role="menu">
+			<li class="dropdown-menu-header">
+				<h5>购物车</h5>
+				<span class="label label-round label-danger">共 <span class="topcart-goodnum"></span> 件商品</span>
+			</li>
+			<li class="list-group dropdown-scrollable" role="presentation">
+				<div data-role="container">
+					<div data-role="content" id="topcart-body"></div>
+				</div>
+			</li>
+			<li class="dropdown-menu-footer" role="presentation">
+				<div class="dropdown-menu-footer-btn">
+					<a href="https://show.metinfo.cn/muban/M1156014/381/shop/cart.php?lang=cn" class="btn btn-squared btn-danger margin-bottom-5 margin-right-10">去购物车结算</a>
+				</div>
+				<span class="red-600 font-size-18 topcarttotal"></span>
+			</li>
+		</ul>
+	</li>
+
+
+        </div>
+
+    </div>
+  </div>
+
+<nav>
+<div class="neck-box">
+  <div class="container">
+
+	<div class="logo-box">
+      <a href="https://show.metinfo.cn/muban/M1156014/381/" title="化妆品商城" target='_self'>
+		<img src="<%=request.getContextPath() %>/statics/images/logos.png" alt="化妆品商城">
+		<img src="<%=request.getContextPath() %>/statics/images/logo.png" alt="化妆品商城">
+	  </a>
+    </div>
+
+    <div class="search-box">
+      <div class="search-cut">
+        <p>
+
+          <a href="product/?search=search&lang=cn&content=HZP防晒霜" target='_self'>HZP防晒霜</a>
+
+          <a href="product/?search=search&lang=cn&content=BB霜" target='_self'>BB霜</a>
+
+          <a href="product/?search=search&lang=cn&content=芦荟胶" target='_self'>芦荟胶</a>
+
+        </p>
+
+        <form method="get" action="product/">
+          <input type="hidden" name="search" value="search">
+          <input type="hidden" name="lang" value="cn">
+          <input type="text" name="content" value="">
+          <button class="fa fa-search" type="submit"></button>
+        </form>
+
+      </div>
+    </div>
+
+    <div class="nav-box index">
+
+	  <div class="nav-class has-banner">
+	    <span>
+		  <i class="wb-list"></i>
+		  <a href="product/" title="全部商品分类" target='_self'>全部商品分类</a>
+		</span>
+	  </div>
+
+      <div class="nav-cut">
+        <ul class="nav-ul">
+
+          <li class="nav-li active"><a href="https://show.metinfo.cn/muban/M1156014/381/" title="化妆品商城">商城首页</a></li>
+
+          <li class="nav-li   margin-left-0"><a href="about/show.php?lang=cn&id=186" title="品牌故事" >品牌故事</a></li>
+
+          <li class="nav-li  navs margin-left-0"><a href="news/" title="热点新闻" >热点新闻</a></li>
+
+          <li class="nav-li   margin-left-0"><a href="about/show.php?lang=cn&id=187" title="资质认证" >资质认证</a></li>
+
+          <li class="nav-li   margin-left-0"><a href="about/show.php?lang=cn&id=188" title="售后服务" >售后服务</a></li>
+
+          <li class="nav-li   margin-left-0"><a href="message/" title="加盟合作" >加盟合作</a></li>
+
+          <li class="nav-li   margin-left-0"><a href="about/show.php?lang=cn&id=191" title="联系我们" >联系我们</a></li>
+
+        </ul>
+      </div>
+
+	  <div class="nav-hover">
+
+	    <ul></ul>
+
+		<ul>
+
+		</ul>
+
+		<ul>
+
+		  <li class="all"><a href="news/" title="热点新闻" >全部</a></li>
+
+		  <li>
+		    <a href="news/news.php?lang=cn&class2=4" title="公司动态" >公司动态</a>
+
+		  </li>
+
+		  <li>
+		    <a href="news/news.php?lang=cn&class2=5" title="业界资讯" >业界资讯</a>
+
+		  </li>
+
+		</ul>
+
+		<ul>
+
+		</ul>
+
+		<ul>
+
+		</ul>
+
+		<ul>
+
+		</ul>
+
+		<ul>
+
+		</ul>
+
+	  </div>
+
+    </div>
+
+  </div>
+</div>
+</nav>
+
+<div class="container mobile-not-padding">
+  <div class="product-cut auto">
+
+	<div class="product-class has-banner index">
+	  <ul class="product-class-wrapper">
+
+        <li class="product-class-slide"><a href="product/product.php?lang=cn&class2=119" title="美容护肤" >美容护肤</a><i class="fa fa-angle-right"></i></li>
+
+        <li class="product-class-slide"><a href="product/product.php?lang=cn&class2=120" title="彩妆 靓妆" >彩妆 靓妆</a><i class="fa fa-angle-right"></i></li>
+
+        <li class="product-class-slide"><a href="product/product.php?lang=cn&class2=121" title="眼部 唇部护理" >眼部 唇部护理</a><i class="fa fa-angle-right"></i></li>
+
+        <li class="product-class-slide"><a href="product/product.php?lang=cn&class2=122" title="香氛 香水" >香氛 香水</a><i class="fa fa-angle-right"></i></li>
+
+        <li class="product-class-slide"><a href="product/product.php?lang=cn&class2=123" title="美发 乌黑亮发" >美发 乌黑亮发</a><i class="fa fa-angle-right"></i></li>
+
+        <li class="product-class-slide"><a href="product/product.php?lang=cn&class2=124" title="精油spa" >精油spa</a><i class="fa fa-angle-right"></i></li>
+
+        <li class="product-class-slide"><a href="product/product.php?lang=cn&class2=125" title="肌肤护理 修复" >肌肤护理 修复</a><i class="fa fa-angle-right"></i></li>
+
+        <li class="product-class-slide"><a href="product/product.php?lang=cn&class2=126" title="身体保洁" >身体保洁</a><i class="fa fa-angle-right"></i></li>
+
+        <li class="product-class-slide"><a href="product/product.php?lang=cn&class2=127" title="化妆工具" >化妆工具</a><i class="fa fa-angle-right"></i></li>
+
+        <li class="product-class-slide"><a href="product/product.php?lang=cn&class2=128" title="男神专区" >男神专区</a><i class="fa fa-angle-right"></i></li>
+
+        <li class="product-class-slide"><a href="product/product.php?lang=cn&class2=129" title="其他" >其他</a><i class="fa fa-angle-right"></i></li>
+
+	  </ul>
+	</div>
+	<div class="product-content index">
+
+	  <div class="product-list">
+        <ul class="product-ul">
+
+		  <li class="product-li">
+
+			
+			<a href="product/product.php?lang=cn&class3=130" title="洁面 磨砂膏"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507447775.jpg'></b>
+			  <p>洁面 磨砂膏</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=131" title="面膜"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507447832.jpg'></b>
+			  <p>面膜</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=132" title="明星爽肤水"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507447509.jpg'></b>
+			  <p>明星爽肤水</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=133" title="防晒隔离"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507447812.jpg'></b>
+			  <p>防晒隔离</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=134" title="晚安粉 出浴粉"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507448317.jpg'></b>
+			  <p>晚安粉 出浴粉</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=135" title="芦荟胶"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507448273.jpg'></b>
+			  <p>芦荟胶</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=136" title="去角质"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507447725.jpg'></b>
+			  <p>去角质</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=137" title="黑头导出液"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507448158.jpg'></b>
+			  <p>黑头导出液</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=138" title="面部护理套装"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507448474.jpg'></b>
+			  <p>面部护理套装</p>
+			</a>
+
+		  </li>
+
+	    </ul>
+      </div>
+
+	  <div class="product-list">
+        <ul class="product-ul">
+
+		  <li class="product-li">
+
+			
+			<a href="product/product.php?lang=cn&class3=139" title="眼线笔 液 胶"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507450288.jpg'></b>
+			  <p>眼线笔 液 胶</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=143" title="BB霜"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507449671.jpg'></b>
+			  <p>BB霜</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=141" title="睫毛膏"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507450279.jpg'></b>
+			  <p>睫毛膏</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=142" title="卸妆品"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507450068.jpg'></b>
+			  <p>卸妆品</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=140" title="粉饼"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507449772.jpg'></b>
+			  <p>粉饼</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=144" title="散粉 蜜粉"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507450099.jpg'></b>
+			  <p>散粉 蜜粉</p>
+			</a>
+
+		  </li>
+
+	    </ul>
+      </div>
+
+	  <div class="product-list">
+        <ul class="product-ul">
+
+		  <li class="product-li">
+
+			
+			<a href="product/product.php?lang=cn&class3=145" title="唇部精华"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507450470.jpg'></b>
+			  <p>唇部精华</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=146" title="睫毛滋养液"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507450477.jpg'></b>
+			  <p>睫毛滋养液</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=147" title="眼部精华"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507450611.jpg'></b>
+			  <p>眼部精华</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=148" title="润唇膏"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507450632.jpg'></b>
+			  <p>润唇膏</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=149" title="唇部去角质品"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507450681.jpg'></b>
+			  <p>唇部去角质品</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=150" title="眼霜"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507450393.jpg'></b>
+			  <p>眼霜</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=151" title="滴 洗眼液"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507450998.jpg'></b>
+			  <p>滴 洗眼液</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=152" title="眼唇膜"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507450688.jpg'></b>
+			  <p>眼唇膜</p>
+			</a>
+
+		  </li>
+
+	    </ul>
+      </div>
+
+	  <div class="product-list">
+        <ul class="product-ul">
+
+		  <li class="product-li">
+
+			
+			<a href="product/product.php?lang=cn&class3=153" title="女士香水"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507451236.jpg'></b>
+			  <p>女士香水</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=154" title="男士香水"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507450831.jpg'></b>
+			  <p>男士香水</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=155" title="中性香水"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507450930.jpg'></b>
+			  <p>中性香水</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=156" title="固体香膏"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507450454.jpg'></b>
+			  <p>固体香膏</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=161" title="香水套装"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507455018.jpg'></b>
+			  <p>香水套装</p>
+			</a>
+
+		  </li>
+
+	    </ul>
+      </div>
+
+	  <div class="product-list">
+        <ul class="product-ul">
+
+		  <li class="product-li">
+
+			
+			<a href="product/product.php?lang=cn&class3=162" title="洗发水"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507455566.jpg'></b>
+			  <p>洗发水</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=163" title="护发素"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507455803.jpg'></b>
+			  <p>护发素</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=164" title="修复 造型"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507456103.jpg'></b>
+			  <p>修复 造型</p>
+			</a>
+
+		  </li>
+
+	    </ul>
+      </div>
+
+	  <div class="product-list">
+        <ul class="product-ul">
+
+		  <li class="product-li">
+
+			
+			<a href="product/product.php?lang=cn&class3=157" title=" 精油"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507455400.jpg'></b>
+			  <p> 精油</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=158" title="花水 纯露"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507455101.jpg'></b>
+			  <p>花水 纯露</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=159" title="基础油"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507455097.jpg'></b>
+			  <p>基础油</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=160" title="香薰用具"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507455209.jpg'></b>
+			  <p>香薰用具</p>
+			</a>
+
+		  </li>
+
+	    </ul>
+      </div>
+
+	  <div class="product-list">
+        <ul class="product-ul">
+
+		  <li class="product-li">
+
+			
+			<a href="product/product.php?lang=cn&class3=172" title="脱毛膏"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507457051.jpg'></b>
+			  <p>脱毛膏</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=173" title="爽身粉"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507456976.jpg'></b>
+			  <p>爽身粉</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=174" title="防嗮油"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507457517.jpg'></b>
+			  <p>防嗮油</p>
+			</a>
+
+		  </li>
+
+	    </ul>
+      </div>
+
+	  <div class="product-list">
+        <ul class="product-ul">
+
+		  <li class="product-li">
+
+			
+			<a href="product/product.php?lang=cn&class3=165" title="身体保湿"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507458169.jpg'></b>
+			  <p>身体保湿</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=166" title="身体清洁 去角质"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507457815.jpg'></b>
+			  <p>身体清洁 去角质</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=167" title="手足护理"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507457968.jpg'></b>
+			  <p>手足护理</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=168" title="婴儿护理"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507457620.jpg'></b>
+			  <p>婴儿护理</p>
+			</a>
+
+		  </li>
+
+	    </ul>
+      </div>
+
+	  <div class="product-list">
+        <ul class="product-ul">
+
+		  <li class="product-li">
+
+			
+			<a href="product/product.php?lang=cn&class3=175" title="彩妆修正笔"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507458147.jpg'></b>
+			  <p>彩妆修正笔</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=176" title="化妆镜"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507458407.jpg'></b>
+			  <p>化妆镜</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=177" title="化妆海绵 棉棒"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507458549.jpg'></b>
+			  <p>化妆海绵 棉棒</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=178" title="化妆包 箱"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507457997.jpg'></b>
+			  <p>化妆包 箱</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=179" title="假睫毛 胶水"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507458180.jpg'></b>
+			  <p>假睫毛 胶水</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=180" title="化妆刷"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507457938.jpg'></b>
+			  <p>化妆刷</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=181" title="吸油面纸"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507458624.jpg'></b>
+			  <p>吸油面纸</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=182" title="双眼皮贴 胶"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507458530.jpg'></b>
+			  <p>双眼皮贴 胶</p>
+			</a>
+
+		  </li>
+
+	    </ul>
+      </div>
+
+	  <div class="product-list">
+        <ul class="product-ul">
+
+		  <li class="product-li">
+
+			
+			<a href="product/product.php?lang=cn&class3=169" title="洁面 剃须"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507458060.jpg'></b>
+			  <p>洁面 剃须</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=170" title="爽肤"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507457930.jpg'></b>
+			  <p>爽肤</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=171" title="面部滋养"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507457646.jpg'></b>
+			  <p>面部滋养</p>
+			</a>
+
+		  </li>
+
+	    </ul>
+      </div>
+
+	  <div class="product-list">
+        <ul class="product-ul">
+
+		  <li class="product-li">
+
+			
+			<a href="product/product.php?lang=cn&class3=183" title="礼物"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507456411.jpg'></b>
+			  <p>礼物</p>
+			</a>
+
+			　
+			<a href="product/product.php?lang=cn&class3=184" title="明星组合套装"  target='_self'>
+			  <b data-original='upload/thumb_src/40_40/1507456565.jpg'></b>
+			  <p>明星组合套装</p>
+			</a>
+
+		  </li>
+
+	    </ul>
+      </div>
+
+    </div>
+
+<div class="met-banner banner-ny-h index" data-height='' style=''>
+
+		<div class="slick-slide">
+			<img class="cover-image" src="<%=request.getContextPath() %>/statics/images/1507366169.jpg"  sizes="(max-width: 767px) 767px" alt="">
+
+		</div>
+
+		<div class="slick-slide">
+			<img class="cover-image" src="<%=request.getContextPath() %>/statics/images/1507366169.jpg" sizes="(max-width: 767px) 767px" alt="">
+
+		</div>
+
+		<div class="slick-slide">
+			<img class="cover-image" data-lazy="https://images.metinfo.cn/muban/M1156014/381/upload/201710/1507366169.jpg"   sizes="(max-width: 767px) 767px" alt="">
+
+		</div>
+
+		<div class="slick-slide">
+			<img class="cover-image" data-lazy="https://images.metinfo.cn/muban/M1156014/381/upload/201710/1507366437.jpg"  sizes="(max-width: 767px) 767px" alt="">
+
+		</div>
+
+</div>
+
+  </div>
+</div>
+
+</header>
+
+<div class="acromion-box">
+  <div class="container position-relative">
+	<div class="column-box">
+	  <ul>
+
+		<li>
+		  <a href="about/show.php?lang=cn&id=186" title="品牌故事" target='_self'>
+			<i class="fa fa-institution"></i>
+			<b>品牌故事</b>
+		  </a>
+		</li>
+
+		<li>
+		  <a href="about/show.php?lang=cn&id=187" title="资质认证" target='_self'>
+			<i class="fa fa-puzzle-piece"></i>
+			<b>资质认证</b>
+		  </a>
+		</li>
+
+		<li>
+		  <a href="feedback/" title="需求调查" target='_self'>
+			<i class="fa fa-pencil-square"></i>
+			<b>需求调查</b>
+		  </a>
+		</li>
+
+		<li>
+		  <a href="about/show.php?lang=cn&id=188" title="售后服务" target='_self'>
+			<i class="fa fa-phone-square"></i>
+			<b>售后服务</b>
+		  </a>
+		</li>
+
+		<li>
+		  <a href="message/" title="加盟合作" target='_self'>
+			<i class="fa fa-user-plus"></i>
+			<b>加盟合作</b>
+		  </a>
+		</li>
+
+		<li>
+		  <a href="about/show.php?lang=cn&id=191" title="联系我们" target='_self'>
+			<i class="fa fa-pie-chart"></i>
+			<b>联系我们</b>
+		  </a>
+		</li>
+
+	  </ul>
+	</div>
+	<div class="active-box">
+	  <ul class="active-box-wraper">
+
+		<li class="active-box-slide">
+		  <a href="active/shownews.php?lang=cn&id=47" title="赢在高颜值 轻松迷倒TA" target='_self'>
+			<img data-original='upload/thumb_src/400_200/1507366302.jpg' alt="赢在高颜值 轻松迷倒TA">
+		  </a>
+		</li>
+
+		<li class="active-box-slide">
+		  <a href="active/shownews.php?lang=cn&id=46" title="换季补水 解救干燥危肌" target='_self'>
+			<img data-original='upload/thumb_src/400_200/1507365311.jpg' alt="换季补水 解救干燥危肌">
+		  </a>
+		</li>
+
+		<li class="active-box-slide">
+		  <a href="active/shownews.php?lang=cn&id=45" title="白金水感力 呵护敏感肌" target='_self'>
+			<img data-original='upload/thumb_src/400_200/1507364915.jpg' alt="白金水感力 呵护敏感肌">
+		  </a>
+		</li>
+
+		<li class="active-box-slide">
+		  <a href="active/shownews.php?lang=cn&id=44" title="你的亲密“啪”档" target='_self'>
+			<img data-original='upload/thumb_src/400_200/1507365620.jpg' alt="你的亲密“啪”档">
+		  </a>
+		</li>
+
+	  </ul>
+	</div>
+  </div>
+</div>
+
+<div class="groom-box">
+  <div class="container">
+    <div class="title-box">
+	  <div class="title-name">
+	    <h3>热卖产品</h3>
+	  </div>
+	  <div class="title-move">
+	    <i class="fa fa-chevron-left"></i>
+	    <i class="fa fa-chevron-right"></i>
+	  </div>
+	</div>
+	<div class="groom-cut">
+	  <ul class="groom-cut-wraper">
+
+	    <li class="groom-cut-slide">
+		  <a href="product/showproduct.php?lang=cn&id=107" title="卡姿兰（Carslan）恒丽透明粉饼" target='_self'>
+		    <img data-original='upload/thumb_src/400_400/1507636361.jpg' alt="卡姿兰（Carslan）恒丽透明粉饼">
+			<b>卡姿兰（Carslan）恒丽透明粉饼</b>
+			<i>新老包装随机发</i>
+			<p>￥59.00元</p>
+		  </a>
+		</li>
+
+	    <li class="groom-cut-slide">
+		  <a href="product/showproduct.php?lang=cn&id=98" title="芭比大眼睫毛膏" target='_self'>
+		    <img data-original='upload/thumb_src/400_400/1507628039.jpg' alt="芭比大眼睫毛膏">
+			<b>芭比大眼睫毛膏</b>
+			<i>爆款直降，美就现在</i>
+			<p>￥108.00元</p>
+		  </a>
+		</li>
+
+	    <li class="groom-cut-slide">
+		  <a href="product/showproduct.php?lang=cn&id=82" title="男士滋养紧致生机爽肤水" target='_self'>
+		    <img data-original='upload/thumb_src/400_400/1507614163.jpg' alt="男士滋养紧致生机爽肤水">
+			<b>男士滋养紧致生机爽肤水</b>
+			<i>抗衰，祛皱，提拉紧致</i>
+			<p>￥100.00元</p>
+		  </a>
+		</li>
+
+	    <li class="groom-cut-slide">
+		  <a href="product/showproduct.php?lang=cn&id=83" title="男士滋养紧致洁面膏" target='_self'>
+		    <img data-original='upload/thumb_src/400_400/1507613683.jpg' alt="男士滋养紧致洁面膏">
+			<b>男士滋养紧致洁面膏</b>
+			<i>深层清洁，细致毛孔</i>
+			<p>￥269.00元</p>
+		  </a>
+		</li>
+
+	    <li class="groom-cut-slide">
+		  <a href="product/showproduct.php?lang=cn&id=86" title="男士活力醒肤乳" target='_self'>
+		    <img data-original='upload/thumb_src/400_400/1507617616.jpg' alt="男士活力醒肤乳">
+			<b>男士活力醒肤乳</b>
+			<i>焕能润泽保湿</i>
+			<p>￥430.00元</p>
+		  </a>
+		</li>
+
+	    <li class="groom-cut-slide">
+		  <a href="product/showproduct.php?lang=cn&id=81" title="橄榄青春洁面啫喱" target='_self'>
+		    <img data-original='upload/thumb_src/400_400/1507613452.jpg' alt="橄榄青春洁面啫喱">
+			<b>橄榄青春洁面啫喱</b>
+			<i>男士洗面奶，洁面乳</i>
+			<p>￥125.00元</p>
+		  </a>
+		</li>
+
+	    <li class="groom-cut-slide">
+		  <a href="product/showproduct.php?lang=cn&id=93" title="高姿COGI多效修容霜" target='_self'>
+		    <img data-original='upload/thumb_src/400_400/1507624806.jpg' alt="高姿COGI多效修容霜">
+			<b>高姿COGI多效修容霜</b>
+			<i>防晒护肤，补水保湿</i>
+			<p>￥110.00元</p>
+		  </a>
+		</li>
+
+	    <li class="groom-cut-slide">
+		  <a href="product/showproduct.php?lang=cn&id=111" title="美人鱼干湿两用粉饼" target='_self'>
+		    <img data-original='upload/thumb_src/400_400/1507637795.jpg' alt="美人鱼干湿两用粉饼">
+			<b>美人鱼干湿两用粉饼</b>
+			<i>保湿遮瑕控油</i>
+			<p>￥9.90元</p>
+		  </a>
+		</li>
+
+	  </ul>
+	</div>
+  </div>
+</div>
+
+<div class="grey-box">
+
+<div class="host-box">
+  <div class="container">
+    <div class="host-title title-box">
+	  <div class="title-name">
+	    <h3>彩妆</h3>
+	  </div>
+	  <div class="title-nav">
+	    <ul>
+		  <li class="active"><a href="product/product.php?lang=cn&class2=120" title="彩妆 靓妆-热门">热门</a></li>
+
+		  <li><a href="product/product.php?lang=cn&class3=143" title="BB霜">BB霜</a></li>
+
+		  <li><a href="product/product.php?lang=cn&class3=141" title="睫毛膏">睫毛膏</a></li>
+
+		  <li><a href="product/product.php?lang=cn&class3=140" title="粉饼">粉饼</a></li>
+
+		</ul>
+	  </div>
+	</div>
+	<div class="host-cut tags">
+	  <div class="host-adver">
+		<ul>
+
+		  <li>
+			<a href="product/showproduct.php?lang=cn&id=105" target="_blank" data-original="https://images.metinfo.cn/muban/M1156014/381/upload/201710/15076194731.jpg">
+			  <img src="<%=request.getContextPath() %>/statics/images/null.png?imageView2/1/w/&x=400/h/&y=400/&x=&x=400&y=&y=400" alt="图片关键词">
+			</a>
+		  </li>
+
+		  <li>
+			<a href="product/showproduct.php?lang=cn&id=110" target="_blank" data-original="https://images.metinfo.cn/muban/M1156014/381/upload/201710/1507637670.jpg">
+			  <img src="<%=request.getContextPath() %>/statics/images/null.png?imageView2/1/w/&x=400/h/&y=400/&x=&x=400&y=&y=400" alt="图片关键词">
+			</a>
+		  </li>
+
+		</ul>
+	  </div>
+	  <div class="host-list index active">
+		<ul class="host-list-wraper">
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=112" title="YSL圣罗兰气垫BB粉饼" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507637417.jpg' alt="YSL圣罗兰气垫BB粉饼">
+			  <span>
+				<b>YSL圣罗兰气垫BB粉饼</b>
+				<i>超模女神粉底液</i>
+				<p>￥499.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=110" title="玛丽黛佳元气青柠蜜粉饼" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507637041.jpg' alt="玛丽黛佳元气青柠蜜粉饼">
+			  <span>
+				<b>玛丽黛佳元气青柠蜜粉饼</b>
+				<i>&nbsp;</i>
+				<p>￥69.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=105" title="丸美BB新肌明星BB霜" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507635607.jpg' alt="丸美BB新肌明星BB霜">
+			  <span>
+				<b>丸美BB新肌明星BB霜</b>
+				<i>BB新肌明星，细致毛孔</i>
+				<p>￥103.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=103" title="妆甄(Zzskin)多效修颜BB霜女" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507634661.jpg' alt="妆甄(Zzskin)多效修颜BB霜女">
+			  <span>
+				<b>妆甄(Zzskin)多效修颜BB霜女</b>
+				<i>告别美颜相机</i>
+				<p>￥59.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=101" title="凝彩纤长睫毛膏" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507631111.jpg' alt="凝彩纤长睫毛膏">
+			  <span>
+				<b>凝彩纤长睫毛膏</b>
+				<i>惊艳卷翘，夺目美睫</i>
+				<p>￥290.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=98" title="芭比大眼睫毛膏" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507628039.jpg' alt="芭比大眼睫毛膏">
+			  <span>
+				<b>芭比大眼睫毛膏</b>
+				<i>爆款直降，美就现在</i>
+				<p>￥108.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=94" title="火烈鸟睫毛膏" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507626005.jpg' alt="火烈鸟睫毛膏">
+			  <span>
+				<b>火烈鸟睫毛膏</b>
+				<i>浓密纤长卷翘防水</i>
+				<p>￥35.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="last" href="product/showproduct.php?lang=cn&id=91" title="水密码水漾优白BB霜" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507621758.jpg' alt="水密码水漾优白BB霜">
+			  <span>
+				<b>水密码水漾优白BB霜</b>
+				<i>自然色，隔离遮瑕</i>
+				<p>￥120.00元</p>
+			  </span>
+			</a> 
+
+			<a class="more" href="product/product.php?lang=cn&class2=120" title="热门" target='_self'>
+			  <img data-original="<%=request.getContextPath() %>/statics/images/null.png?imageView2/1/w/&x=400/h/&y=400/&x=&x=400&y=&y=400" alt="热门">
+			  <span>
+				<b>浏览更多</b>
+				<p>热门</p>
+			  </span>
+			  <i class="wb-arrow-right"></i>
+			</a>
+ 
+		  </li>
+
+		</ul>
+	  </div>
+
+	  <div class="host-list index">
+		<ul class="host-list-wraper">
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=105" title="丸美BB新肌明星BB霜" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507635607.jpg' alt="丸美BB新肌明星BB霜">
+			  <span>
+				<b>丸美BB新肌明星BB霜</b>
+				<i>BB新肌明星，细致毛孔</i>
+				<p>￥103.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=104" title="韩束红BB霜 倍润亮颜修容霜" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507635629.jpg' alt="韩束红BB霜 倍润亮颜修容霜">
+			  <span>
+				<b>韩束红BB霜 倍润亮颜修容霜</b>
+				<i>倍润亮颜修</i>
+				<p>￥100.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=103" title="妆甄(Zzskin)多效修颜BB霜女" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507634661.jpg' alt="妆甄(Zzskin)多效修颜BB霜女">
+			  <span>
+				<b>妆甄(Zzskin)多效修颜BB霜女</b>
+				<i>告别美颜相机</i>
+				<p>￥59.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=102" title="美思韩方滋养修容霜" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507632256.jpg' alt="美思韩方滋养修容霜">
+			  <span>
+				<b>美思韩方滋养修容霜</b>
+				<i>BB霜粉底遮瑕</i>
+				<p>￥149.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=93" title="高姿COGI多效修容霜" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507624806.jpg' alt="高姿COGI多效修容霜">
+			  <span>
+				<b>高姿COGI多效修容霜</b>
+				<i>防晒护肤，补水保湿</i>
+				<p>￥110.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=92" title="奇焕光彩粉嫩透亮修颜霜" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507623951.jpg' alt="奇焕光彩粉嫩透亮修颜霜">
+			  <span>
+				<b>奇焕光彩粉嫩透亮修颜霜</b>
+				<i>欧莱雅彩妆，遮瑕疵</i>
+				<p>￥120.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=91" title="水密码水漾优白BB霜" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507621758.jpg' alt="水密码水漾优白BB霜">
+			  <span>
+				<b>水密码水漾优白BB霜</b>
+				<i>自然色，隔离遮瑕</i>
+				<p>￥120.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="last" href="product/showproduct.php?lang=cn&id=90" title="卡姿兰Carslan丝滑无瑕BB霜" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507620945.jpg' alt="卡姿兰Carslan丝滑无瑕BB霜">
+			  <span>
+				<b>卡姿兰Carslan丝滑无瑕BB霜</b>
+				<i>保湿，遮瑕，裸妆，隔离</i>
+				<p>￥56.00元</p>
+			  </span>
+			</a> 
+
+			<a class="more" href="product/product.php?lang=cn&class3=143" title="BB霜" target='_self'>
+			  <img data-original="<%=request.getContextPath() %>/statics/images/null.png?imageView2/1/w/&x=400/h/&y=400/&x=&x=400&y=&y=400" alt="BB霜">
+			  <span>
+				<b>浏览更多</b>
+				<p>BB霜</p>
+			  </span>
+			  <i class="wb-arrow-right"></i>
+			</a>
+ 
+		  </li>
+
+		</ul>
+	  </div>
+
+	  <div class="host-list index">
+		<ul class="host-list-wraper">
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=101" title="凝彩纤长睫毛膏" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507631111.jpg' alt="凝彩纤长睫毛膏">
+			  <span>
+				<b>凝彩纤长睫毛膏</b>
+				<i>惊艳卷翘，夺目美睫</i>
+				<p>￥290.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=100" title="臻密不凝结睫毛膏" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507631333.jpg' alt="臻密不凝结睫毛膏">
+			  <span>
+				<b>臻密不凝结睫毛膏</b>
+				<i>纤长型，臻密不凝结</i>
+				<p>￥126.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=99" title="纤巧精细睫毛膏" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507628340.jpg' alt="纤巧精细睫毛膏">
+			  <span>
+				<b>纤巧精细睫毛膏</b>
+				<i>��晕染，卷翘</i>
+				<p>￥80.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=98" title="芭比大眼睫毛膏" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507628039.jpg' alt="芭比大眼睫毛膏">
+			  <span>
+				<b>芭比大眼睫毛膏</b>
+				<i>爆款直降，美就现在</i>
+				<p>￥108.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=97" title="HEXZE 炫翘睫毛膏" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507627445.jpg' alt="HEXZE 炫翘睫毛膏">
+			  <span>
+				<b>HEXZE 炫翘睫毛膏</b>
+				<i>纤长浓密，持久定型</i>
+				<p>￥39.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=96" title="大眼睛雀羽纤长睫毛膏" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507626702.jpg' alt="大眼睛雀羽纤长睫毛膏">
+			  <span>
+				<b>大眼睛雀羽纤长睫毛膏</b>
+				<i>单头睫毛膏</i>
+				<p>￥65.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=95" title="花盈美蔻浓密卷翘防水睫毛膏" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507627089.jpg' alt="花盈美蔻浓密卷翘防水睫毛膏">
+			  <span>
+				<b>花盈美蔻浓密卷翘防水睫毛膏</b>
+				<i>曜石黑，防晕染，不结块</i>
+				<p>￥108.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="last" href="product/showproduct.php?lang=cn&id=94" title="火烈鸟睫毛膏" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507626005.jpg' alt="火烈鸟睫毛膏">
+			  <span>
+				<b>火烈鸟睫毛膏</b>
+				<i>浓密纤长卷翘防水</i>
+				<p>￥35.00元</p>
+			  </span>
+			</a> 
+
+			<a class="more" href="product/product.php?lang=cn&class3=141" title="睫毛膏" target='_self'>
+			  <img data-original="<%=request.getContextPath() %>/statics/images/null.png?imageView2/1/w/&x=400/h/&y=400/&x=&x=400&y=&y=400" alt="睫毛膏">
+			  <span>
+				<b>浏览更多</b>
+				<p>睫毛膏</p>
+			  </span>
+			  <i class="wb-arrow-right"></i>
+			</a>
+ 
+		  </li>
+
+		</ul>
+	  </div>
+
+	  <div class="host-list index">
+		<ul class="host-list-wraper">
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=113" title="复颜提拉双重紧肤精华粉饼" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507638442.jpg' alt="复颜提拉双重紧肤精华粉饼">
+			  <span>
+				<b>复颜提拉双重紧肤精华粉饼</b>
+				<i>粉盒粉芯套装色</i>
+				<p>￥179.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=112" title="YSL圣罗兰气垫BB粉饼" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507637417.jpg' alt="YSL圣罗兰气垫BB粉饼">
+			  <span>
+				<b>YSL圣罗兰气垫BB粉饼</b>
+				<i>超模女神粉底液</i>
+				<p>￥499.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=111" title="美人鱼干湿两用粉饼" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507637795.jpg' alt="美人鱼干湿两用粉饼">
+			  <span>
+				<b>美人鱼干湿两用粉饼</b>
+				<i>保湿遮瑕控油</i>
+				<p>￥9.90元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=110" title="玛丽黛佳元气青柠蜜粉饼" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507637041.jpg' alt="玛丽黛佳元气青柠蜜粉饼">
+			  <span>
+				<b>玛丽黛佳元气青柠蜜粉饼</b>
+				<i>&nbsp;</i>
+				<p>￥69.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=109" title="光感润透两用粉饼" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507636173.jpg' alt="光感润透两用粉饼">
+			  <span>
+				<b>光感润透两用粉饼</b>
+				<i>彩妆 粉底 遮瑕 轻薄 定妆</i>
+				<p>￥39.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=108" title="兰芝（LANEIGE）水漾粉饼" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507636357.jpg' alt="兰芝（LANEIGE）水漾粉饼">
+			  <span>
+				<b>兰芝（LANEIGE）水漾粉饼</b>
+				<i>防晒遮瑕，裸妆定妆</i>
+				<p>￥270.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=107" title="卡姿兰（Carslan）恒丽透明粉饼" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507636361.jpg' alt="卡姿兰（Carslan）恒丽透明粉饼">
+			  <span>
+				<b>卡姿兰（Carslan）恒丽透明粉饼</b>
+				<i>新老包装随机发</i>
+				<p>￥59.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="last" href="product/showproduct.php?lang=cn&id=106" title="蜜丝佛陀（Max Factor）透滑粉饼" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507635941.jpg' alt="蜜丝佛陀（Max Factor）透滑粉饼">
+			  <span>
+				<b>蜜丝佛陀（Max Factor）透滑粉饼</b>
+				<i>遮瑕遮盖，干湿两用</i>
+				<p>￥140.00元</p>
+			  </span>
+			</a> 
+
+			<a class="more" href="product/product.php?lang=cn&class3=140" title="粉饼" target='_self'>
+			  <img data-original="<%=request.getContextPath() %>/statics/images/null.png?imageView2/1/w/&x=400/h/&y=400/&x=&x=400&y=&y=400" alt="粉饼">
+			  <span>
+				<b>浏览更多</b>
+				<p>粉饼</p>
+			  </span>
+			  <i class="wb-arrow-right"></i>
+			</a>
+ 
+		  </li>
+
+		</ul>
+	  </div>
+
+	</div>
+  </div>
+</div>
+
+<div class="host-box">
+  <div class="container">
+    <div class="host-title title-box">
+	  <div class="title-name">
+	    <h3>护肤</h3>
+	  </div>
+	  <div class="title-nav">
+	    <ul>
+		  <li class="active"><a href="product/product.php?lang=cn&class2=119" title="美容护肤-热门">热门</a></li>
+
+		  <li><a href="product/product.php?lang=cn&class3=130" title="洁面 磨砂膏">洁面 磨砂膏</a></li>
+
+		  <li><a href="product/product.php?lang=cn&class3=131" title="面膜">面膜</a></li>
+
+		  <li><a href="product/product.php?lang=cn&class3=138" title="面部护理套装">面部护理套装</a></li>
+
+		</ul>
+	  </div>
+	</div>
+	<div class="host-cut tags">
+	  <div class="host-adver">
+		<ul>
+
+		  <li>
+			<a href="product/showproduct.php?lang=cn&id=71" target="_blank" data-original="https://images.metinfo.cn/muban/M1156014/381/upload/201710/1507639495.jpg">
+			  <img src="<%=request.getContextPath() %>/statics/images/null.png?imageView2/1/w/&x=400/h/&y=400/&x=&x=400&y=&y=400" alt="图片关键词">
+			</a>
+		  </li>
+
+		  <li>
+			<a href="product/showproduct.php?lang=cn&id=94" target="_blank" data-original="https://images.metinfo.cn/muban/M1156014/381/upload/201710/1507640116.jpg">
+			  <img src="<%=request.getContextPath() %>/statics/images/null.png?imageView2/1/w/&x=400/h/&y=400/&x=&x=400&y=&y=400" alt="图片关键词">
+			</a>
+		  </li>
+
+		</ul>
+	  </div>
+	  <div class="host-list index active">
+		<ul class="host-list-wraper">
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=115" title="洗面奶新生焕活深彻洁面乳" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507639055.jpg' alt="洗面奶新生焕活深彻洁面乳">
+			  <span>
+				<b>洗面奶新生焕活深彻洁面乳</b>
+				<i>细致毛孔，补水清洁</i>
+				<p>￥103.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=114" title="火山岩控油清痘洁面膏" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507638763.jpg' alt="火山岩控油清痘洁面膏">
+			  <span>
+				<b>火山岩控油清痘洁面膏</b>
+				<i>洗面奶，清洁毛孔</i>
+				<p>￥35.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=76" title="Olay护肤套装多效修护礼盒" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507576753.jpg' alt="Olay护肤套装多效修护礼盒">
+			  <span>
+				<b>Olay护肤套装多效修护礼盒</b>
+				<i>多效三步礼盒</i>
+				<p>￥129.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=75" title="温碧泉深透补水沁润面膜20片" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507576141.jpg' alt="温碧泉深透补水沁润面膜20片">
+			  <span>
+				<b>温碧泉深透补水沁润面膜20片</b>
+				<i>补水保湿护肤，面膜贴套装</i>
+				<p>￥59.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=74" title="温碧泉新活泉娇嫩保湿乳霜" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507575566.jpg' alt="温碧泉新活泉娇嫩保湿乳霜">
+			  <span>
+				<b>温碧泉新活泉娇嫩保湿乳霜</b>
+				<i>补水保湿滋养面霜</i>
+				<p>￥120.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=73" title="密集修护水润面膜100g" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507574650.jpg' alt="密集修护水润面膜100g">
+			  <span>
+				<b>密集修护水润面膜100g</b>
+				<i>补水保湿，细嫩滋养，水润嫩滑</i>
+				<p>￥69.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=70" title="玉兰油Olay护肤套装" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507571255.jpg' alt="玉兰油Olay护肤套装">
+			  <span>
+				<b>玉兰油Olay护肤套装</b>
+				<i>补水保湿护肤化妆品</i>
+				<p>￥369.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="last" href="product/showproduct.php?lang=cn&id=71" title="亲亲水润五件套装" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507572088.jpg' alt="亲亲水润五件套装">
+			  <span>
+				<b>亲亲水润五件套装</b>
+				<i>新生塑颜礼盒，补水保湿</i>
+				<p>￥159.00元</p>
+			  </span>
+			</a> 
+
+			<a class="more" href="product/product.php?lang=cn&class2=119" title="热门" target='_self'>
+			  <img data-original="<%=request.getContextPath() %>/statics/images/null.png?imageView2/1/w/&x=400/h/&y=400/&x=&x=400&y=&y=400" alt="热门">
+			  <span>
+				<b>浏览更多</b>
+				<p>热门</p>
+			  </span>
+			  <i class="wb-arrow-right"></i>
+			</a>
+ 
+		  </li>
+
+		</ul>
+	  </div>
+
+	  <div class="host-list index">
+		<ul class="host-list-wraper">
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=115" title="洗面奶新生焕活深彻洁面乳" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507639055.jpg' alt="洗面奶新生焕活深彻洁面乳">
+			  <span>
+				<b>洗面奶新生焕活深彻洁面乳</b>
+				<i>细致毛孔，补水清洁</i>
+				<p>￥103.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=114" title="火山岩控油清痘洁面膏" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507638763.jpg' alt="火山岩控油清痘洁面膏">
+			  <span>
+				<b>火山岩控油清痘洁面膏</b>
+				<i>洗面奶，清洁毛孔</i>
+				<p>￥35.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="last" href="product/showproduct.php?lang=cn&id=74" title="温碧泉新活泉娇嫩保湿乳霜" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507575566.jpg' alt="温碧泉新活泉娇嫩保湿乳霜">
+			  <span>
+				<b>温碧泉新活泉娇嫩保湿乳霜</b>
+				<i>补水保湿滋养面霜</i>
+				<p>￥120.00元</p>
+			  </span>
+			</a> 
+
+			<a class="more" href="product/product.php?lang=cn&class3=130" title="洁面 磨砂膏" target='_self'>
+			  <img data-original="<%=request.getContextPath() %>/statics/images/null.png?imageView2/1/w/&x=400/h/&y=400/&x=&x=400&y=&y=400" alt="洁面 磨砂膏">
+			  <span>
+				<b>浏览更多</b>
+				<p>洁面 磨砂膏</p>
+			  </span>
+			  <i class="wb-arrow-right"></i>
+			</a>
+ 
+		  </li>
+
+		</ul>
+	  </div>
+
+	  <div class="host-list index">
+		<ul class="host-list-wraper">
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=75" title="温碧泉深透补水沁润面膜20片" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507576141.jpg' alt="温碧泉深透补水沁润面膜20片">
+			  <span>
+				<b>温碧泉深透补水沁润面膜20片</b>
+				<i>补水保湿护肤，面膜贴套装</i>
+				<p>￥59.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="last" href="product/showproduct.php?lang=cn&id=73" title="密集修护水润面膜100g" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507574650.jpg' alt="密集修护水润面膜100g">
+			  <span>
+				<b>密集修护水润面膜100g</b>
+				<i>补水保湿，细嫩滋养，水润嫩滑</i>
+				<p>￥69.00元</p>
+			  </span>
+			</a> 
+
+			<a class="more" href="product/product.php?lang=cn&class3=131" title="面膜" target='_self'>
+			  <img data-original="<%=request.getContextPath() %>/statics/images/null.png?imageView2/1/w/&x=400/h/&y=400/&x=&x=400&y=&y=400" alt="面膜">
+			  <span>
+				<b>浏览更多</b>
+				<p>面膜</p>
+			  </span>
+			  <i class="wb-arrow-right"></i>
+			</a>
+ 
+		  </li>
+
+		</ul>
+	  </div>
+
+	  <div class="host-list index">
+		<ul class="host-list-wraper">
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=76" title="Olay护肤套装多效修护礼盒" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507576753.jpg' alt="Olay护肤套装多效修护礼盒">
+			  <span>
+				<b>Olay护肤套装多效修护礼盒</b>
+				<i>多效三步礼盒</i>
+				<p>￥129.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=70" title="玉兰油Olay护肤套装" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507571255.jpg' alt="玉兰油Olay护肤套装">
+			  <span>
+				<b>玉兰油Olay护肤套装</b>
+				<i>补水保湿护肤化妆品</i>
+				<p>￥369.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="last" href="product/showproduct.php?lang=cn&id=71" title="亲亲水润五件套装" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507572088.jpg' alt="亲亲水润五件套装">
+			  <span>
+				<b>亲亲水润五件套装</b>
+				<i>新生塑颜礼盒，补水保湿</i>
+				<p>￥159.00元</p>
+			  </span>
+			</a> 
+
+			<a class="more" href="product/product.php?lang=cn&class3=138" title="面部护理套装" target='_self'>
+			  <img data-original="<%=request.getContextPath() %>/statics/images/null.png?imageView2/1/w/&x=400/h/&y=400/&x=&x=400&y=&y=400" alt="面部护理套装">
+			  <span>
+				<b>浏览更多</b>
+				<p>面部护理套装</p>
+			  </span>
+			  <i class="wb-arrow-right"></i>
+			</a>
+ 
+		  </li>
+
+		</ul>
+	  </div>
+
+	</div>
+  </div>
+</div>
+
+<div class="host-box">
+  <div class="container">
+    <div class="host-title title-box">
+	  <div class="title-name">
+	    <h3>男神</h3>
+	  </div>
+	  <div class="title-nav">
+	    <ul>
+		  <li class="active"><a href="product/product.php?lang=cn&class2=128" title="男神专区-热门">热门</a></li>
+
+		  <li><a href="product/product.php?lang=cn&class3=169" title="洁面 剃须">洁面 剃须</a></li>
+
+		  <li><a href="product/product.php?lang=cn&class3=170" title="爽肤">爽肤</a></li>
+
+		  <li><a href="product/product.php?lang=cn&class3=171" title="面部滋养">面部滋养</a></li>
+
+		</ul>
+	  </div>
+	</div>
+	<div class="host-cut tags">
+	  <div class="host-adver">
+		<ul>
+
+		  <li>
+			<a href="product/showproduct.php?lang=cn&id=86" target="_blank" data-original="https://images.metinfo.cn/muban/M1156014/381/upload/201710/1507619473.jpg">
+			  <img src="<%=request.getContextPath() %>/statics/images/null.png?imageView2/1/w/&x=400/h/&y=400/&x=&x=400&y=&y=400" alt="图片关键词">
+			</a>
+		  </li>
+
+		  <li>
+			<a href="product/showproduct.php?lang=cn&id=82" target="_blank" data-original="https://images.metinfo.cn/muban/M1156014/381/upload/201710/1507619474.jpg">
+			  <img src="<%=request.getContextPath() %>/statics/images/null.png?imageView2/1/w/&x=400/h/&y=400/&x=&x=400&y=&y=400" alt="图片关键词">
+			</a>
+		  </li>
+
+		</ul>
+	  </div>
+	  <div class="host-list index active">
+		<ul class="host-list-wraper">
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=82" title="男士滋养紧致生机爽肤水" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507614163.jpg' alt="男士滋养紧致生机爽肤水">
+			  <span>
+				<b>男士滋养紧致生机爽肤水</b>
+				<i>抗衰，祛皱，提拉紧致</i>
+				<p>￥100.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=89" title="碧欧泉男士焕能润泽爽肤水" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507618612.jpg' alt="碧欧泉男士焕能润泽爽肤水">
+			  <span>
+				<b>碧欧泉男士焕能润泽爽肤水</b>
+				<i>清爽活力精华</i>
+				<p>￥200.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=88" title="男士净肤细致洁面膏" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507618814.jpg' alt="男士净肤细致洁面膏">
+			  <span>
+				<b>男士净肤细致洁面膏</b>
+				<i>任何肤质，深层清洁</i>
+				<p>￥200.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=85" title="碧欧泉男士滋养紧致面霜" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507617082.jpg' alt="碧欧泉男士滋养紧致面霜">
+			  <span>
+				<b>碧欧泉男士滋养紧致面霜</b>
+				<i>新滋养紧致精华面霜</i>
+				<p>￥650.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=84" title="男士亮肤修颜隔离霜" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507614325.jpg' alt="男士亮肤修颜隔离霜">
+			  <span>
+				<b>男士亮肤修颜隔离霜</b>
+				<i>简单一步，本色亮起来</i>
+				<p>￥30.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=81" title="橄榄青春洁面啫喱" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507613452.jpg' alt="橄榄青春洁面啫喱">
+			  <span>
+				<b>橄榄青春洁面啫喱</b>
+				<i>男士洗面奶，洁面乳</i>
+				<p>￥125.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=78" title="男士净肤细致保湿乳" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507602548.jpg' alt="男士净肤细致保湿乳">
+			  <span>
+				<b>男士净肤细致保湿乳</b>
+				<i>补水保湿，精华液，乳液</i>
+				<p>￥199.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="last" href="product/showproduct.php?lang=cn&id=77" title="男士水动力爽肤水" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507601930.jpg' alt="男士水动力爽肤水">
+			  <span>
+				<b>男士水动力爽肤水</b>
+				<i>男士新水动力，补水保湿</i>
+				<p>￥199.00元</p>
+			  </span>
+			</a> 
+
+			<a class="more" href="product/product.php?lang=cn&class2=128" title="热门" target='_self'>
+			  <img data-original="<%=request.getContextPath() %>/statics/images/null.png?imageView2/1/w/&x=400/h/&y=400/&x=&x=400&y=&y=400" alt="热门">
+			  <span>
+				<b>浏览更多</b>
+				<p>热门</p>
+			  </span>
+			  <i class="wb-arrow-right"></i>
+			</a>
+ 
+		  </li>
+
+		</ul>
+	  </div>
+
+	  <div class="host-list index">
+		<ul class="host-list-wraper">
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=88" title="男士净肤细致洁面膏" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507618814.jpg' alt="男士净肤细致洁面膏">
+			  <span>
+				<b>男士净肤细致洁面膏</b>
+				<i>任何肤质，深层清洁</i>
+				<p>￥200.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=86" title="男士活力醒肤乳" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507617616.jpg' alt="男士活力醒肤乳">
+			  <span>
+				<b>男士活力醒肤乳</b>
+				<i>焕能润泽保湿</i>
+				<p>￥430.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=85" title="碧欧泉男士滋养紧致面霜" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507617082.jpg' alt="碧欧泉男士滋养紧致面霜">
+			  <span>
+				<b>碧欧泉男士滋养紧致面霜</b>
+				<i>新滋养紧致精华面霜</i>
+				<p>￥650.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=84" title="男士亮肤修颜隔离霜" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507614325.jpg' alt="男士亮肤修颜隔离霜">
+			  <span>
+				<b>男士亮肤修颜隔离霜</b>
+				<i>简单一步，本色亮起来</i>
+				<p>￥30.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=83" title="男士滋养紧致洁面膏" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507613683.jpg' alt="男士滋养紧致洁面膏">
+			  <span>
+				<b>男士滋养紧致洁面膏</b>
+				<i>深层清洁，细致毛孔</i>
+				<p>￥269.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="last" href="product/showproduct.php?lang=cn&id=79" title="男士水动力洁面啫喱" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507603939.jpg' alt="男士水动力洁面啫喱">
+			  <span>
+				<b>男士水动力洁面啫喱</b>
+				<i>清洁，滋润，温和</i>
+				<p>￥240.00元</p>
+			  </span>
+			</a> 
+
+			<a class="more" href="product/product.php?lang=cn&class3=169" title="洁面 剃须" target='_self'>
+			  <img data-original="<%=request.getContextPath() %>/statics/images/null.png?imageView2/1/w/&x=400/h/&y=400/&x=&x=400&y=&y=400" alt="洁面 剃须">
+			  <span>
+				<b>浏览更多</b>
+				<p>洁面 剃须</p>
+			  </span>
+			  <i class="wb-arrow-right"></i>
+			</a>
+ 
+		  </li>
+
+		</ul>
+	  </div>
+
+	  <div class="host-list index">
+		<ul class="host-list-wraper">
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=82" title="男士滋养紧致生机爽肤水" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507614163.jpg' alt="男士滋养紧致生机爽肤水">
+			  <span>
+				<b>男士滋养紧致生机爽肤水</b>
+				<i>抗衰，祛皱，提拉紧致</i>
+				<p>￥100.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=89" title="碧欧泉男士焕能润泽爽肤水" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507618612.jpg' alt="碧欧泉男士焕能润泽爽肤水">
+			  <span>
+				<b>碧欧泉男士焕能润泽爽肤水</b>
+				<i>清爽活力精华</i>
+				<p>￥200.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=78" title="男士净肤细致保湿乳" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507602548.jpg' alt="男士净肤细致保湿乳">
+			  <span>
+				<b>男士净肤细致保湿乳</b>
+				<i>补水保湿，精华液，乳液</i>
+				<p>￥199.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="last" href="product/showproduct.php?lang=cn&id=77" title="男士水动力爽肤水" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507601930.jpg' alt="男士水动力爽肤水">
+			  <span>
+				<b>男士水动力爽肤水</b>
+				<i>男士新水动力，补水保湿</i>
+				<p>￥199.00元</p>
+			  </span>
+			</a> 
+
+			<a class="more" href="product/product.php?lang=cn&class3=170" title="爽肤" target='_self'>
+			  <img data-original="<%=request.getContextPath() %>/statics/images/null.png?imageView2/1/w/&x=400/h/&y=400/&x=&x=400&y=&y=400" alt="爽肤">
+			  <span>
+				<b>浏览更多</b>
+				<p>爽肤</p>
+			  </span>
+			  <i class="wb-arrow-right"></i>
+			</a>
+ 
+		  </li>
+
+		</ul>
+	  </div>
+
+	  <div class="host-list index">
+		<ul class="host-list-wraper">
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=87" title="男士亮肤焕颜精华霜" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507618057.jpg' alt="男士亮肤焕颜精华霜">
+			  <span>
+				<b>男士亮肤焕颜精华霜</b>
+				<i>补水保湿，精华乳液</i>
+				<p>￥460.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="" href="product/showproduct.php?lang=cn&id=81" title="橄榄青春洁面啫喱" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507613452.jpg' alt="橄榄青春洁面啫喱">
+			  <span>
+				<b>橄榄青春洁面啫喱</b>
+				<i>男士洗面奶，洁面乳</i>
+				<p>￥125.00元</p>
+			  </span>
+			</a> 
+ 
+		  </li>
+
+		  <li class="host-list-slide ">
+			<a class="last" href="product/showproduct.php?lang=cn&id=80" title="男士滋养紧致青春精华露50ml" target='_self'>
+			  <img data-original='upload/thumb_src/400_400/1507605200.jpg' alt="男士滋养紧致青春精华露50ml">
+			  <span>
+				<b>男士滋养紧致青春精华露50ml</b>
+				<i>蓝钻精华，补水保湿</i>
+				<p>￥659.00元</p>
+			  </span>
+			</a> 
+
+			<a class="more" href="product/product.php?lang=cn&class3=171" title="面部滋养" target='_self'>
+			  <img data-original="<%=request.getContextPath() %>/statics/images/null.png?imageView2/1/w/&x=400/h/&y=400/&x=&x=400&y=&y=400" alt="面部滋养">
+			  <span>
+				<b>浏览更多</b>
+				<p>面部滋养</p>
+			  </span>
+			  <i class="wb-arrow-right"></i>
+			</a>
+ 
+		  </li>
+
+		</ul>
+	  </div>
+
+	</div>
+  </div>
+</div>
+
+  <div class="info-box">
+	<div class="container">
+	  <div class="title-box">
+		<div class="title-name">
+		  <h3>热点新闻</h3>
+		</div>
+		<div class="title-move">
+		  <i class="fa fa-chevron-left"></i>
+		  <i class="fa fa-chevron-right"></i>
+		</div>
+	  </div>
+	  <div class="info-cut index">
+		<ul class="info-cut-wraper">
+
+	    <li class="info-cut-slide">
+		   <a href="news/shownews.php?lang=cn&id=52" title="西安首家泊美Shopping Mall新鲜开业" target='_self'>
+		     <img data-original='upload/thumb_src/400_250/1507478754838904.jpg' alt="西安首家泊美Shopping Mall新鲜开业">
+			 <span>
+			   <p>泊美shopping mall全景开业当日，泊美全新shopping mall充满新鲜活力的陈列布景，当即吸引当地潮人纷纷驻足探店，尽享泊美专属Cosmetic Marché“泊美鲜肌荟”全新品牌概念：法语的Marché是专门出售“新鲜”的地方，它汇聚了世界严选最新鲜优质的蔬果和鲜花，让人可以感受最新鲜原料带来的扑面而来的鲜活力量，体验高品质素材带来不同凡响的效果。泊美悉心寻觅、严格挑选全世界出类</p>
+			   <i>发布日期<em>2017.10.09</em></i>
+			   <b>西安首家泊美Shopping Mall新鲜开业</b>
+			 </span>
+		   </a>
+		</li>
+
+	    <li class="info-cut-slide">
+		   <a href="news/shownews.php?lang=cn&id=53" title="本色肌肤 晶采生活 urara悠莱晶采双瓶全新上市" target='_self'>
+		     <img data-original='upload/thumb_src/400_250/1507478907110819.jpg' alt="本色肌肤 晶采生活 urara悠莱晶采双瓶全新上市">
+			 <span>
+			   <p>“Less is more” 本色肌肤 晶采生活——urara悠莱晶采双瓶全新上市“Less is more”卸下负担，晶采素肌20世纪30年代，由著名的建筑师路德维希·密斯·凡德罗提出的“Less is more”理念，意为“少即是多”，他提倡简单精致，反对过度装饰。用简单的东西带给人们更多的享受。悠莱发现这样的理念与中国女性的护肤习惯不谋而合给予肌肤轻薄享受，呈现通透好气色的粉漾玫瑰</p>
+			   <i>发布日期<em>2017.10.09</em></i>
+			   <b>本色肌肤 晶采生活 urara悠莱晶采双瓶全新上市</b>
+			 </span>
+		   </a>
+		</li>
+
+	    <li class="info-cut-slide">
+		   <a href="news/shownews.php?lang=cn&id=54" title="玫瑰香氛梳MINI 让颜值和自由齐飞" target='_self'>
+		     <img data-original='upload/thumb_src/400_250/1507479007517629.jpg' alt="玫瑰香氛梳MINI 让颜值和自由齐飞">
+			 <span>
+			   <p>HAIR SECRETS玫瑰香氛梳MINI让颜值和自由在旅途中同时在线告别“油头”女孩，Keep住轻盈舒爽的秀发对女孩来说，出门在外头发打理是一大问题，逛完拍完回到酒店只想瘫在床上，洗头这种事情早就抛到脑海。试想下，在外一天头发得吸收多少脏东西。要是把前段流行的“靠头杀”放到你身上，欧巴们闻不到清爽干净的头发香气，而是嗅到一鼻子的头油味，那可真是大写的尴尬了。将玫瑰芬芳装进口袋，体验香气之旅所以为</p>
+			   <i>发布日期<em>2017.10.09</em></i>
+			   <b>玫瑰香氛梳MINI 让颜值和自由齐飞</b>
+			 </span>
+		   </a>
+		</li>
+
+	    <li class="info-cut-slide">
+		   <a href="news/shownews.php?lang=cn&id=55" title="每一个放大镜下的女明星都想证明：谁脸小谁骄傲" target='_self'>
+		     <img data-original='upload/thumb_src/400_250/1507479092118475.jpg' alt="每一个放大镜下的女明星都想证明：谁脸小谁骄傲">
+			 <span>
+			   <p>何穗《青春旅社》媒体看片会图 源自微博@爱奇艺娱乐东方卫视真人秀《青春旅社》开播之际，媒体看片会少不了集体大合照。即使嘉宾众多，何穗依然凭借超模的身高和比普通人白两个度的肌肤脱颖而出。何穗出席OLAY活动照 源自微博@何穗你以为这个合照杀手只是身高和肤色占优势吗？人家的超模脸才是真正的杀伤性武器啊！轮廓鲜明，骨相又极具东方特色，而且线条流畅，肌肉紧致，脸小而大气，完美hold住了高级两个字。何穗出</p>
+			   <i>发布日期<em>2017.10.09</em></i>
+			   <b>每一个放大镜下的女明星都想证明：谁脸小谁骄傲</b>
+			 </span>
+		   </a>
+		</li>
+
+	    <li class="info-cut-slide">
+		   <a href="news/shownews.php?lang=cn&id=49" title="DONGTIAN品牌首次亮相连卡佛 新品彩妆闪耀上市" target='_self'>
+		     <img data-original='upload/thumb_src/400_250/1507478163879999.jpg' alt="DONGTIAN品牌首次亮相连卡佛 新品彩妆闪耀上市">
+			 <span>
+			   <p>DONGTIAN品牌期间限定店亮相连卡佛1999年DONGTIAN品牌诞生，如今已走到第18个年头。18年的时间，DONGTIAN已然成为了国人心目中的“流行时尚的风向标”。在活动现场，品牌创始人李东田先生热情地为在座来宾分享了秋季彩妆妆容趋势，亲自为宾客示范DONGTIAN彩妆新品的使用方法。在谈到此次和连卡佛的合作时，李东田先生说，“连卡佛是著名的精品百货，已经有近170年的历史了。我一直都很</p>
+			   <i>发布日期<em>2017.10.09</em></i>
+			   <b>DONGTIAN品牌首次亮相连卡佛 新品彩妆闪耀上市</b>
+			 </span>
+		   </a>
+		</li>
+
+	    <li class="info-cut-slide">
+		   <a href="news/shownews.php?lang=cn&id=50" title="施华蔻迎来首位创型官 联手张杰颠覆头发终极想象" target='_self'>
+		     <img data-original='upload/thumb_src/400_250/1507478249660021.jpg' alt="施华蔻迎来首位创型官 联手张杰颠覆头发终极想象">
+			 <span>
+			   <p>施华蔻是来自德国的全球顶级美发品牌，至今已拥有119年历史，发明了洗发水和shampoo这个单词，可谓美发造型界的鼻祖。其经典的“黑人头”标志遍布全球150多个国家，位列世界三大美发沙龙品牌，受到国际专业发型师的一致认可和推崇，引领长达一个世纪的护发美发时尚风潮。作为全面覆盖洗护、染烫、造型的美发品牌，施华蔻有着超级丰富的产品线。每年发布的Trend Look，结合最新流行时尚，从发色，造型等各方</p>
+			   <i>发布日期<em>2017.10.09</em></i>
+			   <b>施华蔻迎来首位创型官 联手张杰颠覆头发终极想象</b>
+			 </span>
+		   </a>
+		</li>
+
+	    <li class="info-cut-slide">
+		   <a href="news/shownews.php?lang=cn&id=51" title="SK-II携手全球代言人汤唯见证鎏金臻致升效系列亮相杭" target='_self'>
+		     <img data-original='upload/thumb_src/400_250/1507478545.jpg' alt="SK-II携手全球代言人汤唯见证鎏金臻致升效系列亮相杭">
+			 <span>
+			   <p>奢宠体验 进驻杭城SK-II携手全球代言人汤唯见证鎏金臻致升效系列亮相杭州SK-II全球代言人汤唯接受采访至臻携手 引领高端品质生活杭州大厦作为杭城首个大型商贸旅游综合体，以其优势的地理位置，和卓越的品质服务，已打造成为杭州乃至浙江消费者购物、娱乐、休闲的首选场所之一。近年来，杭州大厦对整体布局不断进行优化，利用其国际化的管理视野和本土化的经营战略，旨在打造时尚品质之城。作为SK-II最友好的合作</p>
+			   <i>发布日期<em>2017.10.09</em></i>
+			   <b>SK-II携手全球代言人汤唯见证鎏金臻致升效系列亮相杭</b>
+			 </span>
+		   </a>
+		</li>
+
+	    <li class="info-cut-slide">
+		   <a href="news/shownews.php?lang=cn&id=48" title="37岁金泰熙升级做妈咪 这个女人美了20年 怎么做到的？" target='_self'>
+		     <img data-original='upload/thumb_src/400_250/1507477799.jpg' alt="37岁金泰熙升级做妈咪 这个女人美了20年 怎么做到的？">
+			 <span>
+			   <p>此前，金泰熙和Rain的大婚已经引爆了不少关注，现在女神又怀孕了，有了颜值超高的爸妈，这个孩子肯定又是最美丽的存在！毕竟ta的妈妈是金泰熙啊！神之美貌的金泰熙可是韩国电视剧里女神的代名词啊！金泰希虽然比Rain大两岁，但绝对是韩国演艺圈公认的女神。出道近20年来，历年国民票选“第一天然美女” 、“最想与其结婚的女艺人”、“最想约会的一日情人”、“整容最佳模仿范本”、 “记者眼中最喜欢明星”、“读书</p>
+			   <i>发布日期<em>2017.10.08</em></i>
+			   <b>37岁金泰熙升级做妈咪 这个女人美了20年 怎么做到的？</b>
+			 </span>
+		   </a>
+		</li>
+
+		</div>
+	  </ul>
+	</div>
+  </div>
+
+</div>
+
+<div class="container">
+
+  <div class="foot-service">
+	<ul class="foot-service-wraper">
+
+	  <li class="foot-service-slide"><a href="foot/show.php?lang=cn&id=109" title="预约维修服务"><i class="fa wb-dashboard"></i>预约维修服务</a></li>
+
+	  <li class="foot-service-slide"><a href="foot/show.php?lang=cn&id=110" title="7天无理由退货"><i class="fa wb-inbox"></i>7天无理由退货</a></li>
+
+	  <li class="foot-service-slide"><a href="foot/show.php?lang=cn&id=111" title="15天免费换货"><i class="fa wb-envelope-open"></i>15天免费换货</a></li>
+
+	  <li class="foot-service-slide"><a href="foot/show.php?lang=cn&id=112" title="满150元包邮"><i class="fa wb-pluse"></i>满150元包邮</a></li>
+
+	  <li class="foot-service-slide"><a href="foot/show.php?lang=cn&id=113" title="520余家售后网点"><i class="fa wb-gallery"></i>520余家售后网点</a></li>
+
+	</ul>
+  </div>
+
+  <div class="foot-content">
+	<div class="foot-nav">
+	  <ul class="foot-nav-wraper">
+
+		<li class="foot-nav-slide">
+		  <b><a href="member/"  title="帮助中心">帮助中心</a></b>
+
+	      <ol>
+
+	        <li><a href="member/"  title="账户管理">账户管理</a></li>
+
+	        <li><a href="bottom/show.php?lang=cn&id=202"  title="购物指南">购物指南</a></li>
+
+	        <li><a href="bottom/show.php?lang=cn&id=203"  title="订单操作">订单操作</a></li>
+
+	      </ol>
+
+	    </li>
+
+		<li class="foot-nav-slide">
+		  <b><a href="about/show.php?lang=cn&id=188"  title="服务支持">服务支持</a></b>
+
+	      <ol>
+
+	        <li><a href="about/show.php?lang=cn&id=188"  title="售后政策">售后政策</a></li>
+
+	        <li><a href="bottom/show.php?lang=cn&id=205"  title="自助服务">自助服务</a></li>
+
+	        <li><a href="bottom/show.php?lang=cn&id=206"  title="相关下载">相关下载</a></li>
+
+	      </ol>
+
+	    </li>
+
+		<li class="foot-nav-slide">
+		  <b><a href="bottom/show.php?lang=cn&id=207"  title="线下门店">线下门店</a></b>
+
+	      <ol>
+
+	        <li><a href="bottom/show.php?lang=cn&id=207"  title="化妆品店">化妆品店</a></li>
+
+	        <li><a href="bottom/show.php?lang=cn&id=208"  title="服务网点">服务网点</a></li>
+
+	        <li><a href="bottom/show.php?lang=cn&id=209"  title="零售网点">零售网点</a></li>
+
+	      </ol>
+
+	    </li>
+
+		<li class="foot-nav-slide">
+		  <b><a href="about/"  title="关于我们">关于我们</a></b>
+
+	      <ol>
+
+	        <li><a href="about/"  title="品牌故事">品牌故事</a></li>
+
+	        <li><a href="message/"  title="加盟合作">加盟合作</a></li>
+
+	        <li><a href="about/show.php?lang=cn&id=191"  title="联系我们">联系我们</a></li>
+
+	      </ol>
+
+	    </li>
+
+		<li class="foot-nav-slide">
+		  <b><a href="http://www.weibo.com"  title="关注我们">关注我们</a></b>
+
+	      <ol>
+
+	        <li><a href="http://www.weibo.com"  title="新浪微博">新浪微博</a></li>
+
+	        <li><a href="http://qq.com"  title="扣扣部落">扣扣部落</a></li>
+
+	        <li><a href="http://wx.qq.com"  title="官方微信">官方微信</a></li>
+
+	      </ol>
+
+	    </li>
+
+		<li class="foot-nav-slide">
+		  <b><a href="bottom/show.php?lang=cn&id=216"  title="特色服务">特色服务</a></b>
+
+	      <ol>
+
+	        <li><a href="bottom/show.php?lang=cn&id=216"  title="A码通道">A码通道</a></li>
+
+	        <li><a href="bottom/show.php?lang=cn&id=217"  title="礼物码">礼物码</a></li>
+
+	        <li><a href="bottom/show.php?lang=cn&id=218"  title="防伪查询">防伪查询</a></li>
+
+	      </ol>
+
+	    </li>
+
+	  </ul>
+	</div>  
+	<div class="foot-text"> 
+	  <b><a href="tel:4000-000-000" title="4000-000-000">4000-000-000</a></b>
+	  <i>服务时间 9:00-22:00</i>
+	  <p>
+
+
+				<a id="met-weixin"><i class="fa fa-weixin light-green-700" data-plugin="webuiPopover" data-trigger="hover" data-animation="pop" data-placement='top' data-width='160' data-padding='0' data-content="<img src='upload/201501/1422258610.jpg' alt='化妆品商城-化妆品商城' style='width: 150px;height:150px;display:block;margin:auto;'>"></i></a>
+
+				<a href="http://wpa.qq.com/msgrd?v=3&uin=4000084433&site=qq&menu=yes" rel="nofollow" target="_blank">
+					<i class="fa fa-qq blue-600"></i>
+				</a>
+
+				<a href="" rel="nofollow" target="_blank"><i class="fa fa-weibo red-600"></i></a>
+
+
+	  </p>
+	</div>    
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+	<div class="copyright-box">
+
+	  <div class="powered_by_metinfo">Powered&nbsp;by&nbsp;<a href="http://www.MetInfo.cn/#copyright" target="_blank" title="企业网站管理系统">MetInfo</a>&nbsp;5.3.19</div>
+	</div>
+
+<div class="met-links">
+	<ol class="breadcrumb">
+		<li>友情链接 :</li>
+
+		<li>
+			<a href="http://gz.jumei.com" title="" target="_blank">
+
+				聚美优品
+
+			</a>
+		</li>
+
+		<li>
+			<a href="http://www.yoka.com/" title="" target="_blank">
+
+				化妆品_YOKA时尚网
+
+			</a>
+		</li>
+
+		<li>
+			<a href="http://www.360xh.com/" title="" target="_blank">
+
+				360化妆品网
+
+			</a>
+		</li>
+
+		<li>
+			<a href="http://www.taobao.com" title="" target="_blank">
+
+				化妆品—天猫
+
+			</a>
+		</li>
+
+	</ol>
+</div>
+
+	  <p><p>化妆品商城 版权所有 © 2018-2020 湘ICP备8888888 （本网站内容为演示数据）</p></p>
+
+  </div>
+</footer>
+<button type="button" class="btn btn-icon btn-primary btn-squared met-scroll-top hide"><i class="icon wb-chevron-up" aria-hidden="true"></i></button>
+<script>
+var jsonurl='https://show.metinfo.cn/muban/M1156014/381/shop/cart.php?lang=cn&a=dojson_cart_list',totalurl='https://show.metinfo.cn/muban/M1156014/381/shop/cart.php?lang=cn&a=domodify',delurl='https://show.metinfo.cn/muban/M1156014/381/shop/cart.php?lang=cn&a=dodel',lang_emptycart='购物车中还没有商品，赶紧选购吧！';
+</script>
+<%@ include file="/jsp/bottom.jsp" %>
+
+
+<script src="<%=request.getContextPath() %>/statics/pagejs/hall/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.statics.YwxyqInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.statics.YwxyqInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="YWXDM" property="ywxdm" jdbcType="VARCHAR" />
+    <result column="YWXMC" property="ywxmc" jdbcType="VARCHAR" />
+    <result column="JSYQJE" property="jsyqje" jdbcType="DECIMAL" />
+    <result column="JSZJE" property="jszje" jdbcType="DECIMAL" />
+    <result column="MONTH" property="month" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, YWXDM, YWXMC, JSYQJE, JSZJE, MONTH
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_CROWD_STATIC_YWXYQ
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_CROWD_STATIC_YWXYQ
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.statics.YwxyqInfo" >
+    insert into T_CROWD_STATIC_YWXYQ (WID, YWXDM, YWXMC, 
+      JSYQJE, JSZJE, MONTH
+      )
+    values (#{wid,jdbcType=VARCHAR}, #{ywxdm,jdbcType=VARCHAR}, #{ywxmc,jdbcType=VARCHAR}, 
+      #{jsyqje,jdbcType=DECIMAL}, #{jszje,jdbcType=DECIMAL}, #{month,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.statics.YwxyqInfo" >
+    insert into T_CROWD_STATIC_YWXYQ
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="ywxdm != null" >
+        YWXDM,
+      </if>
+      <if test="ywxmc != null" >
+        YWXMC,
+      </if>
+      <if test="jsyqje != null" >
+        JSYQJE,
+      </if>
+      <if test="jszje != null" >
+        JSZJE,
+      </if>
+      <if test="month != null" >
+        MONTH,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="ywxdm != null" >
+        #{ywxdm,jdbcType=VARCHAR},
+      </if>
+      <if test="ywxmc != null" >
+        #{ywxmc,jdbcType=VARCHAR},
+      </if>
+      <if test="jsyqje != null" >
+        #{jsyqje,jdbcType=DECIMAL},
+      </if>
+      <if test="jszje != null" >
+        #{jszje,jdbcType=DECIMAL},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.statics.YwxyqInfo" >
+    update T_CROWD_STATIC_YWXYQ
+    <set >
+      <if test="ywxdm != null" >
+        YWXDM = #{ywxdm,jdbcType=VARCHAR},
+      </if>
+      <if test="ywxmc != null" >
+        YWXMC = #{ywxmc,jdbcType=VARCHAR},
+      </if>
+      <if test="jsyqje != null" >
+        JSYQJE = #{jsyqje,jdbcType=DECIMAL},
+      </if>
+      <if test="jszje != null" >
+        JSZJE = #{jszje,jdbcType=DECIMAL},
+      </if>
+      <if test="month != null" >
+        MONTH = #{month,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.statics.YwxyqInfo" >
+    update T_CROWD_STATIC_YWXYQ
+    set YWXDM = #{ywxdm,jdbcType=VARCHAR},
+      YWXMC = #{ywxmc,jdbcType=VARCHAR},
+      JSYQJE = #{jsyqje,jdbcType=DECIMAL},
+      JSZJE = #{jszje,jdbcType=DECIMAL},
+      MONTH = #{month,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,125 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE HTML>
+<html>
+<%@ include file="/jsp/top/top.jsp"%>
+<%@ include file="/jsp/top/other.jsp"%>
+<%@ include file="/jsp/param.jsp"%>
+<link rel='stylesheet'
+	href='<%=request.getContextPath()%>/statics/css/order.css'>
+<!--[if lte IE 8]>
+<div class="text-xs-center m-b-0 bg-blue-grey-100 alert">
+    <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+        <span aria-hidden="true">×</span>
+    </button>
+    你正在使用一个 <strong>过时</strong> 的浏览器。请 <a href="http://browsehappy.com/" target="_blank">升级您的浏览器</a>，以提高您的体验。
+</div>
+<![endif]-->
+
+<body>
+	<%@include file="/jsp/header.jsp"%>
+
+	<div class="page bg-pagebg1">
+		<div class="container">
+			<div class="page-content row">
+
+				<div class="col-lg-3">
+
+					<%@include file="/jsp/gzzx/left_menu.jsp"%>
+				</div>
+
+				<div class="col-lg-9 ">
+					<div class="panel m-b-0 bg-blue-600" boxmh-mh>
+						<div class="panel-body bg-blue-600 shop-order">
+							<div class=" text-xs-center"
+								style="font-size: 2rem; color: #FFF;">规则中心</div>
+						</div>
+					</div>
+					<div class="panel m-b-0" boxmh-mh>
+						<div class="panel-body  shop-order">
+							<div class="row">
+								<div class="col-xs-12 gzzx-header">发包须知</div>
+								<div class="col-xs-12 gzzx-subheader">第一条 概述</div>
+								<div class="col-xs-12 gzxx-content">
+									<p>为了维护智慧校园云工场平台正常运营秩序，保障发包顺利进行，制定本规则。</p>
+								</div>
+								<div class="col-xs-12 gzzx-subheader">第二条 声明</div>
+								<div class="col-xs-12 gzxx-content">
+									<p>发包方发包需符合国家法律法规以及平台关于发包的相关规定。</p>
+								</div>
+								<div class="col-xs-12 gzzx-subheader">第三条 需求描述规则</div>
+								<div class="col-xs-12 gzxx-content">
+									<p>1、需求描述需要准确、完整，必须按规定填写必要真实有效的描述信息。</p>
+									<p>2、不得填写与发包内容无关的信息，如广告。</p>
+									<p>3、不得填写危害社会、交易、他人安全的信息，如恶意欺诈、违法、侵权、色情等信息，详情见《平台发送内容规范》。</p>
+									<p>4、凡是涉嫌诈骗、欺骗、虚假承诺、需要服务商先承担成本以及跳转站外有交易风险的，平台有权关闭该需求。</p>
+									<p>5、平台可在不通知用户的情况下对上述违规信息采取删除、屏蔽、断开链接等措施；对于发布上述信息，导致任何第三方损害的，发包方应当独立承担责任；平台因此遭受损失的，发包方也应当一并赔偿。
+									</p>
+								</div>
+								<div class="col-xs-12 gzzx-subheader">第四条 需求发布规则</div>
+								<div class="col-xs-12 gzxx-content">
+									<p>1、发包方发布的需求，如果拿不准预算，可参考估价标准，或者联系平台，由平台协助完成预算。</p>
+									<p>2、发包方发布的需求名称，要尽量简洁、明了，方便接包方根据名称即可知道大概内容</p>
+									<p>3、需求内容中不得含有联系方式。</p>
+									<p>4、同一需求禁止重复发布，若用户重复发布，平台将关闭重复的需求。</p>
+									<p>5、需求发布时需要提供详细的需求文档或原型图，具体要求请参照《产品定制类需求模板规范》、《全新APP开发类需求模板规范》、《报表类需求模板规范》，对于没有按照对应模板要求发布的需求，平台审核时有权直接退回。需求退回次数将影响需求方的信誉度，对于信誉度低于60分的需求方，平台将不再提供需求交付时效和质量保护措施。</p>
+									<p style="color:red;">6、需求发布需要预留审核和投标时间。预算费用在1200元以内的需求默认预留2个工作日的审核时间，1200元及以上需求的审核时间不超过5个工作日。否则，平台将会收取相应的需求费用</p>
+									<p style="color:red;">7、从需求中标日期起，大于需求标准开发人天，小于两倍标准开发人天的日期区间为需求的合理交付日期区间。需求审核人员有权根据开发资源状况在合理交付日期区间内调整交付日期，对于不在合理交付日期区间内的交付时间要求，由需求方与需求审核人进行协商并达成一致，无法达成一致时，需求方可向平台进行申诉。</p>
+								</div>
+								<div class="col-xs-12 gzzx-subheader">第五条 需求审核规则</div>
+								<div class="col-xs-12 gzxx-content">
+									<div>
+										<p>1、BUG类型的需求不需要投标和选标，由平台审核后直接指定修改责任人，同时费用由平台支付。
+										</p>
+										<p>2、预算费用在1200元以内的需求审核周期不超过2个工作日。
+										</p>
+										<p>3、预算费用在1200元及以上的需求审核周期不超过5个工作日。
+										</p>
+									</div>
+								</div>
+								
+								<div class="col-xs-12 gzzx-subheader">第六条 发包方确定中选接包方</div>
+								<div class="col-xs-12 gzxx-content">
+									<div>
+										<p>1、超期未确定中选接包方：若在选择招标截止日期内有人参与接包竞争，但发包方未选出中选接包者，则系统将关闭订单，并扣以相应的信用值。此规范请参见《积分和信用管理办法》。
+										</p>
+										<p>2、参与接包竞争期限（即：招标截止日期）结束后，一直没有投标者，则需求会自动关闭，如需重新投标，则在需求方需求管理中心重新发布该需求。
+										</p>
+										<p>3、发包方改选中选接包方的情况，包括盗用发包方的密码进行确认中选接包方操作、发包方经中选接包方用户同意取消中选、特殊情况等，由发包方提供相关证据，经平台核实属实后，发包方可重新选择中选接包方。
+										</p>
+									</div>
+								</div>
+								<div class="col-xs-12 gzzx-subheader">第七条 验收与支付</div>
+								<div class="col-xs-12 gzxx-content">
+									<p>1、接包方提请需求验收后，发包方须在规定期限天内作出处理（需求金额500（包括500）以下的3天验收周期，500以上2000（包括2000）以下的6天验收，2000以上的10天验收周期：注：周期不包括国家国定节假日和周六周日），若发包方未拒绝验收、也没有进行退回，则系统自动视为验收通过，并扣除5分的发包方信誉积分，同时支付平台规定的验收期金额</p>
+									<p>2、接包方提请BUG验收后，发包方须在规定期限天内作出处理（需求金额500（包括500）以下的3天验收周期，500以上2000（包括2000）以下的6天验收，2000以上的10天验收周期：注：周期不包括国家国定节假日和周六周日），若发包方未拒绝验收、也没有进行退回，则系统自动视为验收通过，并扣除5分的发包方信誉积分。</p>
+									<p>3、若发生验收不通过的现象，则自动验收周期会在上面规定的基础上，从验收不通过产生的日期再延长3天，（例如，某需求验收周期为10天，第5天需求方验收不通过，则需要剩余验收周期为5+3=8天）。</p>
+									<p>4、若接包方恶意验收不通过，平台有权终止该用户的发包权限，</p>
+								</div>
+								<div class="col-xs-12 gzzx-subheader">第八条 售后</div>
+
+								<div class="col-xs-12 gzxx-content">
+									<p>1、平台仅有部分开发需求默认有售后期限，售后期间为90天，</p>
+									<p>2、在售后期间中，若发包方确认有问题，并拒绝售后结束，则接包方有义务在规定时间内响应需求问题（仅针对问题）的整改，每次售后部通过，则售后期限自动延长10天，</p>
+									<p>3、若接包方恶意发起问题，并拒绝售后结束，平台有权终止该用户的发包权限，</p>
+								</div>
+								<div class="col-xs-12 gzzx-subheader">第九条 评价规则</div>
+								<div class="col-xs-12 gzxx-content">
+									<p>1、发包方在验收需要的时候，必须对开发者作出严格、认证、负责的评价。</p>
+									<p>2、发包方在验收的时候，作出的评价不会参与到接包方的信誉评价中，售后结束后，可再次确认评价并修改，本次的评价纳入接包方的评价体系中。</p>
+									<p>3、发包方发布的评价，不会对接包方展示，仅供平台筛选优秀开发者和开发者评价体系使用。</p>
+									<p>4、发包方发布的评价，最终会在30日后纳入开发者的评价体系中。</p>
+									<p>5、为了提高平台的开发质量，请做出严格、认证、负责的评价。</p>
+								</div>
+								<div class="col-xs-12 gzzx-subheader">第十条 本规则自发布之日起实行</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<%@ include file="/jsp/bottom.jsp"%>
+</body>
+</html>

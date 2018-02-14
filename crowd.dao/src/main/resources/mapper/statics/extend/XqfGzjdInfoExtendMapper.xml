@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.statics.extend.XqfGzjdInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.statics.XqfGzjdInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="XQFID" property="xqfid" jdbcType="VARCHAR" />
+    <result column="XM" property="xm" jdbcType="VARCHAR" />
+    <result column="YJBM" property="yjbm" jdbcType="VARCHAR" />
+    <result column="EJBM" property="ejbm" jdbcType="VARCHAR" />
+    <result column="YFB" property="yfb" jdbcType="DECIMAL" />
+    <result column="DSH" property="dsh" jdbcType="DECIMAL" />
+    <result column="ZBZ" property="zbz" jdbcType="DECIMAL" />
+    <result column="KFZ" property="kfz" jdbcType="DECIMAL" />
+    <result column="YSZ" property="ysz" jdbcType="DECIMAL" />
+    <result column="YWC" property="ywc" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, XQFID, XM, YJBM, EJBM, YFB, DSH, ZBZ, KFZ, YSZ, YWC
+  </sql>
+  <sql id="sqlWhere">
+		<if test="yjbm!=null and yjbm!=''">
+			AND YJBM=#{yjbm,jdbcType=VARCHAR}
+		</if>
+		<if test="ejbm!=null and ejbm!=''">
+			AND EJBM=#{ejbm,jdbcType=VARCHAR}
+		</if>
+  </sql>
+  <select id="selectXqfGzjdInfoByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+  	resultType="map" >
+	SELECT * FROM T_CROWD_STATIC_XQFGZJD WHERE 1=1
+	<if test="query.yjbm!=null and query.yjbm!=''">
+		AND T_CROWD_STATIC_XQFGZJD.YJBM=#{query.yjbm,jdbcType=VARCHAR}
+	</if>
+	<if test="query.ejbm!=null and query.ejbm!=''">
+		AND T_CROWD_STATIC_XQFGZJD.EJBM=#{query.ejbm,jdbcType=VARCHAR}
+	</if>
+	<if test="query.xm!=null and query.xm!=''">
+		AND T_CROWD_STATIC_XQFGZJD.XM LIKE '%'||'${query.xm}'||'%'
+	</if>
+	ORDER BY YFB DESC
+  </select>
+</mapper>

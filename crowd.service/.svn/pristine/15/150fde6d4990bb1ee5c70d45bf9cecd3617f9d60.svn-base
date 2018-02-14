@@ -1,0 +1,19 @@
+package com.wisedu.crowd.service.yhgl;
+
+import java.util.List;
+
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.entity.dto.DataResult;
+import com.wisedu.crowd.entity.log.CustomOperateLog;
+import com.wisedu.crowd.entity.yhgl.KfzxxInfo;
+import com.wisedu.crowd.entity.yhgl.extend.KfzxxInfoExtend;
+
+public interface KfzxxInfoService {
+
+	   DataResult<KfzxxInfo> selectByPrimaryKey(String wid)throws ServiceException;
+
+	   DataResult<KfzxxInfo> saveOrUpdateKfzxxInfo(KfzxxInfo record,CustomOperateLog log) throws ServiceException;
+
+	   DataResult<List<KfzxxInfoExtend>>  selectByCondition(KfzxxInfoExtend record)throws ServiceException;
+
+}

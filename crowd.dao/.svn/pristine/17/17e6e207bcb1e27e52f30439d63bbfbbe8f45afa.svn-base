@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.kcgl.StudyCoursesMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.kcgl.StudyCourses" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="COUNT" property="count" jdbcType="VARCHAR" />
+    <result column="USERID" property="userid" jdbcType="VARCHAR" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="COURSEID" property="courseid" jdbcType="VARCHAR" />
+    <result column="COURSENAME" property="coursename" jdbcType="VARCHAR" />
+    <result column="COURSEOPENID" property="courseopenid" jdbcType="VARCHAR" />
+    <result column="OPENCOURSENAME" property="opencoursename" jdbcType="VARCHAR" />
+    <result column="ITEMID" property="itemid" jdbcType="VARCHAR" />
+    <result column="ITEMNAME" property="itemname" jdbcType="VARCHAR" />
+    <result column="ITEMTYPE" property="itemtype" jdbcType="VARCHAR" />
+    <result column="ITEMTYPENAME" property="itemtypename" jdbcType="VARCHAR" />
+    <result column="LASTTIME" property="lasttime" jdbcType="VARCHAR" />
+    <result column="LASTDATE" property="lastdate" jdbcType="VARCHAR" />
+    <result column="STUDYCOUNT" property="studycount" jdbcType="VARCHAR" />
+    <result column="DURATION" property="duration" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, ID, COUNT, USERID, USERNAME, COURSEID, COURSENAME, COURSEOPENID, OPENCOURSENAME, 
+    ITEMID, ITEMNAME, ITEMTYPE, ITEMTYPENAME, LASTTIME, LASTDATE, STUDYCOUNT, DURATION
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_kcgl_study_courses
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_kcgl_study_courses
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.kcgl.StudyCourses" >
+    insert into t_crowd_kcgl_study_courses (WID, ID, COUNT, 
+      USERID, USERNAME, COURSEID, 
+      COURSENAME, COURSEOPENID, OPENCOURSENAME, 
+      ITEMID, ITEMNAME, ITEMTYPE, 
+      ITEMTYPENAME, LASTTIME, LASTDATE, 
+      STUDYCOUNT, DURATION)
+    values (#{wid,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, #{count,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{courseid,jdbcType=VARCHAR}, 
+      #{coursename,jdbcType=VARCHAR}, #{courseopenid,jdbcType=VARCHAR}, #{opencoursename,jdbcType=VARCHAR}, 
+      #{itemid,jdbcType=VARCHAR}, #{itemname,jdbcType=VARCHAR}, #{itemtype,jdbcType=VARCHAR}, 
+      #{itemtypename,jdbcType=VARCHAR}, #{lasttime,jdbcType=VARCHAR}, #{lastdate,jdbcType=VARCHAR}, 
+      #{studycount,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.kcgl.StudyCourses" >
+    insert into t_crowd_kcgl_study_courses
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="count != null" >
+        COUNT,
+      </if>
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="courseid != null" >
+        COURSEID,
+      </if>
+      <if test="coursename != null" >
+        COURSENAME,
+      </if>
+      <if test="courseopenid != null" >
+        COURSEOPENID,
+      </if>
+      <if test="opencoursename != null" >
+        OPENCOURSENAME,
+      </if>
+      <if test="itemid != null" >
+        ITEMID,
+      </if>
+      <if test="itemname != null" >
+        ITEMNAME,
+      </if>
+      <if test="itemtype != null" >
+        ITEMTYPE,
+      </if>
+      <if test="itemtypename != null" >
+        ITEMTYPENAME,
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME,
+      </if>
+      <if test="lastdate != null" >
+        LASTDATE,
+      </if>
+      <if test="studycount != null" >
+        STUDYCOUNT,
+      </if>
+      <if test="duration != null" >
+        DURATION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="courseid != null" >
+        #{courseid,jdbcType=VARCHAR},
+      </if>
+      <if test="coursename != null" >
+        #{coursename,jdbcType=VARCHAR},
+      </if>
+      <if test="courseopenid != null" >
+        #{courseopenid,jdbcType=VARCHAR},
+      </if>
+      <if test="opencoursename != null" >
+        #{opencoursename,jdbcType=VARCHAR},
+      </if>
+      <if test="itemid != null" >
+        #{itemid,jdbcType=VARCHAR},
+      </if>
+      <if test="itemname != null" >
+        #{itemname,jdbcType=VARCHAR},
+      </if>
+      <if test="itemtype != null" >
+        #{itemtype,jdbcType=VARCHAR},
+      </if>
+      <if test="itemtypename != null" >
+        #{itemtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastdate != null" >
+        #{lastdate,jdbcType=VARCHAR},
+      </if>
+      <if test="studycount != null" >
+        #{studycount,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null" >
+        #{duration,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.kcgl.StudyCourses" >
+    update t_crowd_kcgl_study_courses
+    <set >
+      <if test="id != null" >
+        ID = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        COUNT = #{count,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        USERID = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="courseid != null" >
+        COURSEID = #{courseid,jdbcType=VARCHAR},
+      </if>
+      <if test="coursename != null" >
+        COURSENAME = #{coursename,jdbcType=VARCHAR},
+      </if>
+      <if test="courseopenid != null" >
+        COURSEOPENID = #{courseopenid,jdbcType=VARCHAR},
+      </if>
+      <if test="opencoursename != null" >
+        OPENCOURSENAME = #{opencoursename,jdbcType=VARCHAR},
+      </if>
+      <if test="itemid != null" >
+        ITEMID = #{itemid,jdbcType=VARCHAR},
+      </if>
+      <if test="itemname != null" >
+        ITEMNAME = #{itemname,jdbcType=VARCHAR},
+      </if>
+      <if test="itemtype != null" >
+        ITEMTYPE = #{itemtype,jdbcType=VARCHAR},
+      </if>
+      <if test="itemtypename != null" >
+        ITEMTYPENAME = #{itemtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME = #{lasttime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastdate != null" >
+        LASTDATE = #{lastdate,jdbcType=VARCHAR},
+      </if>
+      <if test="studycount != null" >
+        STUDYCOUNT = #{studycount,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null" >
+        DURATION = #{duration,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.kcgl.StudyCourses" >
+    update t_crowd_kcgl_study_courses
+    set ID = #{id,jdbcType=VARCHAR},
+      COUNT = #{count,jdbcType=VARCHAR},
+      USERID = #{userid,jdbcType=VARCHAR},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      COURSEID = #{courseid,jdbcType=VARCHAR},
+      COURSENAME = #{coursename,jdbcType=VARCHAR},
+      COURSEOPENID = #{courseopenid,jdbcType=VARCHAR},
+      OPENCOURSENAME = #{opencoursename,jdbcType=VARCHAR},
+      ITEMID = #{itemid,jdbcType=VARCHAR},
+      ITEMNAME = #{itemname,jdbcType=VARCHAR},
+      ITEMTYPE = #{itemtype,jdbcType=VARCHAR},
+      ITEMTYPENAME = #{itemtypename,jdbcType=VARCHAR},
+      LASTTIME = #{lasttime,jdbcType=VARCHAR},
+      LASTDATE = #{lastdate,jdbcType=VARCHAR},
+      STUDYCOUNT = #{studycount,jdbcType=VARCHAR},
+      DURATION = #{duration,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.xmgl.YwxWorkTimeMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.xmgl.YwxWorkTime" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="YWX" property="ywx" jdbcType="VARCHAR" />
+    <result column="VERSION" property="version" jdbcType="VARCHAR" />
+    <result column="OPTION_NAME" property="optionName" jdbcType="VARCHAR" />
+    <result column="STANDARD_WORK" property="standardWork" jdbcType="VARCHAR" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+    <result column="PRICE" property="price" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, YWX, VERSION, OPTION_NAME, STANDARD_WORK, REMARKS, PRICE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_xmgl_ywx_worktime
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_xmgl_ywx_worktime
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.xmgl.YwxWorkTime" >
+    insert into t_crowd_xmgl_ywx_worktime (WID, YWX, VERSION, 
+      OPTION_NAME, STANDARD_WORK, REMARKS, 
+      PRICE)
+    values (#{wid,jdbcType=VARCHAR}, #{ywx,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, 
+      #{optionName,jdbcType=VARCHAR}, #{standardWork,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
+      #{price,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.xmgl.YwxWorkTime" >
+    insert into t_crowd_xmgl_ywx_worktime
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="ywx != null" >
+        YWX,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+      <if test="optionName != null" >
+        OPTION_NAME,
+      </if>
+      <if test="standardWork != null" >
+        STANDARD_WORK,
+      </if>
+      <if test="remarks != null" >
+        REMARKS,
+      </if>
+      <if test="price != null" >
+        PRICE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="ywx != null" >
+        #{ywx,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="optionName != null" >
+        #{optionName,jdbcType=VARCHAR},
+      </if>
+      <if test="standardWork != null" >
+        #{standardWork,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.xmgl.YwxWorkTime" >
+    update t_crowd_xmgl_ywx_worktime
+    <set >
+      <if test="ywx != null" >
+        YWX = #{ywx,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        VERSION = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="optionName != null" >
+        OPTION_NAME = #{optionName,jdbcType=VARCHAR},
+      </if>
+      <if test="standardWork != null" >
+        STANDARD_WORK = #{standardWork,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        PRICE = #{price,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.xmgl.YwxWorkTime" >
+    update t_crowd_xmgl_ywx_worktime
+    set YWX = #{ywx,jdbcType=VARCHAR},
+      VERSION = #{version,jdbcType=VARCHAR},
+      OPTION_NAME = #{optionName,jdbcType=VARCHAR},
+      STANDARD_WORK = #{standardWork,jdbcType=VARCHAR},
+      REMARKS = #{remarks,jdbcType=VARCHAR},
+      PRICE = #{price,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,642 @@
+package com.wisedu.crowd.entity.yhgl;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+
+public class XqfxxInfo implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+     * 
+     */
+    private String wid;
+
+    /**
+     * 用户ID
+     */
+    private String yhid;
+
+    /**
+     * 需求方单位名称
+     */
+    private String xqfdwmc;
+
+    /**
+     * 所在地	
+     */
+    private String szdq;
+
+    /**
+     * 联系人姓名
+     */
+    private String xm;
+
+    /**
+     * 昵称
+     */
+    private String nc;
+
+    /**
+     * 身份证号
+     */
+    private String sfzjh;
+
+    /**
+     * 联系人邮箱
+     */
+    private String lxydzyx;
+
+    /**
+     * 账户可用余额
+     */
+    private BigDecimal zhye;
+
+    /**
+     * 操作时间
+     */
+    private Date czsj;
+
+    /**
+     * 操作者IP
+     */
+    private String czzip;
+
+    /**
+     * 审核状态
+     */
+    private String shzt;
+
+    /**
+     * 需求方类别
+     */
+    private String xqflb;
+
+    /**
+     * 照片附件ID
+     */
+    private String zpfjid;
+
+    /**
+     * 冻结余额
+     */
+    private BigDecimal zhdjye;
+
+    /**
+     * 审核意见
+     */
+    private String shyj;
+
+    /**
+     * QQ号
+     */
+    private String qqh;
+
+    /**
+     * 微信号
+     */
+    private String wxh;
+
+    /**
+     * 支付宝账号
+     */
+    private String zfbzh;
+
+    /**
+     * 工号
+     */
+    private String gh;
+
+    /**
+     * 所属公司
+     */
+    private String ssgs;
+
+    /**
+     * 所属业务线
+     */
+    private String ssywx;
+
+    /**
+     * 常住省
+     */
+    private String perProvince;
+
+    /**
+     * 常住市
+     */
+    private String perCity;
+
+    /**
+     * 常住区
+     */
+    private String perArea;
+
+    /**
+     * 用户分类(个人 企业)
+     */
+    private String userRange;
+
+    /**
+     * 身份证正面照附件ID
+     */
+    private String sfzzmztjid;
+
+    /**
+     * 身份证反面照附件ID
+     */
+    private String sfzfmztjid;
+
+    /**
+     * 
+     * @return WID 
+     */
+    public String getWid() {
+        return wid;
+    }
+
+    /**
+     * 
+     * @param wid 
+     */
+    public void setWid(String wid) {
+        this.wid = wid == null ? null : wid.trim();
+    }
+
+    /**
+     * 用户ID
+     * @return YHID 用户ID
+     */
+    public String getYhid() {
+        return yhid;
+    }
+
+    /**
+     * 用户ID
+     * @param yhid 用户ID
+     */
+    public void setYhid(String yhid) {
+        this.yhid = yhid == null ? null : yhid.trim();
+    }
+
+    /**
+     * 需求方单位名称
+     * @return XQFDWMC 需求方单位名称
+     */
+    public String getXqfdwmc() {
+        return xqfdwmc;
+    }
+
+    /**
+     * 需求方单位名称
+     * @param xqfdwmc 需求方单位名称
+     */
+    public void setXqfdwmc(String xqfdwmc) {
+        this.xqfdwmc = xqfdwmc == null ? null : xqfdwmc.trim();
+    }
+
+    /**
+     * 所在地	
+     * @return SZDQ 所在地	
+     */
+    public String getSzdq() {
+        return szdq;
+    }
+
+    /**
+     * 所在地	
+     * @param szdq 所在地	
+     */
+    public void setSzdq(String szdq) {
+        this.szdq = szdq == null ? null : szdq.trim();
+    }
+
+    /**
+     * 联系人姓名
+     * @return XM 联系人姓名
+     */
+    public String getXm() {
+        return xm;
+    }
+
+    /**
+     * 联系人姓名
+     * @param xm 联系人姓名
+     */
+    public void setXm(String xm) {
+        this.xm = xm == null ? null : xm.trim();
+    }
+
+    /**
+     * 昵称
+     * @return NC 昵称
+     */
+    public String getNc() {
+        return nc;
+    }
+
+    /**
+     * 昵称
+     * @param nc 昵称
+     */
+    public void setNc(String nc) {
+        this.nc = nc == null ? null : nc.trim();
+    }
+
+    /**
+     * 身份证号
+     * @return SFZJH 身份证号
+     */
+    public String getSfzjh() {
+        return sfzjh;
+    }
+
+    /**
+     * 身份证号
+     * @param sfzjh 身份证号
+     */
+    public void setSfzjh(String sfzjh) {
+        this.sfzjh = sfzjh == null ? null : sfzjh.trim();
+    }
+
+    /**
+     * 联系人邮箱
+     * @return LXYDZYX 联系人邮箱
+     */
+    public String getLxydzyx() {
+        return lxydzyx;
+    }
+
+    /**
+     * 联系人邮箱
+     * @param lxydzyx 联系人邮箱
+     */
+    public void setLxydzyx(String lxydzyx) {
+        this.lxydzyx = lxydzyx == null ? null : lxydzyx.trim();
+    }
+
+    /**
+     * 账户可用余额
+     * @return ZHYE 账户可用余额
+     */
+    public BigDecimal getZhye() {
+        return zhye;
+    }
+
+    /**
+     * 账户可用余额
+     * @param zhye 账户可用余额
+     */
+    public void setZhye(BigDecimal zhye) {
+        this.zhye = zhye;
+    }
+
+    /**
+     * 操作时间
+     * @return CZSJ 操作时间
+     */
+    public Date getCzsj() {
+        return czsj;
+    }
+
+    /**
+     * 操作时间
+     * @param czsj 操作时间
+     */
+    public void setCzsj(Date czsj) {
+        this.czsj = czsj;
+    }
+
+    /**
+     * 操作者IP
+     * @return CZZIP 操作者IP
+     */
+    public String getCzzip() {
+        return czzip;
+    }
+
+    /**
+     * 操作者IP
+     * @param czzip 操作者IP
+     */
+    public void setCzzip(String czzip) {
+        this.czzip = czzip == null ? null : czzip.trim();
+    }
+
+    /**
+     * 审核状态
+     * @return SHZT 审核状态
+     */
+    public String getShzt() {
+        return shzt;
+    }
+
+    /**
+     * 审核状态
+     * @param shzt 审核状态
+     */
+    public void setShzt(String shzt) {
+        this.shzt = shzt == null ? null : shzt.trim();
+    }
+
+    /**
+     * 需求方类别
+     * @return XQFLB 需求方类别
+     */
+    public String getXqflb() {
+        return xqflb;
+    }
+
+    /**
+     * 需求方类别
+     * @param xqflb 需求方类别
+     */
+    public void setXqflb(String xqflb) {
+        this.xqflb = xqflb == null ? null : xqflb.trim();
+    }
+
+    /**
+     * 照片附件ID
+     * @return ZPFJID 照片附件ID
+     */
+    public String getZpfjid() {
+        return zpfjid;
+    }
+
+    /**
+     * 照片附件ID
+     * @param zpfjid 照片附件ID
+     */
+    public void setZpfjid(String zpfjid) {
+        this.zpfjid = zpfjid == null ? null : zpfjid.trim();
+    }
+
+    /**
+     * 冻结余额
+     * @return ZHDJYE 冻结余额
+     */
+    public BigDecimal getZhdjye() {
+        return zhdjye;
+    }
+
+    /**
+     * 冻结余额
+     * @param zhdjye 冻结余额
+     */
+    public void setZhdjye(BigDecimal zhdjye) {
+        this.zhdjye = zhdjye;
+    }
+
+    /**
+     * 审核意见
+     * @return SHYJ 审核意见
+     */
+    public String getShyj() {
+        return shyj;
+    }
+
+    /**
+     * 审核意见
+     * @param shyj 审核意见
+     */
+    public void setShyj(String shyj) {
+        this.shyj = shyj == null ? null : shyj.trim();
+    }
+
+    /**
+     * QQ号
+     * @return QQH QQ号
+     */
+    public String getQqh() {
+        return qqh;
+    }
+
+    /**
+     * QQ号
+     * @param qqh QQ号
+     */
+    public void setQqh(String qqh) {
+        this.qqh = qqh == null ? null : qqh.trim();
+    }
+
+    /**
+     * 微信号
+     * @return WXH 微信号
+     */
+    public String getWxh() {
+        return wxh;
+    }
+
+    /**
+     * 微信号
+     * @param wxh 微信号
+     */
+    public void setWxh(String wxh) {
+        this.wxh = wxh == null ? null : wxh.trim();
+    }
+
+    /**
+     * 支付宝账号
+     * @return ZFBZH 支付宝账号
+     */
+    public String getZfbzh() {
+        return zfbzh;
+    }
+
+    /**
+     * 支付宝账号
+     * @param zfbzh 支付宝账号
+     */
+    public void setZfbzh(String zfbzh) {
+        this.zfbzh = zfbzh == null ? null : zfbzh.trim();
+    }
+
+    /**
+     * 工号
+     * @return GH 工号
+     */
+    public String getGh() {
+        return gh;
+    }
+
+    /**
+     * 工号
+     * @param gh 工号
+     */
+    public void setGh(String gh) {
+        this.gh = gh == null ? null : gh.trim();
+    }
+
+    /**
+     * 所属公司
+     * @return SSGS 所属公司
+     */
+    public String getSsgs() {
+        return ssgs;
+    }
+
+    /**
+     * 所属公司
+     * @param ssgs 所属公司
+     */
+    public void setSsgs(String ssgs) {
+        this.ssgs = ssgs == null ? null : ssgs.trim();
+    }
+
+    /**
+     * 所属业务线
+     * @return SSYWX 所属业务线
+     */
+    public String getSsywx() {
+        return ssywx;
+    }
+
+    /**
+     * 所属业务线
+     * @param ssywx 所属业务线
+     */
+    public void setSsywx(String ssywx) {
+        this.ssywx = ssywx == null ? null : ssywx.trim();
+    }
+
+    /**
+     * 常住省
+     * @return PER_PROVINCE 常住省
+     */
+    public String getPerProvince() {
+        return perProvince;
+    }
+
+    /**
+     * 常住省
+     * @param perProvince 常住省
+     */
+    public void setPerProvince(String perProvince) {
+        this.perProvince = perProvince == null ? null : perProvince.trim();
+    }
+
+    /**
+     * 常住市
+     * @return PER_CITY 常住市
+     */
+    public String getPerCity() {
+        return perCity;
+    }
+
+    /**
+     * 常住市
+     * @param perCity 常住市
+     */
+    public void setPerCity(String perCity) {
+        this.perCity = perCity == null ? null : perCity.trim();
+    }
+
+    /**
+     * 常住区
+     * @return PER_AREA 常住区
+     */
+    public String getPerArea() {
+        return perArea;
+    }
+
+    /**
+     * 常住区
+     * @param perArea 常住区
+     */
+    public void setPerArea(String perArea) {
+        this.perArea = perArea == null ? null : perArea.trim();
+    }
+
+    /**
+     * 用户分类(个人 企业)
+     * @return USER_RANGE 用户分类(个人 企业)
+     */
+    public String getUserRange() {
+        return userRange;
+    }
+
+    /**
+     * 用户分类(个人 企业)
+     * @param userRange 用户分类(个人 企业)
+     */
+    public void setUserRange(String userRange) {
+        this.userRange = userRange == null ? null : userRange.trim();
+    }
+
+    /**
+     * 身份证正面照附件ID
+     * @return SFZZMZTJID 身份证正面照附件ID
+     */
+    public String getSfzzmztjid() {
+        return sfzzmztjid;
+    }
+
+    /**
+     * 身份证正面照附件ID
+     * @param sfzzmztjid 身份证正面照附件ID
+     */
+    public void setSfzzmztjid(String sfzzmztjid) {
+        this.sfzzmztjid = sfzzmztjid == null ? null : sfzzmztjid.trim();
+    }
+
+    /**
+     * 身份证反面照附件ID
+     * @return SFZFMZTJID 身份证反面照附件ID
+     */
+    public String getSfzfmztjid() {
+        return sfzfmztjid;
+    }
+
+    /**
+     * 身份证反面照附件ID
+     * @param sfzfmztjid 身份证反面照附件ID
+     */
+    public void setSfzfmztjid(String sfzfmztjid) {
+        this.sfzfmztjid = sfzfmztjid == null ? null : sfzfmztjid.trim();
+    }
+
+    /**
+     *
+     * @mbggenerated 2017-11-24
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", wid=").append(wid);
+        sb.append(", yhid=").append(yhid);
+        sb.append(", xqfdwmc=").append(xqfdwmc);
+        sb.append(", szdq=").append(szdq);
+        sb.append(", xm=").append(xm);
+        sb.append(", nc=").append(nc);
+        sb.append(", sfzjh=").append(sfzjh);
+        sb.append(", lxydzyx=").append(lxydzyx);
+        sb.append(", zhye=").append(zhye);
+        sb.append(", czsj=").append(czsj);
+        sb.append(", czzip=").append(czzip);
+        sb.append(", shzt=").append(shzt);
+        sb.append(", xqflb=").append(xqflb);
+        sb.append(", zpfjid=").append(zpfjid);
+        sb.append(", zhdjye=").append(zhdjye);
+        sb.append(", shyj=").append(shyj);
+        sb.append(", qqh=").append(qqh);
+        sb.append(", wxh=").append(wxh);
+        sb.append(", zfbzh=").append(zfbzh);
+        sb.append(", gh=").append(gh);
+        sb.append(", ssgs=").append(ssgs);
+        sb.append(", ssywx=").append(ssywx);
+        sb.append(", perProvince=").append(perProvince);
+        sb.append(", perCity=").append(perCity);
+        sb.append(", perArea=").append(perArea);
+        sb.append(", userRange=").append(userRange);
+        sb.append(", sfzzmztjid=").append(sfzzmztjid);
+        sb.append(", sfzfmztjid=").append(sfzfmztjid);
+        sb.append("]");
+        return sb.toString();
+    }
+}

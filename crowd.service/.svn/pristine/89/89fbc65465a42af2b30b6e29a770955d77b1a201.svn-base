@@ -1,0 +1,292 @@
+package com.wisedu.crowd.service.yhgl.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.wisedu.crowd.common.code.HttpCodeEnum;
+import com.wisedu.crowd.common.code.YhxxShztEnum;
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.common.util.CommonUtil;
+import com.wisedu.crowd.common.util.DateUtil;
+import com.wisedu.crowd.common.util.PageUtil;
+import com.wisedu.crowd.common.util.StringUtil;
+import com.wisedu.crowd.dao.yhgl.KfzxxInfoMapper;
+import com.wisedu.crowd.dao.yhgl.extend.KfzxxInfoExtendMapper;
+import com.wisedu.crowd.entity.dto.QueryCondition;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.entity.log.CustomOperateLog;
+import com.wisedu.crowd.entity.yhgl.KfzxxInfo;
+import com.wisedu.crowd.entity.yhgl.extend.KfzxxInfoExtend;
+import com.wisedu.crowd.service.yhgl.KfzxxInfoService;
+@Service("kfzxxInfoService")
+@Transactional
+public class KfzxxInfoServiceImpl implements KfzxxInfoService{
+
+	@Autowired
+	private  KfzxxInfoMapper kfzxxInfoMapper;
+	
+	@Autowired
+	private KfzxxInfoExtendMapper kfzxxInfoExtendMapper;
+
+	@Override
+	public DataResult<KfzxxInfo> selectByPrimaryKey(String wid,CustomOperateLog log) throws ServiceException {
+		return DataResult.success(kfzxxInfoMapper.selectByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<Integer> deleteByPrimaryKey(String wid, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(kfzxxInfoMapper.deleteByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<Integer> insertSelective(KfzxxInfo record, CustomOperateLog log) throws ServiceException {
+		if(StringUtil.isEmpty(record.getYhid())){
+			throw new ServiceException(HttpCodeEnum.USER_INVALID.getCode(),HttpCodeEnum.USER_INVALID.getName());
+		}
+		if(!checkKfzNc(record.getWid(),record.getNc())){
+			throw new ServiceException(HttpCodeEnum.EXIST_NICK_NAME.getCode(),HttpCodeEnum.EXIST_NICK_NAME.getName());
+         }
+		if(!checkKfzSfzjh(record.getWid(),record.getSfzjh())){
+			throw new ServiceException(HttpCodeEnum.EXIST_SFZ.getCode(),HttpCodeEnum.EXIST_SFZ.getName());
+         }
+		record.setWid(StringUtil.getUuId());
+		record.setCzsj(DateUtil.getCurrentDate());
+		record.setCzzip(log.getCustomIp());
+		record.setShzt(YhxxShztEnum.DSH.getCode());
+		record.setVersion(0);
+		return DataResult.success(kfzxxInfoMapper.insertSelective(record));
+	}
+
+	@Override
+	public DataResult<Integer> updateByPrimaryKeySelective(KfzxxInfo record, CustomOperateLog log)
+			throws ServiceException {
+		if(StringUtil.isEmpty(record.getYhid())){
+			throw new ServiceException(HttpCodeEnum.USER_INVALID.getCode(),HttpCodeEnum.USER_INVALID.getName());
+		}
+		if(!checkKfzNc(record.getWid(),record.getNc())){
+			throw new ServiceException(HttpCodeEnum.EXIST_NICK_NAME.getCode(),HttpCodeEnum.EXIST_NICK_NAME.getName());
+         }
+		if(!checkKfzSfzjh(record.getWid(),record.getSfzjh())){
+			throw new ServiceException(HttpCodeEnum.EXIST_SFZ.getCode(),HttpCodeEnum.EXIST_SFZ.getName());
+         }
+		return DataResult.success(kfzxxInfoMapper.updateByPrimaryKeySelective(record));
+	} 
+    
+	@Override
+	public DataResult<KfzxxInfoExtend> saveKfzxxInfo(KfzxxInfoExtend record, CustomOperateLog log) throws ServiceException {
+		
+		if(StringUtil.isEmpty(record.getYhid())){
+			throw new ServiceException(HttpCodeEnum.USER_INVALID.getCode(),HttpCodeEnum.USER_INVALID.getName());
+		}
+		if(!checkKfzNc(record.getWid(),record.getNc())){
+			throw new ServiceException(HttpCodeEnum.EXIST_NICK_NAME.getCode(),HttpCodeEnum.EXIST_NICK_NAME.getName());
+         }
+		if(!checkKfzSfzjh(record.getWid(),record.getSfzjh())){
+			throw new ServiceException(HttpCodeEnum.EXIST_SFZ.getCode(),HttpCodeEnum.EXIST_SFZ.getName());
+         }
+		record.setWid(StringUtil.getUuId());
+		record.setCzsj(DateUtil.getCurrentDate());
+		record.setCzzip(log.getCustomIp());
+		record.setShzt(YhxxShztEnum.DSH.getCode());
+		record.setVersion(0);
+		kfzxxInfoMapper.insertSelective(record);
+		return DataResult.success(record);
+	}
+
+	@Override
+	public DataResult<KfzxxInfoExtend> updateKfzxxInfo(KfzxxInfoExtend record, CustomOperateLog log) throws ServiceException {
+		if(StringUtil.isEmpty(record.getYhid())){
+			throw new ServiceException(HttpCodeEnum.USER_INVALID.getCode(),HttpCodeEnum.USER_INVALID.getName());
+		}
+		if(!checkKfzNc(record.getWid(),record.getNc())){
+			throw new ServiceException(HttpCodeEnum.EXIST_NICK_NAME.getCode(),HttpCodeEnum.EXIST_NICK_NAME.getName());
+         }
+		if(!checkKfzSfzjh(record.getWid(),record.getSfzjh())){
+			throw new ServiceException(HttpCodeEnum.EXIST_SFZ.getCode(),HttpCodeEnum.EXIST_SFZ.getName());
+         }
+	    kfzxxInfoMapper.updateByPrimaryKeySelective(record);
+	    return DataResult.success(record);
+	    
+	}
+	
+	@Override
+	public DataResult<List<KfzxxInfoExtend>> selectByCondition(QueryCondition<KfzxxInfoExtend> record,
+			CustomOperateLog log) throws ServiceException {
+		if (record.getPageInfo() != null) {
+			Page<KfzxxInfoExtend> page = PageHelper.startPage(record.getPageInfo().getPageNum(),
+					record.getPageInfo().getPageSize());
+			List<KfzxxInfoExtend> datas = kfzxxInfoExtendMapper.selectByCondition(record);
+
+			DataResult<List<KfzxxInfoExtend>> dataResult = DataResult.success(datas);
+			dataResult.setPageInfo(PageUtil.changePageInfo(page));
+			return dataResult;
+		} else {
+			return DataResult.success(kfzxxInfoExtendMapper.selectByCondition(record));
+		}
+		
+
+	}
+
+	@Override
+	public DataResult<Integer> updateByVersion(KfzxxInfo record, CustomOperateLog log) throws ServiceException {
+		if(StringUtil.isEmpty(record.getYhid())){
+			throw new ServiceException(HttpCodeEnum.USER_INVALID.getCode(),HttpCodeEnum.USER_INVALID.getName());
+		}
+		if(!checkKfzNc(record.getWid(),record.getNc())){
+			throw new ServiceException(HttpCodeEnum.EXIST_NICK_NAME.getCode(),HttpCodeEnum.EXIST_NICK_NAME.getName());
+         }
+		if(!checkKfzSfzjh(record.getWid(),record.getSfzjh())){
+			throw new ServiceException(HttpCodeEnum.EXIST_SFZ.getCode(),HttpCodeEnum.EXIST_SFZ.getName());
+         }
+		return DataResult.success(kfzxxInfoExtendMapper.updateByVersion(record));
+	}
+   
+	//检测昵称是否重复
+    public boolean checkKfzNc(String kfzid,String nc){
+    	if(StringUtil.isEmpty(nc)){
+    		return true;
+    	}
+    	KfzxxInfoExtend  kfzxxInfoExtend=new KfzxxInfoExtend();
+		kfzxxInfoExtend.setNc(nc);
+		QueryCondition<KfzxxInfoExtend> condition=new QueryCondition<KfzxxInfoExtend>();
+		condition.setPageInfo(null);
+		condition.setQuery(kfzxxInfoExtend);
+		List<KfzxxInfoExtend> list=kfzxxInfoExtendMapper.selectByCondition(condition);
+    	if(StringUtil.isEmpty(kfzid)){
+    		if(CommonUtil.isEmptyList(list)){
+    			return true;
+    		}
+    		return false;
+    	}else{
+    		if(CommonUtil.isEmptyList(list)){
+    			return true;
+    		}
+    		if(list.size()==1){
+    			if(kfzid.equals(list.get(0).getWid())){
+    				return true;
+    			}
+    		}
+    	}
+    	return false;
+    }
+    
+   //检测身份号是否重复
+    public boolean checkKfzSfzjh(String kfzid,String sfzjh){
+    	if(StringUtil.isEmpty(sfzjh)){
+    		return true;
+    	}
+    	KfzxxInfoExtend  kfzxxInfoExtend=new KfzxxInfoExtend();
+		kfzxxInfoExtend.setSfzjh(sfzjh);
+		QueryCondition<KfzxxInfoExtend> condition=new QueryCondition<KfzxxInfoExtend>();
+		condition.setPageInfo(null);
+		condition.setQuery(kfzxxInfoExtend);
+		List<KfzxxInfoExtend> list=kfzxxInfoExtendMapper.selectByCondition(condition);
+    	if(StringUtil.isEmpty(kfzid)){
+    		if(CommonUtil.isEmptyList(list)){
+    			return true;
+    		}
+    		return false;
+    	}else{
+    		if(CommonUtil.isEmptyList(list)){
+    			return true;
+    		}
+    		if(list.size()==1){
+    			if(kfzid.equals(list.get(0).getWid())){
+    				return true;
+    			}
+    		}
+    	}
+    	return false;
+    }
+	
+	@Override
+	public DataResult<Integer> insertFirstKfzxxInfo(KfzxxInfo record, CustomOperateLog log) throws ServiceException {
+		
+		//session失效
+		if(StringUtil.isEmpty(record.getYhid())){
+			throw new ServiceException(HttpCodeEnum.USER_INVALID.getCode(),HttpCodeEnum.USER_INVALID.getName());
+		}
+		if(!checkKfzNc(null,record.getNc())){
+			throw new ServiceException(HttpCodeEnum.EXIST_NICK_NAME.getCode(),HttpCodeEnum.EXIST_NICK_NAME.getName());
+         }
+		if(!checkKfzSfzjh(null,record.getSfzjh())){
+			throw new ServiceException(HttpCodeEnum.EXIST_SFZ.getCode(),HttpCodeEnum.EXIST_SFZ.getName());
+         }
+		KfzxxInfo  kfzxxInfo=new KfzxxInfo();
+		kfzxxInfo.setYhid(record.getYhid());
+		kfzxxInfo.setWid(StringUtil.getUuId());
+		kfzxxInfo.setCzsj(DateUtil.getCurrentDate());
+		kfzxxInfo.setCzzip(log.getCustomIp());
+		kfzxxInfo.setShzt(YhxxShztEnum.DSH.getCode());
+		
+		kfzxxInfo.setGrzpfjid(record.getGrzpfjid());
+		kfzxxInfo.setNc(record.getNc());
+		kfzxxInfo.setPerProvince(record.getPerProvince());
+		kfzxxInfo.setPerCity(record.getPerCity());
+		kfzxxInfo.setPerArea(record.getPerArea());
+		kfzxxInfo.setCsrq(record.getCsrq());
+		kfzxxInfo.setQq(record.getQq());
+		kfzxxInfo.setWxh(record.getWxh());
+		kfzxxInfo.setSfytd(record.getSfytd());
+		
+		kfzxxInfo.setKfzlb(record.getKfzlb());
+		kfzxxInfo.setScjsdm(record.getScjsdm());
+		kfzxxInfo.setQtjn(record.getQtjn());
+		kfzxxInfo.setGznx(record.getGznx());
+		kfzxxInfo.setJygznx(record.getJygznx());
+		kfzxxInfo.setGzjl(record.getGzjl());
+		kfzxxInfo.setXmjy(record.getXmjy());
+		kfzxxInfo.setZslj(record.getZslj());
+		kfzxxInfo.setGzxz(record.getGzxz());
+		kfzxxInfo.setKxsjid(record.getKxsjid());
+		
+		kfzxxInfo.setXm(record.getXm());
+		kfzxxInfo.setSfzjh(record.getSfzjh());
+		kfzxxInfo.setSfzzmztjid(record.getSfzzmztjid());
+		kfzxxInfo.setSfzfmztjid(record.getSfzfmztjid());
+		return DataResult.success(kfzxxInfoMapper.insertSelective(kfzxxInfo));
+
+	}
+
+	@Override
+	public DataResult<Integer> selectCountByCondition(QueryCondition<KfzxxInfoExtend> record, CustomOperateLog log)
+			throws ServiceException {
+		return DataResult.success(kfzxxInfoExtendMapper.selectCountByCondition(record));
+	}
+
+	@Override
+	public boolean checkKfzEmail(KfzxxInfoExtend record, CustomOperateLog log) {
+		if(StringUtil.isEmpty(record)||StringUtil.isEmpty(record.getDzyx())){
+    		return false;
+    	}
+    	KfzxxInfoExtend  kfzxxInfoExtend=new KfzxxInfoExtend();
+		kfzxxInfoExtend.setDzyx(record.getDzyx());
+		QueryCondition<KfzxxInfoExtend> condition=new QueryCondition<KfzxxInfoExtend>();
+		condition.setPageInfo(null);
+		condition.setQuery(kfzxxInfoExtend);
+		List<KfzxxInfoExtend> list=kfzxxInfoExtendMapper.selectByCondition(condition);
+    	if(StringUtil.isEmpty(record.getYhid())){
+    		if(CommonUtil.isEmptyList(list)){
+    			return true;
+    		}
+    		return false;
+    	}else{
+    		if(CommonUtil.isEmptyList(list)){
+    			return true;
+    		}
+    		if(list.size()==1){
+    			if(record.getYhid().equals(list.get(0).getYhid())){
+    				return true;
+    			}
+    		}
+    	}
+    	return false;
+	}
+
+	
+}

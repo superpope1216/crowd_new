@@ -1,0 +1,210 @@
+/**
+ * Project Name:crowd.web
+ * File Name:TraineeTrainController.java
+ * Package Name:com.wisedu.crowd.controller.train
+ * Date:2018年1月9日下午2:45:16
+ * Copyright (c) 2018, 01113232@wisedu.com All Rights Reserved.
+ *
+*/
+
+package com.wisedu.crowd.controller.train;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.github.pagehelper.StringUtil;
+import com.wisedu.crowd.common.code.BmztEnum;
+import com.wisedu.crowd.common.code.KhjgEnum;
+import com.wisedu.crowd.common.code.YykhztEnum;
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.common.util.ConditionUtil;
+import com.wisedu.crowd.controller.BaseController;
+import com.wisedu.crowd.entity.dto.PageInfo;
+import com.wisedu.crowd.entity.dto.QueryCondition;
+import com.wisedu.crowd.entity.train.TrainEnrolInfo;
+import com.wisedu.crowd.entity.train.extend.TrainEnrolInfoExtend;
+import com.wisedu.crowd.entity.train.extend.TrainPlanInfoExtend;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.service.train.TrainEnrolInfoService;
+import com.wisedu.crowd.service.train.TrainPlanInfoService;
+
+/**
+ * ClassName:TraineeTrainController <br/>
+ * Function: TODO ADD FUNCTION. <br/>
+ * Reason:	 TODO ADD REASON. <br/>
+ * Date:     2018年1月9日 下午2:45:16 <br/>
+ * @author   dell
+ * @version  
+ * @since    JDK 1.6
+ * @see 	 
+ */
+@Controller
+@RequestMapping("xyTrain")
+public class TraineeTrainController extends BaseController{
+
+    @Autowired
+    private TrainEnrolInfoService trainEnrolInfoService;
+    @Autowired
+    private TrainPlanInfoService trainPlanInfoService;
+    
+    @RequestMapping("index")
+    public ModelAndView index(String parentId) throws Exception{
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("train/trainee/myTrain");
+        if(!this.isXy()){
+            return mv;
+        }
+        TrainEnrolInfoExtend queryTrainEnrolInfoExtend = new TrainEnrolInfoExtend();
+        QueryCondition<TrainEnrolInfoExtend> condition =  ConditionUtil.createCondition(queryTrainEnrolInfoExtend);
+        queryTrainEnrolInfoExtend.setXyid(this.getXyxx().getWid());
+        //培训总数
+        mv.addObject("pxzs", trainEnrolInfoService.selectCountByCondition(condition, this.createCustomOperateLog()).getDatas());
+        //预报名数
+        queryTrainEnrolInfoExtend.setBmzt(BmztEnum.YYBM.getCode());
+        mv.addObject("ybm", trainEnrolInfoService.selectCountByCondition(condition, this.createCustomOperateLog()).getDatas());
+        //待预约数
+        queryTrainEnrolInfoExtend.setBmzt(BmztEnum.ZSBM.getCode());
+        List<Integer> yykhzts = new ArrayList<Integer>();
+        yykhzts.add(YykhztEnum.WYY.getCode());
+        yykhzts.add(YykhztEnum.QXYY.getCode());
+        queryTrainEnrolInfoExtend.setYykhzts(yykhzts);
+        mv.addObject("dyy", trainEnrolInfoService.selectCountByCondition(condition, this.createCustomOperateLog()).getDatas());
+        //待考核数
+        TrainEnrolInfoExtend queryTrainEnrolInfoExtend2 = new TrainEnrolInfoExtend();
+        queryTrainEnrolInfoExtend2.setXyid(this.getXyxx().getWid());
+        queryTrainEnrolInfoExtend2.setBmzt(BmztEnum.ZSBM.getCode());
+        List<Integer> yykhzts2 = new ArrayList<Integer>();
+        yykhzts2.add(YykhztEnum.APDKH.getCode());
+        yykhzts2.add(YykhztEnum.YYDAP.getCode());
+        queryTrainEnrolInfoExtend2.setYykhzts(yykhzts2);
+        mv.addObject("dkh", trainEnrolInfoService.selectCountByCondition(ConditionUtil.createCondition(queryTrainEnrolInfoExtend2), 
+                this.createCustomOperateLog()).getDatas());
+        //考核通过数
+        TrainEnrolInfoExtend queryTrainEnrolInfoExtend3 = new TrainEnrolInfoExtend();
+        QueryCondition<TrainEnrolInfoExtend> condition3 =  ConditionUtil.createCondition(queryTrainEnrolInfoExtend3);
+        queryTrainEnrolInfoExtend3.setXyid(this.getXyxx().getWid());
+        queryTrainEnrolInfoExtend3.setKhjg(KhjgEnum.TG.getCode());
+        mv.addObject("tg", trainEnrolInfoService.selectCountByCondition(condition3, this.createCustomOperateLog()).getDatas());
+        //考核不通过数
+        queryTrainEnrolInfoExtend3.setKhjg(KhjgEnum.BTG.getCode());
+        mv.addObject("btg", trainEnrolInfoService.selectCountByCondition(condition3, this.createCustomOperateLog()).getDatas());
+        //缺考数
+        queryTrainEnrolInfoExtend3.setKhjg(KhjgEnum.QK.getCode());
+        mv.addObject("qk", trainEnrolInfoService.selectCountByCondition(condition3, this.createCustomOperateLog()).getDatas());
+        return mv;
+    }
+    
+    @RequestMapping("trains")
+    @ResponseBody
+    public DataResult<List<TrainEnrolInfoExtend>> trains(String states, Integer pageNum, Integer pageSize, String pxrwbh) throws Exception{
+        if(!this.isXy()){
+            return DataResult.success(null);
+        }
+        if(StringUtil.isEmpty(states)){
+            states = "0";
+        }
+        TrainEnrolInfoExtend queryTrainEnrolInfoExtend = new TrainEnrolInfoExtend();
+        queryTrainEnrolInfoExtend.setXyid(this.getXyxx().getWid());
+        List<Integer> yykhzts = new ArrayList<Integer>();
+        if("1".equals(states)){//预报名
+           queryTrainEnrolInfoExtend.setBmzt(BmztEnum.YYBM.getCode()); 
+        }else if("2".equals(states)){//待预约
+            yykhzts.add(YykhztEnum.WYY.getCode());
+            yykhzts.add(YykhztEnum.QXYY.getCode());
+            queryTrainEnrolInfoExtend.setBmzt(BmztEnum.ZSBM.getCode());
+            queryTrainEnrolInfoExtend.setYykhzts(yykhzts);
+        }else if("3".equals(states)){//待考核
+            yykhzts.add(YykhztEnum.YYDAP.getCode());
+            yykhzts.add(YykhztEnum.APDKH.getCode());
+            queryTrainEnrolInfoExtend.setBmzt(BmztEnum.ZSBM.getCode());
+            queryTrainEnrolInfoExtend.setYykhzts(yykhzts);
+        }else if("4".equals(states)){//通过
+            queryTrainEnrolInfoExtend.setKhjg(KhjgEnum.TG.getCode());
+        }else if("5".equals(states)){//不通过
+            queryTrainEnrolInfoExtend.setKhjg(KhjgEnum.BTG.getCode());
+        }else if("6".equals(states)){//缺考
+            queryTrainEnrolInfoExtend.setKhjg(KhjgEnum.QK.getCode());
+        }
+        if(StringUtil.isNotEmpty(pxrwbh)){
+            queryTrainEnrolInfoExtend.setPxrwbh(pxrwbh);
+        }
+        QueryCondition<TrainEnrolInfoExtend> condition = ConditionUtil.createCondition(queryTrainEnrolInfoExtend);
+        PageInfo pageInfo=new PageInfo();
+        if(pageNum!=null){
+            pageInfo.setPageNum(pageNum);
+        }
+        if(pageSize!=null){
+            pageInfo.setPageSize(pageSize);
+        }
+        condition.setPageInfo(pageInfo);
+        return trainEnrolInfoService.selectDisplayByCondition(condition, this.createCustomOperateLog());
+    }
+    
+    
+    @ResponseBody
+    @RequestMapping(value = "survey", method = RequestMethod.POST)
+    public DataResult<List<TrainPlanInfoExtend>> survey(String wid) throws Exception{
+        TrainEnrolInfo trainEnrolInfo = trainEnrolInfoService.selectByPrimaryKey(wid, this.createCustomOperateLog()).getDatas();
+        TrainEnrolInfoExtend trainEnrolInfoExtend = new TrainEnrolInfoExtend();
+        trainEnrolInfoExtend.setWid(wid);
+        trainEnrolInfoExtend.setBmzt(BmztEnum.ZSBM.getCode());
+        trainEnrolInfoService.updateByPrimaryKeySelective(trainEnrolInfoExtend, this.createCustomOperateLog());
+        TrainPlanInfoExtend trainPlanInfoExtend = new TrainPlanInfoExtend();
+        trainPlanInfoExtend.setPxid(trainEnrolInfo.getPxid());
+        return trainPlanInfoService.selectByCondition(ConditionUtil.createCondition(trainPlanInfoExtend), this.createCustomOperateLog());
+    }
+    
+    @ResponseBody
+    @RequestMapping(value = "reserve", method = RequestMethod.POST)
+    public DataResult<Integer> reserve(String wid) throws Exception{
+        TrainEnrolInfo trainEnrolInfo = trainEnrolInfoService.selectByPrimaryKey(wid, this.createCustomOperateLog()).getDatas();
+        if(trainEnrolInfo == null){
+            throw new ServiceException("培训信息不存在");
+        }
+        if(BmztEnum.ZSBM.getCode() != trainEnrolInfo.getBmzt()){
+            throw new ServiceException("您还未正式报名，请先完成课前调查后再预约考核");
+        }
+        TrainEnrolInfoExtend trainEnrolInfoExtend = new TrainEnrolInfoExtend();
+        trainEnrolInfoExtend.setWid(wid);
+        trainEnrolInfoExtend.setYykhzt(YykhztEnum.YYDAP.getCode());
+        return trainEnrolInfoService.updateByPrimaryKeySelective(trainEnrolInfoExtend, this.createCustomOperateLog());
+    }
+    
+    @ResponseBody
+    @RequestMapping(value = "cancel", method = RequestMethod.POST)
+    public DataResult<Integer> cancel(String wid) throws Exception{
+        TrainEnrolInfo trainEnrolInfo = trainEnrolInfoService.selectByPrimaryKey(wid, this.createCustomOperateLog()).getDatas();
+        if(trainEnrolInfo == null){
+            throw new ServiceException("培训信息不存在");
+        }
+        if(YykhztEnum.WYY.getCode() == trainEnrolInfo.getYykhzt() ||
+                YykhztEnum.QXYY.getCode() == trainEnrolInfo.getYykhzt()){
+            throw new ServiceException("您还未预约考核");
+        }
+        if(YykhztEnum.YKH.getCode() == trainEnrolInfo.getYykhzt()){
+            throw new ServiceException("您已经参加考核，无法取消");
+        }
+        TrainEnrolInfoExtend trainEnrolInfoExtend = new TrainEnrolInfoExtend();
+        trainEnrolInfoExtend.setWid(wid);
+        trainEnrolInfoExtend.setYykhzt(YykhztEnum.QXYY.getCode());
+        return trainEnrolInfoService.updateByPrimaryKeySelective(trainEnrolInfoExtend, this.createCustomOperateLog());
+    }
+    
+    @ResponseBody
+    @RequestMapping("view")
+    public DataResult<TrainEnrolInfo> view(String wid) throws Exception{
+        DataResult<TrainEnrolInfo> result = trainEnrolInfoService.selectByPrimaryKey(wid, this.createCustomOperateLog());
+        if(result.getDatas() == null){
+            throw new ServiceException("培训信息不存在");
+        }
+        return result;
+    }
+}
+

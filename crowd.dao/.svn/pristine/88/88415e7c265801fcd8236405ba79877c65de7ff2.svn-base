@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.xtgl.YwxdzbInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.xtgl.YwxdzbInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="YYWX" property="yywx" jdbcType="VARCHAR" />
+    <result column="XYWX" property="xywx" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, YYWX, XYWX
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_xmgl_ywxdzb
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_xmgl_ywxdzb
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.xtgl.YwxdzbInfo" >
+    insert into t_crowd_xmgl_ywxdzb (WID, YYWX, XYWX
+      )
+    values (#{wid,jdbcType=VARCHAR}, #{yywx,jdbcType=VARCHAR}, #{xywx,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.xtgl.YwxdzbInfo" >
+    insert into t_crowd_xmgl_ywxdzb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="yywx != null" >
+        YYWX,
+      </if>
+      <if test="xywx != null" >
+        XYWX,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="yywx != null" >
+        #{yywx,jdbcType=VARCHAR},
+      </if>
+      <if test="xywx != null" >
+        #{xywx,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.xtgl.YwxdzbInfo" >
+    update t_crowd_xmgl_ywxdzb
+    <set >
+      <if test="yywx != null" >
+        YYWX = #{yywx,jdbcType=VARCHAR},
+      </if>
+      <if test="xywx != null" >
+        XYWX = #{xywx,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.xtgl.YwxdzbInfo" >
+    update t_crowd_xmgl_ywxdzb
+    set YYWX = #{yywx,jdbcType=VARCHAR},
+      XYWX = #{xywx,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

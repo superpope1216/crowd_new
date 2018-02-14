@@ -1,0 +1,72 @@
+package com.wisedu.crowd.service.rwgl.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.dao.rwgl.RwtbxxInfoMapper;
+import com.wisedu.crowd.dao.rwgl.extend.RwtbxxInfoExtendMapper;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.entity.dto.QueryCondition;
+import com.wisedu.crowd.entity.log.CustomOperateLog;
+import com.wisedu.crowd.entity.rwgl.RwtbxxInfo;
+import com.wisedu.crowd.entity.rwgl.extend.RwtbxxInfoExtend;
+import com.wisedu.crowd.service.rwgl.RwtbxxInfoService;
+
+@Service("rwtbxxInfoService")
+public class RwtbxxInfoServiceImpl implements RwtbxxInfoService{
+
+	@Autowired
+	private RwtbxxInfoMapper rwtbxxInfoMapper;
+	
+	@Autowired
+	private RwtbxxInfoExtendMapper rwtbxxInfoExtendMapper;
+	@Override
+	public DataResult<Integer> deleteByPrimaryKey(String wid) throws ServiceException {
+		return DataResult.success(rwtbxxInfoMapper.deleteByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<Integer> insertSelective(RwtbxxInfo record) throws ServiceException {
+		return DataResult.success(rwtbxxInfoMapper.insertSelective(record));
+	}
+
+	@Override
+	public DataResult<RwtbxxInfo> selectByPrimaryKey(String wid) throws ServiceException {
+		return DataResult.success(rwtbxxInfoMapper.selectByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<Integer> updateByPrimaryKeySelective(RwtbxxInfo record) throws ServiceException {
+		return DataResult.success(rwtbxxInfoMapper.updateByPrimaryKeySelective(record));
+	}
+
+	@Override
+	public DataResult<List<RwtbxxInfoExtend>> selectDisplayByCondition(QueryCondition<RwtbxxInfoExtend> record) throws ServiceException{
+		return DataResult.success(rwtbxxInfoExtendMapper.selectDisplayByCondition(record));
+	}
+
+	@Override
+	public DataResult<Integer> selectCountByCondition(QueryCondition<RwtbxxInfoExtend> record) throws ServiceException{
+		return DataResult.success(rwtbxxInfoExtendMapper.selectCountByCondition(record));
+	}
+
+	@Override
+	public DataResult<List<RwtbxxInfoExtend>> selectByCondition(QueryCondition<RwtbxxInfoExtend> record) throws ServiceException{
+		return DataResult.success(rwtbxxInfoExtendMapper.selectByCondition(record));
+	}
+
+	@Override
+	public DataResult<Integer> updateByCondition(RwtbxxInfo record,CustomOperateLog log) throws ServiceException {
+		return DataResult.success(rwtbxxInfoExtendMapper.updateByCondition(record));
+	}
+
+
+	@Override
+	public DataResult<Integer> deleteByCondition(RwtbxxInfo record, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(rwtbxxInfoExtendMapper.deleteByCondition(record));
+	}
+
+}

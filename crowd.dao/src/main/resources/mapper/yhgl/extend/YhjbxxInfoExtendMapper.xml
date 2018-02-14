@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.yhgl.extend.YhjbxxInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.yhgl.YhjbxxInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="SJH" property="sjh" jdbcType="VARCHAR" />
+    <result column="YHMM" property="yhmm" jdbcType="VARCHAR" />
+    <result column="SFKFZ" property="sfkfz" jdbcType="INTEGER" />
+    <result column="SFXQF" property="sfxqf" jdbcType="INTEGER" />
+    <result column="ZCSJ" property="zcsj" jdbcType="TIMESTAMP" />
+    <result column="ZCZIP" property="zczip" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="BaseDisplayResultMap" type="com.wisedu.crowd.entity.yhgl.extend.YhjbxxInfoExtend"  
+  extends="BaseResultMap"></resultMap>
+  <sql id="Base_Column_List" >
+    WID, SJH, YHMM, SFKFZ, SFXQF, ZCSJ, ZCZIP,sfyyglry
+  </sql>
+  <sql id="sqlWhere">
+  		<if test='wid!=null and wid!=""'>
+  			AND T_CROWD_YHGL_YHJBXX.WID=#{wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='sjh!=null and sjh!=""'>
+  			AND T_CROWD_YHGL_YHJBXX.SJH=#{sjh,jdbcType=VARCHAR}
+  		</if>
+  		<if test='yhmm!=null and yhmm!=""'>
+  			AND T_CROWD_YHGL_YHJBXX.YHMM=#{yhmm,jdbcType=VARCHAR}
+  		</if>
+  		<if test='sfkfz!=null'>
+  			AND T_CROWD_YHGL_YHJBXX.SFKFZ=#{sfkfz,jdbcType=INTEGER}
+  		</if>
+  		<if test='sfxqf!=null'>
+  			AND T_CROWD_YHGL_YHJBXX.SFXQF=#{sfxqf,jdbcType=INTEGER}
+  		</if>
+  		<if test='sfyyglry!=null'>
+  			AND T_CROWD_YHGL_YHJBXX.sfyyglry=#{sfyyglry,jdbcType=INTEGER}
+  		</if>
+  </sql>
+  <select id="selectByCondition" resultMap="BaseDisplayResultMap" parameterType="com.wisedu.crowd.entity.yhgl.extend.YhjbxxInfoExtend">
+  		SELECT 
+  		<include refid="Base_Column_List"/>
+  		FROM T_CROWD_YHGL_YHJBXX T_CROWD_YHGL_YHJBXX 
+  		<where>
+  			<include refid="sqlWhere"/>
+  		</where>
+  		order by wid
+  </select>
+  <select id="selectCountByCondition" resultType="int" parameterType="com.wisedu.crowd.entity.yhgl.extend.YhjbxxInfoExtend">
+  		SELECT COUNT(0) FROM T_CROWD_YHGL_YHJBXX
+  		<where>
+  			<include refid="sqlWhere"/>
+  		</where>
+  </select>
+  
+</mapper>

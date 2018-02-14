@@ -1,0 +1,30 @@
+define(function(require, exports, module) {
+
+	var $ = jQuery = require('jquery');
+	require('plugins/vendor/bootstrap/bootstrap.min');
+	if(page_type == 'login')require.async('pagejs/yhgl/login');
+	if(page_type == 'register')require.async('pagejs/yhgl/register');
+	if(page_type == 'yhjbxx')require.async('pagejs/yhgl/yhjbxx');
+	if(page_type == 'rbxxgl')require.async('pagejs/yhgl/kfzxx/rbxxgl');
+	if(page_type == 'kfzrbgl')require.async('pagejs/kfzgl/kfzrbgl/kfzrbgl');
+	if(page_type == 'publishing')require.async('pagejs/center/publishing');
+	if(page_type == 'demandMessage')require.async('pagejs/message/demandMessage/demandMessage');
+	if(page_type=="kfzSupplyBasic"){
+		require.async('pagejs/kfzgl/first/kfzSupplyBasic');
+	}
+	if(page_type=="xqfOrder")require.async('pagejs/xqfgl/rwgl/order');
+	if(page_type=="kfzOrder")require.async('pagejs/kfzgl/rwgl/order');
+	if(page_type=="kfzOrderAction")require.async('pagejs/kfzgl/rwgl/orderAction');
+	if(page_type=="xqfOrderAction"){
+		require.async('pagejs/xqfgl/rwgl/orderAction');
+	}
+	if(page_type=="xqfSupplyBasic"){
+		require.async('pagejs/xqfgl/first/xqfSupplyBasic');
+	}
+	if(page_type=="kfzxxConfirm"){
+		require.async('pagejs/kfzgl/confirm/kfzxxConfirm');
+	}
+	if(page_type=="xqfxxConfirm"){
+		require.async('pagejs/xqfgl/confirm/xqfxxConfirm');
+	}
+});

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.statics.RwjbxxDataInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.statics.RwjbxxDataInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="XQJJ" property="xqjj" jdbcType="DECIMAL" />
+    <result column="HSSJ" property="hssj" jdbcType="DECIMAL" />
+    <result column="ZCYHS" property="zcyhs" jdbcType="DECIMAL" />
+    <result column="ZCXQF" property="zcxqf" jdbcType="DECIMAL" />
+    <result column="SHXQF" property="shxqf" jdbcType="DECIMAL" />
+    <result column="ZCKFZ" property="zckfz" jdbcType="DECIMAL" />
+    <result column="SHKFZ" property="shkfz" jdbcType="DECIMAL" />
+    <result column="FBXQS" property="fbxqs" jdbcType="DECIMAL" />
+    <result column="FBXQJE" property="fbxqje" jdbcType="DECIMAL" />
+    <result column="FBXQZS" property="fbxqzs" jdbcType="DECIMAL" />
+    <result column="FBXQZJE" property="fbxqzje" jdbcType="DECIMAL" />
+    <result column="FBBUGS" property="fbbugs" jdbcType="DECIMAL" />
+    <result column="FBBUGJE" property="fbbugje" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, XQJJ, HSSJ, ZCYHS, ZCXQF, SHXQF, ZCKFZ, SHKFZ, FBXQS, FBXQJE, FBXQZS, FBXQZJE, 
+    FBBUGS, FBBUGJE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_CROWD_STATICS_RWJBXX_DATA
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_CROWD_STATICS_RWJBXX_DATA
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.statics.RwjbxxDataInfo" >
+    insert into T_CROWD_STATICS_RWJBXX_DATA (WID, XQJJ, HSSJ, 
+      ZCYHS, ZCXQF, SHXQF, 
+      ZCKFZ, SHKFZ, FBXQS, 
+      FBXQJE, FBXQZS, FBXQZJE, 
+      FBBUGS, FBBUGJE)
+    values (#{wid,jdbcType=VARCHAR}, #{xqjj,jdbcType=DECIMAL}, #{hssj,jdbcType=DECIMAL}, 
+      #{zcyhs,jdbcType=DECIMAL}, #{zcxqf,jdbcType=DECIMAL}, #{shxqf,jdbcType=DECIMAL}, 
+      #{zckfz,jdbcType=DECIMAL}, #{shkfz,jdbcType=DECIMAL}, #{fbxqs,jdbcType=DECIMAL}, 
+      #{fbxqje,jdbcType=DECIMAL}, #{fbxqzs,jdbcType=DECIMAL}, #{fbxqzje,jdbcType=DECIMAL}, 
+      #{fbbugs,jdbcType=DECIMAL}, #{fbbugje,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.statics.RwjbxxDataInfo" >
+    insert into T_CROWD_STATICS_RWJBXX_DATA
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="xqjj != null" >
+        XQJJ,
+      </if>
+      <if test="hssj != null" >
+        HSSJ,
+      </if>
+      <if test="zcyhs != null" >
+        ZCYHS,
+      </if>
+      <if test="zcxqf != null" >
+        ZCXQF,
+      </if>
+      <if test="shxqf != null" >
+        SHXQF,
+      </if>
+      <if test="zckfz != null" >
+        ZCKFZ,
+      </if>
+      <if test="shkfz != null" >
+        SHKFZ,
+      </if>
+      <if test="fbxqs != null" >
+        FBXQS,
+      </if>
+      <if test="fbxqje != null" >
+        FBXQJE,
+      </if>
+      <if test="fbxqzs != null" >
+        FBXQZS,
+      </if>
+      <if test="fbxqzje != null" >
+        FBXQZJE,
+      </if>
+      <if test="fbbugs != null" >
+        FBBUGS,
+      </if>
+      <if test="fbbugje != null" >
+        FBBUGJE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="xqjj != null" >
+        #{xqjj,jdbcType=DECIMAL},
+      </if>
+      <if test="hssj != null" >
+        #{hssj,jdbcType=DECIMAL},
+      </if>
+      <if test="zcyhs != null" >
+        #{zcyhs,jdbcType=DECIMAL},
+      </if>
+      <if test="zcxqf != null" >
+        #{zcxqf,jdbcType=DECIMAL},
+      </if>
+      <if test="shxqf != null" >
+        #{shxqf,jdbcType=DECIMAL},
+      </if>
+      <if test="zckfz != null" >
+        #{zckfz,jdbcType=DECIMAL},
+      </if>
+      <if test="shkfz != null" >
+        #{shkfz,jdbcType=DECIMAL},
+      </if>
+      <if test="fbxqs != null" >
+        #{fbxqs,jdbcType=DECIMAL},
+      </if>
+      <if test="fbxqje != null" >
+        #{fbxqje,jdbcType=DECIMAL},
+      </if>
+      <if test="fbxqzs != null" >
+        #{fbxqzs,jdbcType=DECIMAL},
+      </if>
+      <if test="fbxqzje != null" >
+        #{fbxqzje,jdbcType=DECIMAL},
+      </if>
+      <if test="fbbugs != null" >
+        #{fbbugs,jdbcType=DECIMAL},
+      </if>
+      <if test="fbbugje != null" >
+        #{fbbugje,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.statics.RwjbxxDataInfo" >
+    update T_CROWD_STATICS_RWJBXX_DATA
+    <set >
+      <if test="xqjj != null" >
+        XQJJ = #{xqjj,jdbcType=DECIMAL},
+      </if>
+      <if test="hssj != null" >
+        HSSJ = #{hssj,jdbcType=DECIMAL},
+      </if>
+      <if test="zcyhs != null" >
+        ZCYHS = #{zcyhs,jdbcType=DECIMAL},
+      </if>
+      <if test="zcxqf != null" >
+        ZCXQF = #{zcxqf,jdbcType=DECIMAL},
+      </if>
+      <if test="shxqf != null" >
+        SHXQF = #{shxqf,jdbcType=DECIMAL},
+      </if>
+      <if test="zckfz != null" >
+        ZCKFZ = #{zckfz,jdbcType=DECIMAL},
+      </if>
+      <if test="shkfz != null" >
+        SHKFZ = #{shkfz,jdbcType=DECIMAL},
+      </if>
+      <if test="fbxqs != null" >
+        FBXQS = #{fbxqs,jdbcType=DECIMAL},
+      </if>
+      <if test="fbxqje != null" >
+        FBXQJE = #{fbxqje,jdbcType=DECIMAL},
+      </if>
+      <if test="fbxqzs != null" >
+        FBXQZS = #{fbxqzs,jdbcType=DECIMAL},
+      </if>
+      <if test="fbxqzje != null" >
+        FBXQZJE = #{fbxqzje,jdbcType=DECIMAL},
+      </if>
+      <if test="fbbugs != null" >
+        FBBUGS = #{fbbugs,jdbcType=DECIMAL},
+      </if>
+      <if test="fbbugje != null" >
+        FBBUGJE = #{fbbugje,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.statics.RwjbxxDataInfo" >
+    update T_CROWD_STATICS_RWJBXX_DATA
+    set XQJJ = #{xqjj,jdbcType=DECIMAL},
+      HSSJ = #{hssj,jdbcType=DECIMAL},
+      ZCYHS = #{zcyhs,jdbcType=DECIMAL},
+      ZCXQF = #{zcxqf,jdbcType=DECIMAL},
+      SHXQF = #{shxqf,jdbcType=DECIMAL},
+      ZCKFZ = #{zckfz,jdbcType=DECIMAL},
+      SHKFZ = #{shkfz,jdbcType=DECIMAL},
+      FBXQS = #{fbxqs,jdbcType=DECIMAL},
+      FBXQJE = #{fbxqje,jdbcType=DECIMAL},
+      FBXQZS = #{fbxqzs,jdbcType=DECIMAL},
+      FBXQZJE = #{fbxqzje,jdbcType=DECIMAL},
+      FBBUGS = #{fbbugs,jdbcType=DECIMAL},
+      FBBUGJE = #{fbbugje,jdbcType=DECIMAL}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

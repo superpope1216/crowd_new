@@ -1,0 +1,224 @@
+
+
+
+package com.wisedu.crowd.service.yhgl.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.wisedu.crowd.common.code.HttpCodeEnum;
+import com.wisedu.crowd.common.code.YhxxShztEnum;
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.common.util.CommonUtil;
+import com.wisedu.crowd.common.util.DateUtil;
+import com.wisedu.crowd.common.util.StringUtil;
+import com.wisedu.crowd.dao.yhgl.XqfxxInfoMapper;
+import com.wisedu.crowd.dao.yhgl.extend.XqfxxInfoExtendMapper;
+import com.wisedu.crowd.entity.dto.QueryCondition;
+import com.wisedu.crowd.entity.log.CustomOperateLog;
+import com.wisedu.crowd.entity.yhgl.XqfxxInfo;
+import com.wisedu.crowd.entity.yhgl.extend.KfzxxInfoExtend;
+import com.wisedu.crowd.entity.yhgl.extend.XqfxxInfoExtend;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.service.yhgl.XqfxxInfoService;
+
+@Service("xqfxxInfoService")
+public class XqfxxInfoServiceImpl implements XqfxxInfoService{
+
+	@Autowired
+	private XqfxxInfoMapper xqfxxInfoMapper;
+	@Autowired
+	private XqfxxInfoExtendMapper xqfxxInfoExtendMapper;
+	@Override
+	public DataResult<Integer> deleteByPrimaryKey(String wid,CustomOperateLog log) throws ServiceException {
+		return DataResult.success(xqfxxInfoMapper.deleteByPrimaryKey(wid));
+	}
+
+	
+	//检测昵称是否重复
+    public boolean checkXqfNc(String xqfid,String nc){
+    	if(StringUtil.isEmpty(nc)){
+    		return true;
+    	}
+    	XqfxxInfoExtend  xqfxxInfoExtend=new XqfxxInfoExtend();
+    	xqfxxInfoExtend.setNc(nc);
+		QueryCondition<XqfxxInfoExtend> condition=new QueryCondition<XqfxxInfoExtend>();
+		condition.setPageInfo(null);
+		condition.setQuery(xqfxxInfoExtend);
+		List<XqfxxInfoExtend> list=xqfxxInfoExtendMapper.selectByCondition(condition);
+    	if(StringUtil.isEmpty(xqfid)){
+    		if(CommonUtil.isEmptyList(list)){
+    			return true;
+    		}
+    		return false;
+    	}else{
+    		if(CommonUtil.isEmptyList(list)){
+    			return true;
+    		}
+    		if(list.size()==1){
+    			if(xqfid.equals(list.get(0).getWid())){
+    				return true;
+    			}
+    		}
+    	}
+    	return false;
+    }
+    
+   //检测身份号是否重复
+    public boolean checkXqfSfzjh(String xqfid,String sfzjh){
+    	if(StringUtil.isEmpty(sfzjh)){
+    		return true;//身份证不填 写不验证
+    	}
+    	XqfxxInfoExtend  xqfxxInfoExtend=new XqfxxInfoExtend();
+    	xqfxxInfoExtend.setSfzjh(sfzjh);
+		QueryCondition<XqfxxInfoExtend> condition=new QueryCondition<XqfxxInfoExtend>();
+		condition.setPageInfo(null);
+		condition.setQuery(xqfxxInfoExtend);
+		List<XqfxxInfoExtend> list=xqfxxInfoExtendMapper.selectByCondition(condition);
+    	if(StringUtil.isEmpty(xqfid)){
+    		if(CommonUtil.isEmptyList(list)){
+    			return true;
+    		}
+    		return false;
+    	}else{
+    		if(CommonUtil.isEmptyList(list)){
+    			return true;
+    		}
+    		if(list.size()==1){
+    			if(xqfid.equals(list.get(0).getWid())){
+    				return true;
+    			}
+    		}
+    	}
+    	return false;
+    }
+	
+	
+	
+	@Override
+	public DataResult<Integer> insertSelective(XqfxxInfo record,CustomOperateLog log) throws ServiceException {
+		
+		if(StringUtil.isEmpty(record.getYhid())){
+			throw new ServiceException(HttpCodeEnum.USER_INVALID.getCode(),HttpCodeEnum.USER_INVALID.getName());
+		}
+		if(!checkXqfNc(null,record.getNc())){
+			throw new ServiceException(HttpCodeEnum.EXIST_NICK_NAME.getCode(),HttpCodeEnum.EXIST_NICK_NAME.getName());
+         }
+		if(!checkXqfSfzjh(null,record.getSfzjh())){
+			throw new ServiceException(HttpCodeEnum.EXIST_SFZ.getCode(),HttpCodeEnum.EXIST_SFZ.getName());
+         }
+		record.setWid(StringUtil.getUuId());
+		record.setCzsj(DateUtil.getCurrentDate());
+		record.setCzzip(log.getCustomIp());
+		record.setShzt(YhxxShztEnum.DSH.getCode());
+		record.setVersion(0);
+		return DataResult.success(xqfxxInfoMapper.insertSelective(record));
+	}
+
+	@Override
+	public DataResult<XqfxxInfo> selectByPrimaryKey(String wid,CustomOperateLog log) throws ServiceException {
+		return DataResult.success(xqfxxInfoMapper.selectByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<Integer> updateByPrimaryKeySelective(XqfxxInfo record,CustomOperateLog log) throws ServiceException {
+		if(StringUtil.isEmpty(record.getYhid())){
+			throw new ServiceException(HttpCodeEnum.USER_INVALID.getCode(),HttpCodeEnum.USER_INVALID.getName());
+		}
+		if(!checkXqfNc(record.getWid(),record.getNc())){
+			throw new ServiceException(HttpCodeEnum.EXIST_NICK_NAME.getCode(),HttpCodeEnum.EXIST_NICK_NAME.getName());
+         }
+		if(!checkXqfSfzjh(record.getWid(),record.getSfzjh())){
+			throw new ServiceException(HttpCodeEnum.EXIST_SFZ.getCode(),HttpCodeEnum.EXIST_SFZ.getName());
+         }
+		return DataResult.success(xqfxxInfoMapper.updateByPrimaryKeySelective(record));
+	}
+   
+	
+	@Override
+	public DataResult<XqfxxInfoExtend> saveXqfxxInfo(XqfxxInfoExtend record, CustomOperateLog log) throws ServiceException {
+		if(StringUtil.isEmpty(record.getYhid())){
+			throw new ServiceException(HttpCodeEnum.USER_INVALID.getCode(),HttpCodeEnum.USER_INVALID.getName());
+		}
+		if(!checkXqfNc(null,record.getNc())){
+			throw new ServiceException(HttpCodeEnum.EXIST_NICK_NAME.getCode(),HttpCodeEnum.EXIST_NICK_NAME.getName());
+         }
+		if(!checkXqfSfzjh(null,record.getSfzjh())){
+			throw new ServiceException(HttpCodeEnum.EXIST_SFZ.getCode(),HttpCodeEnum.EXIST_SFZ.getName());
+         }
+		record.setWid(StringUtil.getUuId());
+		record.setCzsj(DateUtil.getCurrentDate());
+		record.setCzzip(log.getCustomIp());
+		record.setVersion(0);
+		xqfxxInfoMapper.insertSelective(record);
+		return DataResult.success(record);
+		
+	}
+
+	@Override
+	public DataResult<XqfxxInfoExtend> updateXqfxxInfo(XqfxxInfoExtend record, CustomOperateLog log) throws ServiceException {
+		if(StringUtil.isEmpty(record.getYhid())){
+			throw new ServiceException(HttpCodeEnum.USER_INVALID.getCode(),HttpCodeEnum.USER_INVALID.getName());
+		}
+		if(!checkXqfNc(record.getWid(),record.getNc())){
+			throw new ServiceException(HttpCodeEnum.EXIST_NICK_NAME.getCode(),HttpCodeEnum.EXIST_NICK_NAME.getName());
+         }
+		if(!checkXqfSfzjh(record.getWid(),record.getSfzjh())){
+			throw new ServiceException(HttpCodeEnum.EXIST_SFZ.getCode(),HttpCodeEnum.EXIST_SFZ.getName());
+         }
+		xqfxxInfoMapper.updateByPrimaryKeySelective(record);
+		return DataResult.success(record);
+	}
+	@Override
+	public DataResult<List<XqfxxInfoExtend>> selectByCondition(QueryCondition<XqfxxInfoExtend> record,CustomOperateLog log)
+			throws ServiceException {
+		return DataResult.success(xqfxxInfoExtendMapper.selectByCondition(record));
+	}
+
+	@Override
+	public DataResult<Integer> updateByVersion(XqfxxInfo record, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(xqfxxInfoExtendMapper.updateByVersion(record));
+	}
+
+
+	@Override
+	public DataResult<Integer> selectCountByCondition(QueryCondition<XqfxxInfoExtend> record, CustomOperateLog log)
+			throws ServiceException {
+		return DataResult.success(xqfxxInfoExtendMapper.selectCountByCondition(record));
+	}
+
+
+	@Override
+	public boolean checkXqfEmail(XqfxxInfoExtend record, CustomOperateLog log) throws ServiceException {
+		if(StringUtil.isEmpty(record)||StringUtil.isEmpty(record.getLxydzyx())){
+    		return false;
+    	}
+		XqfxxInfoExtend  xqfxxInfoExtend=new XqfxxInfoExtend();
+		xqfxxInfoExtend.setLxydzyx(record.getLxydzyx());
+		QueryCondition<XqfxxInfoExtend> condition=new QueryCondition<XqfxxInfoExtend>();
+		condition.setPageInfo(null);
+		condition.setQuery(xqfxxInfoExtend);
+		List<XqfxxInfoExtend> list=xqfxxInfoExtendMapper.selectByCondition(condition);
+    	if(StringUtil.isEmpty(record.getYhid())){
+    		if(CommonUtil.isEmptyList(list)){
+    			return true;
+    		}
+    		return false;
+    	}else{
+    		if(CommonUtil.isEmptyList(list)){
+    			return true;
+    		}
+    		if(list.size()==1){
+    			if(record.getYhid().equals(list.get(0).getYhid())){
+    				return true;
+    			}
+    		}
+    	}
+    	return false;
+	}
+
+
+
+}

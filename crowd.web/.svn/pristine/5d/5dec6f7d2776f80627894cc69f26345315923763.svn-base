@@ -1,0 +1,407 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE HTML>
+<html class="  ">
+<%@ include file="/jsp/top/top.jsp"%>
+<%@ include file="/jsp/param.jsp"%>
+<link rel='stylesheet'
+	href='<%=request.getContextPath()%>/statics/css/rwgl/rwxxDetail.css'>
+</head>
+<body>
+	<!--[if lte IE 8]>
+<div class="text-center padding-top-50 padding-bottom-50 bg-blue-grey-100">
+  <p class="browserupgrade font-size-18">
+	你正在使用一个<strong>过时</strong>的浏览器。请<a href="http://browsehappy.com/" target="_blank">升级您的浏览器</a>，以提高您的体验。
+  </p>
+</div>
+<![endif]-->
+	<header>
+		<%@include file="/jsp/header.jsp"%>
+	</header>
+	<div class="met-position  pattern-show">
+		<div class="container">
+			<div class="row">
+				<ol class="breadcrumb">
+					<li><a href="<%=request.getContextPath()%>/center/index"
+						title="众包大厅"> <i class="icon wb-home" aria-hidden="true"></i>众包大厅
+					</a></li>
+					<li class="dropdown"><a href="../product/" title="全部产品栏目"
+						class="dropdown-toggle" data-toggle="dropdown"
+						aria-expanded="false">开发专区<i class="caret"></i></a>
+						<ul class="dropdown-menu ">
+
+							<li><a href="../product/product.php?lang=cn&amp;class2=119"
+								title="开发专区">开发专区</a></li>
+
+							<li><a href="../product/product.php?lang=cn&amp;class2=120"
+								title="实施专区">实施专区</a></li>
+						</ul></li>
+
+					<li><a href="javascript:void(0);" title="人事">人事</a></li>
+				</ol>
+			</div>
+		</div>
+	</div>
+	<section class="met-shownews animsition">
+		<div class="container">
+			<div class="col-md-9 met-shownews-body">
+				<div class="row">
+					<div class="met-shownews-header">
+						<div class="col-md-12 info " style="padding-bottom: 5px;border-bottom:0px;">
+							<div class="col-md-8 color-333">
+								<h1>
+									移动数据开发 <span class="info2">1700089</span> <span
+										class="label label-success"
+										style="font-size: 13px; vertical-align: middle;color:#fff">开发中</span>
+								</h1>
+
+								<div class="col-md-12 info2">
+									<span>交付日期:2017-03-02</span><span>需求性质:实施</span> <span>需求类型:BUG</span><span>需求级别:暂无</span><span>定制级别:A</span>
+								</div>
+								<div>
+
+									<p>
+										<span id="price" class="red-600" style="font-size: 32px">￥499.00元</span>
+										<del>原价￥699.00元</del>
+									</p>
+
+								</div>
+							</div>
+							<div class="col-md-4"
+								style="text-align: right; vertical-align: middle;">
+								<p>招标日期:2017-01-02</p>
+								<p>已有3人投标</p>
+								<a href="javascript:void(0);"
+									class="btn btn-lg btn-squared btn-primary margin-right-20 product-tocart">
+									<i class="fa fa-cart-plus"></i> 我要投标
+								</a>
+							</div>
+						</div>
+
+
+					</div>
+					<div class="met-editor lazyload clearfix">
+						<div class="editorlightgallery">
+							<ul class="nav nav-tabs nav-tabs-line m-b-0 shop-order-state">
+								<li class="nav-item "><a class="nav-link active"
+									data-toggle="tab" href="" data-state="all">详情信息</a></li>
+								<li class="nav-item"><a class="nav-link" data-toggle="tab"
+									href="#state1" data-state="1">投标信息</a></li>
+							</ul>
+							<div style="padding-top: 20px;">
+								<table style="width: 100%;">
+									<tr>
+										<td
+											style="width: 80px; text-align: right; padding-right: 10px;">项目编号:</td>
+										<td>UK-12345</td>
+									</tr>
+									<tr>
+										<td
+											style="width: 80px; text-align: right; padding-right: 10px;">所属学校:</td>
+										<td>南京大学</td>
+									</tr>
+									<tr>
+										<td
+											style="width: 80px; text-align: right; padding-right: 10px;">业务线:</td>
+										<td>人事</td>
+									</tr>
+									<tr>
+										<td
+											style="width: 80px; text-align: right; padding-right: 10px;">模块:</td>
+										<td>年度考核</td>
+									</tr>
+									<tr>
+										<td
+											style="width: 80px; text-align: right; padding-right: 10px;"
+											valign="top">需求描述:</td>
+										<td>
+											<p>泊美shopping mall全景</p>
+											<p>开业当日，泊美全新shopping
+												mall充满新鲜活力的陈列布景，当即吸引当地潮人纷纷驻足探店，尽享泊美专属Cosmetic
+												Marché“泊美鲜肌荟”全新品牌概念：法语的Marché是专门出售“新鲜”的地方，它汇聚了世界严选最新鲜优质的蔬果和鲜花，让人可以感受最新鲜原料带来的扑面而来的鲜活力量，体验高品质素材带来不同凡响的效果。泊美悉心寻觅、严格挑选全世界出类拔萃的新鲜植物精髓，提取植物自身的力量，高纯度封存每一滴精华的新鲜与活性。</p>
+											<p>泊美SKIN JUICE主题陈列区</p>
+											<p>无论是入口处充满森林气息的SKIN JUICE主题陈列区，亦或是年轻时髦的juice bar
+												果汁饮品分享区，无一不满足消费者多变的猎奇心与新鲜感。一边品尝新鲜的果汁，一边感受skin
+												juice系列为肌肤带来的水果焕肤力量。泊美全新shopping
+												mall不仅设立“千人面膜”产品体验区，还在店内陈列柜有致摆放了全线产品试用装，从保湿，净痘、美白及特护多元化满足肌肤诉求。现场更有玫瑰花园陈列区域，让嘉宾仿佛从果园“穿越”到玫瑰花园，感受泊美全新生机悦润系列的独特质感。</p>
+										</td>
+									</tr>
+								</table>
+							</div>
+							<div>
+								<div class="groom-box">
+									<div class="title-box">
+										<div class="title-name">
+											<h3>投标信息</h3>
+										</div>
+										<div class="title-move">
+											<i class="fa fa-chevron-left"></i> <i
+												class="fa fa-chevron-right"></i>
+										</div>
+									</div>
+									<div class="groom-cut swiper-container-horizontal">
+										<ul class="groom-cut-wraper"
+											style="transform: translate3d(-462px, 0px, 0px); transition-duration: 0ms;">
+
+											<li
+												class="groom-cut-slide swiper-slide-visible tbz-header-li"><a
+												href="<%=request.getContextPath() %>/kfzview/index"
+												title="卡姿兰（Carslan）恒丽透明粉饼" target="_self"
+												class="tbz-header-a"> <img
+													data-original="<%=request.getContextPath()%>/statics/images/12.png?1509528657049"
+													alt="卡姿兰（Carslan）恒丽透明粉饼"
+													src="<%=request.getContextPath()%>/statics/images/12.png?1509528657049"
+													class="swiper-lazy-loading tbz-header-img"> <b>张三</b>
+
+													<p  class="tbl-header-p-top">
+														<span
+															style="text-align: left; float: left; display: inline-block; font-size: 16px;">￥103.00元</span>
+														<span class="tbl-header-zt tbl-header-zt-color">开发中</span>
+													</p>
+													<p class="tbl-header-p-bottom">
+														<span class="tbl-header-ryxz">外部开发者</span>
+														<span class="tbl-header-cxz">诚信值:100分</span>
+													</p>
+											</a></li>
+
+											<li
+												class="groom-cut-slide swiper-slide-visible tbz-header-li"><a
+												href="<%=request.getContextPath() %>/kfzview/index"
+												title="芭比大眼睫毛膏" target="_self" class="tbz-header-a"> <img
+													data-original="<%=request.getContextPath()%>/statics/images/12.png?1509528657049"
+													alt="芭比大眼睫毛膏"
+													src="<%=request.getContextPath()%>/statics/images/12.png?1509528657049"
+													class="swiper-lazy-loading tbz-header-img"> <b>张三</b>
+													<p  class="tbl-header-p-top">
+														<span
+															style="text-align: left; float: left; display: inline-block; font-size: 16px;">￥103.00元</span>
+														<span class="tbl-header-zt tbl-header-zt-color">开发中</span>
+													</p>
+													<p class="tbl-header-p-bottom">
+														<span class="tbl-header-ryxz">外部开发者</span>
+														<span class="tbl-header-cxz">诚信值:100分</span>
+													</p>
+											</a></li>
+
+											<li
+												class="groom-cut-slide swiper-slide-visible  tbz-header-li"><a
+												href="<%=request.getContextPath() %>/kfzview/index"
+												title="男士滋养紧致生机爽肤水" target="_self" class="tbz-header-a">
+													<img
+													data-original="<%=request.getContextPath()%>/statics/images/12.png?1509528657049"
+													alt="男士滋养紧致生机爽肤水"
+													src="<%=request.getContextPath()%>/statics/images/12.png?1509528657049"
+													class="swiper-lazy-loading tbz-header-img"> <b>张三</b>
+													<p  class="tbl-header-p-top">
+														<span
+															style="text-align: left; float: left; display: inline-block; font-size: 16px;">￥103.00元</span>
+														<span class="tbl-header-zt tbl-header-zt-color">开发中</span>
+													</p>
+													<p class="tbl-header-p-bottom">
+														<span class="tbl-header-ryxz">外部开发者</span>
+														<span class="tbl-header-cxz">诚信值:100分</span>
+													</p>
+											</a></li>
+
+											<li
+												class="groom-cut-slide swiper-slide-visible  tbz-header-li"><a
+												href="<%=request.getContextPath() %>/kfzview/index"
+												title="男士滋养紧致洁面膏" target="_self" class="tbz-header-a"> <img
+													data-original="<%=request.getContextPath()%>/statics/images/12.png?1509528657049"
+													alt="男士滋养紧致洁面膏"
+													src="<%=request.getContextPath()%>/statics/images/12.png?1509528657049"
+													class="swiper-lazy-loading tbz-header-img"> <b>张三</b>
+													<p  class="tbl-header-p-top">
+														<span
+															style="text-align: left; float: left; display: inline-block; font-size: 16px;">￥103.00元</span>
+														<span class="tbl-header-zt tbl-header-zt-color">开发中</span>
+													</p>
+													<p class="tbl-header-p-bottom">
+														<span class="tbl-header-ryxz">外部开发者</span>
+														<span class="tbl-header-cxz">诚信值:100分</span>
+													</p>
+											</a></li>
+
+											<li class="groom-cut-slide  tbz-header-li"><a
+												href="<%=request.getContextPath() %>/kfzview/index"
+												title="男士活力醒肤乳" target="_self" class="tbz-header-a"> <img
+													data-original="<%=request.getContextPath()%>/statics/images/12.png?1509528657049"
+													alt="男士活力醒肤乳"
+													src="<%=request.getContextPath()%>/statics/images/12.png?1509528657049"
+													class="swiper-lazy-loading tbz-header-img"><b>张三</b>
+													<p  class="tbl-header-p-top">
+														<span
+															style="text-align: left; float: left; display: inline-block; font-size: 16px;">￥103.00元</span>
+														<span class="tbl-header-zt tbl-header-zt-color">开发中</span>
+													</p>
+													<p class="tbl-header-p-bottom">
+														<span class="tbl-header-ryxz">外部开发者</span>
+														<span class="tbl-header-cxz">诚信值:100分</span>
+													</p>
+											</a></li>
+
+											<li class="groom-cut-slide  tbz-header-li"><a
+												href="<%=request.getContextPath() %>/kfzview/index"
+												title="橄榄青春洁面啫喱" target="_self" class="tbz-header-a"> <img
+													data-original="<%=request.getContextPath()%>/statics/images/12.png?1509528657049"
+													alt="橄榄青春洁面啫喱"
+													src="<%=request.getContextPath()%>/statics/images/12.png?1509528657049"
+													class="swiper-lazy-loading tbz-header-img"> <b>张三</b>
+													<p  class="tbl-header-p-top">
+														<span
+															style="text-align: left; float: left; display: inline-block; font-size: 16px;">￥103.00元</span>
+														<span class="tbl-header-zt tbl-header-zt-color">开发中</span>
+													</p>
+													<p class="tbl-header-p-bottom">
+														<span class="tbl-header-ryxz">外部开发者</span>
+														<span class="tbl-header-cxz">诚信值:100分</span>
+													</p>
+											</a></li>
+
+											<li
+												class="groom-cut-slide swiper-slide-visible tbz-header-li"><a
+												href="<%=request.getContextPath() %>/kfzview/index"
+												title="高姿COGI多效修容霜" target="_self" class="tbz-header-a">
+													<img
+													data-original="<%=request.getContextPath()%>/statics/images/12.png?1509528657049"
+													alt="高姿COGI多效修容霜"
+													src="<%=request.getContextPath()%>/statics/images/12.png?1509528657049"
+													class="tbz-header-img" style="display: block;"><b>张三</b>
+													<p  class="tbl-header-p-top">
+														<span
+															style="text-align: left; float: left; display: inline-block; font-size: 16px;">￥103.00元</span>
+														<span class="tbl-header-zt tbl-header-zt-color">开发中</span>
+													</p>
+													<p class="tbl-header-p-bottom">
+														<span class="tbl-header-ryxz">外部开发者</span>
+														<span class="tbl-header-cxz">诚信值:100分</span>
+													</p>
+											</a></li>
+
+											<li
+												class="groom-cut-slide swiper-slide-visible tbz-header-li"><a
+												href="<%=request.getContextPath() %>/kfzview/index"
+												title="美人鱼干湿两用粉饼" target="_self" class="tbz-header-a"> <img
+													data-original="<%=request.getContextPath()%>/statics/images/12.png?1509528657049"
+													alt="美人鱼干湿两用粉饼"
+													src="<%=request.getContextPath()%>/statics/images/12.png?1509528657049"
+													class="tbz-header-img" style="display: block;"> <b>张三</b>
+													<p class="tbl-header-p-top">
+														<span
+															style="text-align: left; float: left; display: inline-block; font-size: 16px;">￥103.00元</span>
+														<span class="tbl-header-zt tbl-header-zt-color">开发中</span>
+													</p>
+													<p class="tbl-header-p-bottom">
+														<span class="tbl-header-ryxz">外部开发者</span>
+														<span class="tbl-header-cxz">诚信值:100分</span>
+													</p>
+											</a></li>
+
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="met-shownews-footer">
+
+						<ul class="pager pager-round">
+							<li class="previous "><a
+								href="shownews.php?lang=cn&amp;id=49"
+								title="DONGTIAN品牌首次亮相连卡佛 新品彩妆闪耀上市"> 上一篇 <span
+									aria-hidden="true" class="hidden-xs">：DONGTIAN品牌首次亮相连卡佛
+										新品彩妆闪耀上市</span>
+							</a></li>
+							<li class="next "><a href="shownews.php?lang=cn&amp;id=53"
+								title="本色肌肤 晶采生活 urara悠莱晶采双瓶全新上市"> 下一篇 <span
+									aria-hidden="true" class="hidden-xs">：本色肌肤 晶采生活
+										urara悠莱晶采双瓶全新上市</span>
+							</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+
+				<div class="row">
+
+					<div class="met-news-bar">
+						<div class="card m-b-0" style="text-align: center;">
+							<div class="card-header  text-xs-center p-30 p-b-15 xqf_header_bg"
+								style="text-align: center;">
+								<a class="avatar avatar-100 img-bordered m-b-10 bg-white"
+									target="_blank" href="javascript:void(0);" title="mycluster">
+									<img
+									src="<%=request.getContextPath()%>/statics/images/12.png?1509528657049"
+									alt="mycluster">
+								</a>
+								<div class="font-size-20 ">mycluster</div>
+								<div class="grey-600 font-size-14">企业开发者</div>
+								<div class="grey-600 font-size-14">信誉分：100分</div>
+							</div>
+						</div>
+
+
+						<div class="recommend news-list-md">
+							<h3>为您推荐</h3>
+							<ul class="list-group list-group-bordered">
+
+								<li class="list-group-item"><a
+									href="../news/shownews.php?lang=cn&amp;id=52"
+									title="西安首家泊美Shopping Mall新鲜开业" target="_self">西安首家泊美Shopping
+										Mall新鲜开业</a></li>
+
+								<li class="list-group-item"><a
+									href="../news/shownews.php?lang=cn&amp;id=53"
+									title="本色肌肤 晶采生活 urara悠莱晶采双瓶全新上市" target="_self">本色肌肤 晶采生活
+										urara悠莱晶采双瓶全新上市</a></li>
+
+								<li class="list-group-item"><a
+									href="../news/shownews.php?lang=cn&amp;id=54"
+									title="玫瑰香氛梳MINI 让颜值和自由齐飞" target="_self">玫瑰香氛梳MINI
+										让颜值和自由齐飞</a></li>
+
+								<li class="list-group-item"><a
+									href="../news/shownews.php?lang=cn&amp;id=55"
+									title="每一个放大镜下的女明星都想证明：谁脸小谁骄傲" target="_self">每一个放大镜下的女明星都想证明：谁脸小谁骄傲</a></li>
+
+								<li class="list-group-item"><a
+									href="../news/shownews.php?lang=cn&amp;id=49"
+									title="DONGTIAN品牌首次亮相连卡佛 新品彩妆闪耀上市" target="_self">DONGTIAN品牌首次亮相连卡佛
+										新品彩妆闪耀上市</a></li>
+
+							</ul>
+						</div>
+
+						<ul class="column">
+							<li><a href="../news/" title="所有文章" target="_self">所有文章</a></li>
+
+							<li><a href="../news/news.php?lang=cn&amp;class2=4"
+								title="公司动态">公司动态</a></li>
+
+							<li><a href="../news/news.php?lang=cn&amp;class2=5"
+								class="active" title="业界资讯">业界资讯</a></li>
+
+						</ul>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+	<%@ include file="/jsp/footer/footer.jsp"%>
+	<button type="button"
+		class="btn btn-icon btn-primary btn-squared met-scroll-top hide">
+		<i class="icon wb-chevron-up" aria-hidden="true"></i>
+	</button>
+	<script>
+		var jsonurl = "";
+	</script>
+
+	<%@ include file="/jsp/bottom.jsp"%>
+
+	<script
+		src="<%=request.getContextPath()%>/statics/pagejs/hall/index.js"></script>
+</body>
+</html>

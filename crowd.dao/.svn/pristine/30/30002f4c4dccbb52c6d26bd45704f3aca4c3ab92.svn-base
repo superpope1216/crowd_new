@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.yhgl.XqfxxInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.yhgl.XqfxxInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="YHID" property="yhid" jdbcType="VARCHAR" />
+    <result column="XQFDWMC" property="xqfdwmc" jdbcType="VARCHAR" />
+    <result column="SZDQ" property="szdq" jdbcType="VARCHAR" />
+    <result column="XM" property="xm" jdbcType="VARCHAR" />
+    <result column="NC" property="nc" jdbcType="VARCHAR" />
+    <result column="SFZJH" property="sfzjh" jdbcType="VARCHAR" />
+    <result column="LXYDZYX" property="lxydzyx" jdbcType="VARCHAR" />
+    <result column="ZHYE" property="zhye" jdbcType="DECIMAL" />
+    <result column="CZSJ" property="czsj" jdbcType="DATE" />
+    <result column="CZZIP" property="czzip" jdbcType="VARCHAR" />
+    <result column="SHZT" property="shzt" jdbcType="VARCHAR" />
+    <result column="XQFLB" property="xqflb" jdbcType="VARCHAR" />
+    <result column="ZPFJID" property="zpfjid" jdbcType="VARCHAR" />
+    <result column="ZHDJYE" property="zhdjye" jdbcType="DECIMAL" />
+    <result column="SHYJ" property="shyj" jdbcType="VARCHAR" />
+    <result column="QQH" property="qqh" jdbcType="VARCHAR" />
+    <result column="WXH" property="wxh" jdbcType="VARCHAR" />
+    <result column="ZFBZH" property="zfbzh" jdbcType="VARCHAR" />
+    <result column="GH" property="gh" jdbcType="VARCHAR" />
+    <result column="SSGS" property="ssgs" jdbcType="VARCHAR" />
+    <result column="SSYWX" property="ssywx" jdbcType="VARCHAR" />
+    <result column="PER_PROVINCE" property="perProvince" jdbcType="VARCHAR" />
+    <result column="PER_CITY" property="perCity" jdbcType="VARCHAR" />
+    <result column="PER_AREA" property="perArea" jdbcType="VARCHAR" />
+    <result column="USER_RANGE" property="userRange" jdbcType="VARCHAR" />
+    <result column="SFZZMZTJID" property="sfzzmztjid" jdbcType="VARCHAR" />
+    <result column="SFZFMZTJID" property="sfzfmztjid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, YHID, XQFDWMC, SZDQ, XM, NC, SFZJH, LXYDZYX, ZHYE, CZSJ, CZZIP, SHZT, XQFLB, 
+    ZPFJID, ZHDJYE, SHYJ, QQH, WXH, ZFBZH, GH, SSGS, SSYWX, PER_PROVINCE, PER_CITY, PER_AREA, 
+    USER_RANGE, SFZZMZTJID, SFZFMZTJID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_yhgl_xqfxx
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_yhgl_xqfxx
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.yhgl.XqfxxInfo" >
+    insert into t_crowd_yhgl_xqfxx (WID, YHID, XQFDWMC, 
+      SZDQ, XM, NC, SFZJH, 
+      LXYDZYX, ZHYE, CZSJ, CZZIP, 
+      SHZT, XQFLB, ZPFJID, 
+      ZHDJYE, SHYJ, QQH, 
+      WXH, ZFBZH, GH, SSGS, 
+      SSYWX, PER_PROVINCE, PER_CITY, 
+      PER_AREA, USER_RANGE, SFZZMZTJID, 
+      SFZFMZTJID)
+    values (#{wid,jdbcType=VARCHAR}, #{yhid,jdbcType=VARCHAR}, #{xqfdwmc,jdbcType=VARCHAR}, 
+      #{szdq,jdbcType=VARCHAR}, #{xm,jdbcType=VARCHAR}, #{nc,jdbcType=VARCHAR}, #{sfzjh,jdbcType=VARCHAR}, 
+      #{lxydzyx,jdbcType=VARCHAR}, #{zhye,jdbcType=DECIMAL}, #{czsj,jdbcType=DATE}, #{czzip,jdbcType=VARCHAR}, 
+      #{shzt,jdbcType=VARCHAR}, #{xqflb,jdbcType=VARCHAR}, #{zpfjid,jdbcType=VARCHAR}, 
+      #{zhdjye,jdbcType=DECIMAL}, #{shyj,jdbcType=VARCHAR}, #{qqh,jdbcType=VARCHAR}, 
+      #{wxh,jdbcType=VARCHAR}, #{zfbzh,jdbcType=VARCHAR}, #{gh,jdbcType=VARCHAR}, #{ssgs,jdbcType=VARCHAR}, 
+      #{ssywx,jdbcType=VARCHAR}, #{perProvince,jdbcType=VARCHAR}, #{perCity,jdbcType=VARCHAR}, 
+      #{perArea,jdbcType=VARCHAR}, #{userRange,jdbcType=VARCHAR}, #{sfzzmztjid,jdbcType=VARCHAR}, 
+      #{sfzfmztjid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.yhgl.XqfxxInfo" >
+    insert into t_crowd_yhgl_xqfxx
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="yhid != null" >
+        YHID,
+      </if>
+      <if test="xqfdwmc != null" >
+        XQFDWMC,
+      </if>
+      <if test="szdq != null" >
+        SZDQ,
+      </if>
+      <if test="xm != null" >
+        XM,
+      </if>
+      <if test="nc != null" >
+        NC,
+      </if>
+      <if test="sfzjh != null" >
+        SFZJH,
+      </if>
+      <if test="lxydzyx != null" >
+        LXYDZYX,
+      </if>
+      <if test="zhye != null" >
+        ZHYE,
+      </if>
+      <if test="czsj != null" >
+        CZSJ,
+      </if>
+      <if test="czzip != null" >
+        CZZIP,
+      </if>
+      <if test="shzt != null" >
+        SHZT,
+      </if>
+      <if test="xqflb != null" >
+        XQFLB,
+      </if>
+      <if test="zpfjid != null" >
+        ZPFJID,
+      </if>
+      <if test="zhdjye != null" >
+        ZHDJYE,
+      </if>
+      <if test="shyj != null" >
+        SHYJ,
+      </if>
+      <if test="qqh != null" >
+        QQH,
+      </if>
+      <if test="wxh != null" >
+        WXH,
+      </if>
+      <if test="zfbzh != null" >
+        ZFBZH,
+      </if>
+      <if test="gh != null" >
+        GH,
+      </if>
+      <if test="ssgs != null" >
+        SSGS,
+      </if>
+      <if test="ssywx != null" >
+        SSYWX,
+      </if>
+      <if test="perProvince != null" >
+        PER_PROVINCE,
+      </if>
+      <if test="perCity != null" >
+        PER_CITY,
+      </if>
+      <if test="perArea != null" >
+        PER_AREA,
+      </if>
+      <if test="userRange != null" >
+        USER_RANGE,
+      </if>
+      <if test="sfzzmztjid != null" >
+        SFZZMZTJID,
+      </if>
+      <if test="sfzfmztjid != null" >
+        SFZFMZTJID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhid != null" >
+        #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="xqfdwmc != null" >
+        #{xqfdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="szdq != null" >
+        #{szdq,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="nc != null" >
+        #{nc,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzjh != null" >
+        #{sfzjh,jdbcType=VARCHAR},
+      </if>
+      <if test="lxydzyx != null" >
+        #{lxydzyx,jdbcType=VARCHAR},
+      </if>
+      <if test="zhye != null" >
+        #{zhye,jdbcType=DECIMAL},
+      </if>
+      <if test="czsj != null" >
+        #{czsj,jdbcType=DATE},
+      </if>
+      <if test="czzip != null" >
+        #{czzip,jdbcType=VARCHAR},
+      </if>
+      <if test="shzt != null" >
+        #{shzt,jdbcType=VARCHAR},
+      </if>
+      <if test="xqflb != null" >
+        #{xqflb,jdbcType=VARCHAR},
+      </if>
+      <if test="zpfjid != null" >
+        #{zpfjid,jdbcType=VARCHAR},
+      </if>
+      <if test="zhdjye != null" >
+        #{zhdjye,jdbcType=DECIMAL},
+      </if>
+      <if test="shyj != null" >
+        #{shyj,jdbcType=VARCHAR},
+      </if>
+      <if test="qqh != null" >
+        #{qqh,jdbcType=VARCHAR},
+      </if>
+      <if test="wxh != null" >
+        #{wxh,jdbcType=VARCHAR},
+      </if>
+      <if test="zfbzh != null" >
+        #{zfbzh,jdbcType=VARCHAR},
+      </if>
+      <if test="gh != null" >
+        #{gh,jdbcType=VARCHAR},
+      </if>
+      <if test="ssgs != null" >
+        #{ssgs,jdbcType=VARCHAR},
+      </if>
+      <if test="ssywx != null" >
+        #{ssywx,jdbcType=VARCHAR},
+      </if>
+      <if test="perProvince != null" >
+        #{perProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="perCity != null" >
+        #{perCity,jdbcType=VARCHAR},
+      </if>
+      <if test="perArea != null" >
+        #{perArea,jdbcType=VARCHAR},
+      </if>
+      <if test="userRange != null" >
+        #{userRange,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzzmztjid != null" >
+        #{sfzzmztjid,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzfmztjid != null" >
+        #{sfzfmztjid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.yhgl.XqfxxInfo" >
+    update t_crowd_yhgl_xqfxx
+    <set >
+      <if test="yhid != null" >
+        YHID = #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="xqfdwmc != null" >
+        XQFDWMC = #{xqfdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="szdq != null" >
+        SZDQ = #{szdq,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        XM = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="nc != null" >
+        NC = #{nc,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzjh != null" >
+        SFZJH = #{sfzjh,jdbcType=VARCHAR},
+      </if>
+      <if test="lxydzyx != null" >
+        LXYDZYX = #{lxydzyx,jdbcType=VARCHAR},
+      </if>
+      <if test="zhye != null" >
+        ZHYE = #{zhye,jdbcType=DECIMAL},
+      </if>
+      <if test="czsj != null" >
+        CZSJ = #{czsj,jdbcType=DATE},
+      </if>
+      <if test="czzip != null" >
+        CZZIP = #{czzip,jdbcType=VARCHAR},
+      </if>
+      <if test="shzt != null" >
+        SHZT = #{shzt,jdbcType=VARCHAR},
+      </if>
+      <if test="xqflb != null" >
+        XQFLB = #{xqflb,jdbcType=VARCHAR},
+      </if>
+      <if test="zpfjid != null" >
+        ZPFJID = #{zpfjid,jdbcType=VARCHAR},
+      </if>
+      <if test="zhdjye != null" >
+        ZHDJYE = #{zhdjye,jdbcType=DECIMAL},
+      </if>
+      <if test="shyj != null" >
+        SHYJ = #{shyj,jdbcType=VARCHAR},
+      </if>
+      <if test="qqh != null" >
+        QQH = #{qqh,jdbcType=VARCHAR},
+      </if>
+      <if test="wxh != null" >
+        WXH = #{wxh,jdbcType=VARCHAR},
+      </if>
+      <if test="zfbzh != null" >
+        ZFBZH = #{zfbzh,jdbcType=VARCHAR},
+      </if>
+      <if test="gh != null" >
+        GH = #{gh,jdbcType=VARCHAR},
+      </if>
+      <if test="ssgs != null" >
+        SSGS = #{ssgs,jdbcType=VARCHAR},
+      </if>
+      <if test="ssywx != null" >
+        SSYWX = #{ssywx,jdbcType=VARCHAR},
+      </if>
+      <if test="perProvince != null" >
+        PER_PROVINCE = #{perProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="perCity != null" >
+        PER_CITY = #{perCity,jdbcType=VARCHAR},
+      </if>
+      <if test="perArea != null" >
+        PER_AREA = #{perArea,jdbcType=VARCHAR},
+      </if>
+      <if test="userRange != null" >
+        USER_RANGE = #{userRange,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzzmztjid != null" >
+        SFZZMZTJID = #{sfzzmztjid,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzfmztjid != null" >
+        SFZFMZTJID = #{sfzfmztjid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.yhgl.XqfxxInfo" >
+    update t_crowd_yhgl_xqfxx
+    set YHID = #{yhid,jdbcType=VARCHAR},
+      XQFDWMC = #{xqfdwmc,jdbcType=VARCHAR},
+      SZDQ = #{szdq,jdbcType=VARCHAR},
+      XM = #{xm,jdbcType=VARCHAR},
+      NC = #{nc,jdbcType=VARCHAR},
+      SFZJH = #{sfzjh,jdbcType=VARCHAR},
+      LXYDZYX = #{lxydzyx,jdbcType=VARCHAR},
+      ZHYE = #{zhye,jdbcType=DECIMAL},
+      CZSJ = #{czsj,jdbcType=DATE},
+      CZZIP = #{czzip,jdbcType=VARCHAR},
+      SHZT = #{shzt,jdbcType=VARCHAR},
+      XQFLB = #{xqflb,jdbcType=VARCHAR},
+      ZPFJID = #{zpfjid,jdbcType=VARCHAR},
+      ZHDJYE = #{zhdjye,jdbcType=DECIMAL},
+      SHYJ = #{shyj,jdbcType=VARCHAR},
+      QQH = #{qqh,jdbcType=VARCHAR},
+      WXH = #{wxh,jdbcType=VARCHAR},
+      ZFBZH = #{zfbzh,jdbcType=VARCHAR},
+      GH = #{gh,jdbcType=VARCHAR},
+      SSGS = #{ssgs,jdbcType=VARCHAR},
+      SSYWX = #{ssywx,jdbcType=VARCHAR},
+      PER_PROVINCE = #{perProvince,jdbcType=VARCHAR},
+      PER_CITY = #{perCity,jdbcType=VARCHAR},
+      PER_AREA = #{perArea,jdbcType=VARCHAR},
+      USER_RANGE = #{userRange,jdbcType=VARCHAR},
+      SFZZMZTJID = #{sfzzmztjid,jdbcType=VARCHAR},
+      SFZFMZTJID = #{sfzfmztjid,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

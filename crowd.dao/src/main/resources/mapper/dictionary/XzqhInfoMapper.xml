@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.dictionary.XzqhInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.dictionary.XzqhInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="LBDM" property="lbdm" jdbcType="VARCHAR" />
+    <result column="LBMC" property="lbmc" jdbcType="VARCHAR" />
+    <result column="CC" property="cc" jdbcType="VARCHAR" />
+    <result column="LS" property="ls" jdbcType="VARCHAR" />
+    <result column="SFSY" property="sfsy" jdbcType="INTEGER" />
+    <result column="PX" property="px" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, LBDM, LBMC, CC, LS, SFSY, PX
+  </sql>
+  
+  <sql id="sqlWhere">
+  		<if test='wid!=null and wid!=""'>
+  			AND t_crowd_sjzd_xzqh.WID=#{wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='lbdm!=null and lbdm!=""'>
+  			AND t_crowd_sjzd_xzqh.LBDM=#{lbdm,jdbcType=VARCHAR}
+  		</if>
+  		<if test='cc!=null and cc!=""'>
+  			AND t_crowd_sjzd_xzqh.CC=#{cc,jdbcType=VARCHAR}
+  		</if>
+  		<if test='ls!=null and ls!=""'>
+  			AND t_crowd_sjzd_xzqh.LS=#{ls,jdbcType=VARCHAR}
+  		</if>
+  		
+  </sql>
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.wisedu.crowd.entity.dictionary.XzqhInfo">
+  		SELECT 
+  		<include refid="Base_Column_List"/>
+  		FROM t_crowd_sjzd_xzqh t_crowd_sjzd_xzqh 
+  		<where>
+  			<include refid="sqlWhere"/>
+  		</where>
+  		order by px
+  </select>
+</mapper>

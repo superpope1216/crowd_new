@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.zygl.extend.SjkInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.zygl.SjkInfo"
+		extends="com.wisedu.crowd.dao.zygl.SjkInfoMapper.BaseResultMap">
+  </resultMap>
+  <sql id="Base_Column_List" >
+    T_CROWD_ZYGL_SJK.WID, T_CROWD_ZYGL_SJK.SJKDZ, T_CROWD_ZYGL_SJK.SJKSL, 
+    T_CROWD_ZYGL_SJK.YHM, T_CROWD_ZYGL_SJK.MM, T_CROWD_ZYGL_SJK.SYZT, T_CROWD_ZYGL_SJK.SQJLID
+  </sql>
+  <resultMap id="BaseDisplayResultMap"
+		type="com.wisedu.crowd.entity.zygl.extend.SjkInfoExtend" extends="com.wisedu.crowd.dao.zygl.SjkInfoMapper.BaseResultMap">
+		<result column="syzt_display" property="syztDisplay" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="sqlWhere">
+		<if test="query!=null">
+			<if test='query.wid!=null and query.wid!=""'>
+				AND t_crowd_zygl_sjk.wid=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.syzt!=null and query.syzt!=""'>
+				AND t_crowd_zygl_sjk.syzt=#{query.syzt,jdbcType=VARCHAR}
+			</if>
+			<if test='query.sqjlid!=null and query.sqjlid!=""'>
+				AND t_crowd_zygl_sjk.sqjlid=#{query.sqjlid,jdbcType=VARCHAR}
+			</if>
+		</if>
+  </sql>
+  <select id="selectDisplayByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseDisplayResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		,T_CROWD_SJZD_ZYSYZT.LBMC AS syzt_display
+		FROM T_CROWD_ZYGL_SJK T_CROWD_ZYGL_SJK
+		LEFT JOIN  T_CROWD_SJZD_ZYSYZT T_CROWD_SJZD_ZYSYZT
+		ON T_CROWD_SJZD_ZYSYZT.LBDM = T_CROWD_ZYGL_SJK.SYZT AND T_CROWD_SJZD_ZYSYZT.SFSY = 1
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+
+	</select>
+</mapper>

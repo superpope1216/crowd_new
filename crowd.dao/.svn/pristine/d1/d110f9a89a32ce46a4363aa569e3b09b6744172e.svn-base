@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.data.delay.extend.DataDelayKfzMonthInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.data.delay.extend.DataDelayKfzMonthInfoExtend"
+  extends="com.wisedu.crowd.dao.data.delay.DataDelayKfzMonthInfoMapper.BaseResultMap" >
+  </resultMap>
+  <sql id="Base_Column_List" >
+    T_CROWD_DATA_DELAY_KFZ_M_KFZ_M.WID, T_CROWD_DATA_DELAY_KFZ_M_KFZ_M.KFZID, 
+    T_CROWD_DATA_DELAY_KFZ_M_KFZ_M.MONTH, T_CROWD_DATA_DELAY_KFZ_M_KFZ_M.DELAY_DAY, 
+     
+    T_CROWD_DATA_DELAY_KFZ_M_KFZ_M.ZBJE, 
+    T_CROWD_DATA_DELAY_KFZ_M_KFZ_M.YJSJE, T_CROWD_DATA_DELAY_KFZ_M_KFZ_M.DELAY_ALL_DAY, 
+    T_CROWD_DATA_DELAY_KFZ_M_KFZ_M.DELAY_SCORE
+  </sql>
+   <sql id="sqlWhere">
+  	<if test="query!=null">
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND T_CROWD_DATA_DELAY_KFZ_M.WID=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.kfzid!=null and query.kfzid!=""'>
+  			AND T_CROWD_DATA_DELAY_KFZ_M.KFZID=#{query.kfzid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.month!=null and query.month!=""'>
+  			AND T_CROWD_DATA_DELAY_KFZ_M.RWID=#{query.month,jdbcType=VARCHAR}
+  		</if>
+  	</if>
+  </sql>
+  <delete id="deleteByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition">
+  	DELETE FROM T_CROWD_DATA_DELAY_KFZ_M
+  	<where>
+  		<include refid="sqlWhere"/>
+  	</where>
+  </delete>
+  <select id="selectByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+  resultMap="BaseResultMap">
+  		SELECT 
+  		<include refid="Base_Column_List"/>
+  		from T_CROWD_DATA_DELAY_KFZ_M
+  			<where>
+  		<include refid="sqlWhere"/>
+  	</where>
+  </select>
+  <select id="selectDisplayByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+  resultMap="BaseResultMap">
+  		SELECT 
+  		<include refid="Base_Column_List"/>
+  		from T_CROWD_DATA_DELAY_KFZ_M
+  			<where>
+  		<include refid="sqlWhere"/>
+  	</where>
+  </select>
+</mapper>

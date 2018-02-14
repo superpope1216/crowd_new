@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.xxgl.extend.GrxxszInfoExtendMapper" >
+  <resultMap id="BaseDisplayResultMap" type="com.wisedu.crowd.entity.xxgl.extend.GrxxszInfoExtend" 
+  	extends="com.wisedu.crowd.dao.xxgl.GrxxszInfoMapper.BaseResultMap" >
+  		 
+  </resultMap>
+  <sql id="Base_Column_List" >
+    T_CROWD_XXGL_GRSZ.WID, T_CROWD_XXGL_GRSZ.YHID, T_CROWD_XXGL_GRSZ.JSXXLX
+  </sql>
+	<sql id="sqlWhere">
+		<if test="query!=null">
+			<if test='query.wid!=null and query.wid!=""'>
+				AND T_CROWD_XXGL_GRSZ.WID=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.yhid!=null and query.yhid!=""'>
+				AND T_CROWD_XXGL_GRSZ.YHID=#{query.yhid,jdbcType=VARCHAR}
+			</if>
+		</if>
+	</sql>
+	 <select id="selectByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+  	   resultMap="BaseDisplayResultMap">
+  		SELECT 
+  		<include refid="Base_Column_List"/>
+  		,T_CROWD_SJZD_XXLX T_CROWD_SJZD_XXLX
+  		ON T_CROWD_SJZD_XXLX.LBDM = T_CROWD_XXGL_GRSZ.JSXXLX
+  		FROM T_CROWD_XXGL_GRSZ T_CROWD_XXGL_GRSZ
+  		<where>
+  			<include refid="sqlWhere"/>
+  		</where>
+  </select>
+</mapper>

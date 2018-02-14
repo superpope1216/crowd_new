@@ -1,0 +1,471 @@
+define(function(require, exports, module) {
+
+	var $$ = jQuery = require('jquery');
+	require('plugins/vendor/upload/jquery.form');
+	require('plugins/vendor/upload/imageUploader');
+	require('plugins/vendor/upload/uploader');
+	require('plugins/vendor/bootstrap/validator/entrance');
+	
+	require('plugins/vendor/select2/select2.min.css');
+	require('plugins/vendor/select2/select2.full.min');
+	require('plugins/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min');
+	require('plugins/vendor/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min');
+    //基本事件
+	addEvent();
+	//初始化完善用户基本信息事件
+	initPerfectUser();
+	initSelect();
+	saveUserInfo();
+	function addEvent(){
+		//注册按钮 
+		$("#btnRegister").click(function(){
+			 $$('#userRegister').bootstrapValidator("validate");
+			 var bootstrapValidator = $$('#userRegister').data('bootstrapValidator');
+			 if(bootstrapValidator.isValid()){
+				     var basicData=$("#userRegister").serializeArray();
+			    	 basicData.push({"name":"sfytd","value":"1"});
+		            doPost(basePath+"/register/developerRegister",basicData,function(data){
+		       	   if(data.success){
+		        		initUserInfo();
+		        		$("#userRegister").hide();
+						$("#regTop ul li").eq(0).removeClass("now");
+			   			$("#regTop ul li").eq(1).addClass("now");
+		       			$("#perfectData").show();
+		        	    }else{
+		        		   alert(data.msg);
+		        	  }
+		          });
+		       }
+		});
+		//点击获取验证码
+		$("#btnGetVerification").click(function(){
+			  $$("#userRegister").bootstrapValidator("validate");
+			  $$("#userRegister").data('bootstrapValidator').resetForm();
+			  $$("#userRegister").data('bootstrapValidator').validateField("sjh");
+			  var bootstrapValidator = $$('#userRegister').data('bootstrapValidator');
+			  var _sjh=$("input[name='sjh']").val();
+			  if(_sjh==""||!(/^1[34578]\d{9}$/.test(_sjh))){
+				  return;
+			  }
+			  $("#btnGetVerification").attr("disabled",true);
+			  $("#btnGetVerification").val("正在发送...");
+			doPostBack(basePath+"/register/sendVerification",{phone:_sjh},function(data){
+				if(data.success){
+					var times = 60;
+		        	var timer = setInterval(function() {
+		        		if (times < 1) {
+		        			clearInterval(timer); 
+		        			$("#btnGetVerification").val("点击获取验证码"); 
+		        			$("#btnGetVerification").attr("disabled",false); 
+		        			return;
+		        		}
+		        		$("#btnGetVerification").val("已发送 ("+ times +")");
+		        		times --;
+		        	}, 1000);
+				}else{
+					$$("#userRegister").data('bootstrapValidator').resetForm();
+					$("#btnGetVerification").val("点击获取验证码"); 
+        			$("#btnGetVerification").attr("disabled",false);
+        			if(data.code=="-4"){
+		               $("input[name='sjh']").parent("div").after('<small class="help-block" data-bv-validator="regexp" data-bv-for="sjh" data-bv-result="INVALID" style="display: inline;color:#f96868;">'+data.msg+'</small>');
+                    }else{
+ 		               $("input[name='sjh']").parent("div").after('<small class="help-block" data-bv-validator="regexp" data-bv-for="sjh" data-bv-result="INVALID" style="display: inline;color:#f96868;">'+data.msg+'</small>');
+                    }
+				}
+			});
+		 });
+	}
+	
+	function initPerfectUser(){
+		
+		//  企业资质类型tab页切换
+		$("#tabs-green li a").click(function(){
+			$("#tabs-green li a").removeClass("active");
+			$(this).addClass("active");
+			if($(this).attr("data-num")=="1"){
+				$("#three").show();
+				$("#threeAndOne").hide();
+			}else{
+				$("#three").hide();
+				$("#threeAndOne").show();
+			}
+		});
+		
+		$("select[name='sfytd']").val(2);
+		$("select[name='sfytd']").attr("disabled",true);
+		//上传控件+号变化
+		$(".sfz-icon-container").mouseenter(function(){
+			$(this).children(".bh-file-img-plus").css("color","#333");
+		});
+		$(".sfz-icon-container").mouseleave(function(){
+			$(this).children(".bh-file-img-plus").css("color","#bbb");
+		});
+		
+		//上传控件初始化
+		 var uploader=new Uploader({id:"headBrower",maxSize:1024*500,propExplain:"请上传照片",uploadedFunc:function(data){
+				if(true){
+					var imgPath=basePath+"/image/preView?wid="+uploader.params.value;
+					$("#headImg").attr("src",imgPath);
+					$("#grzpfjid").val(uploader.params.value);
+				}
+			}});
+			$("#headImg").click(function(){
+				$("#f_headBrower").trigger("click");
+			});
+		
+		 var sfzzmztjidUploader=new Uploader({id:"sfzzmztjidBrower",maxSize:1024*500,propExplain:"请上传照片",uploadedFunc:function(data){
+				if(true){
+					var imgPath=basePath+"/image/preView?wid="+sfzzmztjidUploader.params.value;
+					$("#sfzzmztjidImg").attr("src",imgPath);
+					$("#sfzzmztjid").val(sfzzmztjidUploader.params.value);
+					$("#sfzzmztjidImg").css("width","290px");
+					$("#sfzzmztjidImg").css("z-index","0");
+
+				}
+			}});
+		$("#sfzzmztjidUpload").click(function(){
+			$("#f_sfzzmztjidBrower").trigger("click");
+		});
+		
+		 var sfzfmztjidUploader=new Uploader({id:"sfzfmztjidBrower",maxSize:1024*500,propExplain:"请上传照片",uploadedFunc:function(data){
+				if(true){
+					var imgPath=basePath+"/image/preView?wid="+sfzfmztjidUploader.params.value;
+					$("#sfzfmztjidImg").attr("src",imgPath);
+					$("#sfzfmztjid").val(sfzfmztjidUploader.params.value);
+					$("#sfzfmztjidImg").css("width","290px");
+					$("#sfzfmztjidImg").css("z-index","0");
+				}
+			}});
+		$("#sfzfmztjidUpload").click(function(){
+			$("#f_sfzfmztjidBrower").trigger("click");
+		});
+		
+		 var businessLicenceScannerUploader=new Uploader({id:"businessLicenceScannerBrower",maxSize:1024*500,propExplain:"请上传照片",uploadedFunc:function(data){
+				if(true){
+					var imgPath=basePath+"/image/preView?wid="+businessLicenceScannerUploader.params.value;
+					$("#businessLicenceScannerImg").attr("src",imgPath);
+					$("#businessLicenceScanner").val(businessLicenceScannerUploader.params.value);
+					$("#businessLicenceScannerImg").css("width","290px");
+					$("#businessLicenceScannerImg").css("z-index","0");
+				}
+			}});
+		$("#businessLicenceScannerUpload").click(function(){
+			$("#f_businessLicenceScannerBrower").trigger("click");
+		});
+		
+		
+		 var organizateCodeScannerUploader=new Uploader({id:"organizateCodeScannerBrower",maxSize:1024*500,propExplain:"请上传照片",uploadedFunc:function(data){
+				if(true){
+					var imgPath=basePath+"/image/preView?wid="+organizateCodeScannerUploader.params.value;
+					$("#organizateCodeScannerImg").attr("src",imgPath);
+					$("#organizateCodeScanner").val(organizateCodeScannerUploader.params.value);
+					$("#organizateCodeScannerImg").css("width","290px");
+					$("#organizateCodeScannerImg").css("z-index","0");
+				}
+			}});
+		$("#organizateCodeScannerUpload").click(function(){
+			$("#f_organizateCodeScannerBrower").trigger("click");
+		});
+		
+		 var taxRegistrationScannerUploader=new Uploader({id:"taxRegistrationScannerBrower",maxSize:1024*500,propExplain:"请上传照片",uploadedFunc:function(data){
+				if(true){
+					var imgPath=basePath+"/image/preView?wid="+taxRegistrationScannerUploader.params.value;
+					$("#taxRegistrationScannerImg").attr("src",imgPath);
+					$("#taxRegistrationScanner").val(taxRegistrationScannerUploader.params.value);
+					$("#taxRegistrationScannerImg").css("width","290px");
+					$("#taxRegistrationScannerImg").css("z-index","0");
+				}
+			}});
+		$("#taxRegistrationScannerUpload").click(function(){
+			$("#f_taxRegistrationScannerBrower").trigger("click");
+		});
+		
+		//初始化多选下位
+		 $$("#rwkfkj").select2({
+		        tags: true,
+		        createTag:function (decorated, params) {  
+		            return null;  
+		        },  
+		        placeholder:'请选择平台技能'
+		    });
+		 $$("#gzlbdm").select2({
+		        tags: true,
+		        createTag:function (decorated, params) {  
+		            return null;  
+		        },  
+		        placeholder:'请选择工作类别代码'
+		    });
+		 $$("#scjsdm").select2({
+		        tags: true,
+		        createTag:function (decorated, params) {  
+		            return null;  
+		        },  
+		        placeholder:'请选择擅长技术代码'
+		    });
+	   $(".select2").css("width","100%");
+	   $(".select2-search__field").css("width","100%");
+	   
+	   //参考案例宽度
+		$("#ckal").css("max-width","100%");
+		
+		 //初始化生日时间控件
+		$$("input[name='csrq']").datepicker({
+		    language: 'zh-CN',
+		    autoclose:true,
+		    todayHighlight:true
+		});
+		//推送任务 下拉变化
+		$("select[name='sfjstj']").change(function(){
+			 var value=$(this).find("option:selected").attr("value");
+	         if(value=="1"){
+	        	$("#rwxs_select").show();
+	        	$("select[name='rwxs']").attr("data-bv-notempty","true");
+	        	var rwxsValue=$("select[name='rwxs']").val();
+	        	if(rwxsValue&&rwxsValue=="1"){
+		            $("#rwkfkj_select").show();
+	        	}
+	          }else{
+	            $("#rwxs_select").hide();
+	            $("#rwkfkj_select").hide();
+	            $("select[name='rwxs']").attr("data-bv-notempty","false");
+	          }
+		});
+		$("select[name='rwxs']").change(function(){
+			 var value=$(this).find("option:selected").attr("value");
+	         if(value=="1"){
+	        	$("#rwkfkj_select").show();
+	          }else{
+	            $("#rwkfkj_select").hide();
+	          }
+		});
+	}
+	
+	function initSelect(){
+		//省
+		$("select[name='perProvince']").change(function(){
+			 var value=$(this).find("option:selected").attr("value");
+			 var text=$(this).find("option:selected").text();
+			 
+	             if(isEmpty(value)){
+	            	 return;
+	             }
+			 $("select[name='perCity']").empty();
+			 var url=basePath+"/kfzSupply/queryXzqhInfoList";
+             var params={ls:value};
+             doSynchrPostBack(url, params, function(data){
+					var result=data.datas;
+					for(var i=0;i<result.length;i++){
+						if(i==0){
+							value=result[i].lbdm;
+						}
+						$("select[name='perCity']").append("<option  value="+result[i].lbdm+">"+result[i].lbmc+"</option>");
+		            }
+				});
+           
+             $("select[name='perArea']").empty();
+             var params={ls:value};
+             doSynchrPostBack(url, params, function(data){
+					var result=data.datas;
+					for(var i=0;i<result.length;i++){
+						$("select[name='perArea']").append("<option value="+result[i].lbdm+">"+result[i].lbmc+"</option>");
+		            }
+				});
+             
+		});
+		//市
+		$("select[name='perCity']").change(function(){
+			
+			 var value=$(this).find("option:selected").attr("value");
+             var params={ls:value};
+             if(isEmpty(value)){
+            	 return;
+             }
+             $("select[name='perArea']").empty();
+             var url=basePath+"/kfzSupply/queryXzqhInfoList";
+             doPostBack(url, params, function(data){
+					var result=data.datas;
+					for(var i=0;i<result.length;i++){
+						$("select[name='perArea']").append("<option value="+result[i].lbdm+">"+result[i].lbmc+"</option>");
+		            }
+				});
+			
+		});
+		
+	}
+	
+	function saveUserInfo(){
+		
+		//保存基本信息
+		$$("#btnBasicNext").click(function(){
+			 $$('#formBasicInfo').bootstrapValidator("validate");
+			 var formBasicValidator = $$('#formBasicInfo').data('bootstrapValidator');
+			 if(formBasicValidator.isValid()){
+				 if($("#grzpfjid").val()==""){
+					 alert("请上传头像");
+					 return;
+				 } 
+				   var sfjstj=$("select[name='sfjstj']").val();
+				   if(sfjstj!="1"){
+					  $("select[name='rwxs']").val("");
+				   }
+				    var basicData=$$("#formBasicInfo").serializeArray();
+				    checkMultipleRwfkjk(basicData);
+				    doPostBack(basePath+"/kfzConfrim/saveKfzxxBasicInfo",basicData,function(data){
+				    	if(data.success){
+				    		$("#regTop ul li").eq(1).removeClass("now");
+				   			$("#regTop ul li").eq(2).addClass("now");
+							$("#ulBasicInfo").hide();
+							$("#ulResumeInfo").show();
+						}else{
+							 alert(data.msg);
+						}			         
+				  });
+					
+			 }
+		});
+		//上一步到基本信息
+		$("#btnBasicPre").click(function(){
+			$("#regTop ul li").eq(2).removeClass("now");
+   			$("#regTop ul li").eq(1).addClass("now");
+			$("#ulResumeInfo").hide();
+			$("#ulBasicInfo").show();
+		});
+		//简历信息
+		$("#btnResumeNext").click(function(){
+		     $$('#formResumeInfo').bootstrapValidator("validate");
+		     var formResumeValidator = $$('#formResumeInfo').data('bootstrapValidator');
+			 if(formResumeValidator.isValid()){
+				    var basicData=$$("#formResumeInfo").serializeArray();
+				    var wid=$("#kfzxxWid").val();
+				    basicData.push({"name":"wid","value":wid});
+				    basicData.push({"name":"shzt","value":0});
+				    checkMultipleSelect(basicData);
+				    doPostBack(basePath+"/kfzConfrim/saveKfzxxResumeInfo",basicData,function(data){
+				    	if(data.success){
+				    		$("#regTop ul li").eq(2).removeClass("now");
+				   			$("#regTop ul li").eq(3).addClass("now");
+							$("#ulResumeInfo").hide();
+							$("#ulCardInfo").show();
+				    	}else{
+				    		alert(data.msg);
+				    	}
+			        });
+					
+			 }
+		});
+		$("#btnResumePre").click(function(){
+			$("#regTop ul li").eq(3).removeClass("now");
+   			$("#regTop ul li").eq(2).addClass("now");
+			$("#ulCardInfo").hide();
+			$("#ulResumeInfo").show();
+		});
+		//身份认证信息
+		$("#saveKfzxxInfo").click(function(){
+			 $$('#formCardInfo').bootstrapValidator("validate");
+			 var formCardValidator = $$('#formCardInfo').data('bootstrapValidator');
+			 if(formCardValidator.isValid()){
+				  if($("#sfzzmztjid").val()==""||$("#sfzfmztjid").val()==""||$("#businessLicenceScanner").val()==""){
+			  		   alert("请上传完整的身份信息感谢你的支持");
+			  		   return;
+			  	     }
+				    var enterpriseQualificateType=$("#tabs-green li a.active").attr("data-num");
+				    if("1"==enterpriseQualificateType){//选择三证时  营业执照和组织机构代码 必填
+				    	if($("#organizateCodeScanner").val()==""){
+				    	    alert("请上传完整的身份信息感谢你的支持");
+				    		return;
+				    	}
+				    }
+				    
+				    var wid=$("#kfzxxWid").val();
+				    var basicData=$("#formCardInfo").serializeArray();
+				    basicData.push({"name":"wid","value":wid});
+				    basicData.push({"name":"shzt","value":1});
+				    basicData.push({"name":"sfytd","value":2});
+				    basicData.push({"name":"enterpriseQualificateType","value":enterpriseQualificateType});
+				    doPostBack(basePath+"/kfzConfrim/saveRegisterKfzxxCardInfo",basicData,function(data){
+				    	if(data.success){
+							 window.location.href=basePath+"/kfzConfrim/index?flag=kfzconfirm";
+						}else{
+							 alert(data.msg);
+						}
+				    });
+			 }
+		});
+	}
+	
+function initUserInfo(){
+		doPostBack("../kfzSupply/queryKfzxxInfo","",function(data){
+			if(data.success&&isNotEmpty(data.datas)){
+				$("#kfzxxWid").val(data.datas[0].wid);
+	            if(isNotEmpty(data.datas[0].rwxs)){
+	            	$("select[name='rwxs']").val(data.datas[0].rwxs);
+	            	 if(data.datas[0].rwxs=="1"){
+	                 	$("#rwkfkj_select").show();
+	                   }else{
+	                     $("#rwkfkj_select").hide();
+	                   }
+	            }else{
+	              $("#rwkfkj_select").hide();
+	            }
+	            if(data.datas[0].sfjstj=="0"||isNotEmpty(data.datas[0].sfjstj)){
+	            	$("select[name='sfjstj']").val(data.datas[0].sfjstj);
+	            	 if(data.datas[0].sfjstj=="1"){
+	                 	 $("#rwxs_select").show();
+	                   }else{
+	                     $("#rwxs_select").hide();
+		            	 $("#rwxs_select").hide();
+	                   }
+	            }else{
+	            	 $("#rwkfkj_select").hide();
+	            	 $("#rwxs_select").hide();
+	            }
+	            if(isNotEmpty(data.datas[0].rwkfkj)){
+	            	var rwkfkj=data.datas[0].rwkfkj.split(",");
+	                $("#rwkfkj").val(rwkfkj).trigger("change");
+	            }else{
+	            	$("#rwkfkj_select").hide();
+	            }
+			}
+		});
+	}
+	
+function checkMultipleRwfkjk(basicData){
+	var data = $$("#rwkfkj").select2("data");
+	var saveIds="";
+	for(var i=0;i<data.length;i++){
+		saveIds+=data[i].id+","
+	}
+	if(saveIds.length>=1){
+		saveIds=saveIds.substr(0,saveIds.length-1);
+	}
+	var sfjstj=$("select[name='sfjstj']").val();
+	var rwxsVal=$("select[name='rwxs']").val();
+	if(sfjstj==""||sfjstj=="0"||isEmpty(rwxsVal)||rwxsVal!="1"){
+		saveIds="";
+	}
+	basicData.push({"name":"rwkfkj","value":saveIds});
+}
+
+function checkMultipleSelect(basicData){
+	     var data = "";
+		 var saveIds="";
+		 data = $$("#gzlbdm").select2("data");
+		 saveIds="";
+			for(var i=0;i<data.length;i++){
+				saveIds+=data[i].id+","
+			}
+			if(saveIds.length>=1){
+				saveIds=saveIds.substr(0,saveIds.length-1);
+			}
+			basicData.push({"name":"gzlbdm","value":saveIds});
+			data = $$("#scjsdm").select2("data");
+			saveIds="";
+			for(var i=0;i<data.length;i++){
+				saveIds+=data[i].id+","
+			}
+			if(saveIds.length>=1){
+				saveIds=saveIds.substr(0,saveIds.length-1);
+			}
+			basicData.push({"name":"scjsdm","value":saveIds});
+     }
+});

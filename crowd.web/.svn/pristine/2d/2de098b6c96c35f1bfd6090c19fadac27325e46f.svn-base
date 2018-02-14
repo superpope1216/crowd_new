@@ -1,0 +1,50 @@
+/**
+ * 
+ */
+$(document).ready(function(){
+	 var IE9 = (navigator.userAgent.indexOf("MSIE 9.0") > 0) ? true: false;
+	 
+	
+   
+    queryTbzxx();
+    function queryTbzxx(){
+    	doGet(basePath+"/rwxxDetail/queryRwtbxx","rwid="+rwid,function(data){
+    		  
+    		  if(data && data.datas){
+    			  var html="";
+    			  for(var i=0;i<10;i++){
+    				  var _data={};
+    				html+='<li class="groom-cut-slide tbz-header-li">';
+    				html+='	<a href="'+basePath+'/kfzview/index?kfzid='+_data.kfzid+'" title="" target="_self" class="tbz-header-a">';
+    				html+='	<img src="'+basePath+'/statics/images/12.png?1509528657049" alt=""	src="'+basePath+'/statics/images/12.png?1509528657049" class="swiper-lazy-loading tbz-header-img">'
+    				html+=' <b>张三'+i+'</b> ';
+    				html+='	<p  class="tbl-header-p-top"> ';
+    				html+='		<span  style="text-align: left; float: left; display: inline-block; font-size: 16px;">￥103.00元</span>';
+    				html+='		<span class="tbl-header-zt tbl-header-zt-color">开发中</span>';
+    				html+='	</p>';
+    				html+='	<p class="tbl-header-p-bottom">';
+    				html+='		<span class="tbl-header-ryxz">外部开发者</span>';
+    				html+='		<span class="tbl-header-cxz">诚信值:100分</span>';
+    				html+='	</p> ';
+    				html+='	</a></li>';
+    			  }
+    			  $("#ulTbzxx").html(html);
+    			  var d= new Swiper('.groom-cut', {
+    			        wrapperClass: 'groom-cut-wraper',
+    			        slideClass: 'groom-cut-slide',
+    			        slidesPerView: IE9 ? 4 : 'auto',
+    			        autoplay: 3800,
+    			        watchSlidesProgress: true,
+    			        watchSlidesVisibility: true,
+    			        prevButton: '.groom-box .fa-chevron-left',
+    			        nextButton: '.groom-box .fa-chevron-right',
+    			        observer: true,
+    			        observeParents: true
+    			    });
+    			  $('.groom-cut img[data-original]').lazyload();
+    		  }
+    	   });
+    }
+   
+    
+});

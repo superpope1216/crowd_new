@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.statics.extend.ManpowerInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.statics.extend.ManpowerInfoExtend" 
+  extends="com.wisedu.crowd.dao.statics.ManpowerInfoMapper.BaseResultMap">
+     <result column="ywxlbDisplay" property="ywxlbDisplay" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    T_CROWD_XTTJ_DQGZLTJ.WID, T_CROWD_XTTJ_DQGZLTJ.YWXLB, 
+    T_CROWD_XTTJ_DQGZLTJ.KFZBZGS, T_CROWD_XTTJ_DQGZLTJ.YKFSJGS, 
+    T_CROWD_XTTJ_DQGZLTJ.ZBZGS, T_CROWD_XTTJ_DQGZLTJ.DSHGS, 
+    T_CROWD_XTTJ_DQGZLTJ.CGZGS, T_CROWD_XTTJ_DQGZLTJ.YGRL, 
+    T_CROWD_XTTJ_DQGZLTJ.SJRL, T_CROWD_XTTJ_DQGZLTJ.SXTS, 
+    T_CROWD_XTTJ_DQGZLTJ.SHBTGGS, T_CROWD_XTTJ_DQGZLTJ.RWXS
+  </sql>
+  <sql id="sqlWhere">
+		<if test="query.rwxs!=null and query.rwxs!=''">
+			AND T_CROWD_XTTJ_DQGZLTJ.RWXS=#{query.rwxs,jdbcType=VARCHAR}
+		</if>
+		<if test='query.ywxlb!=null and query.ywxlb!=""'>
+			AND T_CROWD_XTTJ_DQGZLTJ.ywxlb=#{query.ywxlb,jdbcType=VARCHAR}
+		</if>
+  </sql>
+  <sql id="sqlOrder">
+  	order by
+  	<choose>
+  		<when test="orderBy!=null and orderBy.size>0">
+  			<foreach collection="orderBy" close=" " open=" " separator="," item="item">
+  				${item}
+  			</foreach>
+  		</when>
+  		<otherwise>
+  			T_CROWD_XTTJ_DQGZLTJ.YWXLB 
+  		</otherwise>
+  	</choose>
+  </sql>
+  <select id="selectDisplayByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseResultMap">
+		SELECT 
+		<include refid="Base_Column_List"/>
+		,T_CROWD_SJZD_YWXLB.lbmc as ywxlbDisplay
+  		FROM T_CROWD_XTTJ_DQGZLTJ
+  		LEFT JOIN T_CROWD_SJZD_YWXLB
+    	ON T_CROWD_SJZD_YWXLB.LBDM = T_CROWD_XTTJ_DQGZLTJ.YWXLB
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+		<include refid="sqlOrder"/>
+  </select>
+</mapper>

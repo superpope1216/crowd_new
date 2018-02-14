@@ -1,0 +1,20 @@
+package com.wisedu.crowd.dao.rwgl.extend;
+
+import java.util.List;
+
+import com.wisedu.crowd.entity.dto.QueryCondition;
+import com.wisedu.crowd.entity.rwgl.extend.RwjbxxInfoExtend;
+
+public interface RwjbxxInfoExtendMapper {
+  
+	List<RwjbxxInfoExtend> selectDisplayByCondition(QueryCondition<RwjbxxInfoExtend> record);
+	
+	/**
+	 * 大厅众包专用
+	 * @param record
+	 * @return
+	 */
+	List<RwjbxxInfoExtend> selectForCenter(QueryCondition<RwjbxxInfoExtend> record);
+	
+	Integer selectCountByCondition(QueryCondition<RwjbxxInfoExtend> record);
+}

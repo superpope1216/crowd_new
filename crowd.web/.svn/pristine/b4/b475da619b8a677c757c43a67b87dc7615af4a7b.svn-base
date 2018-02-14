@@ -1,0 +1,127 @@
+package com.wisedu.crowd.controller.kfzxx;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.wisedu.crowd.common.code.NwbEnum;
+import com.wisedu.crowd.common.code.RwxqlxEnum;
+import com.wisedu.crowd.common.code.RwztStateEnum;
+import com.wisedu.crowd.common.code.XtcsEnum;
+import com.wisedu.crowd.common.code.YesNoEnum;
+import com.wisedu.crowd.common.util.CommonUtil;
+import com.wisedu.crowd.common.util.ConditionUtil;
+import com.wisedu.crowd.common.util.StringUtil;
+import com.wisedu.crowd.controller.BaseController;
+import com.wisedu.crowd.entity.dto.PageInfo;
+import com.wisedu.crowd.entity.rwgl.extend.RwjbxxInfoExtend;
+import com.wisedu.crowd.entity.rwgl.extend.RwztbglsInfoExtend;
+import com.wisedu.crowd.entity.xtgl.extend.XtcsbInfoExtend;
+import com.wisedu.crowd.entity.yhgl.KfzxxInfo;
+import com.wisedu.crowd.service.dictionary.DictionaryService;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.service.rwgl.RwjbxxInfoService;
+import com.wisedu.crowd.service.rwgl.RwztbglsInfoService;
+import com.wisedu.crowd.service.xtgl.XtcsbInfoService;
+import com.wisedu.crowd.service.yhgl.KfzxxInfoService;
+
+@Controller
+@RequestMapping("kfzOrderAction")
+public class KfzOrderActionController extends BaseController{
+	@Autowired
+	private RwjbxxInfoService rwjbxxInfoService;
+	@Autowired
+	private XtcsbInfoService xtcsbInfoService;
+	
+	@Autowired
+	private KfzxxInfoService kfzxxInfoService;
+	
+	@Autowired
+	private DictionaryService dictionaryService;
+	@Autowired
+	private RwztbglsInfoService rwztbglsInfoService;
+	@RequestMapping("index")
+	public ModelAndView index(String rwid) throws Exception {
+		ModelAndView mv=new ModelAndView();
+		RwjbxxInfoExtend queryRwjbxxInfoExtend=new RwjbxxInfoExtend();
+		queryRwjbxxInfoExtend.setWid(rwid);
+		queryRwjbxxInfoExtend.setNeedKfzxx(true);
+		queryRwjbxxInfoExtend.setNeedXqfxx(true);
+		DataResult<List<RwjbxxInfoExtend>> rwjbxxDatas=rwjbxxInfoService.selectDisplayByCondition(ConditionUtil.createCondition(queryRwjbxxInfoExtend));
+		if(CommonUtil.isNotEmptyList(rwjbxxDatas.getDatas())){
+			RwjbxxInfoExtend rwjbxxInfo=rwjbxxDatas.getDatas().get(0);
+			mv.addObject("rwjbxx", rwjbxxInfo);
+			if(!StringUtil.isEmpty(rwjbxxInfo.getKfzid())){
+				DataResult<KfzxxInfo> kfzxxInfoDatas=kfzxxInfoService.selectByPrimaryKey(rwjbxxInfo.getKfzid(), this.createCustomOperateLog());
+				if(kfzxxInfoDatas.getDatas()!=null){
+					XtcsbInfoExtend queryXtcsbInfoExtend1=new XtcsbInfoExtend();
+					XtcsbInfoExtend queryXtcsbInfoExtend2=new XtcsbInfoExtend();
+					if(NwbEnum.NB.getCode().equals(kfzxxInfoDatas.getDatas().getKfzlb())){//内部开发者
+						queryXtcsbInfoExtend1.setCsmc(XtcsEnum.NBKFZ_XMGL_XMYSJDFKBL.getCode());
+						queryXtcsbInfoExtend2.setCsmc(XtcsEnum.NBKFZ_XMGL_YYPTYJSQBL.getCode());
+					}else{
+						queryXtcsbInfoExtend1.setCsmc(XtcsEnum.WBKFZ_XMGL_XMYSJDFKBL.getCode());
+						queryXtcsbInfoExtend2.setCsmc(XtcsEnum.WBKFZ_XMGL_YYPTYJSQBL.getCode());
+					}
+					DataResult<List<XtcsbInfoExtend>> xmyssqblDatas=xtcsbInfoService.selectByCondition(queryXtcsbInfoExtend1);
+					DataResult<List<XtcsbInfoExtend>> yyptsqblDatas=xtcsbInfoService.selectByCondition(queryXtcsbInfoExtend2);
+					mv.addObject("xmyssqbl", xmyssqblDatas.getDatas().get(0).getCsz());
+					mv.addObject("yyptsqblDatas", yyptsqblDatas.getDatas().get(0).getCsz());
+				}
+			}
+			Map<String,Object> rwxsMap=dictionaryService.selectRwxsByBm(rwjbxxInfo.getRwxs());
+			boolean needSh=false;
+			if(StringUtil.toStr(rwxsMap.get("SFXQRWLX")).equals(YesNoEnum.YES.getCode())){
+				needSh=true;
+			}
+			if(needSh){
+				if(RwxqlxEnum.BUG.getCode().equals(StringUtil.toStr(rwjbxxInfo.getRwlx()))){//BUG类不需要售后
+					needSh=false;
+				}
+			}
+			if(needSh){
+				XtcsbInfoExtend queryXtcsbInfoExtend=new XtcsbInfoExtend();
+				queryXtcsbInfoExtend.setCsmc(XtcsEnum.NOT_NEED_SH.getCode());
+				DataResult<List<XtcsbInfoExtend>> notNeedShDatas=xtcsbInfoService.selectByCondition(queryXtcsbInfoExtend);
+				if(CommonUtil.isNotEmptyList(notNeedShDatas.getDatas())){
+					if(rwjbxxInfo.getXmysje()<=StringUtil.toLong(notNeedShDatas.getDatas().get(0).getCsz())){
+						needSh=false;
+					}
+				}
+			}
+			mv.addObject("sfxysh",needSh);
+		}
+		RwztbglsInfoExtend queryRwztbglsInfoExtend=new RwztbglsInfoExtend();
+		queryRwztbglsInfoExtend.setXmid(rwid);
+		queryRwztbglsInfoExtend.setZt(StringUtil.toShort(RwztStateEnum.YSZ.getCode()));
+		mv.addObject("ysz", rwztbglsInfoService.selectByCondition(ConditionUtil.createCondition(queryRwztbglsInfoExtend, new PageInfo(1,1), Arrays.asList("t_crowd_xmgl_rwztbgls.CZSJ DESC")), this.createCustomOperateLog()).getDatas());
+		
+		queryRwztbglsInfoExtend.setZt(StringUtil.toShort(RwztStateEnum.SHZ.getCode()));
+		mv.addObject("ystg", rwztbglsInfoService.selectByCondition(ConditionUtil.createCondition(queryRwztbglsInfoExtend, new PageInfo(1,1), Arrays.asList("t_crowd_xmgl_rwztbgls.CZSJ DESC")), this.createCustomOperateLog()).getDatas());
+		queryRwztbglsInfoExtend.setZt(null);
+		List<Short> zts=new ArrayList<Short>();
+		zts.add(StringUtil.toShort(RwztStateEnum.SHZ.getCode()));
+		zts.add(StringUtil.toShort(RwztStateEnum.SHJSDQR.getCode()));
+		mv.addObject("sqshjs", rwztbglsInfoService.selectByCondition(ConditionUtil.createCondition(queryRwztbglsInfoExtend, new PageInfo(1,1), Arrays.asList("t_crowd_xmgl_rwztbgls.CZSJ DESC")), this.createCustomOperateLog()).getDatas());
+		queryRwztbglsInfoExtend.setZts(null);
+		queryRwztbglsInfoExtend.setZt(StringUtil.toShort(RwztStateEnum.DPJ.getCode()));
+		mv.addObject("rwid", rwid);
+		mv.addObject("shjs", rwztbglsInfoService.selectByCondition(ConditionUtil.createCondition(queryRwztbglsInfoExtend, new PageInfo(1,1), Arrays.asList("t_crowd_xmgl_rwztbgls.CZSJ DESC")), this.createCustomOperateLog()).getDatas());
+		mv.setViewName("kfzgl/rwgl/orderAction");
+		return mv;
+	}
+	
+	@RequestMapping(value="applyAccept",method=RequestMethod.POST)
+	@ResponseBody
+	public DataResult<Integer> applyAccept(String rwid) throws Exception{
+		return rwjbxxInfoService.applyAccept(rwid, this.createCustomOperateLog());
+	}
+}

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.rwgl.XmjbxxInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.rwgl.XmjbxxInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="XMBH" property="xmbh" jdbcType="VARCHAR" />
+    <result column="XMMC" property="xmmc" jdbcType="VARCHAR" />
+    <result column="SZQY" property="szqy" jdbcType="VARCHAR" />
+    <result column="SSXX" property="ssxx" jdbcType="VARCHAR" />
+    <result column="LXRQ" property="lxrq" jdbcType="VARCHAR" />
+    <result column="QDRQ" property="qdrq" jdbcType="VARCHAR" />
+    <result column="CNYSRQ" property="cnysrq" jdbcType="VARCHAR" />
+    <result column="YSRQ" property="ysrq" jdbcType="VARCHAR" />
+    <result column="JXRQ" property="jxrq" jdbcType="VARCHAR" />
+    <result column="FZEBH" property="fzebh" jdbcType="VARCHAR" />
+    <result column="FZRMC" property="fzrmc" jdbcType="VARCHAR" />
+    <result column="SFSY" property="sfsy" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, XMBH, XMMC, SZQY, SSXX, LXRQ, QDRQ, CNYSRQ, YSRQ, JXRQ, FZEBH, FZRMC, SFSY
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_xmgl_xmjbxx
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_xmgl_xmjbxx
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.rwgl.XmjbxxInfo" >
+    insert into t_crowd_xmgl_xmjbxx (WID, XMBH, XMMC, 
+      SZQY, SSXX, LXRQ, QDRQ, 
+      CNYSRQ, YSRQ, JXRQ, 
+      FZEBH, FZRMC, SFSY)
+    values (#{wid,jdbcType=VARCHAR}, #{xmbh,jdbcType=VARCHAR}, #{xmmc,jdbcType=VARCHAR}, 
+      #{szqy,jdbcType=VARCHAR}, #{ssxx,jdbcType=VARCHAR}, #{lxrq,jdbcType=VARCHAR}, #{qdrq,jdbcType=VARCHAR}, 
+      #{cnysrq,jdbcType=VARCHAR}, #{ysrq,jdbcType=VARCHAR}, #{jxrq,jdbcType=VARCHAR}, 
+      #{fzebh,jdbcType=VARCHAR}, #{fzrmc,jdbcType=VARCHAR}, #{sfsy,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.rwgl.XmjbxxInfo" >
+    insert into t_crowd_xmgl_xmjbxx
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="xmbh != null" >
+        XMBH,
+      </if>
+      <if test="xmmc != null" >
+        XMMC,
+      </if>
+      <if test="szqy != null" >
+        SZQY,
+      </if>
+      <if test="ssxx != null" >
+        SSXX,
+      </if>
+      <if test="lxrq != null" >
+        LXRQ,
+      </if>
+      <if test="qdrq != null" >
+        QDRQ,
+      </if>
+      <if test="cnysrq != null" >
+        CNYSRQ,
+      </if>
+      <if test="ysrq != null" >
+        YSRQ,
+      </if>
+      <if test="jxrq != null" >
+        JXRQ,
+      </if>
+      <if test="fzebh != null" >
+        FZEBH,
+      </if>
+      <if test="fzrmc != null" >
+        FZRMC,
+      </if>
+      <if test="sfsy != null" >
+        SFSY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="xmbh != null" >
+        #{xmbh,jdbcType=VARCHAR},
+      </if>
+      <if test="xmmc != null" >
+        #{xmmc,jdbcType=VARCHAR},
+      </if>
+      <if test="szqy != null" >
+        #{szqy,jdbcType=VARCHAR},
+      </if>
+      <if test="ssxx != null" >
+        #{ssxx,jdbcType=VARCHAR},
+      </if>
+      <if test="lxrq != null" >
+        #{lxrq,jdbcType=VARCHAR},
+      </if>
+      <if test="qdrq != null" >
+        #{qdrq,jdbcType=VARCHAR},
+      </if>
+      <if test="cnysrq != null" >
+        #{cnysrq,jdbcType=VARCHAR},
+      </if>
+      <if test="ysrq != null" >
+        #{ysrq,jdbcType=VARCHAR},
+      </if>
+      <if test="jxrq != null" >
+        #{jxrq,jdbcType=VARCHAR},
+      </if>
+      <if test="fzebh != null" >
+        #{fzebh,jdbcType=VARCHAR},
+      </if>
+      <if test="fzrmc != null" >
+        #{fzrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="sfsy != null" >
+        #{sfsy,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.rwgl.XmjbxxInfo" >
+    update t_crowd_xmgl_xmjbxx
+    <set >
+      <if test="xmbh != null" >
+        XMBH = #{xmbh,jdbcType=VARCHAR},
+      </if>
+      <if test="xmmc != null" >
+        XMMC = #{xmmc,jdbcType=VARCHAR},
+      </if>
+      <if test="szqy != null" >
+        SZQY = #{szqy,jdbcType=VARCHAR},
+      </if>
+      <if test="ssxx != null" >
+        SSXX = #{ssxx,jdbcType=VARCHAR},
+      </if>
+      <if test="lxrq != null" >
+        LXRQ = #{lxrq,jdbcType=VARCHAR},
+      </if>
+      <if test="qdrq != null" >
+        QDRQ = #{qdrq,jdbcType=VARCHAR},
+      </if>
+      <if test="cnysrq != null" >
+        CNYSRQ = #{cnysrq,jdbcType=VARCHAR},
+      </if>
+      <if test="ysrq != null" >
+        YSRQ = #{ysrq,jdbcType=VARCHAR},
+      </if>
+      <if test="jxrq != null" >
+        JXRQ = #{jxrq,jdbcType=VARCHAR},
+      </if>
+      <if test="fzebh != null" >
+        FZEBH = #{fzebh,jdbcType=VARCHAR},
+      </if>
+      <if test="fzrmc != null" >
+        FZRMC = #{fzrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="sfsy != null" >
+        SFSY = #{sfsy,jdbcType=INTEGER},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.rwgl.XmjbxxInfo" >
+    update t_crowd_xmgl_xmjbxx
+    set XMBH = #{xmbh,jdbcType=VARCHAR},
+      XMMC = #{xmmc,jdbcType=VARCHAR},
+      SZQY = #{szqy,jdbcType=VARCHAR},
+      SSXX = #{ssxx,jdbcType=VARCHAR},
+      LXRQ = #{lxrq,jdbcType=VARCHAR},
+      QDRQ = #{qdrq,jdbcType=VARCHAR},
+      CNYSRQ = #{cnysrq,jdbcType=VARCHAR},
+      YSRQ = #{ysrq,jdbcType=VARCHAR},
+      JXRQ = #{jxrq,jdbcType=VARCHAR},
+      FZEBH = #{fzebh,jdbcType=VARCHAR},
+      FZRMC = #{fzrmc,jdbcType=VARCHAR},
+      SFSY = #{sfsy,jdbcType=INTEGER}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

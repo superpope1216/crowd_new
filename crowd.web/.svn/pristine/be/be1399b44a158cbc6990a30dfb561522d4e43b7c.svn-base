@@ -1,0 +1,111 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>电商类响应式网站模板</title>
+<meta name="renderer" content="webkit">
+<meta charset="UTF-8" /><meta name="robots" content="noindex,nofllow" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+<meta name="generator" content="MetInfo 5.3.18"  data-variable="https://www.metinfo.cn/|cn|../|510|2422|3|metinfo2016|https://account.metinfo.cn/" />
+<meta name="description" content="MetInfo采用PHP+Mysql架构，针对企业网站建设，融入SEO理念设计，功能全面，支持多语言、响应式展示，是一款非常适合企业、公司网站制作的cms建站系统。" />
+<meta name="keywords" content="网站建设,网站制作,cms,企业建站,建站系统" />
+<link href="https://www.metinfo.cn/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+<link rel='stylesheet' type='text/css' href="../templates/metinfo2016/cache/metinfo.css?20170926174714">
+
+<meta name="baidu-site-verification" content="TZxh3k6oNU" />
+<meta property="og:type" content="image"/>
+<meta property="og:image" content="https://image.metinfo.cn//upload/design/jianyao.jpg"/>
+<script>
+var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+var url=window.location.host;
+var str=url.indexOf("9");
+if(str>0){
+hm.src = "https://hm.baidu.com/hm.js?c8b3385520a3f04388041399cf71b8f5";
+}else{
+  hm.src = "https://hm.baidu.com/hm.js?cc82bbdc50ef2041ec5336024c24d11a";
+}
+ 
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<!--[if lte IE 8]>
+<div class="text-xs-center m-b-0 bg-blue-grey-100 alert">
+    <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+        <span aria-hidden="true">×</span>
+    </button>
+    你正在使用一个 <strong>过时</strong> 的浏览器。请 <a href="http://browsehappy.com/" target="_blank">升级您的浏览器</a>，以提高您的体验。
+</div>
+<![endif]-->
+
+<body class='bg-blue-grey-800 padding-top-50'>
+<div class='met-demo'>
+    <div class='met-demo-head container-fluid'>
+        <div class='col-sm-2 col-lg-3 col-xlg-4'>
+            <h1 class='met-demo-title margin-0 font-size-18 white hide'>M1156014</h1>
+            <a href="https://www.metinfo.cn/product/showproduct2422.htm" title='电商类响应式网站模板' class='white' style='text-decoration:none;line-height:50px;'><i class="icon pe-angle-left font-size-30" style='top:8px;left:5px;'></i>返回</a>
+        </div>
+        <div class='demo-reschosse col-sm-3 col-lg-4 hidden-xs text-center white '>
+            <li class='hidden-sm hidden-md' data-class='' data-toggle="tooltip" data-html="true" data-placement="bottom" data-original-title="宽屏电脑">
+                <i class='icon pe-monitor'></i>
+            </li>
+            <li data-class='tablet-width' data-toggle="tooltip" data-html="true" data-placement="bottom" data-original-title="平板竖屏">
+                <i class='iconfont icon-tablet'></i>
+            </li>
+            <li class='hidden-sm hidden-sm' data-class='tablet-horizontal-width' data-toggle="tooltip" data-html="true" data-placement="bottom" data-original-title="平板横屏">
+                <i class='iconfont icon-tablet-horizontal1'></i>
+            </li>
+            <li data-class='mobile-width' data-toggle="tooltip" data-html="true" data-placement="bottom" data-original-title="手机竖屏">
+                <i class='icon pe-phone'></i>
+            </li>
+            <li class='hidden-sm' data-class='mobile-horizontal-width' data-toggle="tooltip" data-html="true" data-placement="bottom" data-original-title="手机横屏">
+                <i class='icon pe-phone icon-horizontal'></i>
+            </li>
+            <span>
+                <i class='iconfont icon-weixin3' data-plugin="webuiPopover" data-trigger="hover" data-animation="pop" data-placement='bottom' data-width='123' data-padding='0' data-content="<img src='http://pan.baidu.com/share/qrcode?w=120&h=120&url=https://show.metinfo.cn/muban/M1156014/381/' width='120' height='120' alt='电商类响应式网站模板' class='block' style='display:block;margin:auto;background:url(https://image.metinfo.cn//templates/metinfo2016/min/img/loading.gif) center no-repeat;'>"></i>
+            </span>
+        </div>
+        <div class='demo-option col-sm-7 col-lg-5 col-xlg-4 hidden-xs pull-right'>
+            <div>
+                <a class='btn btn-sm btn-squared btn-info padding-vertical-0 font-size-14' onclick="_MEIQIA._SHOWPANEL()">咨询客服</a>
+
+                <button type='button' title='电商类响应式网站模板' target='_blank' class='btn btn-sm btn-squared btn-danger padding-vertical-0 font-size-14 shop-btn' id='shop-btn1' data-target="#shop-fashion-option" data-toggle="modal" data-minsrc='https://image.metinfo.cn/upload/201710/1507789028.png?x-oss-process=image/resize,m_fill,h_80,w_100'>立即购买</button>
+
+                <a href='https://account.metinfo.cn/profile/favaorite?a=dotemsc' data-id='2422' title='加入收藏' class='btn btn-sm btn-squared btn-warning padding-vertical-0 font-size-14 shop-favaorite'>加入收藏</a>
+                <a href='http://demo.metinfo.cn/admin/' title='后台演示' target='_blank' class='btn btn-sm btn-squared btn-primary padding-vertical-0 font-size-14'>后台演示</a>
+                <a href='javascript:;' class='close-demo-head' data-toggle="tooltip" data-html="true" data-placement="bottom" data-original-title="隐藏横幅<br>刷新可再次显示"><i class="icon pe-close" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
+    <div id="met-demo-iframe" class=''>
+        <iframe src="https://show.metinfo.cn/muban/M1156014/381/" frameborder="0" class='bg-white' width="100%" height='100%'></iframe>
+    </div>
+</div>
+
+<div class="modal fade modal-primary" id="shop-fashion-option" aria-hidden="true" aria-labelledby="shop-fashion-option"
+role="dialog" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+				<h4 class="modal-title">网站开通流程</h4>
+			</div>
+			<div class="modal-body shop-product-intro"></div>
+		</div>
+	</div>
+</div>
+
+<input type="hidden" value='MajiQq3iOeDmY_0oNfjnQiwtQeHmFxLmNvbQ7c20a7b9df5a1d4f2446719ffa018b727c20a7b9df5a1d4f2446719ffa018b72' name='meqia_code'>
+
+<script src="../templates/metinfo2016/cache/metinfo.js?20171009174519"></script>
+
+</body>
+</html>

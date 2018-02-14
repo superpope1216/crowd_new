@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisedu.crowd.dao.role.extend.GroupMenuAuthInfoExtendMapper">
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.role.extend.GroupMenuAuthInfoExtend"
+  extends="com.wisedu.crowd.dao.role.GroupMenuAuthInfoMapper.BaseResultMap">
+  </resultMap>
+  <sql id="Base_Column_List">
+    T_CROWD_GROUP_MENU_DATAAUTH.WID, T_CROWD_GROUP_MENU_DATAAUTH.GROUPBM, 
+    T_CROWD_GROUP_MENU_DATAAUTH.MENUID, T_CROWD_GROUP_MENU_DATAAUTH.AUTHBM
+  </sql>
+  <sql id="sqlWhere">
+		<if test='query!=null'>
+			<if test='query.wid!=null and query.wid!=""'>
+				AND T_CROWD_GROUP_MENU_DATAAUTH.wid=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.groupbm!=null and query.groupbm!=""'>
+				AND T_CROWD_GROUP_MENU_DATAAUTH.groupbm=#{query.groupbm,jdbcType=VARCHAR}
+			</if>
+			<if test='query.menuid!=null and query.menuid!=""'>
+				AND T_CROWD_GROUP_MENU_DATAAUTH.menuid=#{query.menuid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.authbm!=null and query.authbm!=""'>
+				AND T_CROWD_GROUP_MENU_DATAAUTH.authbm=#{query.authbm,jdbcType=VARCHAR}
+			</if>
+		</if>
+	</sql>
+	<select id="selectDisplayByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List"/>
+		FROM T_CROWD_GROUP_MENU_DATAAUTH
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+	</select>
+</mapper>

@@ -1,0 +1,67 @@
+package com.wisedu.crowd.common.code;
+
+public enum XtcsEnum {
+	/**
+	 * 内部开发者项目验收时付款比例
+	 */
+	NBKFZ_XMGL_XMYSJDFKBL("NBKFZ_XMGL_XMYSJDFKBL", "内部开发者项目验收时付款比例"),
+	/**
+	 * 外部开发者项目验收时付款比例
+	 */
+	WBKFZ_XMGL_XMYSJDFKBL("WBKFZ_XMGL_XMYSJDFKBL","外部开发者项目验收时付款比例"),
+	/**
+	 * 外部开发者运营平台佣金收取比例
+	 */
+	WBKFZ_XMGL_YYPTYJSQBL("WBKFZ_XMGL_XMYSJDFKBL","外部开发者运营平台佣金收取比例"),
+	/**
+	 * 内部开发者运营平台佣金收取比例
+	 */
+	NBKFZ_XMGL_YYPTYJSQBL("NBKFZ_XMGL_YYPTYJSQBL","内部开发者运营平台佣金收取比例"),
+	/**
+	 * 售后结束多少天系统自动评价
+	 */
+	XMGL_SHJSXTZDPJSJJG("XMGL_SHJSXTZDPJSJJG","售后结束多少天系统自动评价"),
+	/**
+	 * 附件路径
+	 */
+	XTGL_FJLJ("XTGL_FJLJ","附件路径"),
+	/**
+	 * 投标价格上下浮动比例
+	 */
+	XMGL_TBJGHDBL("XMGL_TBJGHDBL","投标价格上下浮动比例"),
+	/**
+	 * 500元内需求不需要售后
+	 */
+	NOT_NEED_SH("NOT_NEED_SH","500元内需求不需要售后"),
+	
+	RWCS_SQBL("RWCS_SQBL","任务拆分收取比例"),
+	
+	/**
+	 * 个人所得税起征点
+	 */
+	GRSDS_QZZ("GRSDS_QZZ","个人所得税起征点");
+	private String code;
+
+	private String name;
+
+	XtcsEnum(String code, String name) {
+		this.code = code;
+		this.name = name;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+}

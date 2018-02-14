@@ -1,0 +1,6 @@
+package com.wisedu.crowd.service.rwgl;
+
+public interface RwjbxxInfoService {
+
+	
+}

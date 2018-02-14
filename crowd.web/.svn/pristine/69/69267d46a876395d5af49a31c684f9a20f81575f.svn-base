@@ -1,0 +1,97 @@
+/**
+ * 
+ */
+define(function(require, exports, module) {
+	var $$ = jQuery$ = require('jquery');
+	require('plugins/vendor/bootstrap/validator/entrance');
+	var pjrwlwglChart = echarts.init(document.getElementById('main'));
+	queryTotal();
+	function queryTotal(){
+		doGet(basePath+"/xqfMoney/queryTotal","",function(data){
+			$("#spanTotal").html(data.datas);
+		});
+	}
+	queryMonth();
+	
+	var _pageSize = 10;
+	queryDetail(1, true);
+	function queryMonth(){
+		doGet(basePath+"/xqfMoney/queryMonth","",function(data){
+			var xValue=new Array();
+			var yValue=new Array();
+			for(var k in data.datas){
+				xValue.push(k);
+				yValue.push(data.datas[k]);
+			}
+			var option = {
+				    tooltip : {
+				        trigger: 'axis'
+				    },
+				    legend: {
+				        data:['支出']
+				    },
+				    toolbox: {
+				        show : true
+				    },
+				    calculable : true,
+				    xAxis : [
+				        {
+				            type : 'category',
+				            boundaryGap : false,
+				            data : xValue
+				        }
+				    ],
+				    yAxis : [
+				        {
+				            type : 'value'
+				        }
+				    ],
+				    series : [
+				        {
+				            name:'支出',
+				            type:'line',
+				            smooth:true,
+				            itemStyle: {normal: {areaStyle: {type: 'default'}}},
+				            data:yValue
+				        }
+				    ]
+				};
+			pjrwlwglChart.setOption(option);
+		});
+	} 
+	
+	function queryDetail(pageNum, needPage){
+		doGet(basePath+"/xqfMoney/queryDetail","pageNum="+pageNum+"&pageSize="+_pageSize,function(data){
+			if(data.datas){
+				if(needPage){
+					$('.mypaging2').pagination({
+						pageCount:data.pageInfo.totalPage,
+					    showData:data.pageInfo.pageSize,
+					    coping:true,
+					    callback:function(api){
+					    	var _cPage=api.getCurrent();
+					    	queryDetail(_cPage,false);
+					    }
+					});
+				}
+				$("#mainTable").empty();
+				var html="";
+				for(var i=0;i<data.datas.length;i++){
+					var _data=data.datas[i];
+					html+="<tr>";
+					html+="<td>"+_data.jyztDisplay+"</td>";
+					html+="<td>"+getLocalTime(_data.szsj)+"</td>";
+					html+="<td>"+_data.szlbDisplay+"</td>";
+					html+="<td><a href='"+basePath+"/'>"+_data.rwbh+"</a></td>";
+					html+="<td>"+_data.je+"</td>";
+					html+="<td>"+_data.fysm+"</td>";
+					html+="</tr>";
+				}
+				$("#mainTable").html(html);
+			}
+		});
+	}
+	
+
+		                    
+});

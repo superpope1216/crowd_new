@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.xmgl.RbxxNewInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.xmgl.RbxxNewInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="RWWID" property="rwwid" jdbcType="VARCHAR" />
+    <result column="KFZID" property="kfzid" jdbcType="VARCHAR" />
+    <result column="XM" property="xm" jdbcType="VARCHAR" />
+    <result column="RQ" property="rq" jdbcType="VARCHAR" />
+    <result column="SJD" property="sjd" jdbcType="DECIMAL" />
+    <result column="GZNRSM" property="gznrsm" jdbcType="VARCHAR" />
+    <result column="SJGZL" property="sjgzl" jdbcType="DECIMAL" />
+    <result column="BZ" property="bz" jdbcType="VARCHAR" />
+    <result column="TJSJ" property="tjsj" jdbcType="VARCHAR" />
+    <result column="TJZIP" property="tjzip" jdbcType="VARCHAR" />
+    <result column="RWBH" property="rwbh" jdbcType="VARCHAR" />
+    <result column="RWMC" property="rwmc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, RWWID, KFZID, XM, RQ, SJD, GZNRSM, SJGZL, BZ, TJSJ, TJZIP, RWBH, RWMC
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_xmgl_rwjbxx_rbxx_new
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_xmgl_rwjbxx_rbxx_new
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.xmgl.RbxxNewInfo" >
+    insert into t_crowd_xmgl_rwjbxx_rbxx_new (WID, RWWID, KFZID, 
+      XM, RQ, SJD, GZNRSM, 
+      SJGZL, BZ, TJSJ, TJZIP, 
+      RWBH, RWMC)
+    values (#{wid,jdbcType=VARCHAR}, #{rwwid,jdbcType=VARCHAR}, #{kfzid,jdbcType=VARCHAR}, 
+      #{xm,jdbcType=VARCHAR}, #{rq,jdbcType=VARCHAR}, #{sjd,jdbcType=DECIMAL}, #{gznrsm,jdbcType=VARCHAR}, 
+      #{sjgzl,jdbcType=DECIMAL}, #{bz,jdbcType=VARCHAR}, #{tjsj,jdbcType=VARCHAR}, #{tjzip,jdbcType=VARCHAR}, 
+      #{rwbh,jdbcType=VARCHAR}, #{rwmc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.xmgl.RbxxNewInfo" >
+    insert into t_crowd_xmgl_rwjbxx_rbxx_new
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="rwwid != null" >
+        RWWID,
+      </if>
+      <if test="kfzid != null" >
+        KFZID,
+      </if>
+      <if test="xm != null" >
+        XM,
+      </if>
+      <if test="rq != null" >
+        RQ,
+      </if>
+      <if test="sjd != null" >
+        SJD,
+      </if>
+      <if test="gznrsm != null" >
+        GZNRSM,
+      </if>
+      <if test="sjgzl != null" >
+        SJGZL,
+      </if>
+      <if test="bz != null" >
+        BZ,
+      </if>
+      <if test="tjsj != null" >
+        TJSJ,
+      </if>
+      <if test="tjzip != null" >
+        TJZIP,
+      </if>
+      <if test="rwbh != null" >
+        RWBH,
+      </if>
+      <if test="rwmc != null" >
+        RWMC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="rwwid != null" >
+        #{rwwid,jdbcType=VARCHAR},
+      </if>
+      <if test="kfzid != null" >
+        #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="rq != null" >
+        #{rq,jdbcType=VARCHAR},
+      </if>
+      <if test="sjd != null" >
+        #{sjd,jdbcType=DECIMAL},
+      </if>
+      <if test="gznrsm != null" >
+        #{gznrsm,jdbcType=VARCHAR},
+      </if>
+      <if test="sjgzl != null" >
+        #{sjgzl,jdbcType=DECIMAL},
+      </if>
+      <if test="bz != null" >
+        #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="tjsj != null" >
+        #{tjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="tjzip != null" >
+        #{tjzip,jdbcType=VARCHAR},
+      </if>
+      <if test="rwbh != null" >
+        #{rwbh,jdbcType=VARCHAR},
+      </if>
+      <if test="rwmc != null" >
+        #{rwmc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.xmgl.RbxxNewInfo" >
+    update t_crowd_xmgl_rwjbxx_rbxx_new
+    <set >
+      <if test="rwwid != null" >
+        RWWID = #{rwwid,jdbcType=VARCHAR},
+      </if>
+      <if test="kfzid != null" >
+        KFZID = #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        XM = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="rq != null" >
+        RQ = #{rq,jdbcType=VARCHAR},
+      </if>
+      <if test="sjd != null" >
+        SJD = #{sjd,jdbcType=DECIMAL},
+      </if>
+      <if test="gznrsm != null" >
+        GZNRSM = #{gznrsm,jdbcType=VARCHAR},
+      </if>
+      <if test="sjgzl != null" >
+        SJGZL = #{sjgzl,jdbcType=DECIMAL},
+      </if>
+      <if test="bz != null" >
+        BZ = #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="tjsj != null" >
+        TJSJ = #{tjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="tjzip != null" >
+        TJZIP = #{tjzip,jdbcType=VARCHAR},
+      </if>
+      <if test="rwbh != null" >
+        RWBH = #{rwbh,jdbcType=VARCHAR},
+      </if>
+      <if test="rwmc != null" >
+        RWMC = #{rwmc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.xmgl.RbxxNewInfo" >
+    update t_crowd_xmgl_rwjbxx_rbxx_new
+    set RWWID = #{rwwid,jdbcType=VARCHAR},
+      KFZID = #{kfzid,jdbcType=VARCHAR},
+      XM = #{xm,jdbcType=VARCHAR},
+      RQ = #{rq,jdbcType=VARCHAR},
+      SJD = #{sjd,jdbcType=DECIMAL},
+      GZNRSM = #{gznrsm,jdbcType=VARCHAR},
+      SJGZL = #{sjgzl,jdbcType=DECIMAL},
+      BZ = #{bz,jdbcType=VARCHAR},
+      TJSJ = #{tjsj,jdbcType=VARCHAR},
+      TJZIP = #{tjzip,jdbcType=VARCHAR},
+      RWBH = #{rwbh,jdbcType=VARCHAR},
+      RWMC = #{rwmc,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

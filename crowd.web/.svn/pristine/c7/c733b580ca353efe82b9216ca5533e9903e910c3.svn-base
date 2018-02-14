@@ -1,0 +1,186 @@
+define(function(require, exports, module) {
+	var $$ = jQuery$ = require('jquery');
+	require('plugins/vendor/bootstrap/validator/entrance');
+	require('plugins/vendor/select2/select2.min.css');
+	require('plugins/vendor/select2/select2.full.min');
+	
+	addEvent();
+	$('#formRbxxgl .datepicker').datepicker({
+	    language: 'zh-CN',
+	    autoclose:true,
+	    startDate:date,
+	    todayHighlight:true
+	})
+	function addEvent(){
+		$("#rbxx-edit-modal").on("hidden.bs.modal", function() {
+			$$("#formRbxxgl").bootstrapValidator("validate");
+			$$("#formRbxxgl").data('bootstrapValidator').destroy();
+		})
+		$("#rbxx-edit-modal").on("show.bs.modal", function() {
+			$$("#formRbxxgl").bootstrapValidator();
+			$$("#sqzylb").select2({
+		        tags: true,
+		        createTag:function (decorated, params) {  
+		            return null;  
+		        },  
+		        placeholder:'请选择申请的资源类别'
+		    });
+			$(".select2").css("width","100%");
+		    $(".select2-search__field").css("width","100%");
+		})
+		$("#btnAddDeskstop").click(function() {
+			$("#rbxx-modal-title").text("资源申请");
+			$("input[name='kssysj']").parent("div").parent("div").show();
+			$("input[name='jssysj']").parent("div").parent("div").show();
+			$("#formRbxxgl")[0].reset();
+			$("textarea[name='gznrsm']").text("");
+			$("textarea[name='bz']").text("");
+			$("#wid").val("");
+			// bootstarp 重新验证
+			$("#rbxx-edit-modal").modal("show");
+		});
+		
+
+		$("#btnSave").click(function() {
+			$$("#formRbxxgl").bootstrapValidator("validate");
+			var formRbxxglValidator = $$("#formRbxxgl").data('bootstrapValidator');
+			formRbxxglValidator.validate();
+			if (formRbxxglValidator.isValid()) {
+				var url = basePath + "/deskstop/saveDeskstop";
+				var basicData=$$("#formRbxxgl").serializeArray();
+				basicData = getFormData(basicData);
+				doPostBack(url, basicData, function(data) {
+					var param = getParam(1, 1);
+					queryOrders(1, param);
+					$("#rbxx-edit-modal").modal("hide");
+				});
+			}
+		});
+	}
+	
+	function getFormData(basicData){
+	     var data = "";
+		 var saveIds="";
+		 data = $$("#sqzylb").select2("data");
+		 saveIds="";
+			for(var i=0;i<data.length;i++){
+				saveIds+=data[i].id+","
+			}
+			if(saveIds.length>=1){
+				saveIds=saveIds.substr(0,saveIds.length-1);
+			}
+			basicData.push({"name":"sqzylbs","value":saveIds});
+			return basicData;
+	}
+	
+	var param = getParam(1, 1);
+	queryOrders(1, param);
+	
+	$(".nav-tabs>li>a").click(function(){
+		var state = $(this).attr("data-state");
+		var param = getParam(state, 1);
+		queryOrders(state, param);
+	});
+	$(document).on('show.bs.modal', '.modal', function (event) {
+        var zIndex = 9999 + (10 * $('.modal:visible').length);
+        $(this).css('z-index', zIndex);
+    });
+	
+	function queryOrders(states, param){
+		_currentState=states;
+		doGet(basePath+"/deskstop/queryDeskstop", param, function(data){
+			$("tbody").empty();
+			var html="";
+			if(data && data.datas){
+				$('.mypaging2').pagination({
+					pageCount:data.pageInfo.totalPage,
+				    showData:data.pageInfo.pageSize,
+				    coping:true,
+				    callback:function(api){
+				    	var _cPage=api.getCurrent();
+				    	var param = getParam(_currentState, _cPage);
+				    	reflashTable(_currentState, param);
+				    }
+				});
+				if(data.datas.length > 0){
+					if(states == "1" || states == "2"){
+						html += '<th class="text-xs-center w-150">地址</th>';
+						html += '<th class="text-xs-center w-100">账号</th>';
+						html += '<th class="text-xs-center w-100">密码</th>';
+						html += '<th class="text-xs-center w-100">配置</th>';
+						html += '<th class="text-xs-center w-100">使用状态</th>';
+						html += '<th class="text-xs-center w-150">开始使用时间</th>';
+						html += '<th class="text-xs-center w-150">结束使用时间</th>';
+						html += '<th class="text-xs-center w-150">申请时间</th>';
+/*						html += '<th class="text-xs-center w-100">申请理由</th>';*/
+						html += '<th class="text-xs-center w-100">审核结果</th>';
+					}else{
+						html += '<th class="text-xs-center w-200">地址</th>';
+						html += '<th class="text-xs-center w-150">账号</th>';
+						html += '<th class="text-xs-center w-150">密码</th>';
+						html += '<th class="text-xs-center w-150">申请时间</th>';
+/*						html += '<th class="text-xs-center w-100">申请理由</th>';*/
+						html += '<th class="text-xs-center w-100">审核结果</th>';
+					}
+				}
+				$('#trans').html(html);
+			}
+			reflashTable(states, param);
+		});
+	}
+	
+	
+	function reflashTable(states, param){
+		doGet(basePath+"/deskstop/queryDeskstop", param ,function(data){
+			$("tbody").empty();
+			var html="";
+			if(data && data.datas){
+				for(var i=0;i<data.datas.length;i++){
+					var result=data.datas[i];
+					html+='<tr class="text-xs-center">';
+					html+='<td title="'+toStr(result.dz)+'">'+toStr(result.dz)+'</td>';
+					html+='<td>'+toStr(result.zh)+'</td>';
+					if(result.syzt == "3"){
+						html+='<td title="资源已过期，密码不可见">******</td>';
+					}else{
+						html+='<td>'+toStr(result.mm)+'</td>';
+					}
+					if(states == "1"){
+						html+='<td>'+toStr(result.pzDisplay)+'</td>';
+					}
+					if(states == "2"){
+						html+='<td>'+toStr(result.sjksl)+'</td>';
+					}
+					if(states == "1" || states == "2"){
+						html+='<td>'+toStr(result.syztDisplay)+'</td>';
+						html+='<td>'+toStr(result.kssysj)+'</td>';
+						html+='<td>'+toStr(result.jssysj)+'</td>';
+					}
+					html+='<td>'+toStr(result.sqsj)+'</td>';
+					html+='<td>'+toStr(result.shjgDisplay)+'</td>';
+					html+='</tr>';
+				}
+			}
+			if(html==""){
+				html='<div class="h-200 vertical-align text-xs-center order-null animation-fade"><div class="vertical-align-middle font-size-18 blue-grey-500">没有符合条件的需求</div></div>'
+			}else{
+				$('.mypaging2').show();
+			}
+			$("tbody").append(html);
+		});
+	}
+	
+	function getParam(states, pageNum, pageSize){
+		var param = "state="+states;
+		if(pageSize){
+			param+="&pageSize="+pageSize;
+		}else{
+			param+="&pageSize=10";
+		}
+		if(pageNum){
+			param+="&pageNum="+pageNum;
+		}
+		return param;
+	}
+
+});

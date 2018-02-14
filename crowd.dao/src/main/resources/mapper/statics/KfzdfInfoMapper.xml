@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.statics.KfzdfInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.statics.KfzdfInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="RWID" property="rwid" jdbcType="VARCHAR" />
+    <result column="FLAG" property="flag" jdbcType="VARCHAR" />
+    <result column="SROCE" property="sroce" jdbcType="DECIMAL" />
+    <result column="COMMENT1" property="comment1" jdbcType="VARCHAR" />
+    <result column="SJSJ" property="sjsj" jdbcType="VARCHAR" />
+    <result column="KFZID" property="kfzid" jdbcType="VARCHAR" />
+    <result column="FSSJ" property="fssj" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, RWID, FLAG, SROCE, COMMENT1, SJSJ, KFZID, FSSJ
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_static_kfzxx_sorce
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_static_kfzxx_sorce
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.statics.KfzdfInfo" >
+    insert into t_crowd_static_kfzxx_sorce (WID, RWID, FLAG, 
+      SROCE, COMMENT1, SJSJ, 
+      KFZID, FSSJ)
+    values (#{wid,jdbcType=VARCHAR}, #{rwid,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR}, 
+      #{sroce,jdbcType=DECIMAL}, #{comment1,jdbcType=VARCHAR}, #{sjsj,jdbcType=VARCHAR}, 
+      #{kfzid,jdbcType=VARCHAR}, #{fssj,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.statics.KfzdfInfo" >
+    insert into t_crowd_static_kfzxx_sorce
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="rwid != null" >
+        RWID,
+      </if>
+      <if test="flag != null" >
+        FLAG,
+      </if>
+      <if test="sroce != null" >
+        SROCE,
+      </if>
+      <if test="comment1 != null" >
+        COMMENT1,
+      </if>
+      <if test="sjsj != null" >
+        SJSJ,
+      </if>
+      <if test="kfzid != null" >
+        KFZID,
+      </if>
+      <if test="fssj != null" >
+        FSSJ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="rwid != null" >
+        #{rwid,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="sroce != null" >
+        #{sroce,jdbcType=DECIMAL},
+      </if>
+      <if test="comment1 != null" >
+        #{comment1,jdbcType=VARCHAR},
+      </if>
+      <if test="sjsj != null" >
+        #{sjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="kfzid != null" >
+        #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="fssj != null" >
+        #{fssj,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.statics.KfzdfInfo" >
+    update t_crowd_static_kfzxx_sorce
+    <set >
+      <if test="rwid != null" >
+        RWID = #{rwid,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        FLAG = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="sroce != null" >
+        SROCE = #{sroce,jdbcType=DECIMAL},
+      </if>
+      <if test="comment1 != null" >
+        COMMENT1 = #{comment1,jdbcType=VARCHAR},
+      </if>
+      <if test="sjsj != null" >
+        SJSJ = #{sjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="kfzid != null" >
+        KFZID = #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="fssj != null" >
+        FSSJ = #{fssj,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.statics.KfzdfInfo" >
+    update t_crowd_static_kfzxx_sorce
+    set RWID = #{rwid,jdbcType=VARCHAR},
+      FLAG = #{flag,jdbcType=VARCHAR},
+      SROCE = #{sroce,jdbcType=DECIMAL},
+      COMMENT1 = #{comment1,jdbcType=VARCHAR},
+      SJSJ = #{sjsj,jdbcType=VARCHAR},
+      KFZID = #{kfzid,jdbcType=VARCHAR},
+      FSSJ = #{fssj,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

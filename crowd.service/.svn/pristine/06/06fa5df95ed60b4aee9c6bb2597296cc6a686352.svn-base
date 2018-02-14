@@ -1,0 +1,39 @@
+package com.wisedu.crowd.service.cwgl.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.dao.cwgl.KfzzhmxInfoMapper;
+import com.wisedu.crowd.entity.cwgl.KfzzhmxInfo;
+import com.wisedu.crowd.entity.log.CustomOperateLog;
+import com.wisedu.crowd.service.cwgl.KfzzhmxInfoService;
+import com.wisedu.crowd.service.dto.DataResult;
+
+@Service("kfzzhmxInfoService")
+public class KfzzhmxInfoServiceImpl implements KfzzhmxInfoService{
+
+	@Autowired
+	private KfzzhmxInfoMapper kfzzhmxInfoMapper;
+	@Override
+	public DataResult<Integer> deleteByPrimaryKey(String wid, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(kfzzhmxInfoMapper.deleteByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<Integer> insertSelective(KfzzhmxInfo record, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(kfzzhmxInfoMapper.insertSelective(record));
+	}
+
+	@Override
+	public DataResult<KfzzhmxInfo> selectByPrimaryKey(String wid, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(kfzzhmxInfoMapper.selectByPrimaryKey(wid));
+		}
+
+	@Override
+	public DataResult<Integer> updateByPrimaryKeySelective(KfzzhmxInfo record, CustomOperateLog log)
+			throws ServiceException {
+		return DataResult.success(kfzzhmxInfoMapper.updateByPrimaryKeySelective(record));
+	}
+
+}

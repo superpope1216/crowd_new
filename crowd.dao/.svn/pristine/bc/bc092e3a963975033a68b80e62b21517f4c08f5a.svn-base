@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisedu.crowd.dao.role.extend.GroupInfoExtendMapper">
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.role.extend.GroupInfoExtend"
+  extends="com.wisedu.crowd.dao.role.GroupInfoMapper.BaseResultMap">
+  </resultMap>
+  <sql id="Base_Column_List">
+    T_CROWD_GROUP.WID, T_CROWD_GROUP.NAME, T_CROWD_GROUP.BM, T_CROWD_GROUP.SFDTYHZ, 
+    T_CROWD_GROUP.SFSY, T_CROWD_GROUP.PX, T_CROWD_GROUP.MS, T_CROWD_GROUP.DTSQL
+  </sql>
+ <sql id="sqlWhere">
+		<if test='query!=null'>
+			<if test='query.wid!=null and query.wid!=""'>
+				AND T_CROWD_GROUP.wid=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.bm!=null and query.bm!=""'>
+				AND T_CROWD_GROUP.BM=#{query.bm,jdbcType=VARCHAR}
+			</if>
+			<if test='query.sfsy!=null'>
+				AND T_CROWD_GROUP.SFSY=#{query.sfsy,jdbcType=DECIMAL}
+			</if>
+			<if test='query.wids!=null and query.wids.size>0'>
+				AND T_CROWD_GROUP.WID IN 
+				<foreach collection="query.wids" item="item" open="(" separator=","  close=")">
+					#{item,jdbcType=VARCHAR}
+				</foreach>
+			</if>
+		</if>
+	</sql>
+	<sql id="sqlOrder">
+		ORDER BY
+		<choose>
+			<when test="orderBy!=null">
+				<foreach collection="orderBy" item="item" open=" " close=" "
+					separator=",">
+					${item}
+				</foreach>
+			</when>
+			<otherwise>
+				T_CROWD_GROUP.px
+			</otherwise>
+		</choose>
+	</sql>
+	<select id="selectDisplayByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List"/>
+		FROM T_CROWD_GROUP
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+		<include refid="sqlOrder"/>
+	</select>
+</mapper>

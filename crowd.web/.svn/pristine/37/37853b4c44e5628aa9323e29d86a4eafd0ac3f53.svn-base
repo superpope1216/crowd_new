@@ -1,0 +1,51 @@
+package com.wisedu.crowd.controller.train;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.wisedu.crowd.common.code.DictionaryEnum;
+import com.wisedu.crowd.controller.BaseController;
+import com.wisedu.crowd.entity.train.TrainBasicInfo;
+import com.wisedu.crowd.interceptor.AuthIsXqfAnnotation;
+import com.wisedu.crowd.interceptor.AuthLoginAnnotation;
+import com.wisedu.crowd.service.dictionary.DictionaryService;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.service.train.TrainBasicInfoService;
+
+@Controller
+@RequestMapping("trainApply")
+public class TrainApplyController extends BaseController{
+
+	@Autowired
+	private DictionaryService dictionaryService;
+	@Autowired
+	private TrainBasicInfoService trainBasicInfoService;
+	 
+	/**k
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("index")
+	@AuthLoginAnnotation
+	public ModelAndView index() throws Exception{
+		ModelAndView mv=new ModelAndView();
+		mv.addObject("pxlx",dictionaryService.selectByCondtion(DictionaryEnum.T_CROWD_SJZD_PXLX, null));
+		mv.addObject("pxkc",dictionaryService.selectByCondtion(DictionaryEnum.T_CROWD_SJZD_PXKC, null));
+		mv.addObject("pxrs",dictionaryService.selectByCondtion(DictionaryEnum.T_CROWD_SJZD_PXRS, null));
+		mv.addObject("pxfs",dictionaryService.selectByCondtion(DictionaryEnum.T_CROWD_SJZD_PXFS, null));
+		mv.setViewName("train/apply");
+		return mv;
+	}
+	
+	@RequestMapping(value = "apply", method = RequestMethod.POST)
+	@ResponseBody
+	@AuthIsXqfAnnotation
+	public DataResult<Integer> apply(TrainBasicInfo trainBasicInfo) throws Exception{
+		return trainBasicInfoService.appply(trainBasicInfo, this.createCustomOperateLog());
+	}
+}

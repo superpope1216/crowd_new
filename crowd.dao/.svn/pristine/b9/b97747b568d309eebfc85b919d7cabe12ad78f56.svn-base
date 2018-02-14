@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.statics.extend.JjrInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.statics.extend.JjrInfoExtend"
+  extends="com.wisedu.crowd.dao.statics.JjrInfoMapper.BaseResultMap" >
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_crowd_static_jjrxx.WID, t_crowd_static_jjrxx.DAYS, 
+    t_crowd_static_jjrxx.FLAG
+  </sql>
+  <select id="selectByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition" resultMap="BaseResultMap">
+  	SELECT 
+  	<include refid="Base_Column_List"/>
+  	FROM t_crowd_static_jjrxx
+  	<where>
+  		<if test='query!=null'>
+  			<if test='query.wid!=null and query.wid!=""'>
+  				AND t_crowd_static_jjrxx.WID=#{query.wid,jdbcType=VARCHAR}
+  			</if>
+  			<if test='query.days!=null and query.days!=""'>
+  				AND t_crowd_static_jjrxx.days=#{query.days,jdbcType=VARCHAR}
+  			</if>
+  			<if test='query.minDay!=null and query.minDay!=""'>
+  			    AND t_crowd_static_jjrxx.days<![CDATA[>=]]>#{query.minDay,jdbcType=VARCHAR}
+  			</if>
+  			<if test='query.maxDay!=null and query.maxDay!=""'>
+  			    AND t_crowd_static_jjrxx.days<![CDATA[<=]]>#{query.maxDay,jdbcType=VARCHAR}
+  			</if>
+  		</if>
+  	</where>
+  	order by t_crowd_static_jjrxx.DAYS
+  </select>
+</mapper>

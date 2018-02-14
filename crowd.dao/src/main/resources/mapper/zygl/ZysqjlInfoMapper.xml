@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.zygl.ZysqjlInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.zygl.ZysqjlInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="SQR" property="sqr" jdbcType="VARCHAR" />
+    <result column="SQSJ" property="sqsj" jdbcType="VARCHAR" />
+    <result column="SQLY" property="sqly" jdbcType="VARCHAR" />
+    <result column="KSSYSJ" property="kssysj" jdbcType="VARCHAR" />
+    <result column="JSSYSJ" property="jssysj" jdbcType="VARCHAR" />
+    <result column="SHJG" property="shjg" jdbcType="INTEGER" />
+    <result column="SHR" property="shr" jdbcType="VARCHAR" />
+    <result column="SHSJ" property="shsj" jdbcType="VARCHAR" />
+    <result column="SHYJ" property="shyj" jdbcType="VARCHAR" />
+    <result column="SQZYLB" property="sqzylb" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, SQR, SQSJ, SQLY, KSSYSJ, JSSYSJ, SHJG, SHR, SHSJ, SHYJ, SQZYLB
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_zygl_sqjl
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_zygl_sqjl
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.zygl.ZysqjlInfo" >
+    insert into t_crowd_zygl_sqjl (WID, SQR, SQSJ, 
+      SQLY, KSSYSJ, JSSYSJ, 
+      SHJG, SHR, SHSJ, SHYJ, 
+      SQZYLB)
+    values (#{wid,jdbcType=VARCHAR}, #{sqr,jdbcType=VARCHAR}, #{sqsj,jdbcType=VARCHAR}, 
+      #{sqly,jdbcType=VARCHAR}, #{kssysj,jdbcType=VARCHAR}, #{jssysj,jdbcType=VARCHAR}, 
+      #{shjg,jdbcType=INTEGER}, #{shr,jdbcType=VARCHAR}, #{shsj,jdbcType=VARCHAR}, #{shyj,jdbcType=VARCHAR}, 
+      #{sqzylb,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.zygl.ZysqjlInfo" >
+    insert into t_crowd_zygl_sqjl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid!=null" >
+        WID,
+      </if>
+      <if test="sqr!=null" >
+        SQR,
+      </if>
+      <if test="sqsj!=null" >
+        SQSJ,
+      </if>
+      <if test="sqly!=null" >
+        SQLY,
+      </if>
+      <if test="kssysj!=null" >
+        KSSYSJ,
+      </if>
+      <if test="jssysj!=null" >
+        JSSYSJ,
+      </if>
+      <if test="shjg!=null" >
+        SHJG,
+      </if>
+      <if test="shr!=null" >
+        SHR,
+      </if>
+      <if test="shsj!=null" >
+        SHSJ,
+      </if>
+      <if test="shyj!=null" >
+        SHYJ,
+      </if>
+      <if test="sqzylb!=null" >
+        SQZYLB,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid!=null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="sqr!=null" >
+        #{sqr,jdbcType=VARCHAR},
+      </if>
+      <if test="sqsj!=null" >
+        #{sqsj,jdbcType=VARCHAR},
+      </if>
+      <if test="sqly!=null" >
+        #{sqly,jdbcType=VARCHAR},
+      </if>
+      <if test="kssysj!=null" >
+        #{kssysj,jdbcType=VARCHAR},
+      </if>
+      <if test="jssysj!=null" >
+        #{jssysj,jdbcType=VARCHAR},
+      </if>
+      <if test="shjg!=null" >
+        #{shjg,jdbcType=INTEGER},
+      </if>
+      <if test="shr!=null">
+        #{shr,jdbcType=VARCHAR},
+      </if>
+      <if test="shsj!=null" >
+        #{shsj,jdbcType=VARCHAR},
+      </if>
+      <if test="shyj!=null" >
+        #{shyj,jdbcType=VARCHAR},
+      </if>
+      <if test="sqzylb!=null" >
+        #{sqzylb,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.zygl.ZysqjlInfo" >
+    update t_crowd_zygl_sqjl
+    <set >
+      <if test="sqr != null" >
+        SQR = #{sqr,jdbcType=VARCHAR},
+      </if>
+      <if test="sqsj != null" >
+        SQSJ = #{sqsj,jdbcType=VARCHAR},
+      </if>
+      <if test="sqly != null" >
+        SQLY = #{sqly,jdbcType=VARCHAR},
+      </if>
+      <if test="kssysj != null" >
+        KSSYSJ = #{kssysj,jdbcType=VARCHAR},
+      </if>
+      <if test="jssysj != null" >
+        JSSYSJ = #{jssysj,jdbcType=VARCHAR},
+      </if>
+      <if test="shjg != null" >
+        SHJG = #{shjg,jdbcType=INTEGER},
+      </if>
+      <if test="shr != null" >
+        SHR = #{shr,jdbcType=VARCHAR},
+      </if>
+      <if test="shsj != null" >
+        SHSJ = #{shsj,jdbcType=VARCHAR},
+      </if>
+      <if test="shyj != null" >
+        SHYJ = #{shyj,jdbcType=VARCHAR},
+      </if>
+      <if test="sqzylb != null" >
+        SQZYLB = #{sqzylb,jdbcType=INTEGER},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.zygl.ZysqjlInfo" >
+    update t_crowd_zygl_sqjl
+    set SQR = #{sqr,jdbcType=VARCHAR},
+      SQSJ = #{sqsj,jdbcType=VARCHAR},
+      SQLY = #{sqly,jdbcType=VARCHAR},
+      KSSYSJ = #{kssysj,jdbcType=VARCHAR},
+      JSSYSJ = #{jssysj,jdbcType=VARCHAR},
+      SHJG = #{shjg,jdbcType=INTEGER},
+      SHR = #{shr,jdbcType=VARCHAR},
+      SHSJ = #{shsj,jdbcType=VARCHAR},
+      SHYJ = #{shyj,jdbcType=VARCHAR},
+      SQZYLB = #{sqzylb,jdbcType=INTEGER}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

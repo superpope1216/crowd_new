@@ -1,0 +1,231 @@
+/**
+ * 
+ */
+
+$(document).ready(function(){
+	queryNewRwxx();
+	function queryNewRwxx(){
+		doGet(basePath+"/first/queryList","",function(data){
+			if(data && data.datas){
+				var html="";
+				for(var i=0;i<data.datas.length;i++){
+					var _data=data.datas[i];
+					html+='<li class="groom-cut-slide">';
+					html+='		<a class=""	href="'+basePath+'/rwxxDetail/index?rwid='+_data.wid+'"	title="" target="_self">';
+					html+='			<img src="'+basePath+'/statics/images/home/'+getImagePath(_data.rwxs,_data.kfkj)+'.png"	alt="" style="margin-top: 10px">';
+					html+='				<span> ';
+					html+='					<b	style="text-align: left">'+_data.rwmc+'</b>';
+					html+='					<p style="overflow: auto;">';
+					html+='						<span	style="text-align: left; float: left; display: inline-block; font-size: 16px;">￥'+_data.xmysje+'元</span>';
+					html+='						<span	style="text-align: center; float: right; display: inline-block; width: 40px; background-color: #ddd; border: none; font-size: 12px; border-radius: 3px; cursor: pointer; display: inline-block; background-color: #65C279; color: #FFF;">'+_data.rwjdDisplay+'</span>';
+					html+='					</p>';
+					html+='					<p	style="overflow: auto; border-top: solid 1px #ddd; color: #999; padding-top: 4px;">';
+					html+='						<span	style="text-align: left; float: left; display: inline-block;">'+_data.kfkjDisplay+'</span>';
+					html+='						<span	style="text-align: center; float: right; cursor: pointer; display: inline-block;">'+_data.zbzq+'天</span>';
+					html+='					</p>';
+					html+='				</span>';
+					html+='		</a>';
+					html+='</li>';
+				}
+				$("#ulNewRwjbxx").html(html);
+			}
+		})
+	}
+	
+	$("#ulMoneyTab li").click(function(){
+		$("#ulMoneyTab li").removeClass("active");
+		$(this).addClass("active");
+		var _option=$(this).attr("data-option");
+		if(_option=="person"){
+			$("#ulPserson").show();
+			$("#ulCompany").hide();
+		}else{
+			$("#ulPserson").hide();
+			$("#ulCompany").show();
+		}
+	});
+	
+/*	$("#ulStarTab li").click(function(){
+		$("#ulStarTab li").removeClass("active");
+		$(this).addClass("active");
+		var _option=$(this).attr("data-option");
+		if(_option=="developer"){
+			$("#ulDeveloper").show();
+			$("#ulDemander").hide();
+		}else{
+			$("#ulDeveloper").hide();
+			$("#ulDemander").show();
+		}
+	});*/
+	
+	getPerson();
+	function getPerson(){
+		doGet(basePath+"/publishing/selectPerson","",function(data){
+			 if(data && data.datas){
+				 var html="";
+				 for(var i=0;i<data.datas.length;i++){
+					 html+=' <li class="info-cut-slide">';
+					 html+='	<a	href="javascript:void(0);"	 target="_self">';
+					 html+='		<img	src="'+basePath+'/image/preView?wid='+data.datas[i].GRZPFJID+'">';
+
+					 html+='		<span>';
+					 html+='			<p></p>';
+					 html+='			<i>累计收入<em>'+data.datas[i].JE+'元</em></i>';
+					 html+='			<b>'+data.datas[i].NC+'</b>';
+					 html+='	    </span>';
+					 html+='	</a>';
+					 html+='</li>';
+				 }
+				 $("#ulPserson").html(html);
+			 }
+		});
+	}
+	
+	getCompany();
+	function getCompany(){
+		doGet(basePath+"/publishing/selectCompany","",function(data){
+			 if(data && data.datas){
+				 var html="";
+				 for(var i=0;i<data.datas.length;i++){
+					 html+=' <li class="info-cut-slide">';
+					 html+='	<a	href="javascript:void(0);"	 target="_self">';
+					 //html+='		<img	src="'+basePath+'/image/preView?wid='+data.datas[i].kfzid+'">';
+					 html+='		<img	src="'+basePath+'/image/preView?wid='+data.datas[i].GRZPFJID+'">';
+					 html+='		<span>';
+					 html+='			<p></p>';
+					 html+='			<i>累计收入<em>'+data.datas[i].JE+'元</em></i>';
+					 html+='			<b>'+data.datas[i].NC+'</b>';
+					 html+='	    </span>';
+					 html+='	</a>';
+					 html+='</li>';
+				 }
+				 $("#ulCompany").html(html);
+			 }
+		});
+	}
+	getStaticsData();
+	function getStaticsData(){
+		doGet(basePath+"/first/getStaticsData","",function(data){
+			if(data && data.datas){
+				var _data=data.datas;
+				 $("#pTotalMoney").html(toStr(_data.fbxqzje,0));
+				 $("#pTotalMoney").attr("data-animatetarget",parseInt(toStr(_data.fbxqzje,0)));
+				 $('#pTotalMoney').running();
+				 
+				 $("#pTotalCount").html(toStr(_data.fbxqzs,0));
+				 $("#pTotalCount").attr("data-animatetarget",parseInt(toStr(_data.fbxqzs,0)));
+				 $('#pTotalCount').running();
+				 
+				 $("#pTotalXqf").html(toStr(_data.shxqf,0));
+				 $("#pTotalXqf").attr("data-animatetarget",parseInt(toStr(_data.shxqf,0)));
+				 $('#pTotalXqf').running();
+				 
+				 $("#pTotalKfz").html(toStr(_data.shkfz,0));
+				 $("#pTotalKfz").attr("data-animatetarget",parseInt(_data.shkfz,0));
+				 $('#pTotalKfz').running();
+			}
+		});
+	}
+//	getTotalMoney();
+//	
+//	function getTotalMoney(){
+//		doGet(basePath+"/first/getTotalMoney","",function(data){
+//			 if(data && data.datas){
+//				
+//				 
+//			 }
+//		});
+//	}
+//	getTotalCount();
+//	function getTotalCount(){
+//		doGet(basePath+"/first/getTotalCount","",function(data){
+//			 if(data && data.datas){
+//				 $("#pTotalCount").html(data.datas);
+//				 $("#pTotalCount").attr("data-animatetarget",data.datas);
+//				 $('#pTotalCount').running();
+//			 }
+//		});
+//	}
+//	getKfzCount();
+//	function getKfzCount(){
+//		doGet(basePath+"/first/getKfzCount","",function(data){
+//			 if(data && data.datas){
+//				 $("#pTotalKfz").html(data.datas);
+//				 $("#pTotalKfz").attr("data-animatetarget",data.datas);
+//				 $('#pTotalKfz').running();
+//			 }
+//		});
+//	}
+//	getXqfCount();
+//	function getXqfCount(){
+//		doGet(basePath+"/first/getXqfCount","",function(data){
+//			 if(data && data.datas){
+//				 $("#pTotalXqf").html(data.datas);
+//				 $("#pTotalXqf").attr("data-animatetarget",data.datas);
+//				 $('#pTotalXqf').running();
+//			 }
+//		});
+//	}
+	
+	getDeveloperStar();
+	function getDeveloperStar(){
+		doGet(basePath+"/publishing/selectDeveloperStar","",function(data){
+			 if(data && data.datas){
+				 var html="";
+				 for(var i=0;i<data.datas.length;i++){
+					 var rowData = data.datas[i];
+					 
+					 var content="";
+					 content+="<div class=\'score-detail\'>工时得分："+rowData.gzldf+"</div>";
+					 content+="<div class=\'score-detail\'>中标得分："+rowData.zbdf+"</div></br>";
+					 content+="<div class=\'score-detail\'>验收得分："+rowData.ysdf+"</div>";
+					 content+="<div class=\'score-detail\'>评价得分："+rowData.pjdf+"</div></br>";
+					 content+="<div class=\'score-detail\'>BUG得分："+rowData.bugdf+"</div>";
+					 content+="<div class=\'score-detail\'>延期得分："+rowData.yqdf+"</div></br>";
+					 content+="<div class=\'score-detail\'>日报得分："+rowData.rbdf+"</div>";
+					 
+					 html+='<li class="info-cut-slide">'
+					 html+=' <div class="col-xs-12 col-sm-12 star-card">';
+					 html+=' <div class="col-xs-4 col-sm-4">';
+					 if(rowData.grzp){
+						 html+='<img class="img-responsive headImg" src="'+basePath+'/image/preView?wid='+rowData.grzp+'">';
+					 }else{
+						 html+='<img class="img-responsive headImg" src="'+basePath+'/statics/images/card/kfz.png">';
+					 }
+					 html+='</div>';
+					 html+='<div class="col-xs-8 col-sm-8">';
+					 html+='<div class="star-card-name"><span style="color:#000;">'+rowData.kfzxm+'</span><span style="color:red;margin-left:5px;">'+(parseInt(rowData.score)>=100?100:rowData.score)+'</span><span style="color:#000;">分</span></div>';
+					 html+='<div class="star-card-see" data-trigger="hover" data-html="true" title="得分明细" data-container="body" data-toggle="popover" data-placement="bottom" data-content="'+content+'">查看明细</div>';
+					 html+='</div>';
+					 html+='</div>';
+					 html+='</li>';
+				 }
+				 $("#ulDeveloper").html(html);
+				 $("[data-toggle='popover']").popover();
+			 }
+		});
+	}
+	
+/*	getDemanderStar();
+	function getDemanderStar(){
+		doGet(basePath+"/publishing/selectDemanderStar","",function(data){
+			 if(data && data.datas){
+				 var html="";
+				 for(var i=0;i<data.datas.length;i++){
+					 html+=' <li class="info-cut-slide">';
+					 html+='	<a	href="javascript:void(0);"	 target="_self">';
+					 html+='		<img	src="'+basePath+'/image/preView?wid='+data.datas[i].kfzid+'">';
+					 html+='		<span>';
+					 html+='			<p></p>';
+					 html+='			<i>累计收入<em>'+data.datas[i].je+'元</em></i>';
+					 html+='			<b>'+data.datas[i].xqfxm+'</b>';
+					 html+='	    </span>';
+					 html+='	</a>';
+					 html+='</li>';
+				 }
+				 $("#ulDemander").html(html);
+			 }
+		});
+	}*/
+	
+});

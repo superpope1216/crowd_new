@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.train.TrainEnrolInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.train.TrainEnrolInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="PXID" property="pxid" jdbcType="VARCHAR" />
+    <result column="XYID" property="xyid" jdbcType="VARCHAR" />
+    <result column="JCJNJC" property="jcjnjc" jdbcType="DECIMAL" />
+    <result column="KCJZ" property="kcjz" jdbcType="DECIMAL" />
+    <result column="CQL" property="cql" jdbcType="DECIMAL" />
+    <result column="KHSJ" property="khsj" jdbcType="VARCHAR" />
+    <result column="KHJG" property="khjg" jdbcType="DECIMAL" />
+    <result column="NLPG" property="nlpg" jdbcType="DECIMAL" />
+    <result column="ZSBH" property="zsbh" jdbcType="VARCHAR" />
+    <result column="FJ" property="fj" jdbcType="VARCHAR" />
+    <result column="YYKHSJ" property="yykhsj" jdbcType="VARCHAR" />
+    <result column="BMZT" property="bmzt" jdbcType="DECIMAL" />
+    <result column="YYKHZT" property="yykhzt" jdbcType="DECIMAL" />
+    <result column="DZZS" property="dzzs" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.wisedu.crowd.entity.train.TrainEnrolInfo" extends="BaseResultMap" >
+    <result column="QKMS" property="qkms" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, PXID, XYID, JCJNJC, KCJZ, CQL, KHSJ, KHJG, NLPG, ZSBH, FJ, YYKHSJ, BMZT, YYKHZT, 
+    DZZS
+  </sql>
+  <sql id="Blob_Column_List" >
+    QKMS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_crowd_train_enrol
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_train_enrol
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.train.TrainEnrolInfo" >
+    insert into t_crowd_train_enrol (WID, PXID, XYID, 
+      JCJNJC, KCJZ, CQL, 
+      KHSJ, KHJG, NLPG, ZSBH, 
+      FJ, YYKHSJ, BMZT, YYKHZT, 
+      DZZS, QKMS)
+    values (#{wid,jdbcType=VARCHAR}, #{pxid,jdbcType=VARCHAR}, #{xyid,jdbcType=VARCHAR}, 
+      #{jcjnjc,jdbcType=DECIMAL}, #{kcjz,jdbcType=DECIMAL}, #{cql,jdbcType=DECIMAL}, 
+      #{khsj,jdbcType=VARCHAR}, #{khjg,jdbcType=DECIMAL}, #{nlpg,jdbcType=DECIMAL}, #{zsbh,jdbcType=VARCHAR}, 
+      #{fj,jdbcType=VARCHAR}, #{yykhsj,jdbcType=VARCHAR}, #{bmzt,jdbcType=DECIMAL}, #{yykhzt,jdbcType=DECIMAL}, 
+      #{dzzs,jdbcType=VARCHAR}, #{qkms,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.train.TrainEnrolInfo" >
+    insert into t_crowd_train_enrol
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="pxid != null" >
+        PXID,
+      </if>
+      <if test="xyid != null" >
+        XYID,
+      </if>
+      <if test="jcjnjc != null" >
+        JCJNJC,
+      </if>
+      <if test="kcjz != null" >
+        KCJZ,
+      </if>
+      <if test="cql != null" >
+        CQL,
+      </if>
+      <if test="khsj != null" >
+        KHSJ,
+      </if>
+      <if test="khjg != null" >
+        KHJG,
+      </if>
+      <if test="nlpg != null" >
+        NLPG,
+      </if>
+      <if test="zsbh != null" >
+        ZSBH,
+      </if>
+      <if test="fj != null" >
+        FJ,
+      </if>
+      <if test="yykhsj != null" >
+        YYKHSJ,
+      </if>
+      <if test="bmzt != null" >
+        BMZT,
+      </if>
+      <if test="yykhzt != null" >
+        YYKHZT,
+      </if>
+      <if test="dzzs != null" >
+        DZZS,
+      </if>
+      <if test="qkms != null" >
+        QKMS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="pxid != null" >
+        #{pxid,jdbcType=VARCHAR},
+      </if>
+      <if test="xyid != null" >
+        #{xyid,jdbcType=VARCHAR},
+      </if>
+      <if test="jcjnjc != null" >
+        #{jcjnjc,jdbcType=DECIMAL},
+      </if>
+      <if test="kcjz != null" >
+        #{kcjz,jdbcType=DECIMAL},
+      </if>
+      <if test="cql != null" >
+        #{cql,jdbcType=DECIMAL},
+      </if>
+      <if test="khsj != null" >
+        #{khsj,jdbcType=VARCHAR},
+      </if>
+      <if test="khjg != null" >
+        #{khjg,jdbcType=DECIMAL},
+      </if>
+      <if test="nlpg != null" >
+        #{nlpg,jdbcType=DECIMAL},
+      </if>
+      <if test="zsbh != null" >
+        #{zsbh,jdbcType=VARCHAR},
+      </if>
+      <if test="fj != null" >
+        #{fj,jdbcType=VARCHAR},
+      </if>
+      <if test="yykhsj != null" >
+        #{yykhsj,jdbcType=VARCHAR},
+      </if>
+      <if test="bmzt != null" >
+        #{bmzt,jdbcType=DECIMAL},
+      </if>
+      <if test="yykhzt != null" >
+        #{yykhzt,jdbcType=DECIMAL},
+      </if>
+      <if test="dzzs != null" >
+        #{dzzs,jdbcType=VARCHAR},
+      </if>
+      <if test="qkms != null" >
+        #{qkms,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.train.TrainEnrolInfo" >
+    update t_crowd_train_enrol
+    <set >
+      <if test="pxid != null" >
+        PXID = #{pxid,jdbcType=VARCHAR},
+      </if>
+      <if test="xyid != null" >
+        XYID = #{xyid,jdbcType=VARCHAR},
+      </if>
+      <if test="jcjnjc != null" >
+        JCJNJC = #{jcjnjc,jdbcType=DECIMAL},
+      </if>
+      <if test="kcjz != null" >
+        KCJZ = #{kcjz,jdbcType=DECIMAL},
+      </if>
+      <if test="cql != null" >
+        CQL = #{cql,jdbcType=DECIMAL},
+      </if>
+      <if test="khsj != null" >
+        KHSJ = #{khsj,jdbcType=VARCHAR},
+      </if>
+      <if test="khjg != null" >
+        KHJG = #{khjg,jdbcType=DECIMAL},
+      </if>
+      <if test="nlpg != null" >
+        NLPG = #{nlpg,jdbcType=DECIMAL},
+      </if>
+      <if test="zsbh != null" >
+        ZSBH = #{zsbh,jdbcType=VARCHAR},
+      </if>
+      <if test="fj != null" >
+        FJ = #{fj,jdbcType=VARCHAR},
+      </if>
+      <if test="yykhsj != null" >
+        YYKHSJ = #{yykhsj,jdbcType=VARCHAR},
+      </if>
+      <if test="bmzt != null" >
+        BMZT = #{bmzt,jdbcType=DECIMAL},
+      </if>
+      <if test="yykhzt != null" >
+        YYKHZT = #{yykhzt,jdbcType=DECIMAL},
+      </if>
+      <if test="dzzs != null" >
+        DZZS = #{dzzs,jdbcType=VARCHAR},
+      </if>
+      <if test="qkms != null" >
+        QKMS = #{qkms,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wisedu.crowd.entity.train.TrainEnrolInfo" >
+    update t_crowd_train_enrol
+    set PXID = #{pxid,jdbcType=VARCHAR},
+      XYID = #{xyid,jdbcType=VARCHAR},
+      JCJNJC = #{jcjnjc,jdbcType=DECIMAL},
+      KCJZ = #{kcjz,jdbcType=DECIMAL},
+      CQL = #{cql,jdbcType=DECIMAL},
+      KHSJ = #{khsj,jdbcType=VARCHAR},
+      KHJG = #{khjg,jdbcType=DECIMAL},
+      NLPG = #{nlpg,jdbcType=DECIMAL},
+      ZSBH = #{zsbh,jdbcType=VARCHAR},
+      FJ = #{fj,jdbcType=VARCHAR},
+      YYKHSJ = #{yykhsj,jdbcType=VARCHAR},
+      BMZT = #{bmzt,jdbcType=DECIMAL},
+      YYKHZT = #{yykhzt,jdbcType=DECIMAL},
+      DZZS = #{dzzs,jdbcType=VARCHAR},
+      QKMS = #{qkms,jdbcType=LONGVARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.train.TrainEnrolInfo" >
+    update t_crowd_train_enrol
+    set PXID = #{pxid,jdbcType=VARCHAR},
+      XYID = #{xyid,jdbcType=VARCHAR},
+      JCJNJC = #{jcjnjc,jdbcType=DECIMAL},
+      KCJZ = #{kcjz,jdbcType=DECIMAL},
+      CQL = #{cql,jdbcType=DECIMAL},
+      KHSJ = #{khsj,jdbcType=VARCHAR},
+      KHJG = #{khjg,jdbcType=DECIMAL},
+      NLPG = #{nlpg,jdbcType=DECIMAL},
+      ZSBH = #{zsbh,jdbcType=VARCHAR},
+      FJ = #{fj,jdbcType=VARCHAR},
+      YYKHSJ = #{yykhsj,jdbcType=VARCHAR},
+      BMZT = #{bmzt,jdbcType=DECIMAL},
+      YYKHZT = #{yykhzt,jdbcType=DECIMAL},
+      DZZS = #{dzzs,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.statics.KfzjlMonthMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.statics.KfzjlMonth" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="KFZID" property="kfzid" jdbcType="VARCHAR" />
+    <result column="MONTH" property="month" jdbcType="VARCHAR" />
+    <result column="YQL" property="yql" jdbcType="DECIMAL" />
+    <result column="WGL" property="wgl" jdbcType="DECIMAL" />
+    <result column="BUGZDL" property="bugzdl" jdbcType="DECIMAL" />
+    <result column="GZL" property="gzl" jdbcType="DECIMAL" />
+    <result column="RBL" property="rbl" jdbcType="DECIMAL" />
+    <result column="SHJSL" property="shjsl" jdbcType="DECIMAL" />
+    <result column="BUGL" property="bugl" jdbcType="DECIMAL" />
+    <result column="YWX" property="ywx" jdbcType="VARCHAR" />
+    <result column="BZWGL" property="bzwgl" jdbcType="VARCHAR" />
+    <result column="BZGZL" property="bzgzl" jdbcType="VARCHAR" />
+    <result column="YQL_SCORE" property="yqlScore" jdbcType="DECIMAL" />
+    <result column="WGL_SCORE" property="wglScore" jdbcType="DECIMAL" />
+    <result column="BUGZDL_SCORE" property="bugzdlScore" jdbcType="DECIMAL" />
+    <result column="GZL_SCORE" property="gzlScore" jdbcType="DECIMAL" />
+    <result column="JBL_SCORE" property="jblScore" jdbcType="DECIMAL" />
+    <result column="SHJSL_SCORE" property="shjslScore" jdbcType="DECIMAL" />
+    <result column="BUGL_SCORE" property="buglScore" jdbcType="DECIMAL" />
+    <result column="WGLL" property="wgll" jdbcType="DECIMAL" />
+    <result column="GZLL" property="gzll" jdbcType="DECIMAL" />
+    <result column="SCORE_SJ" property="scoreSj" jdbcType="DECIMAL" />
+    <result column="YWXMC" property="ywxmc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, KFZID, MONTH, YQL, WGL, BUGZDL, GZL, RBL, SHJSL, BUGL, YWX, BZWGL, BZGZL, YQL_SCORE, 
+    WGL_SCORE, BUGZDL_SCORE, GZL_SCORE, JBL_SCORE, SHJSL_SCORE, BUGL_SCORE, WGLL, GZLL,SCORE_SJ,YWXMC
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from USR_CROWD.T_CROWD_STATIC_KFZJL_MONTH
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from USR_CROWD.T_CROWD_STATIC_KFZJL_MONTH
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.statics.KfzjlMonth" >
+    insert into USR_CROWD.T_CROWD_STATIC_KFZJL_MONTH (WID, KFZID, MONTH, 
+      YQL, WGL, BUGZDL, GZL, 
+      RBL, SHJSL, BUGL, YWX, 
+      BZWGL, BZGZL, YQL_SCORE, 
+      WGL_SCORE, BUGZDL_SCORE, GZL_SCORE, 
+      JBL_SCORE, SHJSL_SCORE, BUGL_SCORE, 
+      WGLL, GZLL, SCORE_SJ, YWXMC)
+    values (#{wid,jdbcType=VARCHAR}, #{kfzid,jdbcType=VARCHAR}, #{month,jdbcType=VARCHAR}, 
+      #{yql,jdbcType=DECIMAL}, #{wgl,jdbcType=DECIMAL}, #{bugzdl,jdbcType=DECIMAL}, #{gzl,jdbcType=DECIMAL}, 
+      #{rbl,jdbcType=DECIMAL}, #{shjsl,jdbcType=DECIMAL}, #{bugl,jdbcType=DECIMAL}, #{ywx,jdbcType=VARCHAR}, 
+      #{bzwgl,jdbcType=VARCHAR}, #{bzgzl,jdbcType=VARCHAR}, #{yqlScore,jdbcType=DECIMAL}, 
+      #{wglScore,jdbcType=DECIMAL}, #{bugzdlScore,jdbcType=DECIMAL}, #{gzlScore,jdbcType=DECIMAL}, 
+      #{jblScore,jdbcType=DECIMAL}, #{shjslScore,jdbcType=DECIMAL}, #{buglScore,jdbcType=DECIMAL}, 
+      #{wgll,jdbcType=DECIMAL}, #{gzll,jdbcType=DECIMAL}, #{scoreSj,jdbcType=DECIMAL}, #{ywxmc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.statics.KfzjlMonth" >
+    insert into USR_CROWD.T_CROWD_STATIC_KFZJL_MONTH
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="kfzid != null" >
+        KFZID,
+      </if>
+      <if test="month != null" >
+        MONTH,
+      </if>
+      <if test="yql != null" >
+        YQL,
+      </if>
+      <if test="wgl != null" >
+        WGL,
+      </if>
+      <if test="bugzdl != null" >
+        BUGZDL,
+      </if>
+      <if test="gzl != null" >
+        GZL,
+      </if>
+      <if test="rbl != null" >
+        RBL,
+      </if>
+      <if test="shjsl != null" >
+        SHJSL,
+      </if>
+      <if test="bugl != null" >
+        BUGL,
+      </if>
+      <if test="ywx != null" >
+        YWX,
+      </if>
+      <if test="bzwgl != null" >
+        BZWGL,
+      </if>
+      <if test="bzgzl != null" >
+        BZGZL,
+      </if>
+      <if test="yqlScore != null" >
+        YQL_SCORE,
+      </if>
+      <if test="wglScore != null" >
+        WGL_SCORE,
+      </if>
+      <if test="bugzdlScore != null" >
+        BUGZDL_SCORE,
+      </if>
+      <if test="gzlScore != null" >
+        GZL_SCORE,
+      </if>
+      <if test="jblScore != null" >
+        JBL_SCORE,
+      </if>
+      <if test="shjslScore != null" >
+        SHJSL_SCORE,
+      </if>
+      <if test="buglScore != null" >
+        BUGL_SCORE,
+      </if>
+      <if test="wgll != null" >
+        WGLL,
+      </if>
+      <if test="gzll != null" >
+        GZLL,
+      </if>
+      <if test="scoreSj != null" >
+        SCORE_SJ,
+      </if>
+      <if test="ywxmc != null" >
+        YWXMC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="kfzid != null" >
+        #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="yql != null" >
+        #{yql,jdbcType=DECIMAL},
+      </if>
+      <if test="wgl != null" >
+        #{wgl,jdbcType=DECIMAL},
+      </if>
+      <if test="bugzdl != null" >
+        #{bugzdl,jdbcType=DECIMAL},
+      </if>
+      <if test="gzl != null" >
+        #{gzl,jdbcType=DECIMAL},
+      </if>
+      <if test="rbl != null" >
+        #{rbl,jdbcType=DECIMAL},
+      </if>
+      <if test="shjsl != null" >
+        #{shjsl,jdbcType=DECIMAL},
+      </if>
+      <if test="bugl != null" >
+        #{bugl,jdbcType=DECIMAL},
+      </if>
+      <if test="ywx != null" >
+        #{ywx,jdbcType=VARCHAR},
+      </if>
+      <if test="bzwgl != null" >
+        #{bzwgl,jdbcType=VARCHAR},
+      </if>
+      <if test="bzgzl != null" >
+        #{bzgzl,jdbcType=VARCHAR},
+      </if>
+      <if test="yqlScore != null" >
+        #{yqlScore,jdbcType=DECIMAL},
+      </if>
+      <if test="wglScore != null" >
+        #{wglScore,jdbcType=DECIMAL},
+      </if>
+      <if test="bugzdlScore != null" >
+        #{bugzdlScore,jdbcType=DECIMAL},
+      </if>
+      <if test="gzlScore != null" >
+        #{gzlScore,jdbcType=DECIMAL},
+      </if>
+      <if test="jblScore != null" >
+        #{jblScore,jdbcType=DECIMAL},
+      </if>
+      <if test="shjslScore != null" >
+        #{shjslScore,jdbcType=DECIMAL},
+      </if>
+      <if test="buglScore != null" >
+        #{buglScore,jdbcType=DECIMAL},
+      </if>
+      <if test="wgll != null" >
+        #{wgll,jdbcType=DECIMAL},
+      </if>
+      <if test="gzll != null" >
+        #{gzll,jdbcType=DECIMAL},
+      </if>
+      <if test="scoreSj != null" >
+        #{scoreSj,jdbcType=DECIMAL},
+      </if>
+      <if test="ywxmc != null" >
+        #{ywxmc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.statics.KfzjlMonth" >
+    update USR_CROWD.T_CROWD_STATIC_KFZJL_MONTH
+    <set >
+      <if test="kfzid != null" >
+        KFZID = #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        MONTH = #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="yql != null" >
+        YQL = #{yql,jdbcType=DECIMAL},
+      </if>
+      <if test="wgl != null" >
+        WGL = #{wgl,jdbcType=DECIMAL},
+      </if>
+      <if test="bugzdl != null" >
+        BUGZDL = #{bugzdl,jdbcType=DECIMAL},
+      </if>
+      <if test="gzl != null" >
+        GZL = #{gzl,jdbcType=DECIMAL},
+      </if>
+      <if test="rbl != null" >
+        RBL = #{rbl,jdbcType=DECIMAL},
+      </if>
+      <if test="shjsl != null" >
+        SHJSL = #{shjsl,jdbcType=DECIMAL},
+      </if>
+      <if test="bugl != null" >
+        BUGL = #{bugl,jdbcType=DECIMAL},
+      </if>
+      <if test="ywx != null" >
+        YWX = #{ywx,jdbcType=VARCHAR},
+      </if>
+      <if test="bzwgl != null" >
+        BZWGL = #{bzwgl,jdbcType=VARCHAR},
+      </if>
+      <if test="bzgzl != null" >
+        BZGZL = #{bzgzl,jdbcType=VARCHAR},
+      </if>
+      <if test="yqlScore != null" >
+        YQL_SCORE = #{yqlScore,jdbcType=DECIMAL},
+      </if>
+      <if test="wglScore != null" >
+        WGL_SCORE = #{wglScore,jdbcType=DECIMAL},
+      </if>
+      <if test="bugzdlScore != null" >
+        BUGZDL_SCORE = #{bugzdlScore,jdbcType=DECIMAL},
+      </if>
+      <if test="gzlScore != null" >
+        GZL_SCORE = #{gzlScore,jdbcType=DECIMAL},
+      </if>
+      <if test="jblScore != null" >
+        JBL_SCORE = #{jblScore,jdbcType=DECIMAL},
+      </if>
+      <if test="shjslScore != null" >
+        SHJSL_SCORE = #{shjslScore,jdbcType=DECIMAL},
+      </if>
+      <if test="buglScore != null" >
+        BUGL_SCORE = #{buglScore,jdbcType=DECIMAL},
+      </if>
+      <if test="wgll != null" >
+        WGLL = #{wgll,jdbcType=DECIMAL},
+      </if>
+      <if test="gzll != null" >
+        GZLL = #{gzll,jdbcType=DECIMAL},
+      </if>
+      <if test="scoreSj != null" >
+        SCORE_SJ = #{scoreSj,jdbcType=DECIMAL},
+      </if>
+      <if test="ywxmc != null" >
+        YWXMC = #{ywxmc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.statics.KfzjlMonth" >
+    update USR_CROWD.T_CROWD_STATIC_KFZJL_MONTH
+    set KFZID = #{kfzid,jdbcType=VARCHAR},
+      MONTH = #{month,jdbcType=VARCHAR},
+      YQL = #{yql,jdbcType=DECIMAL},
+      WGL = #{wgl,jdbcType=DECIMAL},
+      BUGZDL = #{bugzdl,jdbcType=DECIMAL},
+      GZL = #{gzl,jdbcType=DECIMAL},
+      RBL = #{rbl,jdbcType=DECIMAL},
+      SHJSL = #{shjsl,jdbcType=DECIMAL},
+      BUGL = #{bugl,jdbcType=DECIMAL},
+      YWX = #{ywx,jdbcType=VARCHAR},
+      BZWGL = #{bzwgl,jdbcType=VARCHAR},
+      BZGZL = #{bzgzl,jdbcType=VARCHAR},
+      YQL_SCORE = #{yqlScore,jdbcType=DECIMAL},
+      WGL_SCORE = #{wglScore,jdbcType=DECIMAL},
+      BUGZDL_SCORE = #{bugzdlScore,jdbcType=DECIMAL},
+      GZL_SCORE = #{gzlScore,jdbcType=DECIMAL},
+      JBL_SCORE = #{jblScore,jdbcType=DECIMAL},
+      SHJSL_SCORE = #{shjslScore,jdbcType=DECIMAL},
+      BUGL_SCORE = #{buglScore,jdbcType=DECIMAL},
+      WGLL = #{wgll,jdbcType=DECIMAL},
+      GZLL = #{gzll,jdbcType=DECIMAL},
+      SCORE_SJ = #{scoreSj,jdbcType=DECIMAL},
+      YWXMC = #{ywxmc,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

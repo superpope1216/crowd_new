@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.yhgl.extend.XqfxxInfoExtendMapper" >
+
+
+  <resultMap id="BaseDisplayResultMap" type="com.wisedu.crowd.entity.yhgl.extend.XqfxxInfoExtend" 
+   extends="com.wisedu.crowd.dao.yhgl.XqfxxInfoMapper.BaseResultMap">
+     <result column="USER_RANAGE_DISPLAY" property="userRangeDisplay"
+	   jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_crowd_yhgl_xqfxx.WID, t_crowd_yhgl_xqfxx.YHID, t_crowd_yhgl_xqfxx.XQFDWMC, 
+    t_crowd_yhgl_xqfxx.SZDQ, t_crowd_yhgl_xqfxx.XM, t_crowd_yhgl_xqfxx.NC, 
+    t_crowd_yhgl_xqfxx.SFZJH, t_crowd_yhgl_xqfxx.GH, t_crowd_yhgl_xqfxx.LXYDZYX, 
+    t_crowd_yhgl_xqfxx.ZHYE, t_crowd_yhgl_xqfxx.ZHDJYE, t_crowd_yhgl_xqfxx.CZSJ, 
+    t_crowd_yhgl_xqfxx.CZZIP,t_crowd_yhgl_xqfxx.SHZT, t_crowd_yhgl_xqfxx.SHYJ, 
+    t_crowd_yhgl_xqfxx.XQFLB, t_crowd_yhgl_xqfxx.SSGS, t_crowd_yhgl_xqfxx.SSYWX, 
+    t_crowd_yhgl_xqfxx.zpfjid, t_crowd_yhgl_xqfxx.qqh, t_crowd_yhgl_xqfxx.wxh, 
+    t_crowd_yhgl_xqfxx.zfbzh,t_crowd_yhgl_xqfxx.PER_PROVINCE,t_crowd_yhgl_xqfxx.PER_CITY,
+    t_crowd_yhgl_xqfxx.PER_AREA,t_crowd_yhgl_xqfxx.USER_RANGE,
+    t_crowd_yhgl_xqfxx.SFZZMZTJID,t_crowd_yhgl_xqfxx.SFZFMZTJID,t_crowd_yhgl_xqfxx.VERSION,
+    t_crowd_yhgl_xqfxx.COMPANY_MC, t_crowd_yhgl_xqfxx.ENTERPRISE_QUALIFICATE_TYPE, 
+    t_crowd_yhgl_xqfxx.BUSINESS_LICENCE_SCANNER, t_crowd_yhgl_xqfxx.BUSINESS_LICENCE_NO, 
+    t_crowd_yhgl_xqfxx.ORGANIZATE_CODE_SCANNER, t_crowd_yhgl_xqfxx.ORGANIZATE_CODE_NO, 
+    t_crowd_yhgl_xqfxx.TAX_REGISTRATION_SCANNER, t_crowd_yhgl_xqfxx.TAX_REGISTRATION_NO, 
+    t_crowd_yhgl_xqfxx.SOCIAL_CREDIT_CODE
+  </sql>
+    <sql id="Base_Display_Column_List" >
+      <include refid="Base_Column_List"></include>
+       ,t_crowd_sjzd_user_range.LBMC as USER_RANAGE_DISPLAY 
+    </sql>
+  <sql id="sqlWhere">
+  	<if test="query!=null">
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND t_crowd_yhgl_xqfxx.wid=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.yhid!=null and query.yhid!=""'>
+  			AND t_crowd_yhgl_xqfxx.yhid=#{query.yhid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.nc!=null and query.nc!=""'>
+  			AND t_crowd_yhgl_xqfxx.nc=#{query.nc,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.sfzjh!=null and query.sfzjh!=""'>
+  			AND t_crowd_yhgl_xqfxx.sfzjh=#{query.sfzjh,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.lxydzyx!=null and query.lxydzyx!=""'>
+  			AND t_crowd_yhgl_xqfxx.LXYDZYX=#{query.lxydzyx,jdbcType=VARCHAR}
+  		</if>
+  	</if>
+  </sql>
+  <select id="selectByCondition" resultMap="BaseDisplayResultMap" parameterType="com.wisedu.crowd.entity.dto.QueryCondition">
+  		SELECT
+  		<include refid="Base_Display_Column_List"/>
+  		FROM t_crowd_yhgl_xqfxx t_crowd_yhgl_xqfxx
+  		
+  		 LEFT JOIN t_crowd_sjzd_user_range t_crowd_sjzd_user_range on
+         t_crowd_sjzd_user_range.LBDM=t_crowd_yhgl_xqfxx.USER_RANGE AND
+         t_crowd_sjzd_user_range.SFSY=1
+         
+  		<where>
+  			<include refid="sqlWhere"/>
+  		</where> 
+  </select>
+  <update id="updateByVersion" parameterType="com.wisedu.crowd.entity.yhgl.XqfxxInfo">
+  	update t_crowd_yhgl_xqfxx
+    <set >
+      <if test="yhid != null" >
+        YHID = #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="xqfdwmc != null" >
+        XQFDWMC = #{xqfdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="szdq != null" >
+        SZDQ = #{szdq,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        XM = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="nc != null" >
+        NC = #{nc,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzjh != null" >
+        SFZJH = #{sfzjh,jdbcType=VARCHAR},
+      </if>
+      <if test="lxydzyx != null" >
+        LXYDZYX = #{lxydzyx,jdbcType=VARCHAR},
+      </if>
+      <if test="zhye != null" >
+        ZHYE = #{zhye,jdbcType=DECIMAL},
+      </if>
+      <if test="czsj != null" >
+        CZSJ = #{czsj,jdbcType=DATE},
+      </if>
+      <if test="czzip != null" >
+        CZZIP = #{czzip,jdbcType=VARCHAR},
+      </if>
+      <if test="shzt != null" >
+        SHZT = #{shzt,jdbcType=VARCHAR},
+      </if>
+      <if test="xqflb != null" >
+        XQFLB = #{xqflb,jdbcType=VARCHAR},
+      </if>
+      <if test="zpfjid != null" >
+        ZPFJID = #{zpfjid,jdbcType=VARCHAR},
+      </if>
+      <if test="zhdjye != null" >
+        ZHDJYE = #{zhdjye,jdbcType=DECIMAL},
+      </if>
+      <if test="shyj != null" >
+        SHYJ = #{shyj,jdbcType=VARCHAR},
+      </if>
+      <if test="qqh != null" >
+        QQH = #{qqh,jdbcType=VARCHAR},
+      </if>
+      <if test="wxh != null" >
+        WXH = #{wxh,jdbcType=VARCHAR},
+      </if>
+      <if test="zfbzh != null" >
+        ZFBZH = #{zfbzh,jdbcType=VARCHAR},
+      </if>
+      <if test="gh != null" >
+        GH = #{gh,jdbcType=VARCHAR},
+      </if>
+      <if test="ssgs != null" >
+        SSGS = #{ssgs,jdbcType=VARCHAR},
+      </if>
+      <if test="ssywx != null" >
+        SSYWX = #{ssywx,jdbcType=VARCHAR},
+      </if>
+      <if test="perProvince != null" >
+        PER_PROVINCE = #{perProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="perCity != null" >
+        PER_CITY = #{perCity,jdbcType=VARCHAR},
+      </if>
+      <if test="perArea != null" >
+        PER_AREA = #{perArea,jdbcType=VARCHAR},
+      </if>
+      <if test="userRange != null" >
+        USER_RANGE = #{userRange,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzzmztjid != null" >
+        SFZZMZTJID = #{sfzzmztjid,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzfmztjid != null" >
+        SFZFMZTJID = #{sfzfmztjid,jdbcType=VARCHAR},
+      </if>
+       <if test="version !=null">
+      	VERSION=#{version,jdbcType=INTEGER}+1,
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR} AND VERSION=#{version,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectCountByCondition" resultType="int">
+  		SELECT COUNT(0) FROM T_CROWD_YHGL_XQFXX
+  		<where>
+  			<include refid="sqlWhere"/>
+  		</where>
+  </select>
+</mapper>

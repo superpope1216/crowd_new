@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.gzzx.PtjyInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.gzzx.PtjyInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="FBSJ" property="fbsj" jdbcType="VARCHAR" />
+    <result column="FBR" property="fbr" jdbcType="VARCHAR" />
+    <result column="XYSJ" property="xysj" jdbcType="VARCHAR" />
+    <result column="XYR" property="xyr" jdbcType="VARCHAR" />
+    <result column="WCSJ" property="wcsj" jdbcType="VARCHAR" />
+    <result column="CLR" property="clr" jdbcType="VARCHAR" />
+    <result column="ZT" property="zt" jdbcType="VARCHAR" />
+    <result column="CLYJ" property="clyj" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, CONTENT, FBSJ, FBR, XYSJ, XYR, WCSJ, CLR, ZT, CLYJ
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_ptjy_ptjy
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_ptjy_ptjy
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.gzzx.PtjyInfo" >
+    insert into t_crowd_ptjy_ptjy (WID, CONTENT, FBSJ, 
+      FBR, XYSJ, XYR, WCSJ, 
+      CLR, ZT, CLYJ)
+    values (#{wid,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{fbsj,jdbcType=VARCHAR}, 
+      #{fbr,jdbcType=VARCHAR}, #{xysj,jdbcType=VARCHAR}, #{xyr,jdbcType=VARCHAR}, #{wcsj,jdbcType=VARCHAR}, 
+      #{clr,jdbcType=VARCHAR}, #{zt,jdbcType=VARCHAR}, #{clyj,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.gzzx.PtjyInfo" >
+    insert into t_crowd_ptjy_ptjy
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="fbsj != null" >
+        FBSJ,
+      </if>
+      <if test="fbr != null" >
+        FBR,
+      </if>
+      <if test="xysj != null" >
+        XYSJ,
+      </if>
+      <if test="xyr != null" >
+        XYR,
+      </if>
+      <if test="wcsj != null" >
+        WCSJ,
+      </if>
+      <if test="clr != null" >
+        CLR,
+      </if>
+      <if test="zt != null" >
+        ZT,
+      </if>
+      <if test="clyj != null" >
+        CLYJ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="fbsj != null" >
+        #{fbsj,jdbcType=VARCHAR},
+      </if>
+      <if test="fbr != null" >
+        #{fbr,jdbcType=VARCHAR},
+      </if>
+      <if test="xysj != null" >
+        #{xysj,jdbcType=VARCHAR},
+      </if>
+      <if test="xyr != null" >
+        #{xyr,jdbcType=VARCHAR},
+      </if>
+      <if test="wcsj != null" >
+        #{wcsj,jdbcType=VARCHAR},
+      </if>
+      <if test="clr != null" >
+        #{clr,jdbcType=VARCHAR},
+      </if>
+      <if test="zt != null" >
+        #{zt,jdbcType=VARCHAR},
+      </if>
+      <if test="clyj != null" >
+        #{clyj,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.gzzx.PtjyInfo" >
+    update t_crowd_ptjy_ptjy
+    <set >
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="fbsj != null" >
+        FBSJ = #{fbsj,jdbcType=VARCHAR},
+      </if>
+      <if test="fbr != null" >
+        FBR = #{fbr,jdbcType=VARCHAR},
+      </if>
+      <if test="xysj != null" >
+        XYSJ = #{xysj,jdbcType=VARCHAR},
+      </if>
+      <if test="xyr != null" >
+        XYR = #{xyr,jdbcType=VARCHAR},
+      </if>
+      <if test="wcsj != null" >
+        WCSJ = #{wcsj,jdbcType=VARCHAR},
+      </if>
+      <if test="clr != null" >
+        CLR = #{clr,jdbcType=VARCHAR},
+      </if>
+      <if test="zt != null" >
+        ZT = #{zt,jdbcType=VARCHAR},
+      </if>
+      <if test="clyj != null" >
+        CLYJ = #{clyj,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.gzzx.PtjyInfo" >
+    update t_crowd_ptjy_ptjy
+    set CONTENT = #{content,jdbcType=VARCHAR},
+      FBSJ = #{fbsj,jdbcType=VARCHAR},
+      FBR = #{fbr,jdbcType=VARCHAR},
+      XYSJ = #{xysj,jdbcType=VARCHAR},
+      XYR = #{xyr,jdbcType=VARCHAR},
+      WCSJ = #{wcsj,jdbcType=VARCHAR},
+      CLR = #{clr,jdbcType=VARCHAR},
+      ZT = #{zt,jdbcType=VARCHAR},
+      CLYJ = #{clyj,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

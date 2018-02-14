@@ -1,0 +1,83 @@
+package com.wisedu.crowd.entity.xtgl;
+
+public class YwxdzbInfo {
+    /**
+     * 
+     */
+    private String wid;
+
+    /**
+     * 
+     */
+    private String yywx;
+
+    /**
+     * 
+     */
+    private String xywx;
+
+    /**
+     * 
+     * @return WID 
+     */
+    public String getWid() {
+        return wid;
+    }
+
+    /**
+     * 
+     * @param wid 
+     */
+    public void setWid(String wid) {
+        this.wid = wid == null ? null : wid.trim();
+    }
+
+    /**
+     * 
+     * @return YYWX 
+     */
+    public String getYywx() {
+        return yywx;
+    }
+
+    /**
+     * 
+     * @param yywx 
+     */
+    public void setYywx(String yywx) {
+        this.yywx = yywx == null ? null : yywx.trim();
+    }
+
+    /**
+     * 
+     * @return XYWX 
+     */
+    public String getXywx() {
+        return xywx;
+    }
+
+    /**
+     * 
+     * @param xywx 
+     */
+    public void setXywx(String xywx) {
+        this.xywx = xywx == null ? null : xywx.trim();
+    }
+
+    /**
+     *
+     * @mbggenerated 2017-12-27
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", wid=").append(wid);
+        sb.append(", yywx=").append(yywx);
+        sb.append(", xywx=").append(xywx);
+        sb.append("]");
+        return sb.toString();
+    }
+}

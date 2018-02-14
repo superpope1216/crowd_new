@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.statics.extend.XqfzfInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.statics.extend.XqfzfInfoExtend"
+  extends="com.wisedu.crowd.dao.statics.XqfzfInfoMapper.BaseResultMap" >
+  </resultMap>
+  <sql id="Base_Column_List" >
+    T_CROWD_STATIC_XQFDF_TOTAL.WID, T_CROWD_STATIC_XQFDF_TOTAL.XQFID, T_CROWD_STATIC_XQFDF_TOTAL.XQFXM, 
+    T_CROWD_STATIC_XQFDF_TOTAL.MONTH, T_CROWD_STATIC_XQFDF_TOTAL.SHDF, T_CROWD_STATIC_XQFDF_TOTAL.YSDF, 
+    T_CROWD_STATIC_XQFDF_TOTAL.PJDF, T_CROWD_STATIC_XQFDF_TOTAL.ZJBUGDF, T_CROWD_STATIC_XQFDF_TOTAL.ZJXQDF, 
+    T_CROWD_STATIC_XQFDF_TOTAL.ZDGBDF, T_CROWD_STATIC_XQFDF_TOTAL.QXDF, T_CROWD_STATIC_XQFDF_TOTAL.SCORE, 
+    T_CROWD_STATIC_XQFDF_TOTAL.FBRWS, T_CROWD_STATIC_XQFDF_TOTAL.JE, T_CROWD_STATIC_XQFDF_TOTAL.YJBM, 
+    T_CROWD_STATIC_XQFDF_TOTAL.EJBM, T_CROWD_STATIC_XQFDF_TOTAL.SSBM, T_CROWD_STATIC_XQFDF_TOTAL.GH
+  </sql>
+  <select id="selectByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition" resultMap="BaseResultMap">
+  	SELECT 
+  	<include refid="Base_Column_List"/>
+  	FROM T_CROWD_STATIC_XQFDF_TOTAL
+  	<where>
+  		<if test='query!=null'>
+  			<if test='query.wid!=null and query.wid!=""'>
+  				AND T_CROWD_STATIC_XQFDF_TOTAL.WID=#{query.wid,jdbcType=VARCHAR}
+  			</if>
+  			<if test='query.month!=null and query.month!=""'>
+  				AND T_CROWD_STATIC_XQFDF_TOTAL.month=#{query.month,jdbcType=VARCHAR}
+  			</if>
+  		</if>
+  	</where>
+  	order by T_CROWD_STATIC_XQFDF_TOTAL.SCORE DESC
+  </select>
+</mapper>

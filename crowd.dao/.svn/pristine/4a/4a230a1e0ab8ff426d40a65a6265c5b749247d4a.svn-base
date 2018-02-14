@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.statics.XqfGzjdInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.statics.XqfGzjdInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="XQFID" property="xqfid" jdbcType="VARCHAR" />
+    <result column="XM" property="xm" jdbcType="VARCHAR" />
+    <result column="YJBM" property="yjbm" jdbcType="VARCHAR" />
+    <result column="EJBM" property="ejbm" jdbcType="VARCHAR" />
+    <result column="YFB" property="yfb" jdbcType="DECIMAL" />
+    <result column="DSH" property="dsh" jdbcType="DECIMAL" />
+    <result column="ZBZ" property="zbz" jdbcType="DECIMAL" />
+    <result column="KFZ" property="kfz" jdbcType="DECIMAL" />
+    <result column="YSZ" property="ysz" jdbcType="DECIMAL" />
+    <result column="YWC" property="ywc" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, XQFID, XM, YJBM, EJBM, YFB, DSH, ZBZ, KFZ, YSZ, YWC
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_CROWD_STATIC_XQFGZJD
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_CROWD_STATIC_XQFGZJD
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.statics.XqfGzjdInfo" >
+    insert into T_CROWD_STATIC_XQFGZJD (WID, XQFID, XM, 
+      YJBM, EJBM, YFB, DSH, 
+      ZBZ, KFZ, YSZ, YWC
+      )
+    values (#{wid,jdbcType=VARCHAR}, #{xqfid,jdbcType=VARCHAR}, #{xm,jdbcType=VARCHAR}, 
+      #{yjbm,jdbcType=VARCHAR}, #{ejbm,jdbcType=VARCHAR}, #{yfb,jdbcType=DECIMAL}, #{dsh,jdbcType=DECIMAL}, 
+      #{zbz,jdbcType=DECIMAL}, #{kfz,jdbcType=DECIMAL}, #{ysz,jdbcType=DECIMAL}, #{ywc,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.statics.XqfGzjdInfo" >
+    insert into T_CROWD_STATIC_XQFGZJD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="xqfid != null" >
+        XQFID,
+      </if>
+      <if test="xm != null" >
+        XM,
+      </if>
+      <if test="yjbm != null" >
+        YJBM,
+      </if>
+      <if test="ejbm != null" >
+        EJBM,
+      </if>
+      <if test="yfb != null" >
+        YFB,
+      </if>
+      <if test="dsh != null" >
+        DSH,
+      </if>
+      <if test="zbz != null" >
+        ZBZ,
+      </if>
+      <if test="kfz != null" >
+        KFZ,
+      </if>
+      <if test="ysz != null" >
+        YSZ,
+      </if>
+      <if test="ywc != null" >
+        YWC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="xqfid != null" >
+        #{xqfid,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="yjbm != null" >
+        #{yjbm,jdbcType=VARCHAR},
+      </if>
+      <if test="ejbm != null" >
+        #{ejbm,jdbcType=VARCHAR},
+      </if>
+      <if test="yfb != null" >
+        #{yfb,jdbcType=DECIMAL},
+      </if>
+      <if test="dsh != null" >
+        #{dsh,jdbcType=DECIMAL},
+      </if>
+      <if test="zbz != null" >
+        #{zbz,jdbcType=DECIMAL},
+      </if>
+      <if test="kfz != null" >
+        #{kfz,jdbcType=DECIMAL},
+      </if>
+      <if test="ysz != null" >
+        #{ysz,jdbcType=DECIMAL},
+      </if>
+      <if test="ywc != null" >
+        #{ywc,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.statics.XqfGzjdInfo" >
+    update T_CROWD_STATIC_XQFGZJD
+    <set >
+      <if test="xqfid != null" >
+        XQFID = #{xqfid,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        XM = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="yjbm != null" >
+        YJBM = #{yjbm,jdbcType=VARCHAR},
+      </if>
+      <if test="ejbm != null" >
+        EJBM = #{ejbm,jdbcType=VARCHAR},
+      </if>
+      <if test="yfb != null" >
+        YFB = #{yfb,jdbcType=DECIMAL},
+      </if>
+      <if test="dsh != null" >
+        DSH = #{dsh,jdbcType=DECIMAL},
+      </if>
+      <if test="zbz != null" >
+        ZBZ = #{zbz,jdbcType=DECIMAL},
+      </if>
+      <if test="kfz != null" >
+        KFZ = #{kfz,jdbcType=DECIMAL},
+      </if>
+      <if test="ysz != null" >
+        YSZ = #{ysz,jdbcType=DECIMAL},
+      </if>
+      <if test="ywc != null" >
+        YWC = #{ywc,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.statics.XqfGzjdInfo" >
+    update T_CROWD_STATIC_XQFGZJD
+    set XQFID = #{xqfid,jdbcType=VARCHAR},
+      XM = #{xm,jdbcType=VARCHAR},
+      YJBM = #{yjbm,jdbcType=VARCHAR},
+      EJBM = #{ejbm,jdbcType=VARCHAR},
+      YFB = #{yfb,jdbcType=DECIMAL},
+      DSH = #{dsh,jdbcType=DECIMAL},
+      ZBZ = #{zbz,jdbcType=DECIMAL},
+      KFZ = #{kfz,jdbcType=DECIMAL},
+      YSZ = #{ysz,jdbcType=DECIMAL},
+      YWC = #{ywc,jdbcType=DECIMAL}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

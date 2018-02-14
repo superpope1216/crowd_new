@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.train.extend.TrainBasicInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.train.extend.TrainBasicInfoExtend"
+  extends="com.wisedu.crowd.dao.train.TrainBasicInfoMapper.BaseResultMap" >
+  	  <result column="sqr_Display" property="sqrDisplay" jdbcType="VARCHAR" />
+  	  <result column="pxkc_Display" property="pxkcDisplay" jdbcType="VARCHAR" />
+  	  <result column="pxrs_Display" property="pxrsDisplay" jdbcType="VARCHAR" />
+  	  <result column="sfwxs_pxDisplay" property="sfwxspx_Display" jdbcType="VARCHAR" />
+  	  <result column="pxzt_Display" property="pxztDisplay" jdbcType="VARCHAR" />
+  	  <result column="pxlx_Display" property="pxlxDisplay" jdbcType="VARCHAR" />
+  	 <result column="PXKSSJ" property="pxkssj" jdbcType="VARCHAR" />
+    <result column="PXJSSJ" property="pxjssj" jdbcType="VARCHAR" />
+    <result column="BMKSSJ" property="bmkssj" jdbcType="VARCHAR" />
+    <result column="BMJSSJ" property="bmjssj" jdbcType="VARCHAR" />
+  	  
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_crowd_train_basicinfo.WID, t_crowd_train_basicinfo.PXRWBH, 
+    t_crowd_train_basicinfo.XMBH, t_crowd_train_basicinfo.SQR, 
+    t_crowd_train_basicinfo.PXKC, t_crowd_train_basicinfo.PXLX, 
+    t_crowd_train_basicinfo.PXRS, t_crowd_train_basicinfo.SFWXSPX, 
+    t_crowd_train_basicinfo.PXDD, t_crowd_train_basicinfo.PXJHSJ, t_crowd_train_basicinfo.JGYS, 
+    t_crowd_train_basicinfo.PXYQ, t_crowd_train_basicinfo.SQSJ,
+    t_crowd_train_basicinfo.PXZT, t_crowd_train_basicinfo.SHBZ, t_crowd_train_basicinfo.SHR, 
+    t_crowd_train_basicinfo.PXJG, t_crowd_train_basicinfo.SHSJ
+  </sql>
+  <sql id="sqlWhere">
+  		<if test='query!=null'>
+  			<if test='query.wid!=null and query.wid!=""'>
+  				AND t_crowd_train_basicinfo.wid=#{query.wid,jdbcType=VARCHAR}
+  			</if>
+  			<if test='query.pxlx!=null'>
+  				AND t_crowd_train_basicinfo.pxlx=#{query.pxlx,jdbcType=DECIMAL}
+  			</if>
+  			<if test='query.sfwxspx!=null'>
+  				AND t_crowd_train_basicinfo.sfwxspx=#{query.sfwxspx,jdbcType=DECIMAL}
+  			</if>
+  			<if test='query.pxzt!=null'>
+  				AND t_crowd_train_basicinfo.pxzt=#{query.pxzt,jdbcType=DECIMAL}
+  			</if>
+  			
+  		</if>
+  </sql>
+  <sql id="sqlOrder">
+  		ORDER BY 
+  		<choose>
+  			<when test="orderBy!=null">
+  				<foreach collection="orderBy" item="item" open=" " close=" " separator=",">
+  					${item}
+  				</foreach>
+  			</when>
+  			<otherwise>
+  				T_CROWD_TRAIN_PLAN.BMKSSJ desc 
+  			</otherwise>
+  		</choose>
+  </sql>
+  <select id="selectPlanDisplayByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition" resultMap="BaseResultMap">
+  		SELECT 
+  		<include refid="Base_Column_List"/>
+  		,t_crowd_yhgl_xqfxx.xm as sqr_Display
+  		,t_crowd_sjzd_pxkc.lbmc as pxkc_Display
+  		,t_crowd_sjzd_pxrs.lbmc as pxrs_Display
+  		,t_crowd_sjzd_pxfs.lbmc as pxrs_Display
+  		,T_CROWD_SJZD_PXZT.lbmc as pxzt_Display
+  		,T_CROWD_SJZD_PXLX.lbmc as pxlx_Display
+  		,T_CROWD_TRAIN_PLAN.PXKSSJ 
+  		,T_CROWD_TRAIN_PLAN.PXJSSJ 
+  		,T_CROWD_TRAIN_PLAN.BMKSSJ 
+  		,T_CROWD_TRAIN_PLAN.BMJSSJ
+  		FROM T_CROWD_TRAIN_PLAN,t_crowd_train_basicinfo
+  		left join t_crowd_yhgl_xqfxx on t_crowd_train_basicinfo.sqr=t_crowd_yhgl_xqfxx.wid  
+  		left join t_crowd_sjzd_pxkc on t_crowd_train_basicinfo.PXKC=t_crowd_sjzd_pxkc.lbdm and t_crowd_sjzd_pxkc.sfsy=1
+  		left join t_crowd_sjzd_pxrs on t_crowd_train_basicinfo.PXRS=t_crowd_sjzd_pxrs.lbdm and t_crowd_sjzd_pxrs.sfsy=1
+  		left join t_crowd_sjzd_pxfs on t_crowd_train_basicinfo.SFWXSPX=t_crowd_sjzd_pxfs.lbdm and t_crowd_sjzd_pxfs.sfsy=1
+  		left join T_CROWD_SJZD_PXZT on t_crowd_train_basicinfo.PXZT=T_CROWD_SJZD_PXZT.lbdm and T_CROWD_SJZD_PXZT.sfsy=1
+  		left join T_CROWD_SJZD_PXLX on t_crowd_train_basicinfo.PXLX=T_CROWD_SJZD_PXLX.lbdm and T_CROWD_SJZD_PXLX.sfsy=1
+  		where t_crowd_train_basicinfo.wid=T_CROWD_TRAIN_PLAN.pxid
+  		<include refid="sqlWhere"/>
+  		<include refid="sqlOrder"/>
+  </select>
+</mapper>

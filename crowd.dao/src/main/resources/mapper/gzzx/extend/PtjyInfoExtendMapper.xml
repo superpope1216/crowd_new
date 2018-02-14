@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.gzzx.extend.PtjyInfoExtendMapper">
+	<resultMap id="BaseDisplayResultMap"
+		type="com.wisedu.crowd.entity.gzzx.extend.PtjyInfoExtend" extends="com.wisedu.crowd.dao.gzzx.PtjyInfoMapper.BaseResultMap">
+		<result column="ztDisplay" property="ztDisplay" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		t_crowd_ptjy_ptjy.WID, t_crowd_ptjy_ptjy.CONTENT,
+		t_crowd_ptjy_ptjy.FBSJ,
+		t_crowd_ptjy_ptjy.FBR,
+		t_crowd_ptjy_ptjy.XYSJ,
+		t_crowd_ptjy_ptjy.XYR, t_crowd_ptjy_ptjy.WCSJ, t_crowd_ptjy_ptjy.CLR,
+		t_crowd_ptjy_ptjy.ZT,
+		t_crowd_ptjy_ptjy.CLYJ
+	</sql>
+	<sql id="sqlWhere">
+		<if test="query!=null">
+			<if test='query.wid!=null and query.wid!=""'>
+				AND t_crowd_ptjy_ptjy.WID=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.zt!=null and query.zt!=""'>
+				AND t_crowd_ptjy_ptjy.ZT=#{query.zt,jdbcType=VARCHAR}
+			</if>
+			<if test='query.content!=null and query.content!=""'>
+				AND t_crowd_ptjy_ptjy.CONTENT LIKE
+				MYCONCAT('%',#{query.content,jdbcType=VARCHAR},'%')
+			</if>
+
+		</if>
+	</sql>
+	<sql id="sqlOrder">
+		order by 
+		<choose>
+			<when test="orderBy!=null">
+				<foreach collection="orderBy" open=" " close=" " item="item" separator=",">
+					${item}
+				</foreach>
+			</when>
+			<otherwise>
+				t_crowd_ptjy_ptjy.FBSJ DESC
+			</otherwise>
+		</choose>
+	</sql>
+	<select id="selectDisplayByCondition" resultMap="BaseDisplayResultMap"
+		parameterType="com.wisedu.crowd.entity.dto.QueryCondition">
+		SELECT
+		<include refid="Base_Column_List" />
+		,T_CROWD_SJZD_PTJYZT.lbmc as ztDisplay
+		from t_crowd_ptjy_ptjy left join
+		T_CROWD_SJZD_PTJYZT on
+		t_crowd_ptjy_ptjy.zt=T_CROWD_SJZD_PTJYZT.lbdm
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+		<include refid="sqlOrder"></include>
+	</select>
+</mapper>

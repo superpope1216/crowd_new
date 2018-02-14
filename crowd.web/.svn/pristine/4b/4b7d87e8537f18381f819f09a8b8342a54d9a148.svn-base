@@ -1,0 +1,250 @@
+package com.wisedu.crowd.controller.xqfxx;
+
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.wisedu.crowd.common.code.HttpCodeEnum;
+import com.wisedu.crowd.common.code.SmsMessageTempleateEnum;
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.common.util.CommonUtil;
+import com.wisedu.crowd.common.util.ConditionUtil;
+import com.wisedu.crowd.common.util.ConstantsUtil;
+import com.wisedu.crowd.common.util.SessionUser;
+import com.wisedu.crowd.common.util.SessionUserUtil;
+import com.wisedu.crowd.common.util.StringUtil;
+import com.wisedu.crowd.controller.BaseController;
+import com.wisedu.crowd.entity.yhgl.YhjbxxInfo;
+import com.wisedu.crowd.entity.yhgl.extend.XqfxxInfoExtend;
+import com.wisedu.crowd.entity.yhgl.extend.YhjbxxInfoExtend;
+import com.wisedu.crowd.interceptor.AuthXqfAnnotation;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.service.messages.EmailSendMessage;
+import com.wisedu.crowd.service.messages.SmsSendMessage;
+import com.wisedu.crowd.service.yhgl.KfzxxInfoService;
+import com.wisedu.crowd.service.yhgl.XqfxxInfoService;
+import com.wisedu.crowd.service.yhgl.YhjbxxInfoService;
+
+/**
+ * 需求方账号管理
+ * @author 11651
+ *
+ */
+@Controller
+@RequestMapping("xqfAccount")
+public class XqfAccountController extends BaseController{
+	
+    
+	 @Autowired
+	 private YhjbxxInfoService  yhjbxxInfoService;
+	 
+	 @Autowired
+	 private SmsSendMessage smsSendMessage;
+	 
+	 @Autowired
+	 private EmailSendMessage emailSendMessage;
+	 
+	 @Autowired
+	 private XqfxxInfoService xqfxxInfoService;
+	
+
+
+		@RequestMapping("index")
+		@AuthXqfAnnotation
+		public String index(Model model) throws Exception{
+			model.addAttribute("sjh",yhjbxxInfoService.selectByPrimaryKey(this.getYhId()).getSjh());
+			XqfxxInfoExtend  xqfxxInfoExtend=new XqfxxInfoExtend();
+			xqfxxInfoExtend.setYhid(this.getYhId());
+			model.addAttribute("xqfEmail",xqfxxInfoService.selectByCondition(ConditionUtil.createCondition(xqfxxInfoExtend), this.createCustomOperateLog()).getDatas().get(0).getLxydzyx());
+            return "xqfgl/account/xqfAccount";
+		}
+		
+		/**
+		 * 修改账户密码 开发方需求方 通用
+		 * @param oldPassword
+		 * @param newPassword
+		 * @param confirmPassword
+		 * @return
+		 * @throws Exception
+		 */
+		@ResponseBody
+		@RequestMapping("fixPassword")
+		public DataResult<Integer> fixPassword(String oldPassword,String newPassword,String confirmPassword) throws Exception{
+			YhjbxxInfo yhjbxxInfo =new YhjbxxInfo();
+			yhjbxxInfo.setWid(this.getYhId());
+			yhjbxxInfo.setYhmm(oldPassword);
+			yhjbxxInfoService.fixYhjbxxPassword(yhjbxxInfo, newPassword, confirmPassword, createCustomOperateLog());
+			return DataResult.success(1);
+		}
+		
+		/**
+		 * 修改手机号 发送验证码
+		 * @param phone
+		 * @param request
+		 * @return
+		 * @throws Exception
+		 */
+		@RequestMapping("sendPhoneVerification")
+		@ResponseBody
+		public DataResult<Integer> sendPhoneVerification(@RequestParam String phone,HttpServletRequest request) throws Exception{
+			if(StringUtil.isEmpty(phone)){
+				throw new ServiceException("手机号不能为空，请输入！");
+			}
+			if(StringUtil.isEmpty(this.getYhId())){
+				throw new ServiceException(HttpCodeEnum.USER_INVALID.getCode(),HttpCodeEnum.USER_INVALID.getName());
+			}
+			if(!StringUtil.isEmpty(this.getSjh())){
+				if(phone.equals(this.getSjh())){
+					throw new ServiceException(HttpCodeEnum.SAME_PHONE.getCode(),HttpCodeEnum.SAME_PHONE.getName());
+	             }
+			}
+			
+			String verification=StringUtil.radomString(4);
+			//判断手机号是否存在
+			YhjbxxInfoExtend  yhjbxxInfo=new YhjbxxInfoExtend();
+			yhjbxxInfo.setSjh(phone);
+			yhjbxxInfo.setWid(this.getYhId());
+			if(!yhjbxxInfoService.checkYhjbxxSjh(yhjbxxInfo, this.createCustomOperateLog())){
+				throw new ServiceException(HttpCodeEnum.EXIST_PHONE.getCode(),HttpCodeEnum.EXIST_PHONE.getName());
+           }
+			try{
+			String content=SmsMessageTempleateEnum.TITLE.getName()+String.format(SmsMessageTempleateEnum.REGISTER.getName(), verification);
+			smsSendMessage.sendMessage(phone, content);
+			}catch(Exception e){
+				e.printStackTrace();
+				throw new ServiceException("发送失败");
+			}
+			SessionUser sessionUser=new SessionUser(phone, verification, new Date());
+			request.getSession().setAttribute(ConstantsUtil.PHONE_VERIFICATION, sessionUser);
+			return DataResult.success(1);
+		}
+		
+		
+		/**
+		 * 修改邮箱   发送验证码
+		 * @param phone
+		 * @param request
+		 * @return
+		 * @throws Exception
+		 */
+		@RequestMapping("sendEmailVerification")
+		@ResponseBody
+		public DataResult<Integer> sendEmailVerification(@RequestParam String email,HttpServletRequest request) throws Exception{
+			if(StringUtil.isEmpty(email)){
+				throw new ServiceException("邮箱不能为空，请输入！");
+			}
+			if(StringUtil.isEmpty(this.getYhId())){
+				throw new ServiceException(HttpCodeEnum.USER_INVALID.getCode(),HttpCodeEnum.USER_INVALID.getName());
+			}
+			
+			if(!StringUtil.isEmpty(this.getXqfxx())&&!StringUtil.isEmpty(this.getXqfxx().getLxydzyx())){
+				if(email.equals(this.getXqfxx().getLxydzyx())){
+					throw new ServiceException(HttpCodeEnum.SAME_EMAIL.getCode(),HttpCodeEnum.SAME_EMAIL.getName());
+	             }
+			}
+			
+			String verification=StringUtil.radomString(4);
+			//判断邮箱是否存在
+			XqfxxInfoExtend xqfxxInfoExtend=new XqfxxInfoExtend();
+			xqfxxInfoExtend.setLxydzyx(email);
+			xqfxxInfoExtend.setYhid(this.getYhId());
+			if(!xqfxxInfoService.checkXqfEmail(xqfxxInfoExtend,this.createCustomOperateLog())){
+				throw new ServiceException(HttpCodeEnum.EXIST_EMAIL.getCode(),HttpCodeEnum.EXIST_EMAIL.getName());
+            }
+			
+			try{
+			String content=SmsMessageTempleateEnum.TITLE.getName()+String.format(SmsMessageTempleateEnum.REGISTER.getName(), verification);
+			List<String> users=new ArrayList<String>();
+			users.add(email);
+			emailSendMessage.sendMessage(users, "邮箱变更", content);
+			}catch(Exception e){
+				e.printStackTrace();
+				throw new ServiceException("发送失败");
+			}
+			SessionUser sessionUser=new SessionUser(email, verification, new Date());
+			request.getSession().setAttribute(ConstantsUtil.EMAIL_VERIFICATION, sessionUser);
+			return DataResult.success(1);
+		}
+		
+		
+		/**
+		 * 修改手机号
+		 * @param phone
+		 * @param captchacode
+		 * @return
+		 * @throws Exception
+		 */
+		@ResponseBody
+		@RequestMapping("fixPhone")
+		public DataResult<Integer> fixPhone(String phone,String captchaCodePhone) throws Exception{
+			
+		   if(StringUtil.isEmpty(captchaCodePhone)||StringUtil.isEmpty(phone)||!validatePhoneCaptchaCode(request,phone,captchaCodePhone)){
+			  throw new ServiceException(HttpCodeEnum.ERROR_CAPTCHACODE.getCode(),HttpCodeEnum.ERROR_CAPTCHACODE.getName());
+           }
+		   if(StringUtil.isEmpty(this.getYhId())){
+				throw new ServiceException(HttpCodeEnum.USER_INVALID.getCode(),HttpCodeEnum.USER_INVALID.getName());
+			}
+			YhjbxxInfo yhjbxxInfo =new YhjbxxInfo();
+			yhjbxxInfo.setWid(this.getYhId());
+			yhjbxxInfo.setSjh(phone);
+			yhjbxxInfoService.saveYhjbxxInfo(yhjbxxInfo, this.createCustomOperateLog());
+			
+			//更新session
+			YhjbxxInfoExtend  record=new YhjbxxInfoExtend();
+			record.setWid(this.getYhId());
+			List<YhjbxxInfoExtend> list=yhjbxxInfoService.selectByCondition(record);
+			if(CommonUtil.isNotEmptyList(list)){
+				request.getSession().setAttribute(ConstantsUtil.SESSION_YHJBXX, list.get(0));
+			}
+			return DataResult.success(1);
+		}
+		
+		/**
+		 * 修改邮箱
+		 * @param email
+		 * @param captchacode
+		 * @return
+		 * @throws Exception
+		 */
+		@ResponseBody
+		@RequestMapping("fixEmail")
+		public DataResult<Integer> fixEmail(String email,String captchaCodeEmail) throws Exception{
+			
+		   if(StringUtil.isEmpty(captchaCodeEmail)||!validateEmailCaptchaCode(request,email,captchaCodeEmail)){
+			  throw new ServiceException(HttpCodeEnum.ERROR_CAPTCHACODE.getCode(),HttpCodeEnum.ERROR_CAPTCHACODE.getName());
+           }
+		    if(StringUtil.isEmpty(this.getYhId())){
+				throw new ServiceException(HttpCodeEnum.USER_INVALID.getCode(),HttpCodeEnum.USER_INVALID.getName());
+			}
+		    if(StringUtil.isEmpty(this.getXqfxx())||StringUtil.isEmpty(this.getXqfxx().getWid())){
+		    	throw new ServiceException("当前用户没有开方者信息");
+		    }
+		    XqfxxInfoExtend record=new XqfxxInfoExtend();
+		    record.setWid(this.getXqfxx().getWid());
+		    record.setLxydzyx(email);
+		    record.setYhid(this.getYhId());
+		    xqfxxInfoService.updateByPrimaryKeySelective(record, this.createCustomOperateLog());
+			return DataResult.success(1);
+		}
+		
+		
+		
+	 private boolean validatePhoneCaptchaCode(HttpServletRequest request, String username, String captchaCode) {
+			return SessionUserUtil.validateCaptchaCode(request,ConstantsUtil.PHONE_VERIFICATION, captchaCode);
+		}
+	 
+	 private boolean validateEmailCaptchaCode(HttpServletRequest request, String username, String captchaCode) {
+			return SessionUserUtil.validateCaptchaCode(request,ConstantsUtil.EMAIL_VERIFICATION, captchaCode);
+		}
+		
+}

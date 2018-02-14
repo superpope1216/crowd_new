@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.statics.extend.YwxbugInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.statics.extend.YwxbugInfoExtend"
+  extends="com.wisedu.crowd.dao.statics.YwxbugInfoMapper.BaseResultMap" >
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_Crowd_Static_Ywxbug.WID, t_Crowd_Static_Ywxbug.YWXDM, t_Crowd_Static_Ywxbug.YWXMC, t_Crowd_Static_Ywxbug.JSBUGJE,
+    t_Crowd_Static_Ywxbug.JSZJE, t_Crowd_Static_Ywxbug.ZJBUG, t_Crowd_Static_Ywxbug.MONTH
+  </sql>
+  <sql id="sqlWhere">
+  	<if test="query!=null">
+  		<if test='query.ywxdm!=null and query.ywxdm!=""'>
+			AND YWXDM=#{query.ywxdm,jdbcType=VARCHAR}
+		</if>
+		<if test='query.month!=null and query.month!=""'>
+			AND MONTH=#{query.month,jdbcType=VARCHAR}
+		</if>
+		<if test='query.beginMonth!=null and query.beginMonth!=""'>
+			AND MONTH<![CDATA[>=]]>#{query.beginMonth,jdbcType=VARCHAR}
+		</if>
+		<if test='query.endMonth!=null and query.endMonth!=""'>
+			AND MONTH<![CDATA[<=]]>#{query.endMonth,jdbcType=VARCHAR}
+		</if>
+  	</if>
+		
+	</sql>
+	<select id="selectStaticsMonthYwxbugInfo" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseResultMap">
+		SELECT
+		YWXDM,YWXMC,MONTH,ROUND((JSBUGJE/DECODE(JSZJE,0,null,JSZJE)*100),2) AS
+		BUGL FROM (
+		SELECT YWXDM,YWXMC,MONTH,SUM(NVL(JSBUGJE,0)) AS
+		JSBUGJE,SUM(NVL(JSZJE,0)) AS
+		JSZJE FROM t_Crowd_Static_Ywxbug
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+		GROUP BY
+		YWXDM,YWXMC,MONTH)
+		ORDER BY MONTH 
+	</select>
+	<select id="selectStaticsYwxbugInfo" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseResultMap">
+		SELECT 
+		YWXDM,YWXMC,JSBUGJE,JSZJE,ROUND((DECODE(JSZJE,0,0,JSBUGJE/JSZJE)*100),2) AS
+		BUGL FROM t_Crowd_Static_Ywxbug
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+		ORDER BY YWXDM
+	</select>
+	<select id="selectStaticsMonthBugInfo" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseResultMap">
+		SELECT MONTH,
+       	SUM(JSBUGJE) JSBUGJE,
+        SUM(JSZJE) JSZJE,
+      	ROUND(DECODE(SUM(JSZJE), 0, 0, (SUM(JSBUGJE) / SUM(JSZJE))) * 100, 2) BUGL
+  		FROM T_CROWD_STATIC_YWXBUG
+  		<where>
+			<include refid="sqlWhere"/>
+		</where>
+ 		GROUP BY MONTH
+ 		ORDER BY MONTH
+	</select>
+	<select id="getYwxBugtjxx" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultType="map">
+		SELECT ROUND(DECODE(COUNT(0), 0, 0, SUM(JSBUGJE) / COUNT(0)), 0) PJBUGJE,
+       	ROUND(DECODE(SUM(JSZJE), 0, 0, SUM(JSBUGJE) / SUM(JSZJE)) * 100, 2) PJBUGL
+  		FROM T_CROWD_STATIC_YWXBUG
+  		<where>
+			<include refid="sqlWhere"/>
+		</where>
+ 		GROUP BY YWXDM
+	</select>
+</mapper>

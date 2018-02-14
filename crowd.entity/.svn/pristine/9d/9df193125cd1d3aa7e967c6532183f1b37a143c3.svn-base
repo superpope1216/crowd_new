@@ -1,0 +1,119 @@
+package com.wisedu.crowd.entity.rwgl.extend;
+
+import java.io.Serializable;
+
+import com.wisedu.crowd.entity.rwgl.RwcfxxInfo;
+
+public class RwcfxxInfoExtend extends RwcfxxInfo implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * 开发者姓名
+	 */
+	private String kfzXm;
+	/**
+	 * 开发者昵称
+	 */
+	private String kfzNc;
+	
+	private String rwztDisplay;
+	
+	private Boolean needRwjbxx;
+	
+	private String rwbh;
+	
+	private String rwmc;
+	
+	private String xqfid;
+	
+	private String xqfNc;
+	
+	private String xqfXm;
+	
+	private String jfrq;
+	public Boolean getNeedRwjbxx() {
+		return needRwjbxx;
+	}
+
+	public void setNeedRwjbxx(Boolean needRwjbxx) {
+		this.needRwjbxx = needRwjbxx;
+	}
+	public String getRwbh() {
+		return rwbh;
+	}
+
+	public void setRwbh(String rwbh) {
+		this.rwbh = rwbh;
+	}
+
+	public String getRwmc() {
+		return rwmc;
+	}
+
+	public void setRwmc(String rwmc) {
+		this.rwmc = rwmc;
+	}
+
+	public String getXqfid() {
+		return xqfid;
+	}
+
+	public void setXqfid(String xqfid) {
+		this.xqfid = xqfid;
+	}
+
+	public String getXqfNc() {
+		return xqfNc;
+	}
+
+	public void setXqfNc(String xqfNc) {
+		this.xqfNc = xqfNc;
+	}
+
+	public String getXqfXm() {
+		return xqfXm;
+	}
+
+	public void setXqfXm(String xqfXm) {
+		this.xqfXm = xqfXm;
+	}
+
+	public String getJfrq() {
+		return jfrq;
+	}
+
+	public void setJfrq(String jfrq) {
+		this.jfrq = jfrq;
+	}
+
+	
+
+	public String getKfzXm() {
+		return kfzXm;
+	}
+
+	public void setKfzXm(String kfzXm) {
+		this.kfzXm = kfzXm;
+	}
+
+	public String getKfzNc() {
+		return kfzNc;
+	}
+
+	public void setKfzNc(String kfzNc) {
+		this.kfzNc = kfzNc;
+	}
+
+	public String getRwztDisplay() {
+		return rwztDisplay;
+	}
+
+	public void setRwztDisplay(String rwztDisplay) {
+		this.rwztDisplay = rwztDisplay;
+	}
+
+}

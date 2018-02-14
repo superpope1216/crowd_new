@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.cwgl.YyfzhxxInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.cwgl.YyfzhxxInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="ZFBZH" property="zfbzh" jdbcType="VARCHAR" />
+    <result column="ZHYE" property="zhye" jdbcType="REAL" />
+    <result column="DJJE" property="djje" jdbcType="DECIMAL" />
+    <result column="VERSION" property="version" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, ZFBZH, ZHYE, DJJE, VERSION
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_cwgl_yyfzhxx
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_cwgl_yyfzhxx
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.cwgl.YyfzhxxInfo" >
+    insert into t_crowd_cwgl_yyfzhxx (WID, ZFBZH, ZHYE, 
+      DJJE, VERSION)
+    values (#{wid,jdbcType=VARCHAR}, #{zfbzh,jdbcType=VARCHAR}, #{zhye,jdbcType=REAL}, 
+      #{djje,jdbcType=DECIMAL}, #{version,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.cwgl.YyfzhxxInfo" >
+    insert into t_crowd_cwgl_yyfzhxx
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="zfbzh != null" >
+        ZFBZH,
+      </if>
+      <if test="zhye != null" >
+        ZHYE,
+      </if>
+      <if test="djje != null" >
+        DJJE,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="zfbzh != null" >
+        #{zfbzh,jdbcType=VARCHAR},
+      </if>
+      <if test="zhye != null" >
+        #{zhye,jdbcType=REAL},
+      </if>
+      <if test="djje != null" >
+        #{djje,jdbcType=DECIMAL},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.cwgl.YyfzhxxInfo" >
+    update t_crowd_cwgl_yyfzhxx
+    <set >
+      <if test="zfbzh != null" >
+        ZFBZH = #{zfbzh,jdbcType=VARCHAR},
+      </if>
+      <if test="zhye != null" >
+        ZHYE = #{zhye,jdbcType=REAL},
+      </if>
+      <if test="djje != null" >
+        DJJE = #{djje,jdbcType=DECIMAL},
+      </if>
+      <if test="version != null" >
+        VERSION = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.cwgl.YyfzhxxInfo" >
+    update t_crowd_cwgl_yyfzhxx
+    set ZFBZH = #{zfbzh,jdbcType=VARCHAR},
+      ZHYE = #{zhye,jdbcType=REAL},
+      DJJE = #{djje,jdbcType=DECIMAL},
+      VERSION = #{version,jdbcType=INTEGER}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

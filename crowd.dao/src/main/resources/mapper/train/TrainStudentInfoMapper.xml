@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.train.TrainStudentInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.train.TrainStudentInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="YHID" property="yhid" jdbcType="VARCHAR" />
+    <result column="XM" property="xm" jdbcType="VARCHAR" />
+    <result column="SJ" property="sj" jdbcType="VARCHAR" />
+    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+    <result column="CYNF" property="cynf" jdbcType="VARCHAR" />
+    <result column="FWXX" property="fwxx" jdbcType="VARCHAR" />
+    <result column="SCJS" property="scjs" jdbcType="VARCHAR" />
+    <result column="PXXYZPID" property="pxxyzpid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, YHID, XM, SJ, QQ, CYNF, FWXX, SCJS, PXXYZPID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_train_student
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_train_student
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.train.TrainStudentInfo" >
+    insert into t_crowd_train_student (WID, YHID, XM, 
+      SJ, QQ, CYNF, FWXX, 
+      SCJS, PXXYZPID)
+    values (#{wid,jdbcType=VARCHAR}, #{yhid,jdbcType=VARCHAR}, #{xm,jdbcType=VARCHAR}, 
+      #{sj,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{cynf,jdbcType=VARCHAR}, #{fwxx,jdbcType=VARCHAR}, 
+      #{scjs,jdbcType=VARCHAR}, #{pxxyzpid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.train.TrainStudentInfo" >
+    insert into t_crowd_train_student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="yhid != null" >
+        YHID,
+      </if>
+      <if test="xm != null" >
+        XM,
+      </if>
+      <if test="sj != null" >
+        SJ,
+      </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+      <if test="cynf != null" >
+        CYNF,
+      </if>
+      <if test="fwxx != null" >
+        FWXX,
+      </if>
+      <if test="scjs != null" >
+        SCJS,
+      </if>
+      <if test="pxxyzpid != null" >
+        PXXYZPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhid != null" >
+        #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="sj != null" >
+        #{sj,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="cynf != null" >
+        #{cynf,jdbcType=VARCHAR},
+      </if>
+      <if test="fwxx != null" >
+        #{fwxx,jdbcType=VARCHAR},
+      </if>
+      <if test="scjs != null" >
+        #{scjs,jdbcType=VARCHAR},
+      </if>
+      <if test="pxxyzpid != null" >
+        #{pxxyzpid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.train.TrainStudentInfo" >
+    update t_crowd_train_student
+    <set >
+      <if test="yhid != null" >
+        YHID = #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        XM = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="sj != null" >
+        SJ = #{sj,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        QQ = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="cynf != null" >
+        CYNF = #{cynf,jdbcType=VARCHAR},
+      </if>
+      <if test="fwxx != null" >
+        FWXX = #{fwxx,jdbcType=VARCHAR},
+      </if>
+      <if test="scjs != null" >
+        SCJS = #{scjs,jdbcType=VARCHAR},
+      </if>
+      <if test="pxxyzpid != null" >
+        PXXYZPID = #{pxxyzpid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.train.TrainStudentInfo" >
+    update t_crowd_train_student
+    set YHID = #{yhid,jdbcType=VARCHAR},
+      XM = #{xm,jdbcType=VARCHAR},
+      SJ = #{sj,jdbcType=VARCHAR},
+      QQ = #{qq,jdbcType=VARCHAR},
+      CYNF = #{cynf,jdbcType=VARCHAR},
+      FWXX = #{fwxx,jdbcType=VARCHAR},
+      SCJS = #{scjs,jdbcType=VARCHAR},
+      PXXYZPID = #{pxxyzpid,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

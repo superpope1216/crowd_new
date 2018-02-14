@@ -1,0 +1,91 @@
+package com.wisedu.crowd.entity.statics;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+public class KfzAreaDataInfo implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+     * null
+     */
+    private String wid;
+
+    /**
+     * null
+     */
+    private String area;
+
+    /**
+     * null
+     */
+    private BigDecimal num;
+
+    /**
+     * null
+     * @return WID null
+     */
+    public String getWid() {
+        return wid;
+    }
+
+    /**
+     * null
+     * @param wid null
+     */
+    public void setWid(String wid) {
+        this.wid = wid == null ? null : wid.trim();
+    }
+
+    /**
+     * null
+     * @return AREA null
+     */
+    public String getArea() {
+        return area;
+    }
+
+    /**
+     * null
+     * @param area null
+     */
+    public void setArea(String area) {
+        this.area = area == null ? null : area.trim();
+    }
+
+    /**
+     * null
+     * @return NUM null
+     */
+    public BigDecimal getNum() {
+        return num;
+    }
+
+    /**
+     * null
+     * @param num null
+     */
+    public void setNum(BigDecimal num) {
+        this.num = num;
+    }
+
+    /**
+     *
+     * @mbggenerated 2018-01-25
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", wid=").append(wid);
+        sb.append(", area=").append(area);
+        sb.append(", num=").append(num);
+        sb.append("]");
+        return sb.toString();
+    }
+}

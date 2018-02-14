@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisedu.crowd.dao.role.GroupMenuAuthInfoMapper">
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.role.GroupMenuAuthInfo">
+    <id column="WID" jdbcType="VARCHAR" property="wid" />
+    <result column="GROUPBM" jdbcType="VARCHAR" property="groupbm" />
+    <result column="MENUID" jdbcType="VARCHAR" property="menuid" />
+    <result column="AUTHBM" jdbcType="VARCHAR" property="authbm" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    WID, GROUPBM, MENUID, AUTHBM
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_CROWD_GROUP_MENU_DATAAUTH
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from T_CROWD_GROUP_MENU_DATAAUTH
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.role.GroupMenuAuthInfo">
+    insert into T_CROWD_GROUP_MENU_DATAAUTH (WID, GROUPBM, MENUID, 
+      AUTHBM)
+    values (#{wid,jdbcType=VARCHAR}, #{groupbm,jdbcType=VARCHAR}, #{menuid,jdbcType=VARCHAR}, 
+      #{authbm,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.role.GroupMenuAuthInfo">
+    insert into T_CROWD_GROUP_MENU_DATAAUTH
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wid != null">
+        WID,
+      </if>
+      <if test="groupbm != null">
+        GROUPBM,
+      </if>
+      <if test="menuid != null">
+        MENUID,
+      </if>
+      <if test="authbm != null">
+        AUTHBM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wid != null">
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="groupbm != null">
+        #{groupbm,jdbcType=VARCHAR},
+      </if>
+      <if test="menuid != null">
+        #{menuid,jdbcType=VARCHAR},
+      </if>
+      <if test="authbm != null">
+        #{authbm,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.role.GroupMenuAuthInfo">
+    update T_CROWD_GROUP_MENU_DATAAUTH
+    <set>
+      <if test="groupbm != null">
+        GROUPBM = #{groupbm,jdbcType=VARCHAR},
+      </if>
+      <if test="menuid != null">
+        MENUID = #{menuid,jdbcType=VARCHAR},
+      </if>
+      <if test="authbm != null">
+        AUTHBM = #{authbm,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.role.GroupMenuAuthInfo">
+    update T_CROWD_GROUP_MENU_DATAAUTH
+    set GROUPBM = #{groupbm,jdbcType=VARCHAR},
+      MENUID = #{menuid,jdbcType=VARCHAR},
+      AUTHBM = #{authbm,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.role.GroupMenuAuthInfo">
+    <id column="WID" jdbcType="VARCHAR" property="wid" />
+    <result column="GROUPBM" jdbcType="VARCHAR" property="groupbm" />
+    <result column="MENUID" jdbcType="VARCHAR" property="menuid" />
+    <result column="AUTHBM" jdbcType="VARCHAR" property="authbm" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    WID, GROUPBM, MENUID, AUTHBM
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_CROWD_GROUP_MENU_DATAAUTH
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from T_CROWD_GROUP_MENU_DATAAUTH
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.role.GroupMenuAuthInfo">
+    insert into T_CROWD_GROUP_MENU_DATAAUTH (WID, GROUPBM, MENUID, 
+      AUTHBM)
+    values (#{wid,jdbcType=VARCHAR}, #{groupbm,jdbcType=VARCHAR}, #{menuid,jdbcType=VARCHAR}, 
+      #{authbm,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.role.GroupMenuAuthInfo">
+    insert into T_CROWD_GROUP_MENU_DATAAUTH
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wid != null">
+        WID,
+      </if>
+      <if test="groupbm != null">
+        GROUPBM,
+      </if>
+      <if test="menuid != null">
+        MENUID,
+      </if>
+      <if test="authbm != null">
+        AUTHBM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wid != null">
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="groupbm != null">
+        #{groupbm,jdbcType=VARCHAR},
+      </if>
+      <if test="menuid != null">
+        #{menuid,jdbcType=VARCHAR},
+      </if>
+      <if test="authbm != null">
+        #{authbm,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.role.GroupMenuAuthInfo">
+    update T_CROWD_GROUP_MENU_DATAAUTH
+    <set>
+      <if test="groupbm != null">
+        GROUPBM = #{groupbm,jdbcType=VARCHAR},
+      </if>
+      <if test="menuid != null">
+        MENUID = #{menuid,jdbcType=VARCHAR},
+      </if>
+      <if test="authbm != null">
+        AUTHBM = #{authbm,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.role.GroupMenuAuthInfo">
+    update T_CROWD_GROUP_MENU_DATAAUTH
+    set GROUPBM = #{groupbm,jdbcType=VARCHAR},
+      MENUID = #{menuid,jdbcType=VARCHAR},
+      AUTHBM = #{authbm,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

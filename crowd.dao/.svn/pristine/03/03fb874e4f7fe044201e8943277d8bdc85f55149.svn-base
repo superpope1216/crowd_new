@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.cwgl.extend.XqfzhmxInfoExtendMapper">
+	<resultMap id="BaseResultMap"
+		type="com.wisedu.crowd.entity.cwgl.extend.XqfzhmxInfoExtend" extends="com.wisedu.crowd.dao.cwgl.XqfzhmxInfoMapper.BaseResultMap">
+		 <result column="rwbh" property="rwbh" jdbcType="VARCHAR" />
+		 <result column="szlbDisplay" property="szlbDisplay" jdbcType="VARCHAR" />
+		 <result column="jyztDisplay" property="jyztDisplay" jdbcType="VARCHAR" />
+		 
+	</resultMap>
+	<sql id="Base_Column_List">
+		t_crowd_cwgl_xqfzhmx.WID, t_crowd_cwgl_xqfzhmx.XQFID,
+		t_crowd_cwgl_xqfzhmx.SZLBID, t_crowd_cwgl_xqfzhmx.LYXMID,
+		t_crowd_cwgl_xqfzhmx.FYSM, t_crowd_cwgl_xqfzhmx.JE,
+		t_crowd_cwgl_xqfzhmx.ZHYE, t_crowd_cwgl_xqfzhmx.DJYE,
+		t_crowd_cwgl_xqfzhmx.JYZT, t_crowd_cwgl_xqfzhmx.SZSJ,
+		t_crowd_cwgl_xqfzhmx.ZDID, t_crowd_cwgl_xqfzhmx.ZDIP,
+		t_crowd_cwgl_xqfzhmx.ZZCZRID,t_crowd_cwgl_xqfzhmx.ZZCZRIP
+	</sql>
+	<sql id="sqlWhere">
+		<if test="query!=null">
+			<if test='query.id!=null and query.id!=""'>
+				AND t_crowd_cwgl_xqfzhmx.WID=#{query.id,jdbcType=VARCHAR}
+			</if>
+			<if test='query.szlbid!=null and query.szlbid!=""'>
+				AND t_crowd_cwgl_xqfzhmx.szlbid=#{query.szlbid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.xqfid!=null and query.xqfid!=""'>
+				AND t_crowd_cwgl_xqfzhmx.xqfid=#{query.xqfid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.minMonth!=null and query.minMonth!=""'>
+				AND TO_CHAR(t_crowd_cwgl_xqfzhmx.SZSJ,'YYYY-MM')<![CDATA[>=]]>#{query.minMonth}
+			</if>
+			<if test='query.maxMonth!=null and query.maxMonth!=""'>
+				AND TO_CHAR(t_crowd_cwgl_xqfzhmx.SZSJ,'YYYY-MM')<![CDATA[<=]]>#{query.maxMonth}
+			</if>
+		</if>
+	</sql>
+	<select id="selectTotalMoney" resultType="java.lang.Double"
+		parameterType="com.wisedu.crowd.entity.dto.QueryCondition">
+		SELECT SUM(JE) FROM t_crowd_cwgl_xqfzhmx
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+		group by xqfid
+	</select>
+	<select id="selectTotalMoneyByMonth" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultType="map">
+		SELECT TO_CHAR(t_crowd_cwgl_xqfzhmx.SZSJ,'YYYY-MM') as month,
+		SUM(JE) as je FROM t_crowd_cwgl_xqfzhmx
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+		group by xqfid,TO_CHAR(t_crowd_cwgl_xqfzhmx.SZSJ,'YYYY-MM')
+		order by TO_CHAR(t_crowd_cwgl_xqfzhmx.SZSJ,'YYYY-MM') desc
+	</select>
+
+	<select id="selectDisplayByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseResultMap">
+		SELECT 
+		<include refid="Base_Column_List"/>
+		,t_crowd_xmgl_rwjbxx.rwbh
+		,t_crowd_sjzd_kfzzhszlb.lbmc as szlbDisplay
+		,t_crowd_sjzd_zjjyzt.lbmc as jyztDisplay
+		 FROM t_crowd_cwgl_xqfzhmx t_crowd_cwgl_xqfzhmx
+		 left join t_crowd_xmgl_rwjbxx t_crowd_xmgl_rwjbxx on t_crowd_cwgl_xqfzhmx.LYXMID= t_crowd_xmgl_rwjbxx.wid
+		 left join  t_crowd_sjzd_kfzzhszlb t_crowd_sjzd_kfzzhszlb on t_crowd_sjzd_kfzzhszlb.lbdm=t_crowd_cwgl_xqfzhmx.SZLBID
+		 left join t_crowd_sjzd_zjjyzt t_crowd_sjzd_zjjyzt on t_crowd_sjzd_zjjyzt.lbdm=t_crowd_cwgl_xqfzhmx.jyzt
+		 <where>
+		 	<include refid="sqlWhere"/>
+		 </where>
+		 order by t_crowd_cwgl_xqfzhmx.szsj desc
+	</select>
+</mapper>

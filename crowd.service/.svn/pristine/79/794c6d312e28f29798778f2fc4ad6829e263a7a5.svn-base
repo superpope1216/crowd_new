@@ -1,0 +1,57 @@
+package com.wisedu.crowd.service.rwgl;
+
+import java.util.List;
+
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.entity.dto.DataResult;
+import com.wisedu.crowd.entity.dto.QueryCondition;
+import com.wisedu.crowd.entity.log.CustomOperateLog;
+import com.wisedu.crowd.entity.rwgl.RwjbxxExtInfo;
+import com.wisedu.crowd.entity.rwgl.RwjbxxInfo;
+import com.wisedu.crowd.entity.rwgl.extend.RwjbxxInfoExtend;
+
+public interface RwjbxxInfoService {
+
+	  /**
+    *
+    * @mbggenerated 2017-11-13
+    */
+   DataResult<Integer> deleteByPrimaryKey(String wid) throws ServiceException;
+
+   /**
+    *
+    * @mbggenerated 2017-11-13
+    */
+   DataResult<Integer> insertSelective(RwjbxxInfo record) throws ServiceException;
+
+   /**
+    *
+    * @mbggenerated 2017-11-13
+    */
+   DataResult<RwjbxxInfo> selectByPrimaryKey(String wid) throws ServiceException;
+
+   /**
+    *
+    * @mbggenerated 2017-11-13
+    */
+   DataResult<Integer> updateByPrimaryKeySelective(RwjbxxInfo record) throws ServiceException;
+   
+   /**
+    * 发布任务基本信息
+    * @param rwjbxxInfo
+    * @param rwjbxxExtInfo
+    * @return
+    * @throws ServiceException
+    */
+   DataResult<Integer> publishing(RwjbxxInfo rwjbxxInfo,RwjbxxExtInfo rwjbxxExtInfo,String flag,CustomOperateLog log) throws ServiceException;
+   
+   /**
+	 * 大厅众包专用
+	 * @param record
+	 * @return
+	 */
+   DataResult<List<RwjbxxInfoExtend>> selectForCenter(QueryCondition<RwjbxxInfoExtend> record) throws ServiceException;
+   
+   
+   
+}

@@ -1,0 +1,121 @@
+package com.wisedu.crowd.controller.xqfxx;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.wisedu.crowd.common.code.RwztStateEnum;
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.common.util.ConditionUtil;
+import com.wisedu.crowd.common.util.StringUtil;
+import com.wisedu.crowd.controller.BaseController;
+import com.wisedu.crowd.entity.dto.PageInfo;
+import com.wisedu.crowd.entity.dto.QueryCondition;
+import com.wisedu.crowd.entity.rwgl.RwjbxxInfo;
+import com.wisedu.crowd.entity.rwgl.extend.RwjbxxInfoExtend;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.service.rwgl.RwjbxxInfoService;
+
+@Controller
+@RequestMapping("xqfOrder")
+public class XqfOrderController extends BaseController{
+
+	@Autowired
+	private RwjbxxInfoService rwjbxxInfoService;
+	@RequestMapping("index")
+	public ModelAndView index() throws Exception{
+		ModelAndView mv=new ModelAndView();
+		RwjbxxInfoExtend queryRwjbxxInfoExtend=new RwjbxxInfoExtend();
+		
+		QueryCondition<RwjbxxInfoExtend> condition=ConditionUtil.createCondition(queryRwjbxxInfoExtend);
+		queryRwjbxxInfoExtend.setXmzt(RwztStateEnum.CG.getCode());
+		queryRwjbxxInfoExtend.setXqfid(this.getXqfxx().getWid());
+		mv.addObject("cg",rwjbxxInfoService.selectCountByCondition(condition, this.createCustomOperateLog()).getDatas());
+		queryRwjbxxInfoExtend.setXmzt(RwztStateEnum.DSH.getCode());
+		mv.addObject("dsh",rwjbxxInfoService.selectCountByCondition(condition, this.createCustomOperateLog()).getDatas());
+		queryRwjbxxInfoExtend.setXmzt(RwztStateEnum.ZBZ.getCode());
+		mv.addObject("zbz",rwjbxxInfoService.selectCountByCondition(condition, this.createCustomOperateLog()).getDatas());
+		List<String> xmzts=new ArrayList<String>();
+		xmzts.add(StringUtil.toStr(RwztStateEnum.KFZ.getCode()));
+		xmzts.add(StringUtil.toStr(RwztStateEnum.JCZ.getCode()));
+		xmzts.add(StringUtil.toStr(RwztStateEnum.JCTG.getCode()));
+		xmzts.add(StringUtil.toStr(RwztStateEnum.JCBTG.getCode()));
+		xmzts.add(StringUtil.toStr(RwztStateEnum.YSZ.getCode()));
+		xmzts.add(StringUtil.toStr(RwztStateEnum.YSBTG.getCode()));
+		xmzts.add(StringUtil.toStr(RwztStateEnum.SHZ.getCode()));
+		xmzts.add(StringUtil.toStr(RwztStateEnum.SHJSDQR.getCode()));
+		xmzts.add(StringUtil.toStr(RwztStateEnum.SHJSBTG.getCode()));
+		xmzts.add(StringUtil.toStr(RwztStateEnum.DPJ.getCode()));
+		queryRwjbxxInfoExtend.setXmzt(null);
+		queryRwjbxxInfoExtend.setXmzts(xmzts);
+		mv.addObject("jxz",rwjbxxInfoService.selectCountByCondition(condition, this.createCustomOperateLog()).getDatas());
+		xmzts.clear();
+		xmzts.add(StringUtil.toStr(RwztStateEnum.YJX.getCode()));
+		xmzts.add(StringUtil.toStr(RwztStateEnum.YZZ.getCode()));
+		xmzts.add(StringUtil.toStr(RwztStateEnum.YGB.getCode()));
+		queryRwjbxxInfoExtend.setXmzt(null);
+		queryRwjbxxInfoExtend.setXmzts(xmzts);
+		mv.addObject("yjs",rwjbxxInfoService.selectCountByCondition(condition, this.createCustomOperateLog()).getDatas());
+		mv.setViewName("xqfgl/rwgl/order");
+		return mv;
+	}
+	
+	@RequestMapping("orders")
+	@ResponseBody
+	public DataResult<List<RwjbxxInfoExtend>> queryOrders(Integer pageNum,Integer pageSize){
+		RwjbxxInfoExtend queryRwjbxxInfoExtend=new RwjbxxInfoExtend();
+		queryRwjbxxInfoExtend.setXqfid(this.getXqfxx().getWid());
+		queryRwjbxxInfoExtend.setNeedKfzxx(true);
+		QueryCondition<RwjbxxInfoExtend> condition=ConditionUtil.createCondition(queryRwjbxxInfoExtend);
+		PageInfo pageInfo=new PageInfo();
+		if(pageNum!=null){
+			pageInfo.setPageNum(pageNum);
+		}
+		if(pageSize!=null){
+			pageInfo.setPageSize(pageSize);
+		}
+		condition.setPageInfo(pageInfo);
+		return rwjbxxInfoService.selectDisplayByCondition(condition);
+	}
+	/**
+	 * 收回需求
+	 * @param rwid
+	 * @return
+	 * @throws Exception
+	 */
+	
+	@RequestMapping("reback")
+	@ResponseBody
+	public DataResult<Integer> reback(String rwid,String shly) throws Exception{
+		 return rwjbxxInfoService.reback(rwid, shly, this.createCustomOperateLog());
+	}
+	
+	@RequestMapping("queryDate")
+	@ResponseBody
+	public DataResult<RwjbxxInfo> queryDate(String rwid) throws Exception{
+		DataResult<RwjbxxInfo> rwjbxxInfoData=rwjbxxInfoService.selectByPrimaryKey(rwid);
+		if(rwjbxxInfoData.getDatas()==null){
+			throw new ServiceException("该需求不存在，请重新确认");
+		}
+		RwjbxxInfo rwjbxxInfo=new RwjbxxInfo();
+		rwjbxxInfo.setWid(rwid);
+		rwjbxxInfo.setZbjzrq(rwjbxxInfoData.getDatas().getZbjzrq());
+		rwjbxxInfo.setJfrq(rwjbxxInfoData.getDatas().getJfrq());
+		return DataResult.success(rwjbxxInfo);
+	}
+	@RequestMapping("modifyDate")
+	@ResponseBody
+	public DataResult<Integer> modifyDate(String wid,String zbjzrq,String jfrq) throws Exception{
+		return rwjbxxInfoService.modifyDate(wid,zbjzrq, jfrq, this.createCustomOperateLog());
+	}
+	@RequestMapping("delete")
+	@ResponseBody
+	public DataResult<Integer> delete(String rwid) throws Exception{
+		return rwjbxxInfoService.delete(rwid, this.createCustomOperateLog());
+	}
+}

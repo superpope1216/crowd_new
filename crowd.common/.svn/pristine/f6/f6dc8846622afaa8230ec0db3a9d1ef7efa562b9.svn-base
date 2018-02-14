@@ -1,0 +1,34 @@
+package com.wisedu.crowd.common.util;
+
+
+public class ConstantsUtil {
+
+	/**
+	 * 用户基本信息
+	 */
+	
+	public final static String SESSION_YHJBXX_ID="SESSION_YHJBXX_ID";
+	public final static String SESSION_YHJBXX="SESSION_YHJBXX";
+	
+	public final static String SESSION_KFZXX="SESSION_KFZXX";
+	
+	public final static String SESSION_XQFXX="SESSION_XQFXX";
+	
+	public final static String IS_KFZ="SESSION_IS_KFZ";
+	
+	public final static String IS_XQF="SESSION_IS_XQF";
+	
+	public final static String EMAIL_NAME="@wisedu.com";
+    
+    /**
+     * 手机验证码 标识
+     */
+    public static final String PHONE_VERIFICATION="PHONEVERIFICATION";
+    
+    public static final String XMJBXX_TS_BH="-999999999";
+    
+    /**
+     * 系统附件路径
+     */
+    public static String SYSATTACHMENTFILEPATH="";
+}

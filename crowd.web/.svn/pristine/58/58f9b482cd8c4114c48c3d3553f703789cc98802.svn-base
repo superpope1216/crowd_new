@@ -1,0 +1,57 @@
+<%@page import="com.wisedu.crowd.common.util.StringUtil"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+	String menuFlag = request.getParameter("flag");
+%>
+<%!public String setActive(String _menuFlag, String flag) {
+
+		if (flag.equals(_menuFlag)) {
+			return " active ";
+		}
+		if (StringUtil.isEmpty(_menuFlag) && "ptxz".equals(flag)) {
+			return " active ";
+		}
+		return "";
+	}%>
+<div class="dropdown m-b-15 hidden-lg-up shop-user-nav">
+	<button type="button" class="btn btn-primary btn-block dropdown-toggle"
+		data-toggle="dropdown">规则中心</button>
+	<div class="dropdown-menu animate w-full" role="menu">
+		<a class="dropdown-item <%=setActive(menuFlag, "ptxz")%>"
+			href="<%=request.getContextPath()%>/ptxz/index?flag=ptxz">平台须知</a>
+		<a class="dropdown-item <%=setActive(menuFlag, "ptlc")%>"
+			href="<%=request.getContextPath()%>/ptlc/index?flag=ptlc">平台流程</a>
+		<a class="dropdown-item <%=setActive(menuFlag, "fbxz")%>"
+			href="<%=request.getContextPath()%>/fbzx/index?flag=fbxz">发包须知</a>
+		<a class="dropdown-item <%=setActive(menuFlag, "jbxz")%>"
+			href="<%=request.getContextPath()%>/jbxz/index?flag=jbxz">接包须知</a>
+		<a class="dropdown-item <%=setActive(menuFlag, "wgcljz")%>"
+			href="<%=request.getContextPath()%>/wgcljz/index?flag=wgcljz">违规处理机制</a>
+		<a class="dropdown-item <%=setActive(menuFlag, "jfhxy")%>"
+			href="<%=request.getContextPath()%>/jfhxy/index?flag=jfhxy">积分和信誉值管理须知</a>
+		<a class="dropdown-item <%=setActive(menuFlag, "xqtsjz")%>"
+			href="<%=request.getContextPath()%>/xqtsjz/index?flag=xqtsjz">需求推送机制</a>
+	</div>
+</div>
+<div class="panel row m-b-0 m-r-15 hidden-md-down" boxmh-h>
+	<div class="panel-body">
+		<h2 class="m-l-30 font-size-18 font-weight-unset">规则中心</h2>
+		<ul class="list-group m-l-15 met-sidebar-nav">
+			<li class="list-group-item <%=setActive(menuFlag, "ptxz")%>"><a
+				href="<%=request.getContextPath()%>/ptxz/index?flag=ptxz">平台须知</a></li>
+				<li class="list-group-item <%=setActive(menuFlag, "ptlc")%>"><a
+				href="<%=request.getContextPath()%>/ptlc/index?flag=ptlc">平台流程</a></li>
+			<li class="list-group-item <%=setActive(menuFlag, "fbxz")%>"><a
+				href="<%=request.getContextPath()%>/fbzx/index?flag=fbxz">发包须知</a></li>
+			<li class="list-group-item <%=setActive(menuFlag, "jbxz")%>"><a
+				href="<%=request.getContextPath()%>/jbxz/index?flag=jbxz">接包须知</a></li>
+			<li class="list-group-item <%=setActive(menuFlag, "wgcljz")%>"><a
+				href="<%=request.getContextPath()%>/wgcljz/index?flag=wgcljz">违规处理机制</a></li>
+			<li class="list-group-item <%=setActive(menuFlag, "jfhxy")%>"><a
+				href="<%=request.getContextPath()%>/jfhxy/index?flag=jfhxy">积分和信誉值管理须知</a></li>
+			<li class="list-group-item <%=setActive(menuFlag, "xqtsjz")%>"><a
+				href="<%=request.getContextPath()%>/xqtsjz/index?flag=xqtsjz">需求推送机制</a></li>
+		</ul>
+	</div>
+</div>

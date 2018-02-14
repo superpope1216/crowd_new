@@ -1,0 +1,60 @@
+/**
+ * Project Name:crowd.service
+ * File Name:KfzxyjfInfoServiceImpl.java
+ * Package Name:com.wisedu.crowd.service.yhgl.impl
+ * Date:2018年1月24日下午1:53:59
+ * Copyright (c) 2018, 01113232@wisedu.com All Rights Reserved.
+ *
+*/
+
+package com.wisedu.crowd.service.yhgl.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.dao.yhgl.KfzxyjfInfoMapper;
+import com.wisedu.crowd.entity.log.CustomOperateLog;
+import com.wisedu.crowd.entity.yhgl.KfzxyjfInfo;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.service.yhgl.KfzxyjfInfoService;
+
+/**
+ * ClassName:KfzxyjfInfoServiceImpl <br/>
+ * Function: TODO ADD FUNCTION. <br/>
+ * Reason:	 TODO ADD REASON. <br/>
+ * Date:     2018年1月24日 下午1:53:59 <br/>
+ * @author   dell
+ * @version  
+ * @since    JDK 1.6
+ * @see 	 
+ */
+@Service("kfzxyjfInfoService")
+@Transactional
+public class KfzxyjfInfoServiceImpl implements KfzxyjfInfoService{
+
+	@Autowired
+	private KfzxyjfInfoMapper kfzxyjfInfoMapper;
+
+	@Override
+	public DataResult<Integer> deleteByPrimaryKey(String wid, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(kfzxyjfInfoMapper.deleteByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<Integer> insertSelective(KfzxyjfInfo record, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(kfzxyjfInfoMapper.insertSelective(record));
+	}
+
+	@Override
+	public DataResult<KfzxyjfInfo> selectByPrimaryKey(String wid, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(kfzxyjfInfoMapper.selectByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<Integer> updateByPrimaryKeySelective(KfzxyjfInfo record, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(kfzxyjfInfoMapper.updateByPrimaryKeySelective(record));
+	}
+}
+

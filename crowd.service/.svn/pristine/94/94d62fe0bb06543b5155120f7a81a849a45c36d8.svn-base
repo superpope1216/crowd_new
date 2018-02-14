@@ -1,0 +1,58 @@
+package com.wisedu.crowd.service.rel.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.wisedu.crowd.common.code.HttpCodeEnum;
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.common.util.CommonUtil;
+import com.wisedu.crowd.common.util.StringUtil;
+import com.wisedu.crowd.dao.rel.KfzScjsdmRelMapper;
+import com.wisedu.crowd.dao.rel.extend.KfzScjsdmRelExtendMapper;
+import com.wisedu.crowd.entity.rel.KfzScjsdmRel;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.service.rel.KfzScjsdmRelService;
+
+@Service("kfzScjsdmRelService")
+public class KfzScjsdmRelServiceImpl implements KfzScjsdmRelService {
+ 
+	@Autowired
+	private KfzScjsdmRelExtendMapper kfzScjsdmRelExtendMapper;
+
+	@Override
+	public DataResult<Integer> delKfzScjsdmRel(String kfzid) {
+		kfzScjsdmRelExtendMapper.delKfzScjsdmRel(kfzid);
+		return DataResult.success(new Integer(1));
+	}
+
+	@Override
+	public DataResult<Integer> addKfzScjsdmRel(String kfzid,String yhid,String lbdm) {
+		
+		if(StringUtils.isEmpty(kfzid)||StringUtils.isEmpty(yhid)){
+			throw new ServiceException(HttpCodeEnum.USER_INVALID.getCode(),HttpCodeEnum.USER_INVALID.getName());
+        }
+		if(StringUtils.isEmpty(lbdm)){
+			throw new ServiceException("参数值为空");
+		}
+		List<KfzScjsdmRel> list=new ArrayList<KfzScjsdmRel>();
+		String[] tempStr=lbdm.split(",");
+		for(String str:tempStr){
+			KfzScjsdmRel  KfzScjsdmRel=new KfzScjsdmRel();
+			KfzScjsdmRel.setWid(StringUtil.getUuId());
+			KfzScjsdmRel.setKfzid(kfzid);
+			KfzScjsdmRel.setYhid(yhid);
+			KfzScjsdmRel.setLbdm(str);
+			list.add(KfzScjsdmRel);
+		}
+		if(CommonUtil.isNotEmptyList(list)){
+			kfzScjsdmRelExtendMapper.addKfzScjsdmRel(list);
+		}
+		return DataResult.success(new Integer(1));
+	}
+	
+
+}

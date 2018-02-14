@@ -1,0 +1,313 @@
+/**
+ * 
+ */
+$(document).ready(function(){
+	 var IE9 = (navigator.userAgent.indexOf("MSIE 9.0") > 0) ? true: false;
+	//$("a").webuiPopover({title:"hello",content:"content",width:"300"}); 
+	
+   $("#btnOpenTb").click(function(){
+	   doPost(basePath+"/rwxxDetail/doTb","rwid="+rwid,function(data){
+		   $("#moadl_tbxx").modal("show");
+	   });
+	   
+   });
+   
+   $("#btnOutTb").click(function(){
+	   confirm("您确认退出该需求的投标吗？",function(data){
+		   doPost(basePath+"/rwxxDetail/outTb","rwid="+rwid,function(data){
+			   alert("退出投标成功！");
+			   window.location.reload();
+		   });
+	   });
+	   
+   });
+   $('span[name="spanRwlb"]').webuiPopover();
+   $('span[name="spanXsrw"]').webuiPopover();
+   
+   
+   $("#formRbxxgl [name='tbje']").keyup(function(){
+	   if($("#formRbxxgl [name='spanAllje']").size()>0){
+			  $("#formRbxxgl [name='spanAllje']").html(parseInt($(this).val())+parseInt($("#formRbxxgl [name='spanPtbzje']").html()));
+		  }
+   });
+   queryNewRwjbxx();
+   function queryNewRwjbxx(){
+	   doGet(basePath+"/rwxxDetail/queryNewRwxx","pageSize=5",function(data){
+		   if(data && data.datas){
+			   var html="";
+			   for(var i=0;i<data.datas.length;i++){
+				   var _data=data.datas[i];
+				   html+='<li class="list-group-item" style="border:0px;">';
+				   html+='<div class="row">';
+				   var rwmc=_data.rwmc;
+				   if(rwmc.length>20){
+					   rwmc=rwmc.substr(0,20)+"...";
+				   }
+				   html+='<div class="col-xs-8 text-left my-mt-0"><a href="'+basePath+'/rwxxDetail/index?rwid='+_data.wid+'" title="'+_data.rwmc+'" target="_self" >'+rwmc+'</a></div>'
+				   
+				   html+='<div class="col-xs-4 text-right my-mt-0" style="color:red;">'+_data.xmysje+'元</div>';
+				   html+='</div>';
+				   html+='</li>';
+			   }
+			   $("#ulNewRwjbxx").html(html);
+		   }
+	   });
+   }
+   
+   $("#btnSaveTbxx").click(function(){
+	   confirm("你确认投标吗？",function(e){
+		   doPost(basePath+"/rwxxDetail/toTb",$("#formRbxxgl").serializeArray(),function(data){
+			  window.location.reload(); 
+		   });
+	   });
+   });
+   queryTbzxx();
+    function queryTbzxx(){
+    	if($("#divTbxxList").size()<=0){
+			return;
+		}
+    	doGet(basePath+"/rwxxDetail/queryRwtbxx","rwid="+rwid,function(data){
+    		  if(data && data.datas){
+    			  var html="";
+    			  for(var i=0;i<data.datas.length;i++){
+    				  var _data=data.datas[i]
+    				  
+    				  html+='<div class="rwxx-dtail-tbxx-content-item">';
+    				  html+='	<div class="rwxx-dtail-tbxx-content-left col-sm-2  hidden-md-down col-xs-12">';
+    				  html+='		<div>';
+    				  html+='			<img class="apply-avatar-1QsRa"	src="'+basePath+'/image/preView?wid='+_data.grzpfjid+'">';
+    				  html+='		</div>';
+    				  html+='	<!-- react-empty: 369 -->';
+    				  html+='	</div>';
+					//</div>
+    				  html+='	<div class="rwxx-dtail-tbxx-content-center col-sm-7  col-xs-12" style="border-right:1px solid #dde3eb">';
+    				  html+='		<div class="rwxx-dtail-tbxx-content-center-title">';
+    				  html+='			<!-- react-text: 372 -->';
+    				  html+='                   <div class="col-sm-7 col-xs-12">';
+    				  html+='					'+_data.kfzXm;
+    				  html+='					</div>';
+    				  html+='			<!-- /react-text -->';
+    				  html+='			<!-- react-text: 373 -->';
+    				  html+='					&nbsp;';
+    				  html+='			<div class="my-score col-sm-4 col-xs-12">';
+    				  html+='					<strong style="display: inline-block;">评分</strong>';
+    				  html+='							<!-- react-text: 393 -->';
+    				  html+='								&nbsp;';
+    				  html+='							<!-- /react-text -->';
+    				  html+='							<span style="display: inline-block;">';
+    				  html+='								<i	class="fa fa-star my-score-color"></i>';
+    				  html+='							</span>';
+    				  html+='							<span>';
+    				  html+='								<i class="fa fa-star my-score-color"></i>';
+    				  html+='							</span>';
+    				  html+='							<span>';
+    				  html+='								<i class="fa fa-star my-score-color"></i>';
+    				  html+='							</span>';
+    				  html+='							<span>';
+    				  html+='								<i	class="fa fa-star-o my-score-color"></i>';
+    				  html+='							</span>';
+    				  html+='							<span>';
+    				  html+='								<i	class="fa fa-star-o my-score-color"></i>';
+    				  html+='							</span>';
+    				  html+='							<!-- react-text: 405 -->';
+    				  html+='							<span style="display: inline-block;">3</span>';
+    				  html+='			</div>';
+    				  html+='		</div>';
+    				  html+='       <div style="clear:  both;"></div>';
+    				  html+='		<div class="rwxx-dtail-tbxx-content-center-sm">';
+    				  html+='			<!-- react-text: 388 -->';
+    				  var kfzlx="个人开发者";
+    				  if(_data.sfytd=="2"){
+    					  kfzlx="企业开发者";
+    				  }
+    				  html+=kfzlx;	
+    				  html+='				';
+    				  html+='			<!-- /react-text -->';
+    				  html+='			<!-- react-text: 389 -->';
+    				  html+='				&nbsp;|&nbsp;';
+    				  html+='			<!-- /react-text -->';
+    				  html+='			<!-- react-text: 390 -->';
+    				  var kfzlb="金智员工";
+    				  if(_data.kfzlb=="1"){
+    					  kfzlb="外部人员";
+    				  }
+    				  html+='			'+kfzlb;
+    				  html+='			<!-- /react-text -->';
+    				  html+='			<!-- react-text: 391 -->';
+    				  html+='			&nbsp; |&nbsp;';
+    				  html+='			<!-- /react-text -->';
+    				  html+='			<!-- /react-text -->';
+    				  html+='		</div>';
+    				  html+='		<div class="apply-message">';
+    				  html+='			<span class="apply-message-span1">投标金额：</span>';
+    				  html+='			<span class="apply-message-span2" style="color:red;">';
+    				  html+=               _data.tbje+'元';
+    				  html+='			</span>';
+    				  html+='		</div>'
+    				  html+='		<div class="apply-message">';
+    				  html+='			<span class="apply-message-span1">胜任理由：</span>';
+    				  html+='			<span class="apply-message-span2">';
+    				  html+=               _data.tbcs;
+    				  html+='			</span>';
+    				  html+='		</div>';
+    				  html+='		<div class="apply-message">';
+    				  html+='			<span class="apply-message-span1">联系方式：</span>';
+    				  html+='				<!-- react-empty: 411 -->';
+    				  html+='QQ:'+_data.qq+"&nbsp;&nbsp;手机:"+_data.sjh
+    				  
+    				  html+='		</div>';
+    				  html+='		<div class="apply-message">';
+    				  html+='			<!-- react-text: 414 -->';
+    				  html+='			报名时间：';
+    				  html+='			<!-- /react-text -->';
+    				  html+='			<!-- react-text: 415 -->';
+    				  html+= format(_data.tbsj)
+    				  html+='			<!-- /react-text -->';
+    				  html+='		</div>';
+/*    				  html+='		<div class="apply-message-2EwTK">';
+    				  html+='			<!-- react-text: 417 -->';
+    				  html+='			申请资料：';
+    				  html+='			<!-- /react-text -->';
+    				  html+='			<button type="button" class="btn btn-link">查看</button>';
+    				  html+='		</div>';*/
+    				  html+='	</div>';
+    				  html+='	<div class="right-column-1oumq col-sm-2  col-xs-12 text-xs-center">';
+    				  //html+='			<a href="xqfOrderAction/index" target="_blank"	class="btn btn-danger my-btn-white btn-squared">不适合</a>';
+    				  if(_data.zbzt=="0"){
+    					  html+='			<a href="javascript:void(0)"; data-key="'+_data.wid+'"	data-option="selectTA" class="btn btn-danger my-btn-blue btn-squared">确认合作</a>';
+    				  }else if(_data.zbzt=="1"){
+    					  html+='			<a href="javascript:void(0);" target="_blank"	class="btn btn-danger my-btn-red btn-squared">已选中</a>';  
+    				  }else if(_data.zbzt=="2"){
+    					  html+='			<a href="javascript:void(0);" target="_blank"	class="btn btn-danger my-btn-white btn-squared">未选中</a>';
+    				  }
+    				  
+    				  html+='		</div>';
+    				  html+='       <div style="clear:  both;"></div>';
+    				  html+='	</div>';
+    				
+    				  html+='</div>';
+//					</div>
+//    				  html+='<li class=" shown offer wow fadeInUp animated" data-wow-delay="0ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp;">';
+//    				  html+='	<a href="'+basePath+'/kfzview/index?kfzid='+_data.kfzid+'" title="'+(_data.kfzNc?_data.kfzNc:_data.kfzXm)+'" target="_blank" style="padding: 2px; background: #fff;">';
+//    				  html+='			<article class="inner-box" style="border: 1px solid #f5f5f5;">';
+//    				  html+='				<figure class="image" style="margin-bottom:0px;">';
+//    				  html+='					<img src="'+basePath+'/statics/images/12.png" title="'+(_data.kfzNc?_data.kfzNc:_data.kfzXm)+'" alt="'+(_data.kfzNc?_data.kfzNc:_data.kfzXm)+'">';
+//    				  html+='					<div class="overlay-box">';
+//    				  html+='						<div class="date">'+(_data.kfzNc?_data.kfzNc:_data.kfzXm)+'</div>';
+//    				  html+='    				</div>';
+//    				  html+='			    </figure>';
+//    				  html+='               <div class="text">';
+//    				  html+='					<div class="desc">';
+//    				  html+='						<p style="overflow: auto;">';
+//    				  html+='						<span style="text-align: left; float: left; display: inline-block;">'+(_data.kfzNc?_data.kfzNc:_data.kfzXm)+'</span>';
+//    				  html+='						<span style="text-align: center; float: right; display: inline-block; width: 40px; background-color: #ddd; border: none; font-size: 12px; border-radius: 3px; cursor: pointer; display: inline-block; background-color: #65C279; color: #FFF;">'+_data.zbztDisplay+'</span>';
+//    				  html+='				        </p>';
+//    				  html+='				        <p>';
+//    				  html+='							<b style="text-align: center;  display: inline-block;" class="price">￥'+_data.tbje+'元</b>';
+//    				  html+='				        </p>';
+//    				  html+='					</div>';
+//    				  html+='					<div class="link text-center">';
+//    				  html+='							<a href="javascript:void(0);" data-option="selectTA" data-key="'+_data.wid+'" title="选中TA" target="_self" class="theme-btn btn-skew style-two btn-sm">选中TA</a>';
+//    				  html+='	                </div>';
+//    				  html+='                </div>';
+//    				  html+='			</article>';
+//    				  html+='	</a>';
+//    				  html+='</li>';
+    			  }
+    			  $("#divTbxxList").html(html);
+    			  $("#divTbxxList [data-option='selectTA']").click(function(){
+    				  var _tbId=$(this).attr("data-key");
+    				  confirm("您确认选择该开发者参与需求的开发吗？",function(){
+    					  doPost(basePath+"/rwxxDetail/selectTb","tbid="+_tbId,function(data){
+    						  if(data && data.datas){
+    							  alert("选标成功！");
+    							  queryTbzxx();
+    						  }
+    					  })
+    				  })
+    			  });
+//    			  var d= new Swiper('.groom-cut', {
+//    			        wrapperClass: 'groom-cut-wraper',
+//    			        slideClass: 'groom-cut-slide',
+//    			        slidesPerView: IE9 ? 4 : 'auto',
+//    			        autoplay: 3800,
+//    			        watchSlidesProgress: true,
+//    			        watchSlidesVisibility: true,
+//    			        prevButton: '.groom-box .fa-chevron-left',
+//    			        nextButton: '.groom-box .fa-chevron-right',
+//    			        observer: true,
+//    			        observeParents: true
+//    			    });
+//    			  $('.groom-cut img[data-original]').lazyload();
+    		  }
+    	   });
+    }
+   
+    queryXmjbxx();
+    function queryXmjbxx(){
+    	doGet(basePath+"/rwxxDetail/rwjbxxExt","rwid="+rwid,function(data){
+    		if(data && data.datas){
+    			if(data.datas.xmbh){
+    				$("#spanXmbh").html(data.datas.xmbh);
+    				$("#spanXmbh").attr("title",data.datas.xmbh);
+    			}else{
+    				$("#spanXmbh").attr("title","无");
+    				$("#spanXmbh").html("无");
+    			}
+    			if(data.datas.xmmc){
+    				$("#spanXmmc").attr("title",data.datas.xmmc);
+    				$("#spanXmmc").html(data.datas.xmmc);
+    			}else{
+    				$("#spanXmmc").attr("title","无");
+    				$("#spanXmmc").html("无");
+    			}
+    			if(data.datas.ssxx){
+    				$("#spanSsxx").attr("title",data.datas.ssxx);
+    				$("#spanSsxx").html(data.datas.ssxx);
+    			}else{
+    				$("#spanSsxx").attr("title","无");
+    				$("#spanSsxx").html("无");
+    			}
+    			if(data.datas.mkbhDisplay){
+    				$("#spanMkxx").attr("title",data.datas.mkbhDisplay);
+    				$("#spanMkxx").html(data.datas.mkbhDisplay);
+    			}else{
+    				$("#spanMkxx").attr("title","无");
+    				$("#spanMkxx").html("无");
+    			}
+    			
+    		}
+    	});
+    }
+    
+    function add0(m) {
+		return m < 10 ? '0' + m : m
+	}
+
+	function format(shijianchuo) {
+		// shijianchuo是整数，否则要parseInt转换
+		var time = new Date(shijianchuo);
+		var y = time.getFullYear();
+		var m = time.getMonth() + 1;
+		var d = time.getDate();
+
+		return y + '-' + add0(m) + '-' + add0(d);
+	}
+    
+	
+	//需求文档下载
+    $("#download").click(function(){
+    	var url=basePath+"/attr/getUserInfo";
+    	var params={};
+    	var wid=$("#download").attr("data-wid");
+    	doPost(url,params,function(data){
+    		if(data.success){
+    			window.location.href=basePath+"/attr/download?wid="+wid;
+    		}else{
+				alert("只有登录用户才能下载附件");
+    		}
+    	});
+    	
+    });
+	
+});

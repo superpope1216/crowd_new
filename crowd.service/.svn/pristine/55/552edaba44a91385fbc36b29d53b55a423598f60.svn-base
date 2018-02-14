@@ -1,0 +1,86 @@
+package com.wisedu.crowd.service.yhgl.impl;
+
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.wisedu.crowd.common.code.YhxxShztEnum;
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.common.util.DateUtil;
+import com.wisedu.crowd.common.util.StringUtil;
+import com.wisedu.crowd.dao.yhgl.KfzxxInfoMapper;
+import com.wisedu.crowd.dao.yhgl.extend.KfzxxInfoExtendMapper;
+import com.wisedu.crowd.entity.dto.QueryCondition;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.entity.log.CustomOperateLog;
+import com.wisedu.crowd.entity.yhgl.KfzxxInfo;
+import com.wisedu.crowd.entity.yhgl.extend.KfzxxInfoExtend;
+import com.wisedu.crowd.service.yhgl.KfzxxInfoService;
+@Service("kfzxxInfoService")
+@Transactional
+public class KfzxxInfoServiceImpl implements KfzxxInfoService{
+
+	@Autowired
+	private  KfzxxInfoMapper kfzxxInfoMapper;
+	
+	@Autowired
+	private KfzxxInfoExtendMapper kfzxxInfoExtendMapper;
+
+	@Override
+	public DataResult<KfzxxInfo> selectByPrimaryKey(String wid,CustomOperateLog log) throws ServiceException {
+		return DataResult.success(kfzxxInfoMapper.selectByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<Integer> deleteByPrimaryKey(String wid, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(kfzxxInfoMapper.deleteByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<Integer> insertSelective(KfzxxInfo record, CustomOperateLog log) throws ServiceException {
+		if(StringUtil.isEmpty(record.getYhid())){
+			throw new ServiceException("session消失");
+		}
+		record.setWid(StringUtil.getUuId());
+		record.setCzsj(DateUtil.getCurrentDate());
+		record.setCzzip(log.getCustomIp());
+		record.setShzt(YhxxShztEnum.DSH.getCode());
+		return DataResult.success(kfzxxInfoMapper.insertSelective(record));
+	}
+
+	@Override
+	public DataResult<Integer> updateByPrimaryKeySelective(KfzxxInfo record, CustomOperateLog log)
+			throws ServiceException {
+		return DataResult.success(kfzxxInfoMapper.updateByPrimaryKeySelective(record));
+	} 
+    
+	
+	@Override
+	public DataResult<KfzxxInfo> saveOrUpdateKfzxxInfo(KfzxxInfo record, CustomOperateLog log) throws ServiceException {
+		if(StringUtils.isEmpty(record.getWid())){
+			record.setWid(StringUtil.getUuId());
+			record.setCzsj(DateUtil.getCurrentDate());
+			record.setCzzip(log.getCustomIp());
+			record.setShzt(YhxxShztEnum.DSH.getCode());
+			kfzxxInfoMapper.insertSelective(record);
+		}else{
+			kfzxxInfoMapper.updateByPrimaryKeySelective(record);
+		}
+		return DataResult.success(record);
+	}
+
+	@Override
+	public DataResult<List<KfzxxInfoExtend>> selectByCondition(QueryCondition<KfzxxInfoExtend> record,
+			CustomOperateLog log) throws ServiceException {
+		return DataResult.success(kfzxxInfoExtendMapper.selectByCondition(record));
+
+	}
+
+	@Override
+	public DataResult<Integer> updateByVersion(KfzxxInfo record, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(kfzxxInfoExtendMapper.updateByVersion(record));
+	}
+}

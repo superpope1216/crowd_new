@@ -1,0 +1,166 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE HTML>
+<html>
+<%@ include file="/jsp/top/top.jsp"%>
+<%@ include file="/jsp/top/other.jsp"%>
+<%@ include file="/jsp/param.jsp"%>
+<link rel='stylesheet'
+	href='<%=request.getContextPath()%>/statics/css/order.css'>
+<!--[if lte IE 8]>
+<div class="text-xs-center m-b-0 bg-blue-grey-100 alert">
+    <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+        <span aria-hidden="true">×</span>
+    </button>
+    你正在使用一个 <strong>过时</strong> 的浏览器。请 <a href="http://browsehappy.com/" target="_blank">升级您的浏览器</a>，以提高您的体验。
+</div>
+<![endif]-->
+
+<body>
+	<%@include file="/jsp/header.jsp"%>
+
+	<div class="page bg-pagebg1">
+		<div class="container">
+			<div class="page-content row">
+
+				<div class="col-lg-3">
+
+					<%@include file="/jsp/kfzxx/left_menu.jsp"%>
+				</div>
+
+				<div class="col-lg-9">
+					<div class="panel m-b-0" boxmh-mh>
+						<div class="panel-body shop-order">
+							<div>
+
+								<button type="button"
+									class="btn btn-success addr-btn btn-squared" id="btnAddRbxx">新建</button>
+
+								<div class="cart-list animation-fade" data-scale="1">
+									<div class="table-responsive">
+										<table class="table table-hover table-striped">
+											<thead>
+												<tr>
+													<th class="text-xs-center w-100">需求编号</th>
+													<th class="w-200">需求名称</th>
+													<th class="text-xs-center">日期</th>
+													<th class="text-xs-center">时间段</th>
+													<th class="text-xs-center w-150">实际工作量</th>
+													<th class="text-xs-center w-100">操作</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr class="text-xs-center">
+													<td>12345</td>
+													<td class="text-xs-left"><div class="media">
+
+															<div class="media-body">
+																<h4 class="media-heading font-weight-unset">
+																	<a target="_blank"
+																		href="https://show.metinfo.cn/muban/M1156014/381/product/showproduct.php?lang=cn&amp;id=90">卡姿兰Carslan丝滑无瑕BB霜</a>
+																</h4>
+															</div></td>
+													<td>2017-02</td>
+													<td>上午</td>
+													<td><span class="red-600 subtotal" data-id="32">￥56.00元</span></td>
+													<td><a
+														href="https://show.metinfo.cn/muban/M1156014/381/shop/cart.php?lang=cn&amp;a=dodel"
+														data-id="32" class="cart-remove"><i
+															class="icon wb-trash" aria-hidden="true"></i></a></td>
+												</tr>
+												<tr class="text-xs-center">
+													<td>12345</td>
+													<td class="text-xs-left"><div class="media">
+
+															<div class="media-body">
+																<h4 class="media-heading font-weight-unset">
+																	<a target="_blank"
+																		href="https://show.metinfo.cn/muban/M1156014/381/product/showproduct.php?lang=cn&amp;id=90">卡姿兰Carslan丝滑无瑕BB霜</a>
+																</h4>
+															</div></td>
+													<td>2017-02</td>
+													<td>上午</td>
+													<td><span class="red-600 subtotal" data-id="32">￥56.00元</span></td>
+													<td><a
+														href="https://show.metinfo.cn/muban/M1156014/381/shop/cart.php?lang=cn&amp;a=dodel"
+														data-id="32" ><i
+															class="icon wb-edit" aria-hidden="true"></i></a>
+															<a
+														href="https://show.metinfo.cn/muban/M1156014/381/shop/cart.php?lang=cn&amp;a=dodel"
+														data-id="32" ><i
+															class="icon wb-trash" aria-hidden="true"></i></a></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="modal fade modal-primary" id="rbxx-edit-modal"
+		aria-hidden="true" aria-labelledby="rbxx-modal-title" role="dialog"
+		tabindex="-1">
+		<div class="modal-dialog modal-center modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title" id="rbxx-modal-title">日报编辑</h4>
+				</div>
+				<form id="formRbxxgl"
+					action="https://show.metinfo.cn/muban/M1156014/381/shop/address.php?lang=cn&a=do_address_editor"
+					class="addr-edit-form met-form-validation">
+					<input name="id" type="hidden">
+					<div class="modal-body">
+						<div class="form-group">
+							<input type="text" class="form-control" name="name"
+								placeholder="请输入任务编号" required data-fv-notempty-message="此项不能为空">
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" name="tel"
+								placeholder="请输入任务名称" readonly required data-fv-notempty-message="此项不能为空">
+						</div>
+
+						<div class="form-group select-linkage">
+							<select class="form-control prov" name="zone_p" required
+								data-fv-notempty-message="此项不能为空" placeholder="请选择时间段"></select> 
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" name="tel"
+								placeholder="请输入实际工作量(小时)"  required data-fv-notempty-message="此项不能为空">
+						</div>
+						<div class="form-group">
+							<textarea class="form-control" rows="3" name="zone_a"
+								placeholder="请输入工作内容说明" required data-fv-notempty-message="此项不能为空"></textarea>
+						</div>
+						<div class="form-group m-b-0">
+							<textarea class="form-control" rows="3" name="zone_a"
+								placeholder="请输入备注" ></textarea>
+						</div>
+					</div>
+					<div class="modal-footer text-xs-left">
+						<button type="button" class="btn btn-primary btn-squared" id="btnSave">保存</button>
+						<button type="button" class="btn btn-default btn-squared"
+							data-dismiss="modal">取消</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- End Modal -->
+	<%@include file="/jsp/footer/footer2.jsp" %>
+		<script type="text/javascript">
+			var page_type = "rbxxgl";
+		</script>
+		<%@ include file="/jsp/bottom.jsp"%>
+
+</body>
+</html>

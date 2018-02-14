@@ -1,0 +1,60 @@
+/**
+ * Project Name:crowd.service
+ * File Name:XqfxyjfxqInfoServiceImpl.java
+ * Package Name:com.wisedu.crowd.service.yhgl.impl
+ * Date:2018年1月24日下午2:02:20
+ * Copyright (c) 2018, 01113232@wisedu.com All Rights Reserved.
+ *
+*/
+
+package com.wisedu.crowd.service.yhgl.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.dao.yhgl.XqfxyjfxqInfoMapper;
+import com.wisedu.crowd.entity.log.CustomOperateLog;
+import com.wisedu.crowd.entity.yhgl.XqfxyjfxqInfo;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.service.yhgl.XqfxyjfxqInfoService;
+
+/**
+ * ClassName:XqfxyjfxqInfoServiceImpl <br/>
+ * Function: TODO ADD FUNCTION. <br/>
+ * Reason:	 TODO ADD REASON. <br/>
+ * Date:     2018年1月24日 下午2:02:20 <br/>
+ * @author   dell
+ * @version  
+ * @since    JDK 1.6
+ * @see 	 
+ */
+@Service("xqfxyjfxqInfoService")
+@Transactional
+public class XqfxyjfxqInfoServiceImpl implements XqfxyjfxqInfoService{
+
+	@Autowired
+	private XqfxyjfxqInfoMapper xqfxyjfxqInfoMapper;
+
+	@Override
+	public DataResult<Integer> deleteByPrimaryKey(String wid, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(xqfxyjfxqInfoMapper.deleteByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<Integer> insertSelective(XqfxyjfxqInfo record, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(xqfxyjfxqInfoMapper.insertSelective(record));
+	}
+
+	@Override
+	public DataResult<XqfxyjfxqInfo> selectByPrimaryKey(String wid, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(xqfxyjfxqInfoMapper.selectByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<Integer> updateByPrimaryKeySelective(XqfxyjfxqInfo record, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(xqfxyjfxqInfoMapper.updateByPrimaryKeySelective(record));
+	}
+}
+

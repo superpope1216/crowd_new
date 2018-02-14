@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.data.delay.DataDelayKfzMonthInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.data.delay.DataDelayKfzMonthInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="KFZID" property="kfzid" jdbcType="VARCHAR" />
+    <result column="MONTH" property="month" jdbcType="VARCHAR" />
+    <result column="DELAY_DAY" property="delayDay" jdbcType="DECIMAL" />
+    <result column="ZBJE" property="zbje" jdbcType="DECIMAL" />
+    <result column="YJSJE" property="yjsje" jdbcType="DECIMAL" />
+    <result column="DELAY_ALL_DAY" property="delayAllDay" jdbcType="DECIMAL" />
+    <result column="DELAY_SCORE" property="delayScore" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, KFZID, MONTH, DELAY_DAY, ZBJE, YJSJE, DELAY_ALL_DAY, DELAY_SCORE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_CROWD_DATA_DELAY_KFZ_M
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_CROWD_DATA_DELAY_KFZ_M
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.data.delay.DataDelayKfzMonthInfo" >
+    insert into T_CROWD_DATA_DELAY_KFZ_M (WID, KFZID, MONTH, 
+      DELAY_DAY, ZBJE, YJSJE, 
+      DELAY_ALL_DAY, DELAY_SCORE)
+    values (#{wid,jdbcType=VARCHAR}, #{kfzid,jdbcType=VARCHAR}, #{month,jdbcType=VARCHAR}, 
+      #{delayDay,jdbcType=DECIMAL}, #{zbje,jdbcType=DECIMAL}, #{yjsje,jdbcType=DECIMAL}, 
+      #{delayAllDay,jdbcType=DECIMAL}, #{delayScore,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.data.delay.DataDelayKfzMonthInfo" >
+    insert into T_CROWD_DATA_DELAY_KFZ_M
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="kfzid != null" >
+        KFZID,
+      </if>
+      <if test="month != null" >
+        MONTH,
+      </if>
+      <if test="delayDay != null" >
+        DELAY_DAY,
+      </if>
+      <if test="zbje != null" >
+        ZBJE,
+      </if>
+      <if test="yjsje != null" >
+        YJSJE,
+      </if>
+      <if test="delayAllDay != null" >
+        DELAY_ALL_DAY,
+      </if>
+      <if test="delayScore != null" >
+        DELAY_SCORE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="kfzid != null" >
+        #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="delayDay != null" >
+        #{delayDay,jdbcType=DECIMAL},
+      </if>
+      <if test="zbje != null" >
+        #{zbje,jdbcType=DECIMAL},
+      </if>
+      <if test="yjsje != null" >
+        #{yjsje,jdbcType=DECIMAL},
+      </if>
+      <if test="delayAllDay != null" >
+        #{delayAllDay,jdbcType=DECIMAL},
+      </if>
+      <if test="delayScore != null" >
+        #{delayScore,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.data.delay.DataDelayKfzMonthInfo" >
+    update T_CROWD_DATA_DELAY_KFZ_M
+    <set >
+      <if test="kfzid != null" >
+        KFZID = #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        MONTH = #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="delayDay != null" >
+        DELAY_DAY = #{delayDay,jdbcType=DECIMAL},
+      </if>
+      <if test="zbje != null" >
+        ZBJE = #{zbje,jdbcType=DECIMAL},
+      </if>
+      <if test="yjsje != null" >
+        YJSJE = #{yjsje,jdbcType=DECIMAL},
+      </if>
+      <if test="delayAllDay != null" >
+        DELAY_ALL_DAY = #{delayAllDay,jdbcType=DECIMAL},
+      </if>
+      <if test="delayScore != null" >
+        DELAY_SCORE = #{delayScore,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.data.delay.DataDelayKfzMonthInfo" >
+    update T_CROWD_DATA_DELAY_KFZ_M
+    set KFZID = #{kfzid,jdbcType=VARCHAR},
+      MONTH = #{month,jdbcType=VARCHAR},
+      DELAY_DAY = #{delayDay,jdbcType=DECIMAL},
+      ZBJE = #{zbje,jdbcType=DECIMAL},
+      YJSJE = #{yjsje,jdbcType=DECIMAL},
+      DELAY_ALL_DAY = #{delayAllDay,jdbcType=DECIMAL},
+      DELAY_SCORE = #{delayScore,jdbcType=DECIMAL}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

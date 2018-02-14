@@ -1,0 +1,163 @@
+define(function(require, exports, module) {
+
+//	var $ = jQuery = require('jquery');
+	var $$ = jQuery = require('jquery');
+
+	require('plugins/vendor/bootstrap/validator/entrance');
+    
+	addEvent();
+	
+	
+	function addEvent(){
+		  //点击按钮显示模态框
+		  $("#fixPasswordModal").click(function(){
+			  $(".safety-modal-pass").modal("show");
+		  });
+		  $("#bindEmailModal").click(function(){
+			  $(".safety-modal-emailadd").modal("show");
+		  });
+		  $("#bindPhoneModal").click(function(){
+			  $(".safety-modal-teledit").modal("show");
+		  });
+		  
+		  
+		  //修改密码操作
+		  $("#fixPassword").click(function(){
+			  $$(".safety-modal-pass form").bootstrapValidator("validate");
+			   var bootstrapValidator = $$(".safety-modal-pass form").data('bootstrapValidator');
+			   bootstrapValidator.validate();
+			   var basicData=$(".safety-modal-pass form").serializeArray();
+			  if(bootstrapValidator.isValid()){
+				  doPost(basePath+"/kfzAccount/fixPassword",basicData,function(data){
+			       	   if(data.success){
+			        	     window.location.href=basePath+"/kfzAccount/index";
+			        	   }else{
+			        		  alert(data.msg);
+			        	   }
+			          });  
+			  }
+		  });
+		  
+		
+		  
+		  $("#bindPhone").click(function(){
+			  $$(".safety-modal-teledit form").bootstrapValidator("validate");
+			   var bootstrapValidator = $$(".safety-modal-teledit form").data('bootstrapValidator');
+			   bootstrapValidator.validate();
+			   var basicData=$(".safety-modal-teledit form").serializeArray();
+			   var phone=$("input[name='sjh']").val();
+			   basicData.push({name:"phone",value:phone});
+			  if(bootstrapValidator.isValid()){
+				  doPost(basePath+"/kfzAccount/fixPhone",basicData,function(data){
+			       	   if(data.success){
+			        	     window.location.href=basePath+"/kfzAccount/index";
+			        	   }else{
+			        		  alert(data.msg);
+			        	   }
+			          });  
+			  }
+		  });
+		  
+		  
+		  $("#bindEmail").click(function(){
+			  $$(".safety-modal-emailadd form").bootstrapValidator("validate");
+			   var bootstrapValidator = $$(".safety-modal-emailadd form").data('bootstrapValidator');
+			   bootstrapValidator.validate();
+			   var basicData=$(".safety-modal-emailadd form").serializeArray();
+			  if(bootstrapValidator.isValid()){
+				  doPost(basePath+"/kfzAccount/fixEmail",basicData,function(data){
+			       	   if(data.success){
+			        	     window.location.href=basePath+"/kfzAccount/index?flag=kfzAccount";
+			        	   }else{
+			        		  alert(data.msg);
+			        	   }
+			          });  
+			  }
+		  });
+		  
+		  //发送手机验证码
+		  $("#btnGetPhoneVerification").click(function(){
+			  $$(".safety-modal-teledit form").bootstrapValidator("validate");
+			  $$(".safety-modal-teledit form").data("bootstrapValidator").resetForm();
+			  $$(".safety-modal-teledit form").data("bootstrapValidator").validateField("sjh");
+			  var bootstrapValidator = $$("safety-modal-teledit form").data('bootstrapValidator');
+			  var _sjh=$("input[name='sjh']").val();
+			  if(_sjh==""||!(/^1[34578]\d{9}$/.test(_sjh))){
+				  return;
+			  }
+			  $("#btnGetPhoneVerification").attr("disabled",true);
+			  $("#btnGetPhoneVerification").text("正在发送...");
+			doPostBack(basePath+"/kfzAccount/sendPhoneVerification",{phone:_sjh},function(data){
+				if(data.success){
+					var times = 60;
+		        	var timer = setInterval(function() {
+		        		if (times < 1) {
+		        			clearInterval(timer); 
+		        			$("#btnGetPhoneVerification").text("获取验证码"); 
+		        			$("#btnGetPhoneVerification").attr("disabled",false); 
+		        			return;
+		        		}
+		        		$("#btnGetPhoneVerification").text("已发送 ("+ times +")");
+		        		times --;
+		        	}, 1000);
+				}else{
+					$("#btnGetPhoneVerification").text("获取验证码"); 
+        			$("#btnGetPhoneVerification").attr("disabled",false);
+        			if(data.code=="-4"){
+		               $("input[name='sjh']").after('<small class="help-block" data-bv-validator="regexp" data-bv-for="sjh" data-bv-result="INVALID" style="display: inline;color:#f96868;">'+data.msg+'</small>');
+                    }else if(data.code=="-19"){
+		               $("input[name='sjh']").after('<small class="help-block" data-bv-validator="regexp" data-bv-for="sjh" data-bv-result="INVALID" style="display: inline;color:#f96868;">'+data.msg+'</small>');
+                    }else if(data.code=="-6"){
+		               $("input[name='sjh']").after('<small class="help-block" data-bv-validator="regexp" data-bv-for="sjh" data-bv-result="INVALID" style="display: inline;color:#f96868;">'+data.msg+'</small>');
+                    }else{
+	        		   $("input[name='sjh']").after('<small class="help-block" data-bv-validator="regexp" data-bv-for="sjh" data-bv-result="INVALID" style="display: inline;color:#f96868;">'+data.msg+'</small>');
+                    }
+				}
+			});
+		  });
+		  
+		  
+		  //发送邮箱验证码
+		  $("#btnGetEmailVerification").click(function(){
+			  $$(".safety-modal-emailadd form").bootstrapValidator("validate");
+			  $$(".safety-modal-emailadd form").data("bootstrapValidator").resetForm();
+			  $$(".safety-modal-emailadd form").data("bootstrapValidator").validateField("email");
+			  var bootstrapValidator = $$("safety-modal-emailadd form").data('bootstrapValidator');
+			  var email=$("input[name='email']").val();
+			  if(email==""||!(/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/.test(email))){
+				  return;
+			  }
+			  $("#btnGetEmailVerification").attr("disabled",true);
+			  $("#btnGetEmailVerification").text("正在发送...");
+			doPostBack(basePath+"/kfzAccount/sendEmailVerification",{email:email},function(data){
+				if(data.success){
+					var times = 60;
+		        	var timer = setInterval(function() {
+		        		if (times < 1) {
+		        			clearInterval(timer); 
+		        			$("#btnGetEmailVerification").text("获取验证码"); 
+		        			$("#btnGetEmailVerification").attr("disabled",false); 
+		        			return;
+		        		}
+		        		$("#btnGetEmailVerification").text("已发送 ("+ times +")");
+		        		times --;
+		        	}, 1000);
+				}else{
+					$$(".safety-modal-emailadd form").data("bootstrapValidator").resetForm();
+					$("#btnGetEmailVerification").text("获取验证码"); 
+        			$("#btnGetEmailVerification").attr("disabled",false);
+        			if(data.code=="-4"){
+		               $("input[name='email']").after('<small class="help-block" data-bv-validator="regexp" data-bv-for="email" data-bv-result="INVALID" style="display: inline;color:#f96868;">'+data.msg+'</small>');
+                    }else{
+	        		   $("input[name='email']").after('<small class="help-block" data-bv-validator="regexp" data-bv-for="email" data-bv-result="INVALID" style="display: inline;color:#f96868;">'+data.msg+'</small>');
+                    }
+				}
+			});
+		  });
+		  
+		
+	}
+	
+	
+	
+});

@@ -1,0 +1,41 @@
+package com.wisedu.crowd.dao.yhgl;
+
+import com.wisedu.crowd.entity.yhgl.YhjbxxExtInfo;
+
+public interface YhjbxxExtInfoMapper {
+    /**
+     *
+     * @mbggenerated 2017-11-04
+     */
+    int deleteByPrimaryKey(String wid);
+
+    /**
+     *
+     * @mbggenerated 2017-11-04
+     */
+    int insert(YhjbxxExtInfo record);
+
+    /**
+     *
+     * @mbggenerated 2017-11-04
+     */
+    int insertSelective(YhjbxxExtInfo record);
+
+    /**
+     *
+     * @mbggenerated 2017-11-04
+     */
+    YhjbxxExtInfo selectByPrimaryKey(String wid);
+
+    /**
+     *
+     * @mbggenerated 2017-11-04
+     */
+    int updateByPrimaryKeySelective(YhjbxxExtInfo record);
+
+    /**
+     *
+     * @mbggenerated 2017-11-04
+     */
+    int updateByPrimaryKey(YhjbxxExtInfo record);
+}

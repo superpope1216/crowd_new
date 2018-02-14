@@ -1,0 +1,7 @@
+package com.wisedu.crowd.dao.rwgl.extend;
+
+import com.wisedu.crowd.entity.rwgl.RwjbxxInfo;
+
+public interface RwjbxxInfoExtendMapper {
+  
+}

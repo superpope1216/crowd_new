@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.train.TrainPlanInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.train.TrainPlanInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="PXID" property="pxid" jdbcType="VARCHAR" />
+    <result column="PXKSSJ" property="pxkssj" jdbcType="VARCHAR" />
+    <result column="PXJSSJ" property="pxjssj" jdbcType="VARCHAR" />
+    <result column="BMKSSJ" property="bmkssj" jdbcType="VARCHAR" />
+    <result column="BMJSSJ" property="bmjssj" jdbcType="VARCHAR" />
+    <result column="FJ" property="fj" jdbcType="VARCHAR" />
+    <result column="JCNLJCDZ" property="jcnljcdz" jdbcType="VARCHAR" />
+    <result column="CZR" property="czr" jdbcType="VARCHAR" />
+    <result column="CZSJ" property="czsj" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.wisedu.crowd.entity.train.TrainPlanInfo" extends="BaseResultMap" >
+    <result column="PXAP" property="pxap" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, PXID, PXKSSJ, PXJSSJ, BMKSSJ, BMJSSJ, FJ, JCNLJCDZ, CZR, CZSJ
+  </sql>
+  <sql id="Blob_Column_List" >
+    PXAP
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_crowd_train_plan
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_train_plan
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.train.TrainPlanInfo" >
+    insert into t_crowd_train_plan (WID, PXID, PXKSSJ, 
+      PXJSSJ, BMKSSJ, BMJSSJ, 
+      FJ, JCNLJCDZ, CZR, 
+      CZSJ, PXAP)
+    values (#{wid,jdbcType=VARCHAR}, #{pxid,jdbcType=VARCHAR}, #{pxkssj,jdbcType=VARCHAR}, 
+      #{pxjssj,jdbcType=VARCHAR}, #{bmkssj,jdbcType=VARCHAR}, #{bmjssj,jdbcType=VARCHAR}, 
+      #{fj,jdbcType=VARCHAR}, #{jcnljcdz,jdbcType=VARCHAR}, #{czr,jdbcType=VARCHAR}, 
+      #{czsj,jdbcType=VARCHAR}, #{pxap,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.train.TrainPlanInfo" >
+    insert into t_crowd_train_plan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="pxid != null" >
+        PXID,
+      </if>
+      <if test="pxkssj != null" >
+        PXKSSJ,
+      </if>
+      <if test="pxjssj != null" >
+        PXJSSJ,
+      </if>
+      <if test="bmkssj != null" >
+        BMKSSJ,
+      </if>
+      <if test="bmjssj != null" >
+        BMJSSJ,
+      </if>
+      <if test="fj != null" >
+        FJ,
+      </if>
+      <if test="jcnljcdz != null" >
+        JCNLJCDZ,
+      </if>
+      <if test="czr != null" >
+        CZR,
+      </if>
+      <if test="czsj != null" >
+        CZSJ,
+      </if>
+      <if test="pxap != null" >
+        PXAP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="pxid != null" >
+        #{pxid,jdbcType=VARCHAR},
+      </if>
+      <if test="pxkssj != null" >
+        #{pxkssj,jdbcType=VARCHAR},
+      </if>
+      <if test="pxjssj != null" >
+        #{pxjssj,jdbcType=VARCHAR},
+      </if>
+      <if test="bmkssj != null" >
+        #{bmkssj,jdbcType=VARCHAR},
+      </if>
+      <if test="bmjssj != null" >
+        #{bmjssj,jdbcType=VARCHAR},
+      </if>
+      <if test="fj != null" >
+        #{fj,jdbcType=VARCHAR},
+      </if>
+      <if test="jcnljcdz != null" >
+        #{jcnljcdz,jdbcType=VARCHAR},
+      </if>
+      <if test="czr != null" >
+        #{czr,jdbcType=VARCHAR},
+      </if>
+      <if test="czsj != null" >
+        #{czsj,jdbcType=VARCHAR},
+      </if>
+      <if test="pxap != null" >
+        #{pxap,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.train.TrainPlanInfo" >
+    update t_crowd_train_plan
+    <set >
+      <if test="pxid != null" >
+        PXID = #{pxid,jdbcType=VARCHAR},
+      </if>
+      <if test="pxkssj != null" >
+        PXKSSJ = #{pxkssj,jdbcType=VARCHAR},
+      </if>
+      <if test="pxjssj != null" >
+        PXJSSJ = #{pxjssj,jdbcType=VARCHAR},
+      </if>
+      <if test="bmkssj != null" >
+        BMKSSJ = #{bmkssj,jdbcType=VARCHAR},
+      </if>
+      <if test="bmjssj != null" >
+        BMJSSJ = #{bmjssj,jdbcType=VARCHAR},
+      </if>
+      <if test="fj != null" >
+        FJ = #{fj,jdbcType=VARCHAR},
+      </if>
+      <if test="jcnljcdz != null" >
+        JCNLJCDZ = #{jcnljcdz,jdbcType=VARCHAR},
+      </if>
+      <if test="czr != null" >
+        CZR = #{czr,jdbcType=VARCHAR},
+      </if>
+      <if test="czsj != null" >
+        CZSJ = #{czsj,jdbcType=VARCHAR},
+      </if>
+      <if test="pxap != null" >
+        PXAP = #{pxap,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wisedu.crowd.entity.train.TrainPlanInfo" >
+    update t_crowd_train_plan
+    set PXID = #{pxid,jdbcType=VARCHAR},
+      PXKSSJ = #{pxkssj,jdbcType=VARCHAR},
+      PXJSSJ = #{pxjssj,jdbcType=VARCHAR},
+      BMKSSJ = #{bmkssj,jdbcType=VARCHAR},
+      BMJSSJ = #{bmjssj,jdbcType=VARCHAR},
+      FJ = #{fj,jdbcType=VARCHAR},
+      JCNLJCDZ = #{jcnljcdz,jdbcType=VARCHAR},
+      CZR = #{czr,jdbcType=VARCHAR},
+      CZSJ = #{czsj,jdbcType=VARCHAR},
+      PXAP = #{pxap,jdbcType=LONGVARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.train.TrainPlanInfo" >
+    update t_crowd_train_plan
+    set PXID = #{pxid,jdbcType=VARCHAR},
+      PXKSSJ = #{pxkssj,jdbcType=VARCHAR},
+      PXJSSJ = #{pxjssj,jdbcType=VARCHAR},
+      BMKSSJ = #{bmkssj,jdbcType=VARCHAR},
+      BMJSSJ = #{bmjssj,jdbcType=VARCHAR},
+      FJ = #{fj,jdbcType=VARCHAR},
+      JCNLJCDZ = #{jcnljcdz,jdbcType=VARCHAR},
+      CZR = #{czr,jdbcType=VARCHAR},
+      CZSJ = #{czsj,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

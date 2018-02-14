@@ -1,0 +1,13 @@
+package com.wisedu.crowd.controller.kfzxx;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("kfzOrder")
+public class KfzOrderController {
+	@RequestMapping("index")
+	public String index(){
+		return "/kfzgl/kfzxx/order";
+	}
+}

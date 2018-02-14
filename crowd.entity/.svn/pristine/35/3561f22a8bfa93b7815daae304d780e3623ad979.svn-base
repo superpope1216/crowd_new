@@ -1,0 +1,13 @@
+package com.wisedu.crowd.entity.data.delay.extend;
+
+import java.io.Serializable;
+
+import com.wisedu.crowd.entity.data.delay.DataDelayKfzMonthInfo;
+
+public class DataDelayKfzMonthInfoExtend extends DataDelayKfzMonthInfo implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+}

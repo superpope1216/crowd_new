@@ -1,0 +1,91 @@
+
+
+
+package com.wisedu.crowd.service.yhgl.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.wisedu.crowd.common.code.YhxxShztEnum;
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.common.util.DateUtil;
+import com.wisedu.crowd.common.util.StringUtil;
+import com.wisedu.crowd.dao.yhgl.XqfxxInfoMapper;
+import com.wisedu.crowd.dao.yhgl.extend.XqfxxInfoExtendMapper;
+import com.wisedu.crowd.entity.dto.QueryCondition;
+import com.wisedu.crowd.entity.log.CustomOperateLog;
+import com.wisedu.crowd.entity.yhgl.XqfxxInfo;
+import com.wisedu.crowd.entity.yhgl.extend.XqfxxInfoExtend;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.service.yhgl.XqfxxInfoService;
+
+@Service("xqfxxInfoService")
+public class XqfxxInfoServiceImpl implements XqfxxInfoService{
+
+	@Autowired
+	private XqfxxInfoMapper xqfxxInfoMapper;
+	@Autowired
+	private XqfxxInfoExtendMapper xqfxxInfoExtendMapper;
+	@Override
+	public DataResult<Integer> deleteByPrimaryKey(String wid,CustomOperateLog log) throws ServiceException {
+		return DataResult.success(xqfxxInfoMapper.deleteByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<Integer> insertSelective(XqfxxInfo record,CustomOperateLog log) throws ServiceException {
+		if(StringUtil.isEmpty(record.getYhid())){
+			throw new ServiceException("session消失");
+		}
+		record.setWid(StringUtil.getUuId());
+		record.setCzsj(DateUtil.getCurrentDate());
+		record.setCzzip(log.getCustomIp());
+		record.setShzt(YhxxShztEnum.DSH.getCode());
+		return DataResult.success(xqfxxInfoMapper.insertSelective(record));
+	}
+
+	@Override
+	public DataResult<XqfxxInfo> selectByPrimaryKey(String wid,CustomOperateLog log) throws ServiceException {
+		return DataResult.success(xqfxxInfoMapper.selectByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<Integer> updateByPrimaryKeySelective(XqfxxInfo record,CustomOperateLog log) throws ServiceException {
+		return DataResult.success(xqfxxInfoMapper.updateByPrimaryKeySelective(record));
+	}
+   
+	
+	@Override
+	public DataResult<XqfxxInfo> saveXqfxxInfo(XqfxxInfo record, CustomOperateLog log) throws ServiceException {
+		if(StringUtil.isEmpty(record.getYhid())){
+			throw new ServiceException("session消失");
+		}
+		record.setWid(StringUtil.getUuId());
+		record.setCzsj(DateUtil.getCurrentDate());
+		record.setCzzip(log.getCustomIp());
+		record.setShzt(YhxxShztEnum.DSH.getCode());
+		xqfxxInfoMapper.insertSelective(record);
+		return DataResult.success(record);
+		
+	}
+
+	@Override
+	public DataResult<XqfxxInfo> updateXqfxxInfo(XqfxxInfo record, CustomOperateLog log) throws ServiceException {
+		xqfxxInfoMapper.updateByPrimaryKeySelective(record);
+		return DataResult.success(record);
+	}
+	@Override
+	public DataResult<List<XqfxxInfoExtend>> selectByCondition(QueryCondition<XqfxxInfoExtend> record,CustomOperateLog log)
+			throws ServiceException {
+		return DataResult.success(xqfxxInfoExtendMapper.selectByCondition(record));
+	}
+
+	@Override
+	public DataResult<Integer> updateByVersion(XqfxxInfo record, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(xqfxxInfoExtendMapper.updateByVersion(record));
+	}
+
+
+
+}

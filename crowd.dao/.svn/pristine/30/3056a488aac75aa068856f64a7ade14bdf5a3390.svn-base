@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.statics.extend.KfzjlMonthExtendMapper" >
+   <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.statics.extend.KfzjlMonthExtend"
+   extends="com.wisedu.crowd.dao.statics.KfzjlMonthMapper.BaseResultMap" >
+  </resultMap>
+   <sql id="Base_Column_List" >
+    T_CROWD_STATIC_KFZJL_MONTH.WID, T_CROWD_STATIC_KFZJL_MONTH.KFZID, 
+    T_CROWD_STATIC_KFZJL_MONTH.MONTH, T_CROWD_STATIC_KFZJL_MONTH.YQL, 
+    T_CROWD_STATIC_KFZJL_MONTH.WGL, T_CROWD_STATIC_KFZJL_MONTH.BUGZDL, 
+    T_CROWD_STATIC_KFZJL_MONTH.GZL, T_CROWD_STATIC_KFZJL_MONTH.RBL, 
+    T_CROWD_STATIC_KFZJL_MONTH.SHJSL, T_CROWD_STATIC_KFZJL_MONTH.BUGL, 
+    T_CROWD_STATIC_KFZJL_MONTH.YWX, T_CROWD_STATIC_KFZJL_MONTH.BZWGL, 
+    T_CROWD_STATIC_KFZJL_MONTH.BZGZL, T_CROWD_STATIC_KFZJL_MONTH.YQL_SCORE, 
+    T_CROWD_STATIC_KFZJL_MONTH.WGL_SCORE, T_CROWD_STATIC_KFZJL_MONTH.BUGZDL_SCORE, 
+    T_CROWD_STATIC_KFZJL_MONTH.GZL_SCORE, T_CROWD_STATIC_KFZJL_MONTH.JBL_SCORE, 
+    T_CROWD_STATIC_KFZJL_MONTH.SHJSL_SCORE, T_CROWD_STATIC_KFZJL_MONTH.BUGL_SCORE, 
+    T_CROWD_STATIC_KFZJL_MONTH.WGLL, T_CROWD_STATIC_KFZJL_MONTH.GZLL, 
+    T_CROWD_STATIC_KFZJL_MONTH.SCORE_SJ,T_CROWD_STATIC_KFZJL_MONTH.YWXMC
+  </sql>
+  <sql id="sqlWhere">
+  		<if test='query!=null'>
+  			<if test='query.ywx!=null and query.ywx!=""'>
+				AND T_CROWD_STATIC_KFZJL_MONTH.YWX=#{query.ywx,jdbcType=VARCHAR}
+			</if>
+			<if test='query.month!=null and query.month!=""'>
+				AND T_CROWD_STATIC_KFZJL_MONTH.MONTH=#{query.month,jdbcType=VARCHAR}
+			</if>
+  		</if>
+		
+	</sql>
+	<sql id="sqlOrder">
+		order by
+	  	<choose>
+	  		<when test="orderBy!=null and orderBy.size>0">
+	  			<foreach collection="orderBy" close=" " open=" " separator="," item="item">
+	  				${item}
+	  			</foreach>
+	  		</when>
+	  		<otherwise>
+	  			T_CROWD_STATIC_KFZJL_MONTH.YWX 
+	  		</otherwise>
+	  	</choose>
+	</sql>
+	<select id="selectStaticsKfzjlMonth" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultType="map">
+		SELECT A.YQL_SCORE,
+		A.WGL_SCORE,
+		A.BUGZDL_SCORE,
+		A.JBL_SCORE,
+		A.SHJSL_SCORE,
+		A.BUGL_SCORE,
+		NVL(B.SCORE, 0) GZL_SCORE
+		FROM (SELECT YWX,
+		YQL_SCORE,
+		WGL_SCORE,
+		BUGZDL_SCORE,
+		JBL_SCORE,
+		SHJSL_SCORE,
+		BUGL_SCORE
+		FROM T_CROWD_STATIC_KFZJL_MONTH
+		WHERE 1 = 1
+		<if test="query.ywx!=null and query.ywx!=''">
+			AND YWX = #{query.ywx,jdbcType=VARCHAR}
+		</if>
+		<if test="query.month != null and query.month != ''">
+			AND MONTH = #{query.month,jdbcType=VARCHAR}
+		</if>
+		) A
+		LEFT JOIN (SELECT YWX, SCORE
+		FROM (SELECT YWX, SCORE
+		FROM T_CROWD_STATIC_KFJLGZL
+		WHERE 1=1
+		<if test="query.kfzid!=null and query.kfzid!=''">
+			AND T_CROWD_STATIC_KFZJL_MONTH.KFZID = #{query.kfzid,jdbcType=VARCHAR}
+		</if>
+		<if test="query.month != null and query.month != ''">
+			AND T_CROWD_STATIC_KFZJL_MONTH.MONTH = #{query.month,jdbcType=VARCHAR}
+		</if>)) B
+		ON A.YWX = B.YWX
+	</select>
+	<select id="selectStaticsKfzjlTotal" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseResultMap">
+	      select 
+	     <include refid="Base_Column_List"></include>
+	     from  T_CROWD_STATIC_KFZJL_MONTH
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+		<include refid="sqlOrder"/>
+	</select>
+	<select id="selectKfjljbxx" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultType="map">
+		SELECT T_CROWD_YHGL_KFZXX.XM,
+       	T_CROWD_STATIC_KFJLGZL.GZL,
+       	(T_CROWD_STATIC_KFZJL_MONTH.SCORE_SJ -
+       	T_CROWD_STATIC_KFZJL_MONTH.GZL_SCORE + T_CROWD_STATIC_KFJLGZL.SCORE) SCORE,
+       	T_CROWD_STATIC_KFZ_OVERVIEW.WGZJE,
+       	T_CROWD_STATIC_YWXXQXX.ZBZ * 50 ZBZJE,
+       	T_CROWD_STATIC_YWXXQXX.KFZ * 50 KFZJE,
+       	NVL(T_CROWD_STATIC_YWXXQXX.DSHS, 0) DSHS
+  		FROM T_CROWD_STATIC_KFJLGZL
+  		LEFT JOIN T_CROWD_YHGL_KFZXX
+    		ON T_CROWD_YHGL_KFZXX.WID = T_CROWD_STATIC_KFJLGZL.KFZID
+ 		LEFT JOIN T_CROWD_STATIC_KFZJL_MONTH
+    		ON T_CROWD_STATIC_KFZJL_MONTH.YWX = T_CROWD_STATIC_KFJLGZL.YWX
+   			AND T_CROWD_STATIC_KFZJL_MONTH.MONTH = T_CROWD_STATIC_KFJLGZL.MONTH
+  		LEFT JOIN T_CROWD_STATIC_YWXXQXX
+    		ON T_CROWD_STATIC_YWXXQXX.YWXDM = T_CROWD_STATIC_KFJLGZL.YWX
+  		LEFT JOIN T_CROWD_STATIC_KFZ_OVERVIEW
+    		ON T_CROWD_STATIC_KFZ_OVERVIEW.KFZID = T_CROWD_STATIC_KFJLGZL.KFZID
+   			AND T_CROWD_STATIC_KFZ_OVERVIEW.MONTH = T_CROWD_STATIC_KFJLGZL.MONTH
+   		WHERE 1=1
+		<if test="query.kfzid!=null and query.kfzid!=''">
+			AND T_CROWD_STATIC_KFJLGZL.KFZID = #{query.kfzid,jdbcType=VARCHAR}
+		</if>
+		<if test="query.month != null and query.month != ''">
+			AND T_CROWD_STATIC_KFJLGZL.MONTH = #{query.month,jdbcType=VARCHAR}
+		</if>
+	</select>
+</mapper>

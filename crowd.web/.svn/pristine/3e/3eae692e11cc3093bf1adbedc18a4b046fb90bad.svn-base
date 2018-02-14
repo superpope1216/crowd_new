@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:amq="http://activemq.apache.org/schema/core"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core-5.8.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd">
+	<context:property-placeholder location="classpath:mq.properties"
+		ignore-unresolvable="true" />
+
+	<!-- Activemq connection factory -->
+	<bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="${mq.brokerURL}"></property>
+		<property name="userName" value="${mq.userName}"></property>
+		<property name="password" value="${mq.password}"></property>
+	</bean>
+
+	<!-- ConnectionFactory Definition -->
+	<bean id="connectionFactory"
+		class="org.springframework.jms.connection.CachingConnectionFactory">
+		<constructor-arg ref="targetConnectionFactory" />
+	</bean>
+
+
+	<!-- Default Destination Queue Definition -->
+	<!-- 发布需求 -->
+	<bean id="rwjbxxFb" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${mq.fbrw}" />
+	</bean>
+
+	<!-- JmsTemplate Definition -->
+	<bean id="rwjbxxFbMqTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="rwjbxxFb" />
+	</bean>
+	
+	<!-- 投标 -->
+	
+	<bean id="rwjbxxTb" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${mq.tbrw}" />
+	</bean>
+	
+	<bean id="rwjbxxTbMqTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="rwjbxxTb" />
+	</bean>
+	
+	<!-- 选标 -->
+	<bean id="selectRwjbxx" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${mq.xbrw}" />
+	</bean>
+	
+	<bean id="selectRwjbxxMqTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="rwjbxxTb" />
+	</bean>
+	
+	<!-- 申请验收 -->
+	<bean id="applyYsRwjbxx" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${mq.sqys}" />
+	</bean>
+	
+	<bean id="applyYsRwjbxxMqTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="applyYsRwjbxx" />
+	</bean>
+	<!-- 申请售后结束 -->
+	
+	<bean id="applyShjsRwjbxx" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${mq.sqrwshjs}" />
+	</bean>
+	
+	<bean id="applyShjsRwjbxxMqTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="applyShjsRwjbxx" />
+	</bean>
+	
+	<!-- 验收通过提醒 -->
+	
+	<bean id="ysPassRwjbxx" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${mq.ystg}" />
+	</bean>
+	
+	<bean id="ysPassRwjbxxMqTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="ysPassRwjbxx" />
+	</bean>
+	
+	<!-- 验收不通过提醒 -->
+	
+	<bean id="ysNotPassRwjbxx" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${mq.ysbtg}" />
+	</bean>
+	
+	<bean id="ysNotPassRwjbxxMqTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="ysNotPassRwjbxx" />
+	</bean>
+	
+	<!-- 售后通过提醒 -->
+	
+	<bean id="shPassRwjbxx" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${mq.shrwtg}" />
+	</bean>
+	
+	<bean id="shPassRwjbxxMqTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="shPassRwjbxx" />
+	</bean>
+	
+	<!-- 售后部通过提醒 -->
+	
+	<bean id="shNotPassRwjbxx" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${mq.shrwbtg}" />
+	</bean>
+	
+	<bean id="shNotPassRwjbxxMqTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="shNotPassRwjbxx" />
+	</bean>
+</beans>

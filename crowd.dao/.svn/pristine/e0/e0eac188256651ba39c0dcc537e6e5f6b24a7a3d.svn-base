@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.yhgl.extend.XqfbpjgInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.yhgl.extend.XqfbpjgInfoExtend" 
+  extends="com.wisedu.crowd.dao.yhgl.XqfbpjgInfoMapper.BaseResultMap">
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_crowd_yhgl_xqfbpjg.WID, t_crowd_yhgl_xqfbpjg.XQFID, 
+    t_crowd_yhgl_xqfbpjg.PJJG, t_crowd_yhgl_xqfbpjg.PJNR, 
+    t_crowd_yhgl_xqfbpjg.SSXMID, t_crowd_yhgl_xqfbpjg.KFZID, 
+    t_crowd_yhgl_xqfbpjg.CPSJ, t_crowd_yhgl_xqfbpjg.CPZIP
+  </sql>
+  <sql id="sqlWhere">
+  	<if test="query!=null">
+  		<if test='query.wid!=null'>
+  			AND t_crowd_yhgl_xqfbpjg.WID=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.xqfid!=null'>
+  			AND t_crowd_yhgl_xqfbpjg.xqfid=#{query.xqfid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.kfzid!=null'>
+  			AND t_crowd_yhgl_xqfbpjg.kfzid=#{query.kfzid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.ssxmid!=null'>
+  			AND t_crowd_yhgl_xqfbpjg.ssxmid=#{query.ssxmid,jdbcType=VARCHAR}
+  		</if>
+  	</if>
+  </sql>
+  <sql id="sqlOrder">
+  	order by 
+  	<choose>
+  		<when test="orderBy!=null">
+  			<foreach collection="orderBy" item="item" close=" " open=" " separator=",">
+  				${item}
+  			</foreach>
+  		</when>
+  		<otherwise>
+  			t_crowd_yhgl_xqfbpjg.CPSJ desc
+  		</otherwise>
+  	</choose>
+  </sql>
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.wisedu.crowd.entity.yhgl.extend.XqfxxExtInfoExtend">
+  		SELECT
+  		<include refid="Base_Column_List"/>
+  		FROM 
+  		t_crowd_yhgl_xqfbpjg
+  		<where>
+  			<include refid="sqlWhere"/>
+  		</where>
+  		<include refid="sqlOrder"/>
+  </select>
+</mapper>

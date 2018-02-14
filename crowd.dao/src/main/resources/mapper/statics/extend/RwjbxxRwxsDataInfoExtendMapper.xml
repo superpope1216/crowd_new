@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="com.wisedu.crowd.dao.statics.extend.RwjbxxRwxsDataInfoExtendMapper">
+	<resultMap id="BaseResultMap"
+		type="com.wisedu.crowd.entity.statics.extend.RwjbxxRwxsDataInfoExtend"
+		extends="com.wisedu.crowd.dao.statics.RwjbxxRwxsDataInfoMapper.BaseResultMap">
+	</resultMap>
+	<sql id="Base_Column_List">
+		T_CROWD_STATICS_RWJBXX_DATADET.WID, T_CROWD_STATICS_RWJBXX_DATADET.KFXS,
+		T_CROWD_STATICS_RWJBXX_DATADET.FBRWS,
+		T_CROWD_STATICS_RWJBXX_DATADET.FBRWJE,
+		T_CROWD_STATICS_RWJBXX_DATADET.WGRWS,
+		T_CROWD_STATICS_RWJBXX_DATADET.WGRWJE
+		,T_CROWD_STATICS_RWJBXX_DATADET.YEAR
+	</sql>
+	<sql id="sqlUpdateWhere">
+		<if test='wid!=null and wid!=""'>
+			AND T_CROWD_STATICS_RWJBXX_DATADET.WID=#{wid,jdbcType=VARCHAR}
+		</if>
+		<if test='kfxs!=null and kfxs!=""'>
+			AND T_CROWD_STATICS_RWJBXX_DATADET.KFXS=#{kfxs,jdbcType=VARCHAR}
+		</if>
+		<if test='year!=null and year!=""'>
+			AND T_CROWD_STATICS_RWJBXX_DATADET.YEAR=#{year,jdbcType=VARCHAR}
+		</if>
+	</sql>
+	<sql id="sqlWhere">
+		<if test='query!=null'>
+			<if test='query.wid!=null and query.wid!=""'>
+				AND T_CROWD_STATICS_RWJBXX_DATADET.WID=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.kfxs!=null and query.kfxs!=""'>
+				AND T_CROWD_STATICS_RWJBXX_DATADET.KFXS=#{query.kfxs,jdbcType=VARCHAR}
+			</if>
+			<if test='query.year!=null and query.year!=""'>
+				AND T_CROWD_STATICS_RWJBXX_DATADET.YEAR=#{query.year,jdbcType=VARCHAR}
+			</if>
+		</if>
+	</sql>
+	<delete id="deleteByCondition"
+		parameterType="com.wisedu.crowd.entity.statics.extend.RwjbxxRwxsDataInfoExtend">
+		DELETE FROM T_CROWD_STATICS_RWJBXX_DATADET
+		<where>
+			<include refid="sqlUpdateWhere" />
+		</where>
+	</delete>
+	<select id="selectByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM T_CROWD_STATICS_RWJBXX_DATADET
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+	</select>
+
+</mapper>

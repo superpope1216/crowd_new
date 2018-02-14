@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.rwgl.extend.RwjbxxInfoExtendMapper">
+
+	<sql id="Base_Column_List">
+		T_CROWD_XMGL_RWJBXX.wid, T_CROWD_XMGL_RWJBXX.xqfid, T_CROWD_XMGL_RWJBXX.rwbh,
+		T_CROWD_XMGL_RWJBXX.rwmc, T_CROWD_XMGL_RWJBXX.rwlb,
+		T_CROWD_XMGL_RWJBXX.kfkj,
+		T_CROWD_XMGL_RWJBXX.fwlx, T_CROWD_XMGL_RWJBXX.kfkjsm, T_CROWD_XMGL_RWJBXX.xmysje,
+		T_CROWD_XMGL_RWJBXX.xmgs, T_CROWD_XMGL_RWJBXX.sfyxqwd,
+		T_CROWD_XMGL_RWJBXX.xqwdfjid,
+		T_CROWD_XMGL_RWJBXX.xmtpfjid, T_CROWD_XMGL_RWJBXX.xmzt, T_CROWD_XMGL_RWJBXX.zbjzrq,
+		T_CROWD_XMGL_RWJBXX.zbzq, T_CROWD_XMGL_RWJBXX.sfxyxqfw,
+		T_CROWD_XMGL_RWJBXX.sfxyjffw,
+		T_CROWD_XMGL_RWJBXX.sfyqzcfw, T_CROWD_XMGL_RWJBXX.sfjsxqfxy, T_CROWD_XMGL_RWJBXX.zcfwsm,
+		T_CROWD_XMGL_RWJBXX.cjsj,T_CROWD_XMGL_RWJBXX.cjzip,
+		T_CROWD_XMGL_RWJBXX.zbje,
+		T_CROWD_XMGL_RWJBXX.kfzid, T_CROWD_XMGL_RWJBXX.zbsj, T_CROWD_XMGL_RWJBXX.ckxm,
+		T_CROWD_XMGL_RWJBXX.tjsj, T_CROWD_XMGL_RWJBXX.ywxlb,
+		T_CROWD_XMGL_RWJBXX.jfrq,
+		T_CROWD_XMGL_RWJBXX.sfxmxq, T_CROWD_XMGL_RWJBXX.zbgzl, T_CROWD_XMGL_RWJBXX.ssdq,
+		T_CROWD_XMGL_RWJBXX.rwmc2,
+		T_CROWD_XMGL_RWJBXX.rwxs,T_CROWD_XMGL_RWJBXX.rwlx,
+		T_CROWD_XMGL_RWJBXX.shbtgyy, T_CROWD_XMGL_RWJBXX.kfzssfgs,
+		T_CROWD_XMGL_RWJBXX.rwbz,
+		T_CROWD_XMGL_RWJBXX.sfxypg, T_CROWD_XMGL_RWJBXX.sfypg, T_CROWD_XMGL_RWJBXX.sftswb,
+		T_CROWD_XMGL_RWJBXX.shryxm, T_CROWD_XMGL_RWJBXX.sfjsptxqgf,
+		T_CROWD_XMGL_RWJBXX.rwnyd,
+		T_CROWD_XMGL_RWJBXX.sfjc, T_CROWD_XMGL_RWJBXX.fb, T_CROWD_XMGL_RWJBXX.dzjb,
+		T_CROWD_XMGL_RWJBXX.cpapp, T_CROWD_XMGL_RWJBXX.sfjj,
+		T_CROWD_XMGL_RWJBXX.jjbzje,
+		T_CROWD_XMGL_RWJBXX.dzsm, T_CROWD_XMGL_RWJBXX.ptbzje,
+		T_CROWD_XMGL_RWJBXX.parentId
+	</sql>
+	<resultMap id="BaseDisplayResultMap"
+		type="com.wisedu.crowd.entity.rwgl.extend.RwjbxxInfoExtend" extends="com.wisedu.crowd.dao.rwgl.RwjbxxInfoMapper.BaseResultMap">
+		<result column="kfkj_display" property="kfkjDisplay" jdbcType="VARCHAR" />
+		<result column="xmzt_display" property="xmztDisplay" jdbcType="VARCHAR" />
+		<result column="rwjd" property="rwjd" jdbcType="VARCHAR" />
+		<result column="rwjd_display" property="rwjdDisplay" jdbcType="VARCHAR" />
+		<result column="rwxs_display" property="rwxsDisplay" jdbcType="VARCHAR" />
+		<result column="rwlx_Display" property="rwlxDisplay" jdbcType="VARCHAR" />
+		<result column="rwnyd_Display" property="rwnydDisplay"
+			jdbcType="VARCHAR" />
+		<result column="dzjb_Display" property="dzjbDisplay" jdbcType="VARCHAR" />
+		<result column="ywxlb_Display" property="ywxlbDisplay"
+			jdbcType="VARCHAR" />
+		<result column="xqfnc" property="xqfnc" jdbcType="VARCHAR" />
+		<result column="kfznc" property="kfznc" jdbcType="VARCHAR" />
+		<result column="xmzywx" property="xmzywx" jdbcType="VARCHAR" />
+		<result column="xmzywx_Display" property="xmzywxDisplay"
+			jdbcType="VARCHAR" />
+		<result column="childCount" property="childCount" jdbcType="INTEGER"/>
+		<association property="rwtbxxInfoExtend" column="wid"
+			columnPrefix="T_CROWD_XMGL_RWTBXX"
+			resultMap="com.wisedu.crowd.dao.rwgl.extend.RwtbxxInfoExtendMapper.BaseDisplayResultMap">
+
+		</association>
+	</resultMap>
+	<sql id="sqlWhere">
+		<if test="query!=null">
+			<if test='query.wid!=null and query.wid!=""'>
+				AND T_CROWD_XMGL_RWJBXX.wid=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.rwbh!=null and query.rwbh!=""'>
+				AND T_CROWD_XMGL_RWJBXX.RWBH=#{query.rwbh,jdbcType=VARCHAR}
+			</if>
+			<if test='query.rwmc!=null and query.rwmc!=""'>
+				AND T_CROWD_XMGL_RWJBXX.RWMC LIKE
+				CONCAT('%',#{query.rwmc,jdbcType=VARCHAR},'%')
+			</if>
+			<if test='query.rwxs!=null and query.rwxs!=""'>
+				AND T_CROWD_XMGL_RWJBXX.RWXS=#{query.rwxs,jdbcType=VARCHAR}
+			</if>
+			<if test='query.rwjd!=null and query.rwjd!=""'>
+				AND t_crowd_sjzd_RWZT.SSJD=#{query.rwjd,jdbcType=VARCHAR}
+			</if>
+			<if test='query.xmzt!=null'>
+				AND T_CROWD_XMGL_RWJBXX.XMZT=#{query.xmzt,jdbcType=INTEGER}
+			</if>
+			<if test='query.xqfid!=null and query.xqfid!=""'>
+				AND T_CROWD_XMGL_RWJBXX.XQFID=#{query.xqfid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.kfzid!=null and query.kfzid!=""'>
+				AND T_CROWD_XMGL_RWJBXX.KFZID=#{query.kfzid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.xmzts!=null'>
+				AND T_CROWD_XMGL_RWJBXX.XMZT IN
+				<foreach index="index" item="item" collection="query.xmzts"
+					open="(" close=")" separator=",">
+					${item}
+				</foreach>
+			</if>
+			<if test='query.minXmzt!=null'>
+				AND T_CROWD_XMGL_RWJBXX.XMZT<![CDATA[>=]]>#{query.minXmzt,jdbcType=INTEGER}
+			</if>
+			<if test='query.maxXmzt!=null'>
+				AND T_CROWD_XMGL_RWJBXX.XMZT<![CDATA[<=]]>#{query.maxXmzt,jdbcType=INTEGER}
+			</if>
+			<if test='query.parentId!=null and query.parentId!=""'>
+				AND T_CROWD_XMGL_RWJBXX.PARENTID=#{query.parentId,jdbcType=VARCHAR}
+			</if>
+			<if test='query.xmzywx!=null and query.xmzywx!=""'>
+				AND T_CROWD_XMGL_RWJBXX.YWXLB IN (SELECT T_CROWD_XMGL_YWXDZB.XYWX FROM
+				T_CROWD_XMGL_YWXDZB,T_CROWD_SJZD_YWXLB WHERE
+				T_CROWD_XMGL_YWXDZB.YYWX=T_CROWD_SJZD_YWXLB.LBDM
+				AND T_CROWD_SJZD_YWXLB.SFSY=1 AND
+				T_CROWD_SJZD_YWXLB.LBDM=#{xmzywx,jdbcType=VARCHAR})
+			</if>
+			<if test='query.rwtbxxInfoExtend!=null'>
+				<if
+					test='query.rwtbxxInfoExtend.kfzid!=null and query.rwtbxxInfoExtend.kfzid!=""'>
+					AND
+					T_CROWD_XMGL_RWTBXX.KFZID=#{query.rwtbxxInfoExtend.kfzid,jdbcType=VARCHAR}
+				</if>
+				<if test='query.rwtbxxInfoExtend.zbzt!=null and query.rwtbxxInfoExtend.zbzt!=""'>
+					AND
+					T_CROWD_XMGL_RWTBXX.ZBZT=#{query.rwtbxxInfoExtend.zbzt,jdbcType=VARCHAR}
+				</if>
+			</if>
+
+		</if>
+	</sql>
+	<select id="selectDisplayByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseDisplayResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		,T_CROWD_SJZD_RWXS.LBMC AS rwxs_display
+		,T_CROWD_XMGL_ZJRWLX.LBMC AS rwlx_Display
+		,t_crowd_sjzd_dzjb.lbmc as dzjb_Display
+		,t_crowd_sjzd_rwnyd.lbmc as rwnyd_Display
+		,t_crowd_sjzd_RWZT.lbmc as xmzt_display
+		,T_CROWD_XMGL_YWX.MC AS ywxlb_display
+		<if test="query.needXqfxx!=null and query.needXqfxx==true">
+			,T_CROWD_YHGL_XQFXX.NC AS xqfnc
+		</if>
+		<if test="query.needKfzxx!=null and query.needKfzxx==true">
+			,T_CROWD_YHGL_KFZXX.NC AS kfznc
+		</if>
+		<if test='query.rwtbxxInfoExtend!=null'>
+			,
+			<include
+				refid="com.wisedu.crowd.dao.rwgl.extend.RwtbxxInfoExtendMapper.Base_Column_List" />
+			,t_crowd_xmgl_rwtbxx.zbzt_Display
+		</if>
+		
+		<if test="query.needChild!=null and query.needChild==true">
+			,(SELECT COUNT(0) FROM T_CROWD_XMGL_RWJBXX T_CROWD_XMGL_RWJBXX2 
+			WHERE T_CROWD_XMGL_RWJBXX.WID=T_CROWD_XMGL_RWJBXX2.PARENTID AND T_CROWD_XMGL_RWJBXX2.XMZT!=17)
+			 AS childCount
+		</if>
+		FROM T_CROWD_XMGL_RWJBXX T_CROWD_XMGL_RWJBXX
+		LEFT JOIN T_CROWD_SJZD_RWXS T_CROWD_SJZD_RWXS ON
+		T_CROWD_XMGL_RWJBXX.RWXS=T_CROWD_SJZD_RWXS.LBDM AND
+		T_CROWD_SJZD_RWXS.SFSY=1
+		LEFT JOIN T_CROWD_XMGL_ZJRWLX T_CROWD_XMGL_ZJRWLX ON
+		T_CROWD_XMGL_RWJBXX.RWLX=T_CROWD_XMGL_ZJRWLX.LBDM AND
+		T_CROWD_XMGL_ZJRWLX.SFSY=1
+		LEFT JOIN t_crowd_sjzd_dzjb t_crowd_sjzd_dzjb on
+		T_CROWD_XMGL_RWJBXX.dzjb=t_crowd_sjzd_dzjb.lbdm and
+		t_crowd_sjzd_dzjb.sfsy=1
+		LEFT JOIN t_crowd_sjzd_rwnyd t_crowd_sjzd_rwnyd on
+		T_CROWD_XMGL_RWJBXX.rwnyd=t_crowd_sjzd_rwnyd.lbdm and
+		t_crowd_sjzd_rwnyd.sfsy=1
+		LEFT JOIN t_crowd_sjzd_RWZT t_crowd_sjzd_RWZT ON
+		t_crowd_sjzd_RWZT.LBDM=T_CROWD_XMGL_RWJBXX.XMZT AND
+		t_crowd_sjzd_RWZT.SFSY=1
+		LEFT JOIN T_CROWD_XMGL_YWX T_CROWD_XMGL_YWX ON
+		T_CROWD_XMGL_YWX.BM=T_CROWD_XMGL_RWJBXX.YWXLB AND
+		T_CROWD_XMGL_YWX.SFSY=1
+		<if test="query.needXqfxx!=null and query.needXqfxx==true">
+			LEFT JOIN T_CROWD_YHGL_XQFXX T_CROWD_YHGL_XQFXX ON
+			T_CROWD_XMGL_RWJBXX.XQFID=T_CROWD_YHGL_XQFXX.WID
+		</if>
+		<if test="query.needKfzxx!=null and query.needKfzxx==true">
+			LEFT JOIN T_CROWD_YHGL_KFZXX T_CROWD_YHGL_KFZXX ON
+			T_CROWD_XMGL_RWJBXX.KFZID=T_CROWD_YHGL_KFZXX.WID
+		</if>
+		<if test='query.rwtbxxInfoExtend!=null'>
+			LEFT JOIN (select t_crowd_xmgl_rwtbxx.*,t_crowd_sjzd_rwzbzt.LBDM as
+			zbzt_Display from t_crowd_xmgl_rwtbxx t_crowd_xmgl_rwtbxx
+			left join t_crowd_sjzd_rwzbzt on
+			t_crowd_xmgl_rwtbxx.ZBZT=t_crowd_sjzd_rwzbzt.LBDM and
+			t_crowd_sjzd_rwzbzt.SFSY=1
+			) t_crowd_xmgl_rwtbxx ON
+			T_CROWD_XMGL_RWTBXX.RWID=T_CROWD_XMGL_RWJBXX.WID
+		</if>
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+
+	</select>
+	<select id="selectForCenter" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseDisplayResultMap">
+
+		SELECT
+		T_CROWD_XMGL_RWJBXX.WID,T_CROWD_XMGL_RWJBXX.RWMC,T_CROWD_XMGL_RWJBXX.RWBH,
+		T_CROWD_XMGL_RWJBXX.RWXS, T_CROWD_XMGL_RWJBXX.XMGS,
+		T_CROWD_XMGL_RWJBXX.xmysje,T_CROWD_XMGL_RWJBXX.KFKJ,
+		T_CROWD_SJZD_RWKFKJ.LBMC AS kfkj_display ,T_CROWD_XMGL_RWJBXX.zbzq,
+		T_CROWD_XMGL_RWJBXX.XMZT,T_CROWD_SJZD_RWZT.LBMC AS xmzt_display,
+		T_CROWD_SJZD_RWZT.SSJD AS rwjd,T_CROWD_SJZD_RWZT.JDMC as rwjd_display
+		FROM T_CROWD_XMGL_RWJBXX T_CROWD_XMGL_RWJBXX
+		LEFT JOIN T_CROWD_SJZD_RWKFKJ T_CROWD_SJZD_RWKFKJ ON
+		T_CROWD_XMGL_RWJBXX.KFKJ=T_CROWD_SJZD_RWKFKJ.LBDM AND
+		T_CROWD_SJZD_RWKFKJ.SFSY=1
+		LEFT JOIN (SELECT
+		T_CROWD_SJZD_RWZT.LBDM,T_CROWD_SJZD_RWZT.LBMC,T_CROWD_SJZD_RWZT.SSJD,t_crowd_sjzd_RWJD_NEW.LBMC
+		AS JDMC FROM
+		t_crowd_sjzd_RWJD_NEW,t_crowd_sjzd_RWZT WHERE t_crowd_sjzd_RWJD_NEW.SFSY=1 AND
+		t_crowd_sjzd_RWZT.SFSY=1 AND t_crowd_sjzd_RWZT.SSJD=t_crowd_sjzd_RWJD_NEW.LBDM)
+		t_crowd_sjzd_RWZT
+
+		ON T_CROWD_XMGL_RWJBXX.XMZT=T_CROWD_SJZD_RWZT.LBDM
+		<where>
+			<include refid="sqlWhere" />
+			AND T_CROWD_XMGL_RWJBXX.XMZT<![CDATA[>=]]>3
+			AND T_CROWD_XMGL_RWJBXX.XMZT<![CDATA[<=]]>15
+
+		</where>
+	</select>
+
+	<select id="selectCountByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultType="int">
+		SELECT COUNT(0) FROM T_CROWD_XMGL_RWJBXX
+		<if test='query.rwtbxxInfoExtend!=null'>
+			LEFT JOIN t_crowd_xmgl_rwtbxx ON
+			T_CROWD_XMGL_RWTBXX.RWID=T_CROWD_XMGL_RWJBXX.WID
+		</if>
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+	</select>
+	
+	<select id="selectSumMoney" resultType="java.math.BigDecimal">
+		SELECT SUM(ifnull(ZBJE,XMYSJE))+SUM(ifnull(ptbzje,0))+SUM(ifnull(jjbzje,0))
+		FROM T_CROWD_XMGL_RWJBXX
+		
+		WHERE XMZT<![CDATA[>=]]>2 AND XMZT<![CDATA[<=]]>16
+	</select>
+</mapper>

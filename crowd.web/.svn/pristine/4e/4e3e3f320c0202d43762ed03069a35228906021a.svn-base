@@ -1,0 +1,188 @@
+<%@page import="com.wisedu.crowd.entity.yhgl.KfzxxInfo"%>
+<%@page import="com.wisedu.crowd.entity.yhgl.XqfxxInfo"%>
+<%@page import="com.wisedu.crowd.service.dto.DataResult"%>
+<%@page import="com.wisedu.crowd.entity.dto.QueryCondition"%>
+<%@page import="com.wisedu.crowd.entity.yhgl.extend.XqfxxInfoExtend"%>
+<%@page import="com.wisedu.crowd.service.yhgl.XqfxxInfoService"%>
+<%@page import="com.wisedu.crowd.common.code.YhxxShztEnum"%>
+<%@page import="com.wisedu.crowd.common.util.CommonUtil"%>
+<%@page import="java.util.List"%>
+<%@page import="com.wisedu.crowd.entity.yhgl.extend.KfzxxInfoExtend"%>
+<%@page import="com.wisedu.crowd.service.yhgl.KfzxxInfoService"%>
+<%@page import="com.wisedu.crowd.common.util.StringUtil"%>
+<%@page import="com.wisedu.crowd.entity.yhgl.YhjbxxInfo"%>
+<%@page import="com.wisedu.crowd.common.util.ConstantsUtil"%>
+<%@page
+	import="org.springframework.web.context.support.WebApplicationContextUtils"%>
+<%@page import="org.springframework.web.context.WebApplicationContext"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%
+	boolean isKfz = false;
+	boolean isXqf = false;
+	WebApplicationContext wac = WebApplicationContextUtils
+			.getRequiredWebApplicationContext(getServletContext());
+	Object yhjbxxObject = session.getAttribute(ConstantsUtil.SESSION_YHJBXX);
+	if (yhjbxxObject != null) {
+		YhjbxxInfo yhjbxxInfo = (YhjbxxInfo) request.getSession().getAttribute(ConstantsUtil.SESSION_YHJBXX);
+		if (yhjbxxInfo != null && !StringUtil.isEmpty(yhjbxxInfo.getWid())) {
+			//判断用户是否是开发者
+			Object kfzxxObject = session.getAttribute(ConstantsUtil.SESSION_KFZXX);
+			if (kfzxxObject == null) {
+				KfzxxInfoService kfzxxInfoService = (KfzxxInfoService) wac.getBean("kfzxxInfoService");//如是注解的Service取注解
+				KfzxxInfoExtend queryKfzxxInfoExtend = new KfzxxInfoExtend();
+				queryKfzxxInfoExtend.setYhid(yhjbxxInfo.getWid());
+
+				QueryCondition<KfzxxInfoExtend> condition = new QueryCondition<>();
+				condition.setQuery(queryKfzxxInfoExtend);
+				DataResult<List<KfzxxInfoExtend>> kfzxxData = kfzxxInfoService.selectByCondition(condition,
+						null);
+				if (CommonUtil.isNotEmptyList(kfzxxData.getDatas())) {
+					session.setAttribute(ConstantsUtil.SESSION_KFZXX, kfzxxData.getDatas().get(0));
+					if (YhxxShztEnum.YTG.getCode().equals(kfzxxData.getDatas().get(0).getShzt())) {
+						isKfz = true;
+						session.setAttribute(ConstantsUtil.IS_KFZ, true);
+					}
+
+				}
+			}else{
+			    KfzxxInfo kfzxxInfo=(KfzxxInfo)kfzxxObject;
+			    if(!kfzxxInfo.getShzt().equals(YhxxShztEnum.YTG.getCode())){
+			        KfzxxInfoService kfzxxInfoService = (KfzxxInfoService) wac.getBean("kfzxxInfoService");//如是注解的Service取注解
+					KfzxxInfoExtend queryKfzxxInfoExtend = new KfzxxInfoExtend();
+					queryKfzxxInfoExtend.setYhid(yhjbxxInfo.getWid());
+
+					QueryCondition<KfzxxInfoExtend> condition = new QueryCondition<>();
+					condition.setQuery(queryKfzxxInfoExtend);
+					DataResult<List<KfzxxInfoExtend>> kfzxxData = kfzxxInfoService.selectByCondition(condition,
+							null);
+					if (CommonUtil.isNotEmptyList(kfzxxData.getDatas())) {
+						session.setAttribute(ConstantsUtil.SESSION_KFZXX, kfzxxData.getDatas().get(0));
+						if (YhxxShztEnum.YTG.getCode().equals(kfzxxData.getDatas().get(0).getShzt())) {
+							isKfz = true;
+							session.setAttribute(ConstantsUtil.IS_KFZ, true);
+						}
+
+					}
+			    }
+			}
+
+			//判断用户是否是需求方
+			Object xqfxxObject = session.getAttribute(ConstantsUtil.SESSION_XQFXX);
+			System.out.println("======================================xqfxxObject===" + xqfxxObject);
+			if (xqfxxObject == null) {
+				XqfxxInfoService xqfxxInfoService = (XqfxxInfoService) wac.getBean("xqfxxInfoService");//如是注解的Service取注解
+				XqfxxInfoExtend queryXqfxxInfoExtend = new XqfxxInfoExtend();
+				queryXqfxxInfoExtend.setYhid(yhjbxxInfo.getWid());
+				QueryCondition<XqfxxInfoExtend> condition = new QueryCondition<XqfxxInfoExtend>();
+				condition.setQuery(queryXqfxxInfoExtend);
+				DataResult<List<XqfxxInfoExtend>> xqfxxData = xqfxxInfoService.selectByCondition(condition,
+						null);
+				if (CommonUtil.isNotEmptyList(xqfxxData.getDatas())) {
+					session.setAttribute(ConstantsUtil.SESSION_XQFXX, xqfxxData.getDatas().get(0));
+					System.out.println("======================================xqfxxObject1==="
+							+ xqfxxData.getDatas().get(0));
+					System.out.println("1======================================xqfxxObject1==="
+							+ isXqf);
+					if (YhxxShztEnum.YTG.getCode().equals(xqfxxData.getDatas().get(0).getShzt())) {
+						isXqf = true;
+						System.out.println("2======================================xqfxxObject1==="
+								+ isXqf);
+						session.setAttribute(ConstantsUtil.IS_XQF, true);
+					}
+
+				}
+			}else{
+			    XqfxxInfo xqfxxInfo=(XqfxxInfo)xqfxxObject;
+			    if(!xqfxxInfo.getShzt().equals(YhxxShztEnum.YTG.getCode())){
+			        XqfxxInfoService xqfxxInfoService = (XqfxxInfoService) wac.getBean("xqfxxInfoService");//如是注解的Service取注解
+					XqfxxInfoExtend queryXqfxxInfoExtend = new XqfxxInfoExtend();
+					queryXqfxxInfoExtend.setYhid(yhjbxxInfo.getWid());
+					QueryCondition<XqfxxInfoExtend> condition = new QueryCondition<XqfxxInfoExtend>();
+					condition.setQuery(queryXqfxxInfoExtend);
+					DataResult<List<XqfxxInfoExtend>> xqfxxData = xqfxxInfoService.selectByCondition(condition,
+							null);
+					if (CommonUtil.isNotEmptyList(xqfxxData.getDatas())) {
+						session.setAttribute(ConstantsUtil.SESSION_XQFXX, xqfxxData.getDatas().get(0));
+						System.out.println("======================================xqfxxObject1==="
+								+ xqfxxData.getDatas().get(0));
+						System.out.println("1======================================xqfxxObject1==="
+								+ isXqf);
+						if (YhxxShztEnum.YTG.getCode().equals(xqfxxData.getDatas().get(0).getShzt())) {
+							isXqf = true;
+							System.out.println("2======================================xqfxxObject1==="
+									+ isXqf);
+							session.setAttribute(ConstantsUtil.IS_XQF, true);
+						}
+
+					}
+			    }
+			}
+		}
+	}
+%>
+<%
+	if (yhjbxxObject != null) {
+%>
+
+<li class="dropdown"><a href="javascript:;"
+	class="navbar-avatar dropdown-toggle" data-toggle="dropdown"
+	aria-expanded="false" style="padding-top:10px;padding-bottom:10px;"> <span
+		class="avatar avatar-online margin-right-5"> <img
+			src="<%=request.getContextPath()%>/statics/images/12.png"
+			alt="mycluster">
+	</span>
+		<% if(isXqf){%> 
+		<%=((XqfxxInfoExtend)session.getAttribute(ConstantsUtil.SESSION_XQFXX)).getNc().equals("")?((XqfxxInfoExtend)session.getAttribute(ConstantsUtil.SESSION_XQFXX)).getXm():((XqfxxInfoExtend)session.getAttribute(ConstantsUtil.SESSION_XQFXX)).getNc() %>
+		<%}else if(isKfz){%>
+		<%=((KfzxxInfoExtend)session.getAttribute(ConstantsUtil.SESSION_KFZXX)).getNc().equals("")?((KfzxxInfoExtend)session.getAttribute(ConstantsUtil.SESSION_KFZXX)).getXm():((KfzxxInfoExtend)session.getAttribute(ConstantsUtil.SESSION_KFZXX)).getNc() %>
+		<%}else {%>
+		<%=((YhjbxxInfo) request.getSession().getAttribute(ConstantsUtil.SESSION_YHJBXX)).getSjh() %>
+		<%} %>
+	<span class="caret"></span>
+</a>
+
+	<ul class="dropdown-menu dropdown-menu-right animate" role="menu">
+		<c:if test="${!empty sessionScope.SESSION_KFZXX}">
+			<li role="presentation"><a
+				href="<%=request.getContextPath()%>/kfzxx/index" role="menuitem">
+					<i class="icon wb-user" aria-hidden="true"></i> 我是开发者
+			</a></li>
+		</c:if>
+		<c:if test="${!empty sessionScope.SESSION_XQFXX}">
+			<li role="presentation"><a
+				href="<%=request.getContextPath()%>/xqfxx/index" role="menuitem"><i
+					class="icon wb-user" aria-hidden="true"></i> 我是需求方</a></li>
+		</c:if>
+
+
+		<li role="presentation"><a
+			href="<%=request.getContextPath()%>/favority/index?flag=favortity"
+			role="menuitem"><i class="icon wb-heart" aria-hidden="true"></i>
+				我的收藏1</a></li>
+		<li role="presentation"><a
+			href="https://show.metinfo.cn/muban/M1156014/381/shop/discount.php?lang=cn"
+			role="menuitem"><i class="icon wb-bookmark" aria-hidden="true"></i>
+				我的培训</a></li>
+
+		<li role="presentation"><a
+			href="https://show.metinfo.cn/muban/M1156014/381/member/basic.php?lang=cn&nojump=1"
+			target="_blank" role="menuitem"><i class="icon wb-settings"
+				aria-hidden="true"></i> 账户设置</a></li>
+		<li class="divider" role="presentation"></li>
+		<li role="presentation"><a
+			href="<%=request.getContextPath()%>/login/logout" role="menuitem"><i
+				class="icon wb-power" aria-hidden="true"></i> 退出</a></li>
+	</ul></li>
+
+
+<%
+	} else {
+%>
+<a class="login" href="<%=request.getContextPath()%>/login/index">登录</a>
+<hr>
+<a class="login" href="<%=request.getContextPath()%>/register/index">注册</a>
+<%
+	}
+%>

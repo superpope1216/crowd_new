@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.rwgl.extend.RwtbxxInfoExtendMapper">
+	<resultMap id="BaseDisplayResultMap"
+		type="com.wisedu.crowd.entity.rwgl.extend.RwtbxxInfoExtend" extends="com.wisedu.crowd.dao.rwgl.RwtbxxInfoMapper.BaseResultMap">
+		<result column="zbzt_display" property="zbztDisplay" jdbcType="VARCHAR" />
+		<result column="kfz_xm" property="kfzXm" jdbcType="VARCHAR" />
+		<result column="kfz_nc" property="kfzNc" jdbcType="VARCHAR" />
+		<result column="kfzlb" property="kfzlb" jdbcType="VARCHAR" />
+		<result column="sfytd" property="sfytd" jdbcType="VARCHAR" />
+		<result column="bmsj" property="bmsj" jdbcType="VARCHAR" />
+		<result column="sjh" property="sjh" jdbcType="VARCHAR" />
+		<result column="qq" property="qq" jdbcType="VARCHAR" />
+		<result column="grzpfjid" property="grzpfjid" jdbcType="VARCHAR" />
+		<result column="score" property="score" jdbcType="DECIMAL" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		t_crowd_xmgl_rwtbxx.WID, t_crowd_xmgl_rwtbxx.RWID, t_crowd_xmgl_rwtbxx.KFZID,
+		t_crowd_xmgl_rwtbxx.TBJE, t_crowd_xmgl_rwtbxx.TBCS,
+		t_crowd_xmgl_rwtbxx.ZBZT,
+		t_crowd_xmgl_rwtbxx.TBSJ, t_crowd_xmgl_rwtbxx.TBRIP, t_crowd_xmgl_rwtbxx.SFJSKFZXY
+	</sql>
+	<sql id="sqlWhere">
+		<if test="query!=null">
+			<if test='query.wid!=null and query.wid!=""'>
+				AND t_crowd_xmgl_rwtbxx.wid=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.rwid!=null and query.rwid!=""'>
+				AND t_crowd_xmgl_rwtbxx.RWID=#{query.rwid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.kfzid!=null and query.kfzid!=""'>
+				AND t_crowd_xmgl_rwtbxx.kfzid =#{query.kfzid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.tbje!=null'>
+				AND t_crowd_xmgl_rwtbxx.tbje=#{query.tbje,jdbcType=DECIMAL}
+			</if>
+			<if test='query.zbzt!=null and query.zbzt!=""'>
+				AND t_crowd_xmgl_rwtbxx.zbzt=#{query.zbzt,jdbcType=VARCHAR}
+			</if>
+		</if>
+	</sql>
+	<select id="selectByCondition" resultMap="BaseDisplayResultMap"
+		parameterType="com.wisedu.crowd.entity.rwgl.extend.RwtbxxInfoExtend">
+		select
+		<include refid="Base_Column_List" />
+		from t_crowd_xmgl_rwtbxx t_crowd_xmgl_rwtbxx
+
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+		ORDER BY t_crowd_xmgl_rwtbxx TBSJ DESC
+	</select>
+
+	<select id="selectCountByCondition" resultType="java.lang.Integer"
+		parameterType="com.wisedu.crowd.entity.rwgl.extend.RwtbxxInfoExtend">
+		select COUNT(0) FROM t_crowd_xmgl_rwtbxx
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+	</select>
+
+	<select id="selectDisplayByCondition" resultMap="BaseDisplayResultMap"
+		parameterType="com.wisedu.crowd.entity.rwgl.extend.RwtbxxInfoExtend">
+		select
+		<include refid="Base_Column_List" />
+		,t_Crowd_Sjzd_Rwzbzt.lbmc as ZBZT_DISPLAY
+		,T_CROWD_YHGL_KFZXX.XM AS KFZ_XM
+		,T_CROWD_YHGL_KFZXX.NC AS KFZ_NC
+		,T_CROWD_YHGL_KFZXX.SJH as sjh
+		,T_CROWD_YHGL_KFZXX.qq as qq
+		,T_CROWD_YHGL_KFZXX.sfytd
+		,T_CROWD_YHGL_KFZXX.kfzlb
+		,T_CROWD_YHGL_KFZXX.grzpfjid
+		,NVL(T_CROWD_YHGL_KFZDF.SCORE, 0) AS SCORE
+		from t_crowd_xmgl_rwtbxx t_crowd_xmgl_rwtbxx
+		left join t_Crowd_Sjzd_Rwzbzt t_Crowd_Sjzd_Rwzbzt on
+		t_Crowd_Sjzd_Rwzbzt.lbdm=t_crowd_xmgl_rwtbxx.ZBZT and
+		t_Crowd_Sjzd_Rwzbzt.sfsy=1
+		LEFT JOIN (SELECT
+		T_CROWD_YHGL_KFZXX.XM,T_CROWD_YHGL_KFZXX.kfzlb,T_CROWD_YHGL_YHJBXX.SJH,T_CROWD_YHGL_KFZXX.WID,
+		T_CROWD_YHGL_KFZXX.NC,T_CROWD_YHGL_KFZXX.QQ,T_CROWD_YHGL_KFZXX.sfytd,T_CROWD_YHGL_KFZXX.grzpfjid
+		FROM T_CROWD_YHGL_KFZXX 
+		left join t_crowd_yhgl_yhjbxx on t_crowd_yhgl_yhjbxx.wid=t_crowd_yhgl_kfzxx.yhid)
+		 T_CROWD_YHGL_KFZXX ON T_CROWD_YHGL_KFZXX.WID=
+		t_crowd_xmgl_rwtbxx.KFZID
+		LEFT JOIN T_CROWD_YHGL_KFZDF ON T_CROWD_YHGL_KFZDF.KFZID = T_CROWD_XMGL_RWTBXX.KFZID
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+		ORDER BY t_crowd_xmgl_rwtbxx.TBSJ DESC
+	</select>
+	<delete id="deleteByCondition" parameterType="com.wisedu.crowd.entity.rwgl.RwtbxxInfo">
+		DELETE FROM t_crowd_xmgl_rwtbxx
+			<where>
+			<if test='wid!=null and wid!=""'>
+				AND WID = #{wid,jdbcType=VARCHAR}
+			</if>
+			<if test='rwid!=null and rwid!=""'>
+				AND RWID=#{rwid,jdbcType=VARCHAR}
+			</if>
+			<if test='kfzid!=null and kfzid!=""'>
+				AND KFZID=#{kfzid,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+	<update id="updateByCondition" parameterType="com.wisedu.crowd.entity.rwgl.RwtbxxInfo">
+		update t_crowd_xmgl_rwtbxx
+		<set>
+			<if test="kfzid != null">
+				KFZID = #{kfzid,jdbcType=VARCHAR},
+			</if>
+			<if test="tbje != null">
+				TBJE = #{tbje,jdbcType=DECIMAL},
+			</if>
+			<if test="tbcs != null">
+				TBCS = #{tbcs,jdbcType=VARCHAR},
+			</if>
+			<if test="zbzt != null">
+				ZBZT = #{zbzt,jdbcType=VARCHAR},
+			</if>
+			<if test="tbsj != null">
+				TBSJ = #{tbsj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="tbrip != null">
+				TBRIP = #{tbrip,jdbcType=VARCHAR},
+			</if>
+			<if test="sfjskfzxy != null">
+				SFJSKFZXY = #{sfjskfzxy,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<where>
+			<if test='wid!=null and wid!=""'>
+				AND WID = #{wid,jdbcType=VARCHAR}
+			</if>
+			<if test='rwid!=null and rwid!=""'>
+				AND RWID=#{rwid,jdbcType=VARCHAR}
+			</if>
+			<if test='kfzid!=null and kfzid!=""'>
+				AND KFZID=#{kfzid,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</update>
+</mapper>

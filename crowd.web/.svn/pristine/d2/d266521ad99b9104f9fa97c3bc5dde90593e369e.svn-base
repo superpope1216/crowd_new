@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	<script src="//cdn.bootcss.com/tether/1.3.6/js/tether.min.js"></script>
+<script src="<%=request.getContextPath()%>/statics/js/advert.js"></script>
+<script src="<%=request.getContextPath()%>/statics/js/common.js"></script>
+<script
+	src="<%=request.getContextPath()%>/statics/plugins/vendor/jquery/seajs.js"></script>
+<script src="<%=request.getContextPath()%>/statics/js/show_v3.js"></script>
+<script type="text/javascript">
+	var basePath="<%=request.getContextPath()%>";
+	var plugins = basePath + "/statics/plugins";
+	var pageJs = basePath + "/statics/pagejs";
+	seajs.config({
+		paths : {
+			'plugins' :plugins,
+			'pagejs' :pageJs
+		},
+		alias : {
+			"jquery" : "jquery_seajs.js"
+		}
+	});
+	seajs.use("pagejs/public");
+</script>

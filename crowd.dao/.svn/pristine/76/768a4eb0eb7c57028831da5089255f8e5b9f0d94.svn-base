@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.statics.KfzxxDataMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.statics.KfzxxData" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="KFZID" property="kfzid" jdbcType="VARCHAR" />
+    <result column="CYXM" property="cyxm" jdbcType="DECIMAL" />
+    <result column="PTRZJN" property="ptrzjn" jdbcType="VARCHAR" />
+    <result column="PTRZDJ" property="ptrzdj" jdbcType="VARCHAR" />
+    <result column="ZSR" property="zsr" jdbcType="DECIMAL" />
+    <result column="ZDF" property="zdf" jdbcType="DECIMAL" />
+    <result column="TBS" property="tbs" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, KFZID, CYXM, PTRZJN, PTRZDJ, ZSR, ZDF, TBS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_CROWD_STATIC_KFZXX_DATA
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_CROWD_STATIC_KFZXX_DATA
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.statics.KfzxxData" >
+    insert into T_CROWD_STATIC_KFZXX_DATA (WID, KFZID, CYXM, 
+      PTRZJN, PTRZDJ, ZSR, 
+      ZDF, TBS)
+    values (#{wid,jdbcType=VARCHAR}, #{kfzid,jdbcType=VARCHAR}, #{cyxm,jdbcType=DECIMAL}, 
+      #{ptrzjn,jdbcType=VARCHAR}, #{ptrzdj,jdbcType=VARCHAR}, #{zsr,jdbcType=DECIMAL}, 
+      #{zdf,jdbcType=DECIMAL}, #{tbs,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.statics.KfzxxData" >
+    insert into T_CROWD_STATIC_KFZXX_DATA
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="kfzid != null" >
+        KFZID,
+      </if>
+      <if test="cyxm != null" >
+        CYXM,
+      </if>
+      <if test="ptrzjn != null" >
+        PTRZJN,
+      </if>
+      <if test="ptrzdj != null" >
+        PTRZDJ,
+      </if>
+      <if test="zsr != null" >
+        ZSR,
+      </if>
+      <if test="zdf != null" >
+        ZDF,
+      </if>
+      <if test="tbs != null" >
+        TBS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="kfzid != null" >
+        #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="cyxm != null" >
+        #{cyxm,jdbcType=DECIMAL},
+      </if>
+      <if test="ptrzjn != null" >
+        #{ptrzjn,jdbcType=VARCHAR},
+      </if>
+      <if test="ptrzdj != null" >
+        #{ptrzdj,jdbcType=VARCHAR},
+      </if>
+      <if test="zsr != null" >
+        #{zsr,jdbcType=DECIMAL},
+      </if>
+      <if test="zdf != null" >
+        #{zdf,jdbcType=DECIMAL},
+      </if>
+      <if test="tbs != null" >
+        #{tbs,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.statics.KfzxxData" >
+    update T_CROWD_STATIC_KFZXX_DATA
+    <set >
+      <if test="kfzid != null" >
+        KFZID = #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="cyxm != null" >
+        CYXM = #{cyxm,jdbcType=DECIMAL},
+      </if>
+      <if test="ptrzjn != null" >
+        PTRZJN = #{ptrzjn,jdbcType=VARCHAR},
+      </if>
+      <if test="ptrzdj != null" >
+        PTRZDJ = #{ptrzdj,jdbcType=VARCHAR},
+      </if>
+      <if test="zsr != null" >
+        ZSR = #{zsr,jdbcType=DECIMAL},
+      </if>
+      <if test="zdf != null" >
+        ZDF = #{zdf,jdbcType=DECIMAL},
+      </if>
+      <if test="tbs != null" >
+        TBS = #{tbs,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.statics.KfzxxData" >
+    update T_CROWD_STATIC_KFZXX_DATA
+    set KFZID = #{kfzid,jdbcType=VARCHAR},
+      CYXM = #{cyxm,jdbcType=DECIMAL},
+      PTRZJN = #{ptrzjn,jdbcType=VARCHAR},
+      PTRZDJ = #{ptrzdj,jdbcType=VARCHAR},
+      ZSR = #{zsr,jdbcType=DECIMAL},
+      ZDF = #{zdf,jdbcType=DECIMAL},
+      TBS = #{tbs,jdbcType=DECIMAL}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

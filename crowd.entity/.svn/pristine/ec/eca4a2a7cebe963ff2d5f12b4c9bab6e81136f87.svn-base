@@ -1,0 +1,928 @@
+package com.wisedu.crowd.entity.rwgl;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+
+public class RwjbxxInfo implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+     * 
+     */
+    private String wid;
+
+    /**
+     * 需求方ID
+     */
+    private String xqfid;
+
+    /**
+     * 任务编号
+     */
+    private String rwbh;
+
+    /**
+     * 任务名称
+     */
+    private String rwmc;
+
+    /**
+     * 任务类别
+     */
+    private Short rwlb;
+
+    /**
+     * 开发框架
+     */
+    private Short kfkj;
+
+    /**
+     * 任务形式
+     */
+    private String rwxs;
+
+    /**
+     * 服务类型
+     */
+    private Short fwlx;
+
+    /**
+     * 开发框架说明
+     */
+    private String kfkjsm;
+
+    /**
+     * 项目预算金额
+     */
+    private Long xmysje;
+
+    /**
+     * 项目概述
+     */
+    private String xmgs;
+
+    /**
+     * 是否有需求文档
+     */
+    private Short sfyxqwd;
+
+    /**
+     * 需求文档附件ID
+     */
+    private String xqwdfjid;
+
+    /**
+     * 项目图片附件ID
+     */
+    private String xmtpfjid;
+
+    /**
+     * 项目状态
+     */
+    private String xmzt;
+
+    /**
+     * 招标起始时间
+     */
+    private Date zbqssj;
+
+    /**
+     * 招标周期
+     */
+    private Long zbzq;
+
+    /**
+     * 是否需要需求服务
+     */
+    private Short sfxyxqfw;
+
+    /**
+     * 是否需要交付服务
+     */
+    private Short sfxyjffw;
+
+    /**
+     * 是否需要驻场服务
+     */
+    private Short sfxyzcfw;
+
+    /**
+     * 驻场服务说明
+     */
+    private String zcfwsm;
+
+    /**
+     * 创建时间
+     */
+    private Date cjsj;
+
+    /**
+     * 创建者IP
+     */
+    private String cjzip;
+
+    /**
+     * 中标金额
+     */
+    private Long zbje;
+
+    /**
+     * 中标工作量
+     */
+    private BigDecimal zbgzl;
+
+    /**
+     * 中标开发者ID
+     */
+    private String kfzid;
+
+    /**
+     * 中标时间
+     */
+    private Date zbsj;
+
+    /**
+     * 所属业务线
+     */
+    private String ywxlb;
+
+    /**
+     * 交付日期
+     */
+    private String jfrq;
+
+    /**
+     * 是否需要评估
+     */
+    private String sfxypg;
+
+    /**
+     * 是否已评估
+     */
+    private String sfypg;
+
+    /**
+     * 是否推送外部CROWD
+     */
+    private String sftswb;
+
+    /**
+     * 审核人员姓名
+     */
+    private String shryxm;
+
+    /**
+     * 是否接受平台需求规范
+     */
+    private Short sfjsptxqgf;
+
+    /**
+     * 任务难易度
+     */
+    private String rwnyd;
+
+    /**
+     * 分包
+     */
+    private String fb;
+
+    /**
+     * 定制级别
+     */
+    private String dzjb;
+
+    /**
+     * 产品APP
+     */
+    private String cpapp;
+
+    /**
+     * 是否紧急
+     */
+    private String sfjs;
+
+    /**
+     * 紧急补助金额
+     */
+    private Long jjbzje;
+
+    /**
+     * 定制说明
+     */
+    private String dzsm;
+
+    /**
+     * 
+     * @return WID 
+     */
+    public String getWid() {
+        return wid;
+    }
+
+    /**
+     * 
+     * @param wid 
+     */
+    public void setWid(String wid) {
+        this.wid = wid == null ? null : wid.trim();
+    }
+
+    /**
+     * 需求方ID
+     * @return XQFID 需求方ID
+     */
+    public String getXqfid() {
+        return xqfid;
+    }
+
+    /**
+     * 需求方ID
+     * @param xqfid 需求方ID
+     */
+    public void setXqfid(String xqfid) {
+        this.xqfid = xqfid == null ? null : xqfid.trim();
+    }
+
+    /**
+     * 任务编号
+     * @return RWBH 任务编号
+     */
+    public String getRwbh() {
+        return rwbh;
+    }
+
+    /**
+     * 任务编号
+     * @param rwbh 任务编号
+     */
+    public void setRwbh(String rwbh) {
+        this.rwbh = rwbh == null ? null : rwbh.trim();
+    }
+
+    /**
+     * 任务名称
+     * @return RWMC 任务名称
+     */
+    public String getRwmc() {
+        return rwmc;
+    }
+
+    /**
+     * 任务名称
+     * @param rwmc 任务名称
+     */
+    public void setRwmc(String rwmc) {
+        this.rwmc = rwmc == null ? null : rwmc.trim();
+    }
+
+    /**
+     * 任务类别
+     * @return RWLB 任务类别
+     */
+    public Short getRwlb() {
+        return rwlb;
+    }
+
+    /**
+     * 任务类别
+     * @param rwlb 任务类别
+     */
+    public void setRwlb(Short rwlb) {
+        this.rwlb = rwlb;
+    }
+
+    /**
+     * 开发框架
+     * @return KFKJ 开发框架
+     */
+    public Short getKfkj() {
+        return kfkj;
+    }
+
+    /**
+     * 开发框架
+     * @param kfkj 开发框架
+     */
+    public void setKfkj(Short kfkj) {
+        this.kfkj = kfkj;
+    }
+
+    /**
+     * 任务形式
+     * @return RWXS 任务形式
+     */
+    public String getRwxs() {
+        return rwxs;
+    }
+
+    /**
+     * 任务形式
+     * @param rwxs 任务形式
+     */
+    public void setRwxs(String rwxs) {
+        this.rwxs = rwxs == null ? null : rwxs.trim();
+    }
+
+    /**
+     * 服务类型
+     * @return FWLX 服务类型
+     */
+    public Short getFwlx() {
+        return fwlx;
+    }
+
+    /**
+     * 服务类型
+     * @param fwlx 服务类型
+     */
+    public void setFwlx(Short fwlx) {
+        this.fwlx = fwlx;
+    }
+
+    /**
+     * 开发框架说明
+     * @return KFKJSM 开发框架说明
+     */
+    public String getKfkjsm() {
+        return kfkjsm;
+    }
+
+    /**
+     * 开发框架说明
+     * @param kfkjsm 开发框架说明
+     */
+    public void setKfkjsm(String kfkjsm) {
+        this.kfkjsm = kfkjsm == null ? null : kfkjsm.trim();
+    }
+
+    /**
+     * 项目预算金额
+     * @return XMYSJE 项目预算金额
+     */
+    public Long getXmysje() {
+        return xmysje;
+    }
+
+    /**
+     * 项目预算金额
+     * @param xmysje 项目预算金额
+     */
+    public void setXmysje(Long xmysje) {
+        this.xmysje = xmysje;
+    }
+
+    /**
+     * 项目概述
+     * @return XMGS 项目概述
+     */
+    public String getXmgs() {
+        return xmgs;
+    }
+
+    /**
+     * 项目概述
+     * @param xmgs 项目概述
+     */
+    public void setXmgs(String xmgs) {
+        this.xmgs = xmgs == null ? null : xmgs.trim();
+    }
+
+    /**
+     * 是否有需求文档
+     * @return SFYXQWD 是否有需求文档
+     */
+    public Short getSfyxqwd() {
+        return sfyxqwd;
+    }
+
+    /**
+     * 是否有需求文档
+     * @param sfyxqwd 是否有需求文档
+     */
+    public void setSfyxqwd(Short sfyxqwd) {
+        this.sfyxqwd = sfyxqwd;
+    }
+
+    /**
+     * 需求文档附件ID
+     * @return XQWDFJID 需求文档附件ID
+     */
+    public String getXqwdfjid() {
+        return xqwdfjid;
+    }
+
+    /**
+     * 需求文档附件ID
+     * @param xqwdfjid 需求文档附件ID
+     */
+    public void setXqwdfjid(String xqwdfjid) {
+        this.xqwdfjid = xqwdfjid == null ? null : xqwdfjid.trim();
+    }
+
+    /**
+     * 项目图片附件ID
+     * @return XMTPFJID 项目图片附件ID
+     */
+    public String getXmtpfjid() {
+        return xmtpfjid;
+    }
+
+    /**
+     * 项目图片附件ID
+     * @param xmtpfjid 项目图片附件ID
+     */
+    public void setXmtpfjid(String xmtpfjid) {
+        this.xmtpfjid = xmtpfjid == null ? null : xmtpfjid.trim();
+    }
+
+    /**
+     * 项目状态
+     * @return XMZT 项目状态
+     */
+    public String getXmzt() {
+        return xmzt;
+    }
+
+    /**
+     * 项目状态
+     * @param xmzt 项目状态
+     */
+    public void setXmzt(String xmzt) {
+        this.xmzt = xmzt == null ? null : xmzt.trim();
+    }
+
+    /**
+     * 招标起始时间
+     * @return ZBQSSJ 招标起始时间
+     */
+    public Date getZbqssj() {
+        return zbqssj;
+    }
+
+    /**
+     * 招标起始时间
+     * @param zbqssj 招标起始时间
+     */
+    public void setZbqssj(Date zbqssj) {
+        this.zbqssj = zbqssj;
+    }
+
+    /**
+     * 招标周期
+     * @return ZBZQ 招标周期
+     */
+    public Long getZbzq() {
+        return zbzq;
+    }
+
+    /**
+     * 招标周期
+     * @param zbzq 招标周期
+     */
+    public void setZbzq(Long zbzq) {
+        this.zbzq = zbzq;
+    }
+
+    /**
+     * 是否需要需求服务
+     * @return SFXYXQFW 是否需要需求服务
+     */
+    public Short getSfxyxqfw() {
+        return sfxyxqfw;
+    }
+
+    /**
+     * 是否需要需求服务
+     * @param sfxyxqfw 是否需要需求服务
+     */
+    public void setSfxyxqfw(Short sfxyxqfw) {
+        this.sfxyxqfw = sfxyxqfw;
+    }
+
+    /**
+     * 是否需要交付服务
+     * @return SFXYJFFW 是否需要交付服务
+     */
+    public Short getSfxyjffw() {
+        return sfxyjffw;
+    }
+
+    /**
+     * 是否需要交付服务
+     * @param sfxyjffw 是否需要交付服务
+     */
+    public void setSfxyjffw(Short sfxyjffw) {
+        this.sfxyjffw = sfxyjffw;
+    }
+
+    /**
+     * 是否需要驻场服务
+     * @return SFXYZCFW 是否需要驻场服务
+     */
+    public Short getSfxyzcfw() {
+        return sfxyzcfw;
+    }
+
+    /**
+     * 是否需要驻场服务
+     * @param sfxyzcfw 是否需要驻场服务
+     */
+    public void setSfxyzcfw(Short sfxyzcfw) {
+        this.sfxyzcfw = sfxyzcfw;
+    }
+
+    /**
+     * 驻场服务说明
+     * @return ZCFWSM 驻场服务说明
+     */
+    public String getZcfwsm() {
+        return zcfwsm;
+    }
+
+    /**
+     * 驻场服务说明
+     * @param zcfwsm 驻场服务说明
+     */
+    public void setZcfwsm(String zcfwsm) {
+        this.zcfwsm = zcfwsm == null ? null : zcfwsm.trim();
+    }
+
+    /**
+     * 创建时间
+     * @return CJSJ 创建时间
+     */
+    public Date getCjsj() {
+        return cjsj;
+    }
+
+    /**
+     * 创建时间
+     * @param cjsj 创建时间
+     */
+    public void setCjsj(Date cjsj) {
+        this.cjsj = cjsj;
+    }
+
+    /**
+     * 创建者IP
+     * @return CJZIP 创建者IP
+     */
+    public String getCjzip() {
+        return cjzip;
+    }
+
+    /**
+     * 创建者IP
+     * @param cjzip 创建者IP
+     */
+    public void setCjzip(String cjzip) {
+        this.cjzip = cjzip == null ? null : cjzip.trim();
+    }
+
+    /**
+     * 中标金额
+     * @return ZBJE 中标金额
+     */
+    public Long getZbje() {
+        return zbje;
+    }
+
+    /**
+     * 中标金额
+     * @param zbje 中标金额
+     */
+    public void setZbje(Long zbje) {
+        this.zbje = zbje;
+    }
+
+    /**
+     * 中标工作量
+     * @return ZBGZL 中标工作量
+     */
+    public BigDecimal getZbgzl() {
+        return zbgzl;
+    }
+
+    /**
+     * 中标工作量
+     * @param zbgzl 中标工作量
+     */
+    public void setZbgzl(BigDecimal zbgzl) {
+        this.zbgzl = zbgzl;
+    }
+
+    /**
+     * 中标开发者ID
+     * @return KFZID 中标开发者ID
+     */
+    public String getKfzid() {
+        return kfzid;
+    }
+
+    /**
+     * 中标开发者ID
+     * @param kfzid 中标开发者ID
+     */
+    public void setKfzid(String kfzid) {
+        this.kfzid = kfzid == null ? null : kfzid.trim();
+    }
+
+    /**
+     * 中标时间
+     * @return ZBSJ 中标时间
+     */
+    public Date getZbsj() {
+        return zbsj;
+    }
+
+    /**
+     * 中标时间
+     * @param zbsj 中标时间
+     */
+    public void setZbsj(Date zbsj) {
+        this.zbsj = zbsj;
+    }
+
+    /**
+     * 所属业务线
+     * @return YWXLB 所属业务线
+     */
+    public String getYwxlb() {
+        return ywxlb;
+    }
+
+    /**
+     * 所属业务线
+     * @param ywxlb 所属业务线
+     */
+    public void setYwxlb(String ywxlb) {
+        this.ywxlb = ywxlb == null ? null : ywxlb.trim();
+    }
+
+    /**
+     * 交付日期
+     * @return JFRQ 交付日期
+     */
+    public String getJfrq() {
+        return jfrq;
+    }
+
+    /**
+     * 交付日期
+     * @param jfrq 交付日期
+     */
+    public void setJfrq(String jfrq) {
+        this.jfrq = jfrq == null ? null : jfrq.trim();
+    }
+
+    /**
+     * 是否需要评估
+     * @return SFXYPG 是否需要评估
+     */
+    public String getSfxypg() {
+        return sfxypg;
+    }
+
+    /**
+     * 是否需要评估
+     * @param sfxypg 是否需要评估
+     */
+    public void setSfxypg(String sfxypg) {
+        this.sfxypg = sfxypg == null ? null : sfxypg.trim();
+    }
+
+    /**
+     * 是否已评估
+     * @return SFYPG 是否已评估
+     */
+    public String getSfypg() {
+        return sfypg;
+    }
+
+    /**
+     * 是否已评估
+     * @param sfypg 是否已评估
+     */
+    public void setSfypg(String sfypg) {
+        this.sfypg = sfypg == null ? null : sfypg.trim();
+    }
+
+    /**
+     * 是否推送外部CROWD
+     * @return SFTSWB 是否推送外部CROWD
+     */
+    public String getSftswb() {
+        return sftswb;
+    }
+
+    /**
+     * 是否推送外部CROWD
+     * @param sftswb 是否推送外部CROWD
+     */
+    public void setSftswb(String sftswb) {
+        this.sftswb = sftswb == null ? null : sftswb.trim();
+    }
+
+    /**
+     * 审核人员姓名
+     * @return SHRYXM 审核人员姓名
+     */
+    public String getShryxm() {
+        return shryxm;
+    }
+
+    /**
+     * 审核人员姓名
+     * @param shryxm 审核人员姓名
+     */
+    public void setShryxm(String shryxm) {
+        this.shryxm = shryxm == null ? null : shryxm.trim();
+    }
+
+    /**
+     * 是否接受平台需求规范
+     * @return SFJSPTXQGF 是否接受平台需求规范
+     */
+    public Short getSfjsptxqgf() {
+        return sfjsptxqgf;
+    }
+
+    /**
+     * 是否接受平台需求规范
+     * @param sfjsptxqgf 是否接受平台需求规范
+     */
+    public void setSfjsptxqgf(Short sfjsptxqgf) {
+        this.sfjsptxqgf = sfjsptxqgf;
+    }
+
+    /**
+     * 任务难易度
+     * @return RWNYD 任务难易度
+     */
+    public String getRwnyd() {
+        return rwnyd;
+    }
+
+    /**
+     * 任务难易度
+     * @param rwnyd 任务难易度
+     */
+    public void setRwnyd(String rwnyd) {
+        this.rwnyd = rwnyd == null ? null : rwnyd.trim();
+    }
+
+    /**
+     * 分包
+     * @return FB 分包
+     */
+    public String getFb() {
+        return fb;
+    }
+
+    /**
+     * 分包
+     * @param fb 分包
+     */
+    public void setFb(String fb) {
+        this.fb = fb == null ? null : fb.trim();
+    }
+
+    /**
+     * 定制级别
+     * @return DZJB 定制级别
+     */
+    public String getDzjb() {
+        return dzjb;
+    }
+
+    /**
+     * 定制级别
+     * @param dzjb 定制级别
+     */
+    public void setDzjb(String dzjb) {
+        this.dzjb = dzjb == null ? null : dzjb.trim();
+    }
+
+    /**
+     * 产品APP
+     * @return CPAPP 产品APP
+     */
+    public String getCpapp() {
+        return cpapp;
+    }
+
+    /**
+     * 产品APP
+     * @param cpapp 产品APP
+     */
+    public void setCpapp(String cpapp) {
+        this.cpapp = cpapp == null ? null : cpapp.trim();
+    }
+
+    /**
+     * 是否紧急
+     * @return SFJS 是否紧急
+     */
+    public String getSfjs() {
+        return sfjs;
+    }
+
+    /**
+     * 是否紧急
+     * @param sfjs 是否紧急
+     */
+    public void setSfjs(String sfjs) {
+        this.sfjs = sfjs == null ? null : sfjs.trim();
+    }
+
+    /**
+     * 紧急补助金额
+     * @return JJBZJE 紧急补助金额
+     */
+    public Long getJjbzje() {
+        return jjbzje;
+    }
+
+    /**
+     * 紧急补助金额
+     * @param jjbzje 紧急补助金额
+     */
+    public void setJjbzje(Long jjbzje) {
+        this.jjbzje = jjbzje;
+    }
+
+    /**
+     * 定制说明
+     * @return DZSM 定制说明
+     */
+    public String getDzsm() {
+        return dzsm;
+    }
+
+    /**
+     * 定制说明
+     * @param dzsm 定制说明
+     */
+    public void setDzsm(String dzsm) {
+        this.dzsm = dzsm == null ? null : dzsm.trim();
+    }
+
+    /**
+     *
+     * @mbggenerated 2017-11-13
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", wid=").append(wid);
+        sb.append(", xqfid=").append(xqfid);
+        sb.append(", rwbh=").append(rwbh);
+        sb.append(", rwmc=").append(rwmc);
+        sb.append(", rwlb=").append(rwlb);
+        sb.append(", kfkj=").append(kfkj);
+        sb.append(", rwxs=").append(rwxs);
+        sb.append(", fwlx=").append(fwlx);
+        sb.append(", kfkjsm=").append(kfkjsm);
+        sb.append(", xmysje=").append(xmysje);
+        sb.append(", xmgs=").append(xmgs);
+        sb.append(", sfyxqwd=").append(sfyxqwd);
+        sb.append(", xqwdfjid=").append(xqwdfjid);
+        sb.append(", xmtpfjid=").append(xmtpfjid);
+        sb.append(", xmzt=").append(xmzt);
+        sb.append(", zbqssj=").append(zbqssj);
+        sb.append(", zbzq=").append(zbzq);
+        sb.append(", sfxyxqfw=").append(sfxyxqfw);
+        sb.append(", sfxyjffw=").append(sfxyjffw);
+        sb.append(", sfxyzcfw=").append(sfxyzcfw);
+        sb.append(", zcfwsm=").append(zcfwsm);
+        sb.append(", cjsj=").append(cjsj);
+        sb.append(", cjzip=").append(cjzip);
+        sb.append(", zbje=").append(zbje);
+        sb.append(", zbgzl=").append(zbgzl);
+        sb.append(", kfzid=").append(kfzid);
+        sb.append(", zbsj=").append(zbsj);
+        sb.append(", ywxlb=").append(ywxlb);
+        sb.append(", jfrq=").append(jfrq);
+        sb.append(", sfxypg=").append(sfxypg);
+        sb.append(", sfypg=").append(sfypg);
+        sb.append(", sftswb=").append(sftswb);
+        sb.append(", shryxm=").append(shryxm);
+        sb.append(", sfjsptxqgf=").append(sfjsptxqgf);
+        sb.append(", rwnyd=").append(rwnyd);
+        sb.append(", fb=").append(fb);
+        sb.append(", dzjb=").append(dzjb);
+        sb.append(", cpapp=").append(cpapp);
+        sb.append(", sfjs=").append(sfjs);
+        sb.append(", jjbzje=").append(jjbzje);
+        sb.append(", dzsm=").append(dzsm);
+        sb.append("]");
+        return sb.toString();
+    }
+}

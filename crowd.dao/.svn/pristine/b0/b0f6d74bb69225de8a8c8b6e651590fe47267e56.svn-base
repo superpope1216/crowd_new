@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.cwgl.extend.YyfzhxxInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.cwgl.YyfzhxxInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="ZFBZH" property="zfbzh" jdbcType="VARCHAR" />
+    <result column="ZHYE" property="zhye" jdbcType="REAL" />
+    <result column="DJJE" property="djje" jdbcType="DECIMAL" />
+    <result column="VERSION" property="version" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_crowd_cwgl_yyfzhxx.WID, t_crowd_cwgl_yyfzhxx.ZFBZH, 
+    t_crowd_cwgl_yyfzhxx.ZHYE, t_crowd_cwgl_yyfzhxx.DJJE, 
+    t_crowd_cwgl_yyfzhxx.VERSION
+  </sql>
+  <sql id="sqlWhere">
+  	<if test="query!=null">
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND t_crowd_cwgl_yyfzhxx.WID=#{query.wid,jdbcType=VARCHAR} 
+  		</if>
+  	</if>
+  </sql>
+  <select id="selectByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+  resultMap="com.wisedu.crowd.dao.cwgl.YyfzhxxInfoMapper.BaseResultMap">
+  	SELECT 
+  	<include refid="Base_Column_List"/>
+  	from t_crowd_cwgl_yyfzhxx
+  	<where>
+  		<include refid="sqlWhere"/>
+  	</where>
+  </select>
+  
+</mapper>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.zygl.extend.YzmInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.zygl.YzmInfo"
+		extends="com.wisedu.crowd.dao.zygl.YzmInfoMapper.BaseResultMap">
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_crowd_zygl_yzm.WID, t_crowd_zygl_yzm.DZ, t_crowd_zygl_yzm.ZH, 
+    t_crowd_zygl_yzm.CSMM, t_crowd_zygl_yzm.PZ, t_crowd_zygl_yzm.SYZT, 
+    t_crowd_zygl_yzm.SQJLID
+  </sql>
+  <resultMap id="BaseDisplayResultMap"
+		type="com.wisedu.crowd.entity.zygl.extend.YzmInfoExtend" extends="com.wisedu.crowd.dao.zygl.YzmInfoMapper.BaseResultMap">
+		<result column="pz_display" property="pzDisplay" jdbcType="VARCHAR" />
+		<result column="syzt_display" property="syztDisplay" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="sqlWhere">
+		<if test="query!=null">
+			<if test='query.wid!=null and query.wid!=""'>
+				AND t_crowd_zygl_yzm.wid=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.syzt!=null and query.syzt!=""'>
+				AND t_crowd_zygl_yzm.syzt=#{query.syzt,jdbcType=VARCHAR}
+			</if>
+			<if test='query.sqjlid!=null and query.sqjlid!=""'>
+				AND t_crowd_zygl_yzm.sqjlid=#{query.sqjlid,jdbcType=VARCHAR}
+			</if>
+		</if>
+  </sql>
+  	<select id="selectDisplayByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseDisplayResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		,T_CROWD_SJZD_YZMPZ.LBMC AS pz_display
+		,T_CROWD_SJZD_ZYSYZT.LBMC AS syzt_display
+		FROM T_CROWD_ZYGL_YZM T_CROWD_ZYGL_YZM
+		LEFT JOIN  T_CROWD_SJZD_YZMPZ T_CROWD_SJZD_YZMPZ
+		ON T_CROWD_SJZD_YZMPZ.LBDM = T_CROWD_ZYGL_YZM.PZ AND T_CROWD_SJZD_YZMPZ.SFSY = 1
+		LEFT JOIN  T_CROWD_SJZD_ZYSYZT T_CROWD_SJZD_ZYSYZT
+		ON T_CROWD_SJZD_ZYSYZT.LBDM = T_CROWD_ZYGL_YZM.SYZT AND T_CROWD_SJZD_ZYSYZT.SFSY = 1
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+
+	</select>
+</mapper>

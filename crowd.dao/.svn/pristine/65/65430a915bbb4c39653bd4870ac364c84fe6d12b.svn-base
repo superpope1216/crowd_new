@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisedu.crowd.dao.yhgl.extend.KfzzzxxInfoExtendMapper">
+  <resultMap id="BaseDisplayResultMap" type="com.wisedu.crowd.entity.yhgl.extend.KfzzzxxInfoExtend"
+  	extends="com.wisedu.crowd.dao.yhgl.KfzzzxxInfoMapper.BaseResultMap">
+	<result column="ZZDJID_DISPLAY" property="zzdjidDisplay" jdbcType="VARCHAR" />
+	<result column="ZZLBID_DISPLAY" property="zzlbidDisplay" jdbcType="VARCHAR" />
+	<result column="FJID" property="fjid" jdbcType="VARCHAR" />
+	<result column="ZZSM" property="zzsm" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    T_CROWD_YHGL_KFZZZXX.WID, T_CROWD_YHGL_KFZZZXX.KFZID, T_CROWD_YHGL_KFZZZXX.ZZDJID, 
+    T_CROWD_YHGL_KFZZZXX.HQRQ, T_CROWD_YHGL_KFZZZXX.DJRID, T_CROWD_YHGL_KFZZZXX.DJRIP, 
+    T_CROWD_YHGL_KFZZZXX.DJSJ, T_CROWD_YHGL_KFZZZXX.ZZLBID
+  </sql>
+  <sql id="Base_Display_Column_List">
+  	<include refid="Base_Column_List"></include>
+  	,t_crowd_sjzd_kfzzzdj.DJMC as ZZDJID_DISPLAY 
+  	,t_crowd_sjzd_kfzzzlb.LBMC as ZZLBID_DISPLAY
+  	,t_crowd_sjzd_kfzzzlb.FJID as FJID
+  	,t_crowd_sjzd_kfzzzlb.ZZSM as ZZSM
+  </sql>
+  <sql id="sqlWhere">
+   <if test="query!=null">
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND t_crowd_yhgl_kfzzzxx.WID=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.kfzid!=null and query.kfzid!=""'>
+  			AND t_crowd_yhgl_kfzzzxx.kfzid=#{query.kfzid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.zzdjid!=null and query.zzdjid!=""'>
+  			AND t_crowd_yhgl_kfzzzxx.zzdjid=#{query.zzdjid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.zzlbid!=null and query.zzlbid!=""'>
+  			AND t_crowd_yhgl_kfzzzxx.zzlbid=#{query.zzlbid,jdbcType=VARCHAR}
+  		</if>
+  	</if>
+  </sql>
+  <select id="selectByCondition" resultMap="BaseDisplayResultMap" parameterType="com.wisedu.crowd.entity.yhgl.extend.KfzzzxxInfoExtend">
+  		SELECT 
+  		<include refid="Base_Display_Column_List"/>
+  		FROM t_crowd_yhgl_kfzzzxx t_crowd_yhgl_kfzzzxx 
+  		
+  		LEFT JOIN t_crowd_sjzd_kfzzzdj t_crowd_sjzd_kfzzzdj on
+        t_crowd_sjzd_kfzzzdj.DJDM=t_crowd_yhgl_kfzzzxx.ZZDJID AND
+        t_crowd_sjzd_kfzzzdj.SFSY=1
+        
+        LEFT JOIN t_crowd_sjzd_kfzzzlb t_crowd_sjzd_kfzzzlb on
+        t_crowd_sjzd_kfzzzlb.LBDM=t_crowd_yhgl_kfzzzxx.ZZLBID AND
+        t_crowd_sjzd_kfzzzlb.SFSY=1
+        
+  		<where>
+  			<include refid="sqlWhere"/>
+  		</where>
+  		order by t_crowd_yhgl_kfzzzxx.hqrq desc
+  </select>
+</mapper>

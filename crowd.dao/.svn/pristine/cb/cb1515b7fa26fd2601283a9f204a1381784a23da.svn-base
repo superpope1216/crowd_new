@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.xxgl.extend.XqxxInfoExtendMapper" >
+  <resultMap id="BaseDisplayResultMap" type="com.wisedu.crowd.entity.xxgl.extend.XqxxInfoExtend" 
+  	extends="com.wisedu.crowd.dao.xxgl.XqxxInfoMapper.BaseResultMap" >
+  		 <result column="rwbh" property="rwbh" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    T_CROWD_XXGL_XQXX.WID, T_CROWD_XXGL_XQXX.RWID, T_CROWD_XXGL_XQXX.JSR, T_CROWD_XXGL_XQXX.RQ, 
+    T_CROWD_XXGL_XQXX.XXNR, T_CROWD_XXGL_XQXX.FSSJ, T_CROWD_XXGL_XQXX.SFYD, T_CROWD_XXGL_XQXX.XXLX
+  </sql>
+	<sql id="sqlWhere">
+		<if test="query!=null">
+			<if test='query.wid!=null and query.wid!=""'>
+				AND T_CROWD_XXGL_XQXX.WID=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.rwbh!=null and query.rwbh!=""'>
+				AND T_CROWD_XMGL_RWJBXX.RWBH=#{query.rwbh,jdbcType=VARCHAR}
+			</if>
+			<if test='query.jsr!=null and query.jsr!=""'>
+				AND T_CROWD_XXGL_XQXX.JSR=#{query.jsr,jdbcType=VARCHAR}
+			</if>
+		</if>
+	</sql>
+	 <select id="selectByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+  	   resultMap="BaseDisplayResultMap">
+  		SELECT 
+  		<include refid="Base_Column_List"/>
+  		,T_CROWD_XMGL_RWJBXX.RWBH AS rwbh
+  		FROM T_CROWD_XXGL_XQXX T_CROWD_XXGL_XQXX
+  		LEFT JOIN T_CROWD_XMGL_RWJBXX T_CROWD_XMGL_RWJBXX ON T_CROWD_XMGL_RWJBXX.WID=T_CROWD_XXGL_XQXX.RWID
+  		<where>
+  			<include refid="sqlWhere"/>
+  		</where>
+  		ORDER BY T_CROWD_XXGL_XQXX.FSSJ DESC
+  </select>
+  <update id="markXqxxInfo">
+    UPDATE T_CROWD_XXGL_XQXX 
+    SET SFYD = #{sfyd,jdbcType=VARCHAR}
+    WHERE WID IN
+    <foreach collection="wids" index="index" item="item" 
+        separator="," open="(" close=")">
+        #{item,jdbcType=VARCHAR}
+    </foreach>
+ </update>
+</mapper>

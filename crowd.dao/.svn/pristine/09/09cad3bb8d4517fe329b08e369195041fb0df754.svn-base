@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.zygl.extend.ZysqjlInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.zygl.ZysqjlInfo"
+		extends="com.wisedu.crowd.dao.zygl.ZysqjlInfoMapper.BaseResultMap">
+  </resultMap>
+  <sql id="Base_Column_List" >
+    T_CROWD_ZYGL_SQJL.WID, T_CROWD_ZYGL_SQJL.SQR, T_CROWD_ZYGL_SQJL.SQSJ, 
+    T_CROWD_ZYGL_SQJL.SQLY, T_CROWD_ZYGL_SQJL.KSSYSJ, T_CROWD_ZYGL_SQJL.JSSYSJ, 
+    T_CROWD_ZYGL_SQJL.SHJG, T_CROWD_ZYGL_SQJL.SHR, T_CROWD_ZYGL_SQJL.SHSJ, 
+    T_CROWD_ZYGL_SQJL.SHYJ, T_CROWD_ZYGL_SQJL.SQZYLB
+  </sql>
+  <resultMap id="BaseDisplayResultMap"
+		type="com.wisedu.crowd.entity.zygl.extend.ZysqjlInfoExtend" extends="com.wisedu.crowd.dao.zygl.ZysqjlInfoMapper.BaseResultMap">
+		<result column="shjg_display" property="shjgDisplay" jdbcType="VARCHAR" />
+		<result column="sqzylb_display" property="sqzylbDisplay" jdbcType="VARCHAR" />
+		<result column="dz" property="dz" jdbcType="VARCHAR" />
+		<result column="zh" property="zh" jdbcType="VARCHAR" />
+		<result column="mm" property="mm" jdbcType="VARCHAR" />
+		<result column="syzt" property="syzt" jdbcType="VARCHAR" />
+		<result column="syzt_display" property="syztDisplay" jdbcType="VARCHAR" />
+		<result column="pz" property="pz" jdbcType="VARCHAR" />
+		<result column="pz_display" property="pzDisplay" jdbcType="VARCHAR" />
+		<result column="sjksl" property="sjksl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="sqlWhere">
+		<if test="query!=null">
+			<if test='query.wid!=null and query.wid!=""'>
+				AND T_CROWD_ZYGL_SQJL.wid=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.sqr!=null and query.sqr!=""'>
+				AND T_CROWD_ZYGL_SQJL.sqr=#{query.sqr,jdbcType=VARCHAR}
+			</if>
+			<if test='query.sqzylb!=null and query.sqzylb!=""'>
+				AND T_CROWD_ZYGL_SQJL.sqzylb=#{query.sqzylb,jdbcType=VARCHAR}
+			</if>
+		</if>
+  </sql>
+  
+  <select id="selectYzmDisplayByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseDisplayResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		,T_CROWD_SJZD_ZYLB.LBMC AS sqzylb_display
+		,T_CROWD_SJZD_ZYSHJG.LBMC AS shjg_display
+		,T_CROWD_ZYGL_YZM.DZ AS DZ
+		,T_CROWD_ZYGL_YZM.ZH AS ZH
+		,T_CROWD_ZYGL_YZM.CSMM AS MM
+		,T_CROWD_ZYGL_YZM.PZ AS PZ
+		,T_CROWD_ZYGL_YZM.SYZT AS SYZT
+		,T_CROWD_SJZD_YZMPZ.LBMC AS pz_display
+		,T_CROWD_SJZD_ZYSYZT.LBMC AS syzt_display
+		FROM T_CROWD_ZYGL_SQJL T_CROWD_ZYGL_SQJL
+		LEFT JOIN T_CROWD_ZYGL_YZM T_CROWD_ZYGL_YZM
+		ON T_CROWD_ZYGL_YZM.SQJLID = T_CROWD_ZYGL_SQJL.WID
+		LEFT JOIN  T_CROWD_SJZD_ZYLB T_CROWD_SJZD_ZYLB
+		ON T_CROWD_SJZD_ZYLB.LBDM = T_CROWD_ZYGL_SQJL.SQZYLB AND T_CROWD_SJZD_ZYLB.SFSY = 1
+		LEFT JOIN  T_CROWD_SJZD_ZYSHJG T_CROWD_SJZD_ZYSHJG
+		ON T_CROWD_SJZD_ZYSHJG.LBDM = T_CROWD_ZYGL_SQJL.SHJG AND T_CROWD_SJZD_ZYSHJG.SFSY = 1
+		LEFT JOIN  T_CROWD_SJZD_YZMPZ T_CROWD_SJZD_YZMPZ
+		ON T_CROWD_SJZD_YZMPZ.LBDM = T_CROWD_ZYGL_YZM.PZ AND T_CROWD_SJZD_YZMPZ.SFSY = 1
+		LEFT JOIN  T_CROWD_SJZD_ZYSYZT T_CROWD_SJZD_ZYSYZT
+		ON T_CROWD_SJZD_ZYSYZT.LBDM = T_CROWD_ZYGL_YZM.SYZT AND T_CROWD_SJZD_ZYSYZT.SFSY = 1
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+	</select>
+	
+	<select id="selectSjkDisplayByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseDisplayResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		,T_CROWD_SJZD_ZYLB.LBMC AS sqzylb_display
+		,T_CROWD_SJZD_ZYSHJG.LBMC AS shjg_display
+		,T_CROWD_ZYGL_SJK.SJKDZ AS DZ
+		,T_CROWD_ZYGL_SJK.YHM AS ZH
+		,T_CROWD_ZYGL_SJK.MM AS MM
+		,T_CROWD_ZYGL_SJK.SJKSL AS SJKSL
+		,T_CROWD_SJZD_ZYSYZT.LBMC AS syzt_display
+		FROM T_CROWD_ZYGL_SQJL T_CROWD_ZYGL_SQJL
+		LEFT JOIN T_CROWD_ZYGL_SJK T_CROWD_ZYGL_SJK
+		ON T_CROWD_ZYGL_SJK.SQJLID = T_CROWD_ZYGL_SQJL.WID
+		LEFT JOIN  T_CROWD_SJZD_ZYLB T_CROWD_SJZD_ZYLB
+		ON T_CROWD_SJZD_ZYLB.LBDM = T_CROWD_ZYGL_SQJL.SQZYLB AND T_CROWD_SJZD_ZYLB.SFSY = 1
+		LEFT JOIN  T_CROWD_SJZD_ZYSHJG T_CROWD_SJZD_ZYSHJG
+		ON T_CROWD_SJZD_ZYSHJG.LBDM = T_CROWD_ZYGL_SQJL.SHJG AND T_CROWD_SJZD_ZYSHJG.SFSY = 1
+		LEFT JOIN  T_CROWD_SJZD_ZYSYZT T_CROWD_SJZD_ZYSYZT
+		ON T_CROWD_SJZD_ZYSYZT.LBDM = T_CROWD_ZYGL_SJK.SYZT AND T_CROWD_SJZD_ZYSYZT.SFSY = 1
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+	</select>
+	
+	<select id="selectVpnDisplayByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseDisplayResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		,T_CROWD_SJZD_ZYLB.LBMC AS sqzylb_display
+		,T_CROWD_SJZD_ZYSHJG.LBMC AS shjg_display
+		,T_CROWD_ZYGL_VPN.VPNDZ AS DZ
+		,T_CROWD_ZYGL_VPN.VPNZH AS ZH
+		,T_CROWD_ZYGL_VPN.VPNMM AS MM
+		FROM T_CROWD_ZYGL_SQJL T_CROWD_ZYGL_SQJL
+		LEFT JOIN T_CROWD_ZYGL_VPN T_CROWD_ZYGL_VPN
+		ON T_CROWD_ZYGL_VPN.ZYSQID = T_CROWD_ZYGL_SQJL.WID
+		LEFT JOIN  T_CROWD_SJZD_ZYLB T_CROWD_SJZD_ZYLB
+		ON T_CROWD_SJZD_ZYLB.LBDM = T_CROWD_ZYGL_SQJL.SQZYLB AND T_CROWD_SJZD_ZYLB.SFSY = 1
+		LEFT JOIN  T_CROWD_SJZD_ZYSHJG T_CROWD_SJZD_ZYSHJG
+		ON T_CROWD_SJZD_ZYSHJG.LBDM = T_CROWD_ZYGL_SQJL.SHJG AND T_CROWD_SJZD_ZYSHJG.SFSY = 1
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+
+	</select>
+	<select id="selectSvnDisplayByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseDisplayResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		,T_CROWD_SJZD_ZYLB.LBMC AS sqzylb_display
+		,T_CROWD_SJZD_ZYSHJG.LBMC AS shjg_display
+		,T_CROWD_ZYGL_SVN.SCDZ AS DZ
+		,T_CROWD_ZYGL_SVN.ZH AS ZH
+		,T_CROWD_ZYGL_SVN.MM AS MM
+		FROM T_CROWD_ZYGL_SQJL T_CROWD_ZYGL_SQJL
+		LEFT JOIN T_CROWD_ZYGL_SVN T_CROWD_ZYGL_SVN
+		ON T_CROWD_ZYGL_SVN.SQJLID = T_CROWD_ZYGL_SQJL.WID
+		LEFT JOIN  T_CROWD_SJZD_ZYLB T_CROWD_SJZD_ZYLB
+		ON T_CROWD_SJZD_ZYLB.LBDM = T_CROWD_ZYGL_SQJL.SQZYLB AND T_CROWD_SJZD_ZYLB.SFSY = 1
+		LEFT JOIN  T_CROWD_SJZD_ZYSHJG T_CROWD_SJZD_ZYSHJG
+		ON T_CROWD_SJZD_ZYSHJG.LBDM = T_CROWD_ZYGL_SQJL.SHJG AND T_CROWD_SJZD_ZYSHJG.SFSY = 1
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+
+	</select>
+</mapper>

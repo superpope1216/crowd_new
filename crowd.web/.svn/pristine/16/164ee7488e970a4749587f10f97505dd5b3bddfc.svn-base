@@ -1,0 +1,45 @@
+/**
+ * 
+ */
+
+$(document).ready(function(){
+	$(".column-side li a[data-toggle='collapse']").click(function() {
+		if($(this).find("i.icon").hasClass("wb-chevron-down")){
+			
+			//$(".column-side ol li a").css("padding","24px 18px 5px");
+			$(this).find("i.icon").removeClass("wb-chevron-down").addClass("wb-chevron-up");
+		}else{
+			//$(".column-side ol li a").css("padding","24px 18px");
+			$(this).find("i.icon").removeClass("wb-chevron-up").addClass("wb-chevron-down");
+		}
+	});
+	queryRwjbxx();
+	function queryRwjbxx(){
+		doGet(basePath+"/center/query","rwxs="+lbdm,function(data){
+			var html="";
+			if(data && data.datas){
+				for(var i=0;i<data.datas.length;i++){
+					var _data=data.datas[i];
+					html+='<li class="shown">';
+					html+='   <a class="" href="'+basePath+'/rwxxDetail/index?rwid='+_data.wid+'" title="'+_data.rwmc+'" target="_self">';
+					html+='      <img	src="'+basePath+'/statics/images/home/'+getImagePath(_data.rwxs,_data.kfkj)+'.png"	alt="'+_data.rwmc+'" style="margin-top: 10px">';
+					html+='      <span>';
+					html+=' 	 	<b style="text-align: left">'+_data.rwmc+'</b>';
+					html+=' 	 	<p style="overflow: auto;">';
+					html+='		 		<span	style="text-align: left; float: left; display: inline-block; font-size: 16px;">￥103.00元</span>';
+					html+=' 	 		<span style="text-align: center; float: right; display: inline-block; width: 40px; background-color: #ddd; border: none; font-size: 12px; border-radius: 3px; cursor: pointer; display: inline-block; background-color: #65C279; color: #FFF;">'+_data.rwjdDisplay+'</span>';
+					html+='		 	</p>';
+					html+='		 	<p	style="overflow: auto; border-top: solid 1px #ddd; color: #999; padding-top: 4px;">';
+					html+='		   	 <span style="text-align: left; float: left; display: inline-block;">'+_data.kfkjDisplay+'</span>';
+					html+='				<span style="text-align: center; float: right; cursor: pointer; display: inline-block;">'+_data.zbzq+'天</span>';
+					html+='     	 </p>';
+					html+='		</span>';
+					html+='	  </a>';
+					html+='</li>';
+				}
+			}
+			$("#crowd-grid").html(html);
+		});
+	}
+	
+});

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.yhgl.YhjbxxExtInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.yhgl.YhjbxxExtInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="YHID" property="yhid" jdbcType="VARCHAR" />
+    <result column="SZDQ" property="szdq" jdbcType="VARCHAR" />
+    <result column="NC" property="nc" jdbcType="VARCHAR" />
+    <result column="CZSJ" property="czsj" jdbcType="VARCHAR" />
+    <result column="CZZIP" property="czzip" jdbcType="VARCHAR" />
+    <result column="WXH" property="wxh" jdbcType="VARCHAR" />
+    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+    <result column="CSRQ" property="csrq" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, YHID, SZDQ, NC, CZSJ, CZZIP, WXH, QQ, CSRQ
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_yhgl_yhjbxx_ext
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_yhgl_yhjbxx_ext
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.yhgl.YhjbxxExtInfo" >
+    insert into t_crowd_yhgl_yhjbxx_ext (WID, YHID, SZDQ, 
+      NC, CZSJ, CZZIP, WXH, 
+      QQ, CSRQ)
+    values (#{wid,jdbcType=VARCHAR}, #{yhid,jdbcType=VARCHAR}, #{szdq,jdbcType=VARCHAR}, 
+      #{nc,jdbcType=VARCHAR}, #{czsj,jdbcType=VARCHAR}, #{czzip,jdbcType=VARCHAR}, #{wxh,jdbcType=VARCHAR}, 
+      #{qq,jdbcType=VARCHAR}, #{csrq,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.yhgl.YhjbxxExtInfo" >
+    insert into t_crowd_yhgl_yhjbxx_ext
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="yhid != null" >
+        YHID,
+      </if>
+      <if test="szdq != null" >
+        SZDQ,
+      </if>
+      <if test="nc != null" >
+        NC,
+      </if>
+      <if test="czsj != null" >
+        CZSJ,
+      </if>
+      <if test="czzip != null" >
+        CZZIP,
+      </if>
+      <if test="wxh != null" >
+        WXH,
+      </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+      <if test="csrq != null" >
+        CSRQ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhid != null" >
+        #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="szdq != null" >
+        #{szdq,jdbcType=VARCHAR},
+      </if>
+      <if test="nc != null" >
+        #{nc,jdbcType=VARCHAR},
+      </if>
+      <if test="czsj != null" >
+        #{czsj,jdbcType=VARCHAR},
+      </if>
+      <if test="czzip != null" >
+        #{czzip,jdbcType=VARCHAR},
+      </if>
+      <if test="wxh != null" >
+        #{wxh,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="csrq != null" >
+        #{csrq,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.yhgl.YhjbxxExtInfo" >
+    update t_crowd_yhgl_yhjbxx_ext
+    <set >
+      <if test="yhid != null" >
+        YHID = #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="szdq != null" >
+        SZDQ = #{szdq,jdbcType=VARCHAR},
+      </if>
+      <if test="nc != null" >
+        NC = #{nc,jdbcType=VARCHAR},
+      </if>
+      <if test="czsj != null" >
+        CZSJ = #{czsj,jdbcType=VARCHAR},
+      </if>
+      <if test="czzip != null" >
+        CZZIP = #{czzip,jdbcType=VARCHAR},
+      </if>
+      <if test="wxh != null" >
+        WXH = #{wxh,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        QQ = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="csrq != null" >
+        CSRQ = #{csrq,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.yhgl.YhjbxxExtInfo" >
+    update t_crowd_yhgl_yhjbxx_ext
+    set YHID = #{yhid,jdbcType=VARCHAR},
+      SZDQ = #{szdq,jdbcType=VARCHAR},
+      NC = #{nc,jdbcType=VARCHAR},
+      CZSJ = #{czsj,jdbcType=VARCHAR},
+      CZZIP = #{czzip,jdbcType=VARCHAR},
+      WXH = #{wxh,jdbcType=VARCHAR},
+      QQ = #{qq,jdbcType=VARCHAR},
+      CSRQ = #{csrq,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

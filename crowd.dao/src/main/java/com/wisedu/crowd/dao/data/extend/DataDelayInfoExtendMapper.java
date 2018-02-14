@@ -1,0 +1,19 @@
+package com.wisedu.crowd.dao.data.extend;
+
+import java.util.List;
+import java.util.Map;
+
+import com.wisedu.crowd.entity.data.extend.DataDelayInfoExtend;
+import com.wisedu.crowd.entity.dto.QueryCondition;
+
+public interface DataDelayInfoExtendMapper {
+
+	Integer deleteByCondition(QueryCondition<DataDelayInfoExtend> condition);
+	
+	List<DataDelayInfoExtend>  selectDisplayByCondition(QueryCondition<DataDelayInfoExtend> condition);
+	
+	List<DataDelayInfoExtend>  selectByCondition(QueryCondition<DataDelayInfoExtend> condition);
+	
+	
+	List<Map<String,Object>> selectCustomByCondition(QueryCondition<DataDelayInfoExtend> condition);
+}

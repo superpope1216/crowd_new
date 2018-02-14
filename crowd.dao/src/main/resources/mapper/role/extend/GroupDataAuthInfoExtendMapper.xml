@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisedu.crowd.dao.role.extend.GroupDataAuthInfoExtendMapper">
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.role.extend.GroupDataAuthInfoExtend"
+  extends="com.wisedu.crowd.dao.role.GroupDataAuthInfoMapper.BaseResultMap">
+  </resultMap>
+  <sql id="Base_Column_List">
+    T_CROWD_GROUP_DATAAUTH.WID, T_CROWD_GROUP_DATAAUTH.BM, 
+    T_CROWD_GROUP_DATAAUTH.CONTENT, T_CROWD_GROUP_DATAAUTH.SFSY, 
+    T_CROWD_GROUP_DATAAUTH.PX, T_CROWD_GROUP_DATAAUTH.MC
+  </sql>
+  
+  <sql id="sqlWhere">
+		<if test='query!=null'>
+			<if test='query.wid!=null and query.wid!=""'>
+				AND T_CROWD_GROUP_DATAAUTH.wid=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.bm!=null and query.bm!=""'>
+				AND T_CROWD_GROUP_DATAAUTH.BM=#{query.bm,jdbcType=VARCHAR}
+			</if>
+		</if>
+	</sql>
+	<sql id="sqlOrder">
+		ORDER BY
+		<choose>
+			<when test="orderBy!=null">
+				<foreach collection="orderBy" item="item" open=" " close=" "
+					separator=",">
+					${item}
+				</foreach>
+			</when>
+			<otherwise>
+				T_CROWD_GROUP_DATAAUTH.px
+			</otherwise>
+		</choose>
+	</sql>
+	<select id="selectDisplayByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List"/>
+		FROM T_CROWD_GROUP_DATAAUTH
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+		<include refid="sqlOrder"/>
+	</select>
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.BaseInfoMapper" >
+	<sql id="sqlQueryItem">
+		<if test='queryItem!=null and queryItem.size>0'>
+			<foreach collection="queryItem" close=" " open=" " item="item" separator=",">
+				${item}
+			</foreach>
+		</if>
+	</sql>
+	<sql id="sqlGroupBy">
+		<if test='groupBy!=null and groupBy.size>0'>
+		GROUP BY 
+			<foreach collection="groupBy" close=" " open=" " item="item" separator=",">
+				${item}
+			</foreach>
+		</if>
+	</sql>
+	
+	 <select id="checkExistTable" resultType="int" parameterType="string">
+	 	SELECT COUNT(*) FROM User_Tables WHERE UPPER(table_name) = UPPER(#{tableName,jdbcType=VARCHAR})
+	 </select>
+	
+	<delete id="delete" parameterType="string">
+		DELETE FROM ${tableName}
+	</delete>
+	<update id="insert" parameterType="string">
+		insert into ${tableName} select * from ${oldTableName}
+	</update>
+	<update id="deleteTable" parameterType="string">
+		DROP TABLE ${tableName};
+	</update>
+	<update id="createNewTable" parameterType="string">
+		create table ${tableName} as select * from  ${oldTableName} where 1=2
+	</update>
+	
+</mapper>

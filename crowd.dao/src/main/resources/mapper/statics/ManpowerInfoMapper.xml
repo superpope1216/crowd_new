@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.statics.ManpowerInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.statics.ManpowerInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="YWXLB" property="ywxlb" jdbcType="VARCHAR" />
+    <result column="KFZBZGS" property="kfzbzgs" jdbcType="DECIMAL" />
+    <result column="YKFSJGS" property="ykfsjgs" jdbcType="DECIMAL" />
+    <result column="ZBZGS" property="zbzgs" jdbcType="DECIMAL" />
+    <result column="DSHGS" property="dshgs" jdbcType="DECIMAL" />
+    <result column="CGZGS" property="cgzgs" jdbcType="DECIMAL" />
+    <result column="YGRL" property="ygrl" jdbcType="DECIMAL" />
+    <result column="SJRL" property="sjrl" jdbcType="DECIMAL" />
+    <result column="SXTS" property="sxts" jdbcType="DECIMAL" />
+    <result column="SHBTGGS" property="shbtggs" jdbcType="DECIMAL" />
+    <result column="RWXS" property="rwxs" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, YWXLB, KFZBZGS, YKFSJGS, ZBZGS, DSHGS, CGZGS, YGRL, SJRL, SXTS, SHBTGGS, RWXS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from USR_CROWD.T_CROWD_XTTJ_DQGZLTJ
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from USR_CROWD.T_CROWD_XTTJ_DQGZLTJ
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.statics.ManpowerInfo" >
+    insert into USR_CROWD.T_CROWD_XTTJ_DQGZLTJ (WID, YWXLB, KFZBZGS, 
+      YKFSJGS, ZBZGS, DSHGS, 
+      CGZGS, YGRL, SJRL, 
+      SXTS, SHBTGGS, RWXS
+      )
+    values (#{wid,jdbcType=VARCHAR}, #{ywxlb,jdbcType=VARCHAR}, #{kfzbzgs,jdbcType=DECIMAL}, 
+      #{ykfsjgs,jdbcType=DECIMAL}, #{zbzgs,jdbcType=DECIMAL}, #{dshgs,jdbcType=DECIMAL}, 
+      #{cgzgs,jdbcType=DECIMAL}, #{ygrl,jdbcType=DECIMAL}, #{sjrl,jdbcType=DECIMAL}, 
+      #{sxts,jdbcType=DECIMAL}, #{shbtggs,jdbcType=DECIMAL}, #{rwxs,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.statics.ManpowerInfo" >
+    insert into USR_CROWD.T_CROWD_XTTJ_DQGZLTJ
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="ywxlb != null" >
+        YWXLB,
+      </if>
+      <if test="kfzbzgs != null" >
+        KFZBZGS,
+      </if>
+      <if test="ykfsjgs != null" >
+        YKFSJGS,
+      </if>
+      <if test="zbzgs != null" >
+        ZBZGS,
+      </if>
+      <if test="dshgs != null" >
+        DSHGS,
+      </if>
+      <if test="cgzgs != null" >
+        CGZGS,
+      </if>
+      <if test="ygrl != null" >
+        YGRL,
+      </if>
+      <if test="sjrl != null" >
+        SJRL,
+      </if>
+      <if test="sxts != null" >
+        SXTS,
+      </if>
+      <if test="shbtggs != null" >
+        SHBTGGS,
+      </if>
+      <if test="rwxs != null" >
+        RWXS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="ywxlb != null" >
+        #{ywxlb,jdbcType=VARCHAR},
+      </if>
+      <if test="kfzbzgs != null" >
+        #{kfzbzgs,jdbcType=DECIMAL},
+      </if>
+      <if test="ykfsjgs != null" >
+        #{ykfsjgs,jdbcType=DECIMAL},
+      </if>
+      <if test="zbzgs != null" >
+        #{zbzgs,jdbcType=DECIMAL},
+      </if>
+      <if test="dshgs != null" >
+        #{dshgs,jdbcType=DECIMAL},
+      </if>
+      <if test="cgzgs != null" >
+        #{cgzgs,jdbcType=DECIMAL},
+      </if>
+      <if test="ygrl != null" >
+        #{ygrl,jdbcType=DECIMAL},
+      </if>
+      <if test="sjrl != null" >
+        #{sjrl,jdbcType=DECIMAL},
+      </if>
+      <if test="sxts != null" >
+        #{sxts,jdbcType=DECIMAL},
+      </if>
+      <if test="shbtggs != null" >
+        #{shbtggs,jdbcType=DECIMAL},
+      </if>
+      <if test="rwxs != null" >
+        #{rwxs,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.statics.ManpowerInfo" >
+    update USR_CROWD.T_CROWD_XTTJ_DQGZLTJ
+    <set >
+      <if test="ywxlb != null" >
+        YWXLB = #{ywxlb,jdbcType=VARCHAR},
+      </if>
+      <if test="kfzbzgs != null" >
+        KFZBZGS = #{kfzbzgs,jdbcType=DECIMAL},
+      </if>
+      <if test="ykfsjgs != null" >
+        YKFSJGS = #{ykfsjgs,jdbcType=DECIMAL},
+      </if>
+      <if test="zbzgs != null" >
+        ZBZGS = #{zbzgs,jdbcType=DECIMAL},
+      </if>
+      <if test="dshgs != null" >
+        DSHGS = #{dshgs,jdbcType=DECIMAL},
+      </if>
+      <if test="cgzgs != null" >
+        CGZGS = #{cgzgs,jdbcType=DECIMAL},
+      </if>
+      <if test="ygrl != null" >
+        YGRL = #{ygrl,jdbcType=DECIMAL},
+      </if>
+      <if test="sjrl != null" >
+        SJRL = #{sjrl,jdbcType=DECIMAL},
+      </if>
+      <if test="sxts != null" >
+        SXTS = #{sxts,jdbcType=DECIMAL},
+      </if>
+      <if test="shbtggs != null" >
+        SHBTGGS = #{shbtggs,jdbcType=DECIMAL},
+      </if>
+      <if test="rwxs != null" >
+        RWXS = #{rwxs,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.statics.ManpowerInfo" >
+    update USR_CROWD.T_CROWD_XTTJ_DQGZLTJ
+    set YWXLB = #{ywxlb,jdbcType=VARCHAR},
+      KFZBZGS = #{kfzbzgs,jdbcType=DECIMAL},
+      YKFSJGS = #{ykfsjgs,jdbcType=DECIMAL},
+      ZBZGS = #{zbzgs,jdbcType=DECIMAL},
+      DSHGS = #{dshgs,jdbcType=DECIMAL},
+      CGZGS = #{cgzgs,jdbcType=DECIMAL},
+      YGRL = #{ygrl,jdbcType=DECIMAL},
+      SJRL = #{sjrl,jdbcType=DECIMAL},
+      SXTS = #{sxts,jdbcType=DECIMAL},
+      SHBTGGS = #{shbtggs,jdbcType=DECIMAL},
+      RWXS = #{rwxs,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,64 @@
+package com.wisedu.crowd.task.statics;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.wisedu.crowd.common.code.DictionaryEnum;
+import com.wisedu.crowd.common.util.CommonUtil;
+import com.wisedu.crowd.common.util.DecimalUtil;
+import com.wisedu.crowd.common.util.StringUtil;
+import com.wisedu.crowd.entity.dictionary.DictionaryInfo;
+import com.wisedu.crowd.entity.log.CustomOperateLog;
+import com.wisedu.crowd.entity.statics.KfzAreaDataInfo;
+import com.wisedu.crowd.service.dictionary.DictionaryService;
+import com.wisedu.crowd.service.statics.KfzAreaDataInfoService;
+import com.wisedu.crowd.service.yhgl.KfzxxInfoService;
+
+/**
+ * 开发者所属区域统计
+ * @author wisedu
+ *
+ */
+@Component
+@Transactional
+public class KfzAreaDataStatics {
+	@Autowired
+	private KfzxxInfoService kfzxxInfoService;
+	@Autowired
+	private DictionaryService dictionaryService;
+	
+	@Autowired
+	private KfzAreaDataInfoService kfzAreaDataInfoService;
+	@Scheduled(cron = "0 0/1 *  * * ? ")
+	public void run() throws Exception {
+		CustomOperateLog log=new CustomOperateLog();
+		log.setAdmin(true);
+			
+		KfzAreaDataInfo delKfzAreaDataInfo=new KfzAreaDataInfo();
+		kfzAreaDataInfoService.deleteByCondition(delKfzAreaDataInfo, log);
+		List<DictionaryInfo> areaDatas=dictionaryService.selectAllByTable(DictionaryEnum.T_CROWD_SJZD_AREA);
+		if(CommonUtil.isNotEmptyList(areaDatas)){
+			for(DictionaryInfo info:areaDatas){
+				KfzAreaDataInfo kfzAreaDataInfo=new KfzAreaDataInfo();
+				kfzAreaDataInfo.setWid(StringUtil.getUuId());
+				kfzAreaDataInfo.setArea(info.getLbdm());
+				BigDecimal kfzNum=DecimalUtil.ZERO;
+				List<Map<String,Object>>  kfzDatas=kfzxxInfoService.selectCountByArea(info.getLbdm()).getDatas();
+				if(CommonUtil.isNotEmptyList(kfzDatas)){
+					Map<String,Object> kfzMap=kfzDatas.get(0);
+					if(CommonUtil.isNotEmptyMap(kfzMap)){
+						kfzNum=DecimalUtil.toDecimal(kfzMap.get("num"));
+					}
+				}
+				kfzAreaDataInfo.setNum(kfzNum);
+				kfzAreaDataInfoService.insertSelective(kfzAreaDataInfo, log);
+			}
+		}
+	}
+}

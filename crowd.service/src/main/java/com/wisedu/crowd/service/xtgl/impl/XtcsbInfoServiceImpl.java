@@ -1,0 +1,37 @@
+package com.wisedu.crowd.service.xtgl.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.dao.xtgl.XtcsbInfoMapper;
+import com.wisedu.crowd.dao.xtgl.extend.XtcsbInfoExtendMapper;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.entity.xtgl.extend.XtcsbInfoExtend;
+import com.wisedu.crowd.service.xtgl.XtcsbInfoService;
+
+@Service("xtcsbInfoService")
+@Transactional
+public class XtcsbInfoServiceImpl implements XtcsbInfoService{
+
+	@Autowired
+	private  XtcsbInfoMapper xtcsbInfoMapper;
+	
+	@Autowired
+	private XtcsbInfoExtendMapper  xtcsbInfoExtendMapper;
+
+	@Override
+	public DataResult<List<XtcsbInfoExtend>> selectByCondition(XtcsbInfoExtend record) throws ServiceException {
+		return DataResult.success(xtcsbInfoExtendMapper.selectByCondition(record));
+	}
+
+	
+	
+	
+
+	
+    
+}

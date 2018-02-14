@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.rwgl.RwztbglsInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.rwgl.RwztbglsInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="XMID" property="xmid" jdbcType="VARCHAR" />
+    <result column="ZT" property="zt" jdbcType="DECIMAL" />
+    <result column="KFZID" property="kfzid" jdbcType="VARCHAR" />
+    <result column="XQFID" property="xqfid" jdbcType="VARCHAR" />
+    <result column="CZRXM" property="czrxm" jdbcType="VARCHAR" />
+    <result column="CZSJ" property="czsj" jdbcType="TIMESTAMP" />
+    <result column="CZRIP" property="czrip" jdbcType="VARCHAR" />
+    <result column="SHYY" property="shyy" jdbcType="VARCHAR" />
+    <result column="CZLX" property="czlx" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, XMID, ZT, KFZID, XQFID, CZRXM, CZSJ, CZRIP, SHYY, CZLX
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_xmgl_rwztbgls
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_xmgl_rwztbgls
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.rwgl.RwztbglsInfo" >
+    insert into t_crowd_xmgl_rwztbgls (WID, XMID, ZT, 
+      KFZID, XQFID, CZRXM, 
+      CZSJ, CZRIP, SHYY, 
+      CZLX)
+    values (#{wid,jdbcType=VARCHAR}, #{xmid,jdbcType=VARCHAR}, #{zt,jdbcType=DECIMAL}, 
+      #{kfzid,jdbcType=VARCHAR}, #{xqfid,jdbcType=VARCHAR}, #{czrxm,jdbcType=VARCHAR}, 
+      #{czsj,jdbcType=TIMESTAMP}, #{czrip,jdbcType=VARCHAR}, #{shyy,jdbcType=VARCHAR}, 
+      #{czlx,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.rwgl.RwztbglsInfo" >
+    insert into t_crowd_xmgl_rwztbgls
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="xmid != null" >
+        XMID,
+      </if>
+      <if test="zt != null" >
+        ZT,
+      </if>
+      <if test="kfzid != null" >
+        KFZID,
+      </if>
+      <if test="xqfid != null" >
+        XQFID,
+      </if>
+      <if test="czrxm != null" >
+        CZRXM,
+      </if>
+      <if test="czsj != null" >
+        CZSJ,
+      </if>
+      <if test="czrip != null" >
+        CZRIP,
+      </if>
+      <if test="shyy != null" >
+        SHYY,
+      </if>
+      <if test="czlx != null" >
+        CZLX,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="xmid != null" >
+        #{xmid,jdbcType=VARCHAR},
+      </if>
+      <if test="zt != null" >
+        #{zt,jdbcType=DECIMAL},
+      </if>
+      <if test="kfzid != null" >
+        #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="xqfid != null" >
+        #{xqfid,jdbcType=VARCHAR},
+      </if>
+      <if test="czrxm != null" >
+        #{czrxm,jdbcType=VARCHAR},
+      </if>
+      <if test="czsj != null" >
+        #{czsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="czrip != null" >
+        #{czrip,jdbcType=VARCHAR},
+      </if>
+      <if test="shyy != null" >
+        #{shyy,jdbcType=VARCHAR},
+      </if>
+      <if test="czlx != null" >
+        #{czlx,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.rwgl.RwztbglsInfo" >
+    update t_crowd_xmgl_rwztbgls
+    <set >
+      <if test="xmid != null" >
+        XMID = #{xmid,jdbcType=VARCHAR},
+      </if>
+      <if test="zt != null" >
+        ZT = #{zt,jdbcType=DECIMAL},
+      </if>
+      <if test="kfzid != null" >
+        KFZID = #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="xqfid != null" >
+        XQFID = #{xqfid,jdbcType=VARCHAR},
+      </if>
+      <if test="czrxm != null" >
+        CZRXM = #{czrxm,jdbcType=VARCHAR},
+      </if>
+      <if test="czsj != null" >
+        CZSJ = #{czsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="czrip != null" >
+        CZRIP = #{czrip,jdbcType=VARCHAR},
+      </if>
+      <if test="shyy != null" >
+        SHYY = #{shyy,jdbcType=VARCHAR},
+      </if>
+      <if test="czlx != null" >
+        CZLX = #{czlx,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.rwgl.RwztbglsInfo" >
+    update t_crowd_xmgl_rwztbgls
+    set XMID = #{xmid,jdbcType=VARCHAR},
+      ZT = #{zt,jdbcType=DECIMAL},
+      KFZID = #{kfzid,jdbcType=VARCHAR},
+      XQFID = #{xqfid,jdbcType=VARCHAR},
+      CZRXM = #{czrxm,jdbcType=VARCHAR},
+      CZSJ = #{czsj,jdbcType=TIMESTAMP},
+      CZRIP = #{czrip,jdbcType=VARCHAR},
+      SHYY = #{shyy,jdbcType=VARCHAR},
+      CZLX = #{czlx,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

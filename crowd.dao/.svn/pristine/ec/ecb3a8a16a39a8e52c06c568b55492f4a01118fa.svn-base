@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisedu.crowd.dao.yhgl.KfzzzxxInfoMapper">
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.yhgl.KfzzzxxInfo">
+    <id column="WID" jdbcType="VARCHAR" property="wid" />
+    <result column="KFZID" jdbcType="VARCHAR" property="kfzid" />
+    <result column="ZZDJID" jdbcType="VARCHAR" property="zzdjid" />
+    <result column="HQRQ" jdbcType="DATE" property="hqrq" />
+    <result column="DJRID" jdbcType="VARCHAR" property="djrid" />
+    <result column="DJRIP" jdbcType="VARCHAR" property="djrip" />
+    <result column="DJSJ" jdbcType="DATE" property="djsj" />
+    <result column="ZZLBID" jdbcType="VARCHAR" property="zzlbid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    WID, KFZID, ZZDJID, HQRQ, DJRID, DJRIP, DJSJ, ZZLBID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_yhgl_kfzzzxx
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_crowd_yhgl_kfzzzxx
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.yhgl.KfzzzxxInfo">
+    insert into t_crowd_yhgl_kfzzzxx (WID, KFZID, ZZDJID, 
+      HQRQ, DJRID, DJRIP, DJSJ, 
+      ZZLBID)
+    values (#{wid,jdbcType=VARCHAR}, #{kfzid,jdbcType=VARCHAR}, #{zzdjid,jdbcType=VARCHAR}, 
+      #{hqrq,jdbcType=DATE}, #{djrid,jdbcType=VARCHAR}, #{djrip,jdbcType=VARCHAR}, #{djsj,jdbcType=DATE}, 
+      #{zzlbid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.yhgl.KfzzzxxInfo">
+    insert into t_crowd_yhgl_kfzzzxx
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wid != null">
+        WID,
+      </if>
+      <if test="kfzid != null">
+        KFZID,
+      </if>
+      <if test="zzdjid != null">
+        ZZDJID,
+      </if>
+      <if test="hqrq != null">
+        HQRQ,
+      </if>
+      <if test="djrid != null">
+        DJRID,
+      </if>
+      <if test="djrip != null">
+        DJRIP,
+      </if>
+      <if test="djsj != null">
+        DJSJ,
+      </if>
+      <if test="zzlbid != null">
+        ZZLBID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wid != null">
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="kfzid != null">
+        #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="zzdjid != null">
+        #{zzdjid,jdbcType=VARCHAR},
+      </if>
+      <if test="hqrq != null">
+        #{hqrq,jdbcType=DATE},
+      </if>
+      <if test="djrid != null">
+        #{djrid,jdbcType=VARCHAR},
+      </if>
+      <if test="djrip != null">
+        #{djrip,jdbcType=VARCHAR},
+      </if>
+      <if test="djsj != null">
+        #{djsj,jdbcType=DATE},
+      </if>
+      <if test="zzlbid != null">
+        #{zzlbid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.yhgl.KfzzzxxInfo">
+    update t_crowd_yhgl_kfzzzxx
+    <set>
+      <if test="kfzid != null">
+        KFZID = #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="zzdjid != null">
+        ZZDJID = #{zzdjid,jdbcType=VARCHAR},
+      </if>
+      <if test="hqrq != null">
+        HQRQ = #{hqrq,jdbcType=DATE},
+      </if>
+      <if test="djrid != null">
+        DJRID = #{djrid,jdbcType=VARCHAR},
+      </if>
+      <if test="djrip != null">
+        DJRIP = #{djrip,jdbcType=VARCHAR},
+      </if>
+      <if test="djsj != null">
+        DJSJ = #{djsj,jdbcType=DATE},
+      </if>
+      <if test="zzlbid != null">
+        ZZLBID = #{zzlbid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.yhgl.KfzzzxxInfo">
+    update t_crowd_yhgl_kfzzzxx
+    set KFZID = #{kfzid,jdbcType=VARCHAR},
+      ZZDJID = #{zzdjid,jdbcType=VARCHAR},
+      HQRQ = #{hqrq,jdbcType=DATE},
+      DJRID = #{djrid,jdbcType=VARCHAR},
+      DJRIP = #{djrip,jdbcType=VARCHAR},
+      DJSJ = #{djsj,jdbcType=DATE},
+      ZZLBID = #{zzlbid,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

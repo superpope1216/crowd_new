@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.rwgl.extend.RwjbxxInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.rwgl.RwjbxxInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="XQFID" property="xqfid" jdbcType="VARCHAR" />
+    <result column="RWBH" property="rwbh" jdbcType="VARCHAR" />
+    <result column="RWMC" property="rwmc" jdbcType="VARCHAR" />
+    <result column="RWLB" property="rwlb" jdbcType="DECIMAL" />
+    <result column="KFKJ" property="kfkj" jdbcType="DECIMAL" />
+    <result column="RWXS" property="rwxs" jdbcType="VARCHAR" />
+    <result column="FWLX" property="fwlx" jdbcType="DECIMAL" />
+    <result column="KFKJSM" property="kfkjsm" jdbcType="VARCHAR" />
+    <result column="XMYSJE" property="xmysje" jdbcType="DECIMAL" />
+    <result column="XMGS" property="xmgs" jdbcType="VARCHAR" />
+    <result column="SFYXQWD" property="sfyxqwd" jdbcType="DECIMAL" />
+    <result column="XQWDFJID" property="xqwdfjid" jdbcType="VARCHAR" />
+    <result column="XMTPFJID" property="xmtpfjid" jdbcType="VARCHAR" />
+    <result column="XMZT" property="xmzt" jdbcType="VARCHAR" />
+    <result column="ZBQSSJ" property="zbqssj" jdbcType="TIMESTAMP" />
+    <result column="ZBZQ" property="zbzq" jdbcType="DECIMAL" />
+    <result column="SFXYXQFW" property="sfxyxqfw" jdbcType="DECIMAL" />
+    <result column="SFXYJFFW" property="sfxyjffw" jdbcType="DECIMAL" />
+    <result column="SFXYZCFW" property="sfxyzcfw" jdbcType="DECIMAL" />
+    <result column="ZCFWSM" property="zcfwsm" jdbcType="VARCHAR" />
+    <result column="CJSJ" property="cjsj" jdbcType="TIMESTAMP" />
+    <result column="CJZIP" property="cjzip" jdbcType="VARCHAR" />
+    <result column="ZBJE" property="zbje" jdbcType="DECIMAL" />
+    <result column="ZBGZL" property="zbgzl" jdbcType="DECIMAL" />
+    <result column="KFZID" property="kfzid" jdbcType="VARCHAR" />
+    <result column="ZBSJ" property="zbsj" jdbcType="TIMESTAMP" />
+    <result column="YWXLB" property="ywxlb" jdbcType="VARCHAR" />
+    <result column="JFRQ" property="jfrq" jdbcType="VARCHAR" />
+    <result column="SFXYPG" property="sfxypg" jdbcType="VARCHAR" />
+    <result column="SFYPG" property="sfypg" jdbcType="VARCHAR" />
+    <result column="SFTSWB" property="sftswb" jdbcType="VARCHAR" />
+    <result column="SHRYXM" property="shryxm" jdbcType="VARCHAR" />
+    <result column="SFJSPTXQGF" property="sfjsptxqgf" jdbcType="DECIMAL" />
+    <result column="RWNYD" property="rwnyd" jdbcType="VARCHAR" />
+    <result column="FB" property="fb" jdbcType="VARCHAR" />
+    <result column="DZJB" property="dzjb" jdbcType="VARCHAR" />
+    <result column="CPAPP" property="cpapp" jdbcType="VARCHAR" />
+    <result column="SFJS" property="sfjs" jdbcType="VARCHAR" />
+    <result column="JJBZJE" property="jjbzje" jdbcType="DECIMAL" />
+    <result column="DZSM" property="dzsm" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, XQFID, RWBH, RWMC, RWLB, KFKJ, RWXS, FWLX, KFKJSM, XMYSJE, XMGS, SFYXQWD, XQWDFJID, 
+    XMTPFJID, XMZT, ZBQSSJ, ZBZQ, SFXYXQFW, SFXYJFFW, SFXYZCFW, ZCFWSM, CJSJ, CJZIP, 
+    ZBJE, ZBGZL, KFZID, ZBSJ, YWXLB, JFRQ, SFXYPG, SFYPG, SFTSWB, SHRYXM, SFJSPTXQGF, 
+    RWNYD, FB, DZJB, CPAPP, SFJS, JJBZJE, DZSM
+  </sql>
+</mapper>

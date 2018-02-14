@@ -1,0 +1,37 @@
+package com.wisedu.crowd.service.rwgl;
+
+import java.util.List;
+
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.entity.dto.DataResult;
+import com.wisedu.crowd.entity.rwgl.RwjbxxExtInfo;
+import com.wisedu.crowd.entity.rwgl.extend.RwjbxxExtInfoExtend;
+
+public interface RwjbxxExtInfoService {
+	 /**
+    *
+    * @mbggenerated 2017-11-20
+    */
+   DataResult<Integer> deleteByPrimaryKey(String wid);
+
+
+   /**
+    *
+    * @mbggenerated 2017-11-20
+    */
+   DataResult<Integer> insertSelective(RwjbxxExtInfo record);
+
+   /**
+    *
+    * @mbggenerated 2017-11-20
+    */
+   DataResult<RwjbxxExtInfo> selectByPrimaryKey(String wid);
+
+   /**
+    *
+    * @mbggenerated 2017-11-20
+    */
+   DataResult<Integer> updateByPrimaryKeySelective(RwjbxxExtInfo record);
+
+   DataResult<List<RwjbxxExtInfoExtend>> selectByCondition(RwjbxxExtInfoExtend record) throws ServiceException;
+}

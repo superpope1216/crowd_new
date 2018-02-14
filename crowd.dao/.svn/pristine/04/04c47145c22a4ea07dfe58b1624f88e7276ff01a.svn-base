@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.rwgl.extend.RwjbxxExtInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.rwgl.RwjbxxExtInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="RWID" property="rwid" jdbcType="VARCHAR" />
+    <result column="XMBH" property="xmbh" jdbcType="VARCHAR" />
+    <result column="YWXBM" property="ywxbm" jdbcType="VARCHAR" />
+    <result column="MKBH" property="mkbh" jdbcType="VARCHAR" />
+    <result column="FB" property="fb" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="BaseDisplayResultMap" type="com.wisedu.crowd.entity.rwgl.extend.RwjbxxExtInfoExtend" extends="BaseResultMap">
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, RWID, XMBH, YWXBM, MKBH, FB
+  </sql>
+  <select id="selectByCondition" resultMap="BaseDisplayResultMap" parameterType="com.wisedu.crowd.entity.rwgl.extend.RwjbxxExtInfoExtend" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_xmgl_rwjbxx_ext
+    <where>
+    	<if test='wid!=null and wid!=""'>
+    		AND WID = #{wid,jdbcType=VARCHAR}
+    	</if>
+    	<if test='rwid!=null and rwid!=""'>
+    		AND RWID=#{rwid,jdbcType=VARCHAR}
+    	</if>
+    	<if test='xmbh!=null and xmbh!=""'>
+    		AND XMBH = #{xmbh,jdbcType=VARCHAR}
+    	</if>
+    	<if test='ywxbm!=null and ywxbm!=""'>
+    		AND YWXBM = #{ywxbm,jdbcType=VARCHAR}
+    	</if>
+    </where>
+  </select>
+
+</mapper>

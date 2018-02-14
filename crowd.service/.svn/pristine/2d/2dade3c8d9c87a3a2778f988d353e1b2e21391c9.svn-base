@@ -1,0 +1,19 @@
+package com.wisedu.crowd.service.rel;
+
+import java.util.List;
+
+import com.wisedu.crowd.entity.rel.KfzRwkfkjRel;
+import com.wisedu.crowd.service.dto.DataResult;
+
+public interface KfzRWkfkjRelService {
+   
+    DataResult<Integer> delKfzRwkfkjRel(String kfzid);
+	
+	/**
+	 * 批量新增
+	 * @param record
+	 */
+    DataResult<Integer> addKfzRwkfkjRel(String kfzid,String yhid,String lbdm);
+	
+	
+}

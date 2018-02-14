@@ -1,0 +1,17 @@
+package com.wisedu.crowd.service.rel;
+
+
+import com.wisedu.crowd.service.dto.DataResult;
+
+public interface KfzScjsdmRelService {
+   
+    DataResult<Integer> delKfzScjsdmRel(String kfzid);
+	
+	/**
+	 * 批量新增
+	 * @param record
+	 */
+    DataResult<Integer> addKfzScjsdmRel(String kfzid,String yhid,String lbdm);
+	
+	
+}

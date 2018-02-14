@@ -1,0 +1,38 @@
+package com.wisedu.crowd.controller.yhgl.login;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.common.util.CommonUtil;
+import com.wisedu.crowd.common.util.ConstantsUtil;
+import com.wisedu.crowd.controller.BaseController;
+import com.wisedu.crowd.dto.Result;
+import com.wisedu.crowd.entity.yhgl.extend.YhjbxxInfoExtend;
+import com.wisedu.crowd.service.yhgl.YhjbxxInfoService;
+
+@Controller
+@RequestMapping("login")
+public class LoginController extends BaseController{
+	@Autowired
+	private YhjbxxInfoService yhjbxxInfoService;
+	@RequestMapping("index")
+	public String index(){
+		return "yhgl/login/login";
+	}
+	
+	@ResponseBody
+	@RequestMapping("login")
+	public Result login(@RequestParam String username,@RequestParam String password,HttpServletRequest request) throws Exception{
+		YhjbxxInfoExtend yhjbxxInfoExtend=yhjbxxInfoService.login(username, password, this.createCustomOperateLog());
+		request.getSession(true).setAttribute(ConstantsUtil.SESSION_YHJBXX, yhjbxxInfoExtend);
+		return Result.success();
+	}
+}

@@ -1,0 +1,145 @@
+package com.wisedu.crowd.service.yhgl.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.wisedu.crowd.common.exception.ResponseCode;
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.common.util.CommonUtil;
+import com.wisedu.crowd.common.util.DateUtil;
+import com.wisedu.crowd.common.util.StringEncrypt;
+import com.wisedu.crowd.common.util.StringUtil;
+import com.wisedu.crowd.dao.yhgl.YhjbxxInfoMapper;
+import com.wisedu.crowd.dao.yhgl.extend.YhjbxxInfoExtendMapper;
+import com.wisedu.crowd.entity.yhgl.YhjbxxInfo;
+import com.wisedu.crowd.entity.yhgl.YhjbxxLoginLogInfo;
+import com.wisedu.crowd.entity.yhgl.extend.YhjbxxInfoExtend;
+import com.wisedu.crowd.entity.yhgl.extend.YhjbxxLoginLogInfoExtend;
+import com.wisedu.crowd.entity.log.CustomOperateLog;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.service.yhgl.YhjbxxInfoService;
+import com.wisedu.crowd.service.yhgl.YhjbxxLoginLogInfoService;
+
+@Service("yhjbxxInfoService")
+@Transactional
+public class YhjbxxInfoServiceImpl implements YhjbxxInfoService {
+	@Autowired
+	private YhjbxxInfoMapper yhjbxxInfoMapper;
+
+	@Autowired
+	private YhjbxxInfoExtendMapper yhjbxxInfoExtendMapper;
+
+	@Autowired
+	private YhjbxxLoginLogInfoService yhjbxxLoginLogInfoService;
+
+	/**
+	 *
+	 * @mbggenerated 2017-11-02
+	 */
+	public int deleteByPrimaryKey(String wid) throws ServiceException {
+		return yhjbxxInfoMapper.deleteByPrimaryKey(wid);
+	}
+
+	/**
+	 *
+	 * @mbggenerated 2017-11-02
+	 */
+	public YhjbxxInfo selectByPrimaryKey(String wid) throws ServiceException {
+		return yhjbxxInfoMapper.selectByPrimaryKey(wid);
+	}
+
+	public YhjbxxInfoExtend register(YhjbxxInfoExtend yhjbxxInfo, String confirmPassword, CustomOperateLog log)
+			throws ServiceException {
+		if (yhjbxxInfo == null) {
+			throw new ServiceException(ResponseCode.error.getMsg());
+		}
+
+		if (StringUtil.isEmpty(yhjbxxInfo.getYhmm().trim())) {
+			throw new ServiceException("密码不能为空！");
+		}
+		if (StringUtil.isEmpty(confirmPassword.trim())) {
+			throw new ServiceException("确认密码不能为空！");
+		}
+		if (!yhjbxxInfo.getYhmm().trim().equals(confirmPassword.trim())) {
+			throw new ServiceException("两次输入的秘密不一致！");
+		}
+		
+		YhjbxxInfoExtend queryYhjbxxInfoExtend = new YhjbxxInfoExtend();
+		queryYhjbxxInfoExtend.setSjh(yhjbxxInfo.getSjh());
+		List<YhjbxxInfoExtend> yhjbxxList = this.selectByCondition(queryYhjbxxInfoExtend);
+		if (CommonUtil.isNotEmptyList(yhjbxxList)) {
+			throw new ServiceException("手机号已存在，请重新确认！");
+		}
+		String wid=StringUtil.getUuId();
+		yhjbxxInfo.setZcsj(DateUtil.getCurrentDate());
+		yhjbxxInfo.setWid(wid);
+		yhjbxxInfo.setZczip(log.getCustomIp());
+		yhjbxxInfo.setYhmm(StringEncrypt.encrypt(wid+yhjbxxInfo.getYhmm()));
+		//this.saveYhjbxxInfo(yhjbxxInfo, log);
+		yhjbxxInfoMapper.insertSelective(yhjbxxInfo);
+		// 保存用户登录日志
+		YhjbxxLoginLogInfoExtend yhjbxxLoginLogInfo = new YhjbxxLoginLogInfoExtend();
+		yhjbxxLoginLogInfo.setWid(StringUtil.getUuId());
+		yhjbxxLoginLogInfo.setLoginTime(DateUtil.getCurrentDateTimeStr());
+		yhjbxxLoginLogInfo.setSjh(log.getSjh());
+		yhjbxxLoginLogInfo.setLoginIp(log.getCustomIp());
+		yhjbxxLoginLogInfo.setYhid(log.getRegisterId());
+		yhjbxxLoginLogInfo.setXm(log.getXm());
+		yhjbxxLoginLogInfo.setNc(log.getNc());
+		yhjbxxLoginLogInfoService.insertSelective(yhjbxxLoginLogInfo, log);
+		return yhjbxxInfo;
+	}
+
+	public List<YhjbxxInfoExtend> selectByCondition(YhjbxxInfoExtend condition) throws ServiceException {
+		return yhjbxxInfoExtendMapper.selectByCondition(condition);
+	}
+
+	@Override
+	public YhjbxxInfo saveYhjbxxInfo(YhjbxxInfo record, CustomOperateLog log) throws ServiceException {
+		if (StringUtil.isEmpty(record.getWid())) {
+			record.setWid(StringUtil.getUuId());
+			record.setZcsj(DateUtil.getCurrentDate());
+			record.setZczip(log.getCustomIp());
+			yhjbxxInfoMapper.insertSelective(record);
+		} else {
+			yhjbxxInfoMapper.updateByPrimaryKeySelective(record);
+		}
+		return record;
+	}
+
+	@Override
+	public DataResult<YhjbxxInfoExtend> login(String userName, String password, CustomOperateLog log) throws ServiceException {
+		if (StringUtil.isEmpty(userName)) {
+			throw new ServiceException("用户名称不能为空！");
+		}
+		if (StringUtil.isEmpty(password)) {
+			throw new ServiceException("密码不能为空！");
+		}
+		YhjbxxInfoExtend queryYhjbxxInfoExtend = new YhjbxxInfoExtend();
+		queryYhjbxxInfoExtend.setSjh(userName);
+		//queryYhjbxxInfoExtend.setYhmm(StringEncrypt.encrypt(password));
+		
+		List<YhjbxxInfoExtend> datas = this.selectByCondition(queryYhjbxxInfoExtend);
+		if (CommonUtil.isEmptyList(datas)) {
+			throw new ServiceException("用户名/密码错误，请重新确认！");
+		}else{
+			YhjbxxInfoExtend yhjbxxInfoExtend=datas.get(0);
+			if(!yhjbxxInfoExtend.getYhmm().equals(StringEncrypt.encrypt(yhjbxxInfoExtend.getWid()+password))){
+				throw new ServiceException("用户名/密码错误，请重新确认！");
+			}
+		}
+		// 保存用户登录日志
+		YhjbxxLoginLogInfoExtend yhjbxxLoginLogInfo = new YhjbxxLoginLogInfoExtend();
+		yhjbxxLoginLogInfo.setWid(StringUtil.getUuId());
+		yhjbxxLoginLogInfo.setLoginTime(DateUtil.getCurrentDateTimeStr());
+		yhjbxxLoginLogInfo.setSjh(datas.get(0).getSjh());
+		yhjbxxLoginLogInfo.setLoginIp(log.getCustomIp());
+		yhjbxxLoginLogInfo.setYhid(datas.get(0).getWid());
+		yhjbxxLoginLogInfoService.insertSelective(yhjbxxLoginLogInfo, log);
+		return DataResult.success(datas.get(0));
+	}
+
+}

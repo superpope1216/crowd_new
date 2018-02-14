@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.statics.KfzjlWglInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.statics.KfzjlWglInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="KFZID" property="kfzid" jdbcType="VARCHAR" />
+    <result column="YWX" property="ywx" jdbcType="VARCHAR" />
+    <result column="MONTH" property="month" jdbcType="VARCHAR" />
+    <result column="GZL" property="gzl" jdbcType="VARCHAR" />
+    <result column="WGL" property="wgl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, KFZID, YWX, MONTH, GZL, WGL
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from USR_CROWD.T_CROWD_STATIC_WGL
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from USR_CROWD.T_CROWD_STATIC_WGL
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.statics.KfzjlWglInfo" >
+    insert into USR_CROWD.T_CROWD_STATIC_WGL (WID, KFZID, YWX, 
+      MONTH, GZL, WGL)
+    values (#{wid,jdbcType=VARCHAR}, #{kfzid,jdbcType=VARCHAR}, #{ywx,jdbcType=VARCHAR}, 
+      #{month,jdbcType=VARCHAR}, #{gzl,jdbcType=VARCHAR}, #{wgl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.statics.KfzjlWglInfo" >
+    insert into USR_CROWD.T_CROWD_STATIC_WGL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="kfzid != null" >
+        KFZID,
+      </if>
+      <if test="ywx != null" >
+        YWX,
+      </if>
+      <if test="month != null" >
+        MONTH,
+      </if>
+      <if test="gzl != null" >
+        GZL,
+      </if>
+      <if test="wgl != null" >
+        WGL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="kfzid != null" >
+        #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="ywx != null" >
+        #{ywx,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="gzl != null" >
+        #{gzl,jdbcType=VARCHAR},
+      </if>
+      <if test="wgl != null" >
+        #{wgl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.statics.KfzjlWglInfo" >
+    update USR_CROWD.T_CROWD_STATIC_WGL
+    <set >
+      <if test="kfzid != null" >
+        KFZID = #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="ywx != null" >
+        YWX = #{ywx,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        MONTH = #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="gzl != null" >
+        GZL = #{gzl,jdbcType=VARCHAR},
+      </if>
+      <if test="wgl != null" >
+        WGL = #{wgl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.statics.KfzjlWglInfo" >
+    update USR_CROWD.T_CROWD_STATIC_WGL
+    set KFZID = #{kfzid,jdbcType=VARCHAR},
+      YWX = #{ywx,jdbcType=VARCHAR},
+      MONTH = #{month,jdbcType=VARCHAR},
+      GZL = #{gzl,jdbcType=VARCHAR},
+      WGL = #{wgl,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

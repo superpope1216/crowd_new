@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.rwgl.extend.RwztbglsInfoExtendMapper">
+	<resultMap id="BaseDisplayResultMap"
+		type="com.wisedu.crowd.entity.rwgl.extend.RwztbglsInfoExtend" extends="com.wisedu.crowd.dao.rwgl.RwztbglsInfoMapper.BaseResultMap">
+
+	</resultMap>
+	<sql id="Base_Column_List">
+		t_crowd_xmgl_rwztbgls.WID, t_crowd_xmgl_rwztbgls.XMID,
+		t_crowd_xmgl_rwztbgls.ZT,
+		t_crowd_xmgl_rwztbgls.KFZID,
+		t_crowd_xmgl_rwztbgls.XQFID,
+		t_crowd_xmgl_rwztbgls.CZRXM,
+		t_crowd_xmgl_rwztbgls.CZSJ, t_crowd_xmgl_rwztbgls.CZRIP,
+		t_crowd_xmgl_rwztbgls.SHYY,
+		t_crowd_xmgl_rwztbgls.CZLX
+	</sql>
+	<sql id="sqlWhere">
+		<if test="query!=null">
+			<if test='query.wid!=null and query.wid!=""'>
+				AND
+				t_crowd_xmgl_rwztbgls.wid=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.zt!=null'>
+				AND T_CROWD_XMGL_RWZTBGLS.zt=#{query.zt,jdbcType=DECIMAL}
+			</if>
+			<if test='query.kfzid!=null and query.kfzid!=""'>
+				AND
+				t_crowd_xmgl_rwztbgls.kfzid=#{query.kfzid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.xqfid!=null and query.xqfid!=""'>
+				AND
+				t_crowd_xmgl_rwztbgls.xqfid=#{query.xqfid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.xmid!=null and query.xmid!=""'>
+				AND
+				t_crowd_xmgl_rwztbgls.xmid=#{query.xmid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.zts!=null'>
+				AND.zt in 
+				<foreach collection="query.zts" close=")" open="(" index="index" item="item" separator=",">
+					#{item}
+				</foreach>
+			</if>
+		</if>
+	</sql>
+	<sql id="sqlOrder">
+		<choose>
+			<when test="orderBy!=null">
+				ORDER BY
+				<foreach collection="orderBy" item="item" close=" " open=" "
+					index="index" separator=",">
+						${item}
+				</foreach>
+			</when>
+			
+			<otherwise>
+				order by t_crowd_xmgl_rwztbgls.czsj desc
+			</otherwise>
+		</choose>
+	</sql>
+	<select id="selectByCondition" resultMap="BaseDisplayResultMap"
+		parameterType="com.wisedu.crowd.entity.dto.QueryCondition">
+		select
+		<include refid="Base_Column_List" />
+		from t_crowd_xmgl_rwztbgls
+		<where><include refid="sqlWhere"/></where>
+		<include refid="sqlOrder"/>
+	</select>
+
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.yhgl.extend.YhjbxxLoginLogInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.yhgl.YhjbxxLoginLogInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="YHID" property="yhid" jdbcType="VARCHAR" />
+    <result column="SJH" property="sjh" jdbcType="VARCHAR" />
+    <result column="XM" property="xm" jdbcType="VARCHAR" />
+    <result column="NC" property="nc" jdbcType="VARCHAR" />
+    <result column="LOGIN_TIME" property="loginTime" jdbcType="VARCHAR" />
+    <result column="LOGIN_IP" property="loginIp" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, YHID, SJH, XM, NC, LOGIN_TIME, LOGIN_IP
+  </sql>
+  <resultMap id="BaseDisplayResultMap" type="com.wisedu.crowd.entity.yhgl.extend.YhjbxxLoginLogInfoExtend"  
+  extends="BaseResultMap"></resultMap>
+  <sql id="sqlWhere">
+  		<if test='wid!=null and wid!=""'>
+  			AND t_crowd_yhgl_login_log.WID=#{wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='sjh!=null and sjh!=""'>
+  			AND t_crowd_yhgl_login_log.YHID=#{yhid,jdbcType=VARCHAR}
+  		</if>
+  </sql>
+  <select id="selectByCondition" resultMap="BaseDisplayResultMap" parameterType="com.wisedu.crowd.entity.yhgl.extend.YhjbxxLoginLogInfoExtend">
+  		SELECT 
+  		<include refid="Base_Column_List"/>
+  		FROM t_crowd_yhgl_login_log t_crowd_yhgl_login_log 
+  		<where>
+  			<include refid="sqlWhere"/>
+  		</where>
+  		order by LOGIN_TIME desc
+  </select>
+  
+</mapper>

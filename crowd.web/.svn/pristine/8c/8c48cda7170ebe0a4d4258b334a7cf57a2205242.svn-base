@@ -1,0 +1,14 @@
+package com.wisedu.crowd.controller.xqfxx;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("xqfxx")
+public class XqfController {
+
+	@RequestMapping("index")
+	public String index(){
+		return "/xqfgl/xqfxx/index";
+	}
+}

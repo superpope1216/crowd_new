@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:amq="http://activemq.apache.org/schema/core"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core-5.8.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd">
+	<context:property-placeholder location="classpath:mq.properties"
+		ignore-unresolvable="true" />
+
+	<!-- Activemq connection factory -->
+	<bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="${mq.brokerURL}"></property>
+		<property name="userName" value="${mq.userName}"></property>
+		<property name="password" value="${mq.password}"></property>
+	</bean>
+
+	<!-- ConnectionFactory Definition -->
+	<bean id="connectionFactory"
+		class="org.springframework.jms.connection.CachingConnectionFactory">
+		<constructor-arg ref="targetConnectionFactory" />
+	</bean>
+
+
+	<!-- Default Destination Queue Definition -->
+	<bean id="fbrwQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${mq.fbrw}" />
+	</bean>
+
+	<bean id="publishingRwjbxxrMessageListener"
+		class="com.wisedu.crowd.message.rwjbxx.listener.PublishingRwjbxxListener"></bean>
+	<bean id="publishingRwjbxxListener"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory"></property>
+		<property name="destination" ref="fbrwQueue"></property>
+		<property name="messageListener" ref="publishingRwjbxxrMessageListener"></property>
+	</bean>
+
+	<!-- JmsTemplate Definition -->
+	<bean id="rwjbxxFbMqTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="fbrwQueue" />
+	</bean>
+
+
+	<!-- 投标 -->
+
+	<bean id="rwjbxxTb" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${mq.tbrw}" />
+	</bean>
+
+	<bean id="rwjbxxTbMessageListener"
+		class="com.wisedu.crowd.message.rwjbxx.listener.TbRwjbxxListener"></bean>
+	<bean id="rwjbxxTbListener"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory"></property>
+		<property name="destination" ref="rwjbxxTb"></property>
+		<property name="messageListener" ref="rwjbxxTbMessageListener"></property>
+	</bean>
+
+	<bean id="rwjbxxTbMqTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="rwjbxxTb" />
+	</bean>
+	
+	<!-- 选标 -->
+	<bean id="selectRwjbxx" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${mq.xbrw}" />
+	</bean>
+	
+	<bean id="selectRwjbxxMqTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="rwjbxxTb" />
+	</bean>
+	
+	<bean id="selectRwjbxxMessageListener"
+		class="com.wisedu.crowd.message.rwjbxx.listener.SelectRwjbxxListener"></bean>
+	<bean id="selectRwjbxxListener"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory"></property>
+		<property name="destination" ref="selectRwjbxx"></property>
+		<property name="messageListener" ref="selectRwjbxxMessageListener"></property>
+	</bean>
+	<!-- 申请验收 -->
+	<bean id="applyYsRwjbxx" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${mq.sqys}" />
+	</bean>
+	
+	<bean id="applyYsRwjbxxMqTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="applyYsRwjbxx" />
+	</bean>
+	
+	
+	<bean id="applyYsRwjbxxMessageListener"
+		class="com.wisedu.crowd.message.rwjbxx.listener.ApplyYsListener"></bean>
+	<bean id="applyYsRwjbxxListener"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory"></property>
+		<property name="destination" ref="applyYsRwjbxx"></property>
+		<property name="messageListener" ref="applyYsRwjbxxMessageListener"></property>
+	</bean>
+	
+	
+	<!-- 申请售后结束 -->
+	
+	<bean id="applyShjsRwjbxx" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${mq.sqrwshjs}" />
+	</bean>
+	
+	<bean id="applyShjsRwjbxxMqTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="applyShjsRwjbxx" />
+	</bean>
+	
+	
+	<bean id="applyShjsRwjbxxMessageListener"
+		class="com.wisedu.crowd.message.rwjbxx.listener.ApplyShjsListener"></bean>
+	<bean id="applyShjsRwjbxxListener"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory"></property>
+		<property name="destination" ref="applyShjsRwjbxx"></property>
+		<property name="messageListener" ref="applyShjsRwjbxxMessageListener"></property>
+	</bean>
+	<!-- 验收通过提醒 -->
+	
+	<bean id="ysPassRwjbxx" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${mq.ystg}" />
+	</bean>
+	
+	<bean id="ysPassRwjbxxMqTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="ysPassRwjbxx" />
+	</bean>
+	
+	<bean id="ysPassRwjbxxMessageListener"
+		class="com.wisedu.crowd.message.rwjbxx.listener.YsPassListener"></bean>
+	<bean id="ysPassRwjbxxListener"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory"></property>
+		<property name="destination" ref="ysPassRwjbxx"></property>
+		<property name="messageListener" ref="ysPassRwjbxxMessageListener"></property>
+	</bean>
+	
+	<!-- 验收不通过提醒 -->
+	
+	<bean id="ysNotPassRwjbxx" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${mq.ysbtg}" />
+	</bean>
+	
+	<bean id="ysNotPassRwjbxxMqTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="ysNotPassRwjbxx" />
+	</bean>
+	
+	<bean id="ysNotPassRwjbxxMessageListener"
+		class="com.wisedu.crowd.message.rwjbxx.listener.YsNotPassListener"></bean>
+	<bean id="ysNotPassRwjbxxListener"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory"></property>
+		<property name="destination" ref="ysNotPassRwjbxx"></property>
+		<property name="messageListener" ref="ysNotPassRwjbxxMessageListener"></property>
+	</bean>
+	<!-- 售后通过提醒 -->
+	
+	<bean id="shPassRwjbxx" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${mq.shrwtg}" />
+	</bean>
+	
+	<bean id="shPassRwjbxxMqTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="shPassRwjbxx" />
+	</bean>
+	
+	<bean id="shPassRwjbxxMessageListener"
+		class="com.wisedu.crowd.message.rwjbxx.listener.ShPassListener"></bean>
+	<bean id="shPassRwjbxxListener"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory"></property>
+		<property name="destination" ref="shPassRwjbxx"></property>
+		<property name="messageListener" ref="shPassRwjbxxMessageListener"></property>
+	</bean>
+	
+	<!-- 售后部通过提醒 -->
+	
+	<bean id="shNotPassRwjbxx" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${mq.shrwbtg}" />
+	</bean>
+	
+	<bean id="shNotPassRwjbxxMqTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="shNotPassRwjbxx" />
+	</bean>
+	
+	<bean id="shNotPassRwjbxxMessageListener"
+		class="com.wisedu.crowd.message.rwjbxx.listener.ShNotPassListener"></bean>
+	<bean id="shNotPassRwjbxxListener"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory"></property>
+		<property name="destination" ref="shNotPassRwjbxx"></property>
+		<property name="messageListener" ref="shNotPassRwjbxxMessageListener"></property>
+	</bean>
+	<!-- 自动验收通过提醒 -->
+	<bean id="autoYsPassRwjbxx" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${mq.autoYsPass}" />
+	</bean>
+	
+	<bean id="autoYsPassRwjbxxMqTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="autoYsPassRwjbxx" />
+	</bean>
+	
+	<bean id="autoYsPassRwjbxxMessageListener"
+		class="com.wisedu.crowd.message.rwjbxx.listener.AutoYsPassListener"></bean>
+	<bean id="autoYsPassRwjbxxListener"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory"></property>
+		<property name="destination" ref="autoYsPassRwjbxx"></property>
+		<property name="messageListener" ref="autoYsPassRwjbxxMessageListener"></property>
+	</bean>
+	
+	<!-- 自动验收不通过提醒 -->
+	<bean id="autoYsNotPassRwjbxx" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${mq.autoYsNotPass}" />
+	</bean>
+	
+	<bean id="autoYsNotPassRwjbxxMqTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="autoYsNotPassRwjbxx" />
+	</bean>
+	
+	<bean id="autoYsNotPassRwjbxxMessageListener"
+		class="com.wisedu.crowd.message.rwjbxx.listener.AutoYsNotPassListener"></bean>
+	<bean id="autoYsNotPassRwjbxxListener"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory"></property>
+		<property name="destination" ref="autoYsNotPassRwjbxx"></property>
+		<property name="messageListener" ref="autoYsNotPassRwjbxxMessageListener"></property>
+	</bean>
+	
+	<!-- 自动售后通过 -->
+	<bean id="autoShPassRwjbxx" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${mq.autoShPass}" />
+	</bean>
+	
+	<bean id="autoShPassRwjbxxMqTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="autoShPassRwjbxx" />
+	</bean>
+	
+	<bean id="autoShPassRwjbxxMessageListener"
+		class="com.wisedu.crowd.message.rwjbxx.listener.AutoShPassListener"></bean>
+	<bean id="autoShPassRwjbxxListener"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory"></property>
+		<property name="destination" ref="autoShPassRwjbxx"></property>
+		<property name="messageListener" ref="autoShPassRwjbxxMessageListener"></property>
+	</bean>
+	
+	
+	<!-- 自动售后不通过 -->
+	<bean id="autoShNotPassRwjbxx" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${mq.autoShNotPass}" />
+	</bean>
+	
+	<bean id="autoShNotPassRwjbxxMqTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="autoShNotPassRwjbxx" />
+	</bean>
+	
+	<bean id="autoShNotPassRwjbxxMessageListener"
+		class="com.wisedu.crowd.message.rwjbxx.listener.AutoShNotPassListener"></bean>
+	<bean id="autoShNotPassRwjbxxListener"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory"></property>
+		<property name="destination" ref="autoShNotPassRwjbxx"></property>
+		<property name="messageListener" ref="autoShNotPassRwjbxxMessageListener"></property>
+	</bean>
+</beans>

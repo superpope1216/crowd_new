@@ -1,0 +1,123 @@
+package com.wisedu.crowd.entity.yhgl.extend;
+
+import java.io.Serializable;
+
+import com.wisedu.crowd.entity.yhgl.KfzxxInfo;
+
+/**
+ * 开发者 信息
+ * @author wisedu
+ *
+ */
+public class KfzxxInfoExtend extends KfzxxInfo implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * 工作类别
+	 */
+	private String gzlbdmDisplay;
+	/**
+	 * 擅长技术
+	 */
+	private String scjsdmDisplay;
+	/**
+	 * 工作年限
+	 */
+	private String gznxDisplay;
+	
+	/**
+	 * 教育工作年限 
+	 */
+	private String jygznxDisplay;
+	
+	/**
+	 * 工作现状
+	 */
+	private String gzxzDisplay;
+	/**
+	 * 用户类型
+	 */
+	private String sfytdDisplay;
+	
+	/**
+	 * 
+	 */
+	private String condition;
+	
+	private int score;
+	
+
+
+	public String getCondition() {
+		return condition;
+	}
+
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
+
+	public String getGzlbdmDisplay() {
+		return gzlbdmDisplay;
+	}
+
+	public void setGzlbdmDisplay(String gzlbdmDisplay) {
+		this.gzlbdmDisplay = gzlbdmDisplay;
+	}
+
+	public String getScjsdmDisplay() {
+		return scjsdmDisplay;
+	}
+
+	public void setScjsdmDisplay(String scjsdmDisplay) {
+		this.scjsdmDisplay = scjsdmDisplay;
+	}
+
+	public String getGznxDisplay() {
+		return gznxDisplay;
+	}
+
+	public void setGznxDisplay(String gznxDisplay) {
+		this.gznxDisplay = gznxDisplay;
+	}
+
+	public String getGzxzDisplay() {
+		return gzxzDisplay;
+	}
+
+	public void setGzxzDisplay(String gzxzDisplay) {
+		this.gzxzDisplay = gzxzDisplay;
+	}
+
+	
+
+	public String getSfytdDisplay() {
+		return sfytdDisplay;
+	}
+
+	public void setSfytdDisplay(String sfytdDisplay) {
+		this.sfytdDisplay = sfytdDisplay;
+	}
+
+	public String getJygznxDisplay() {
+		return jygznxDisplay;
+	}
+
+	public void setJygznxDisplay(String jygznxDisplay) {
+		this.jygznxDisplay = jygznxDisplay;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
+	
+	
+
+}

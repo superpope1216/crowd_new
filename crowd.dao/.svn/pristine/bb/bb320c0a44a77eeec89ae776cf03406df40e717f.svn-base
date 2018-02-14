@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisedu.crowd.dao.yhgl.XqfxxInfoMapper">
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.yhgl.XqfxxInfo">
+    <id column="WID" jdbcType="VARCHAR" property="wid" />
+    <result column="YHID" jdbcType="VARCHAR" property="yhid" />
+    <result column="XQFDWMC" jdbcType="VARCHAR" property="xqfdwmc" />
+    <result column="SZDQ" jdbcType="VARCHAR" property="szdq" />
+    <result column="XM" jdbcType="VARCHAR" property="xm" />
+    <result column="NC" jdbcType="VARCHAR" property="nc" />
+    <result column="SFZJH" jdbcType="VARCHAR" property="sfzjh" />
+    <result column="GH" jdbcType="VARCHAR" property="gh" />
+    <result column="LXYDZYX" jdbcType="VARCHAR" property="lxydzyx" />
+    <result column="ZHYE" jdbcType="DECIMAL" property="zhye" />
+    <result column="ZHDJYE" jdbcType="DECIMAL" property="zhdjye" />
+    <result column="CZSJ" jdbcType="TIMESTAMP" property="czsj" />
+    <result column="CZZIP" jdbcType="VARCHAR" property="czzip" />
+    <result column="SHZT" jdbcType="DECIMAL" property="shzt" />
+    <result column="SHYJ" jdbcType="VARCHAR" property="shyj" />
+    <result column="XQFLB" jdbcType="DECIMAL" property="xqflb" />
+    <result column="SSGS" jdbcType="VARCHAR" property="ssgs" />
+    <result column="SSYWX" jdbcType="VARCHAR" property="ssywx" />
+    <result column="zpfjid" jdbcType="VARCHAR" property="zpfjid" />
+    <result column="qqh" jdbcType="VARCHAR" property="qqh" />
+    <result column="wxh" jdbcType="VARCHAR" property="wxh" />
+    <result column="zfbzh" jdbcType="VARCHAR" property="zfbzh" />
+    <result column="PER_PROVINCE" jdbcType="VARCHAR" property="perProvince" />
+    <result column="PER_CITY" jdbcType="VARCHAR" property="perCity" />
+    <result column="PER_AREA" jdbcType="VARCHAR" property="perArea" />
+    <result column="USER_RANGE" jdbcType="VARCHAR" property="userRange" />
+    <result column="SFZZMZTJID" jdbcType="VARCHAR" property="sfzzmztjid" />
+    <result column="SFZFMZTJID" jdbcType="VARCHAR" property="sfzfmztjid" />
+    <result column="VERSION" jdbcType="INTEGER" property="version" />
+    <result column="COMPANY_MC" jdbcType="VARCHAR" property="companyMc" />
+    <result column="ENTERPRISE_QUALIFICATE_TYPE" jdbcType="VARCHAR" property="enterpriseQualificateType" />
+    <result column="BUSINESS_LICENCE_SCANNER" jdbcType="VARCHAR" property="businessLicenceScanner" />
+    <result column="BUSINESS_LICENCE_NO" jdbcType="VARCHAR" property="businessLicenceNo" />
+    <result column="ORGANIZATE_CODE_SCANNER" jdbcType="VARCHAR" property="organizateCodeScanner" />
+    <result column="ORGANIZATE_CODE_NO" jdbcType="VARCHAR" property="organizateCodeNo" />
+    <result column="TAX_REGISTRATION_SCANNER" jdbcType="VARCHAR" property="taxRegistrationScanner" />
+    <result column="TAX_REGISTRATION_NO" jdbcType="VARCHAR" property="taxRegistrationNo" />
+    <result column="SOCIAL_CREDIT_CODE" jdbcType="VARCHAR" property="socialCreditCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    WID, YHID, XQFDWMC, SZDQ, XM, NC, SFZJH, GH, LXYDZYX, ZHYE, ZHDJYE, CZSJ, CZZIP, 
+    SHZT, SHYJ, XQFLB, SSGS, SSYWX, zpfjid, qqh, wxh, zfbzh, PER_PROVINCE, PER_CITY, 
+    PER_AREA, USER_RANGE, SFZZMZTJID, SFZFMZTJID, VERSION, COMPANY_MC, ENTERPRISE_QUALIFICATE_TYPE, 
+    BUSINESS_LICENCE_SCANNER, BUSINESS_LICENCE_NO, ORGANIZATE_CODE_SCANNER, ORGANIZATE_CODE_NO, 
+    TAX_REGISTRATION_SCANNER, TAX_REGISTRATION_NO, SOCIAL_CREDIT_CODE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_yhgl_xqfxx
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_crowd_yhgl_xqfxx
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.yhgl.XqfxxInfo">
+    insert into t_crowd_yhgl_xqfxx (WID, YHID, XQFDWMC, 
+      SZDQ, XM, NC, SFZJH, 
+      GH, LXYDZYX, ZHYE, 
+      ZHDJYE, CZSJ, CZZIP, 
+      SHZT, SHYJ, XQFLB, 
+      SSGS, SSYWX, zpfjid, 
+      qqh, wxh, zfbzh, PER_PROVINCE, 
+      PER_CITY, PER_AREA, USER_RANGE, 
+      SFZZMZTJID, SFZFMZTJID, VERSION, 
+      COMPANY_MC, ENTERPRISE_QUALIFICATE_TYPE, BUSINESS_LICENCE_SCANNER, 
+      BUSINESS_LICENCE_NO, ORGANIZATE_CODE_SCANNER, 
+      ORGANIZATE_CODE_NO, TAX_REGISTRATION_SCANNER, 
+      TAX_REGISTRATION_NO, SOCIAL_CREDIT_CODE)
+    values (#{wid,jdbcType=VARCHAR}, #{yhid,jdbcType=VARCHAR}, #{xqfdwmc,jdbcType=VARCHAR}, 
+      #{szdq,jdbcType=VARCHAR}, #{xm,jdbcType=VARCHAR}, #{nc,jdbcType=VARCHAR}, #{sfzjh,jdbcType=VARCHAR}, 
+      #{gh,jdbcType=VARCHAR}, #{lxydzyx,jdbcType=VARCHAR}, #{zhye,jdbcType=DECIMAL}, 
+      #{zhdjye,jdbcType=DECIMAL}, #{czsj,jdbcType=TIMESTAMP}, #{czzip,jdbcType=VARCHAR}, 
+      #{shzt,jdbcType=DECIMAL}, #{shyj,jdbcType=VARCHAR}, #{xqflb,jdbcType=DECIMAL}, 
+      #{ssgs,jdbcType=VARCHAR}, #{ssywx,jdbcType=VARCHAR}, #{zpfjid,jdbcType=VARCHAR}, 
+      #{qqh,jdbcType=VARCHAR}, #{wxh,jdbcType=VARCHAR}, #{zfbzh,jdbcType=VARCHAR}, #{perProvince,jdbcType=VARCHAR}, 
+      #{perCity,jdbcType=VARCHAR}, #{perArea,jdbcType=VARCHAR}, #{userRange,jdbcType=VARCHAR}, 
+      #{sfzzmztjid,jdbcType=VARCHAR}, #{sfzfmztjid,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
+      #{companyMc,jdbcType=VARCHAR}, #{enterpriseQualificateType,jdbcType=VARCHAR}, #{businessLicenceScanner,jdbcType=VARCHAR}, 
+      #{businessLicenceNo,jdbcType=VARCHAR}, #{organizateCodeScanner,jdbcType=VARCHAR}, 
+      #{organizateCodeNo,jdbcType=VARCHAR}, #{taxRegistrationScanner,jdbcType=VARCHAR}, 
+      #{taxRegistrationNo,jdbcType=VARCHAR}, #{socialCreditCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.yhgl.XqfxxInfo">
+    insert into t_crowd_yhgl_xqfxx
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wid != null">
+        WID,
+      </if>
+      <if test="yhid != null">
+        YHID,
+      </if>
+      <if test="xqfdwmc != null">
+        XQFDWMC,
+      </if>
+      <if test="szdq != null">
+        SZDQ,
+      </if>
+      <if test="xm != null">
+        XM,
+      </if>
+      <if test="nc != null">
+        NC,
+      </if>
+      <if test="sfzjh != null">
+        SFZJH,
+      </if>
+      <if test="gh != null">
+        GH,
+      </if>
+      <if test="lxydzyx != null">
+        LXYDZYX,
+      </if>
+      <if test="zhye != null">
+        ZHYE,
+      </if>
+      <if test="zhdjye != null">
+        ZHDJYE,
+      </if>
+      <if test="czsj != null">
+        CZSJ,
+      </if>
+      <if test="czzip != null">
+        CZZIP,
+      </if>
+      <if test="shzt != null">
+        SHZT,
+      </if>
+      <if test="shyj != null">
+        SHYJ,
+      </if>
+      <if test="xqflb != null">
+        XQFLB,
+      </if>
+      <if test="ssgs != null">
+        SSGS,
+      </if>
+      <if test="ssywx != null">
+        SSYWX,
+      </if>
+      <if test="zpfjid != null">
+        zpfjid,
+      </if>
+      <if test="qqh != null">
+        qqh,
+      </if>
+      <if test="wxh != null">
+        wxh,
+      </if>
+      <if test="zfbzh != null">
+        zfbzh,
+      </if>
+      <if test="perProvince != null">
+        PER_PROVINCE,
+      </if>
+      <if test="perCity != null">
+        PER_CITY,
+      </if>
+      <if test="perArea != null">
+        PER_AREA,
+      </if>
+      <if test="userRange != null">
+        USER_RANGE,
+      </if>
+      <if test="sfzzmztjid != null">
+        SFZZMZTJID,
+      </if>
+      <if test="sfzfmztjid != null">
+        SFZFMZTJID,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="companyMc != null">
+        COMPANY_MC,
+      </if>
+      <if test="enterpriseQualificateType != null">
+        ENTERPRISE_QUALIFICATE_TYPE,
+      </if>
+      <if test="businessLicenceScanner != null">
+        BUSINESS_LICENCE_SCANNER,
+      </if>
+      <if test="businessLicenceNo != null">
+        BUSINESS_LICENCE_NO,
+      </if>
+      <if test="organizateCodeScanner != null">
+        ORGANIZATE_CODE_SCANNER,
+      </if>
+      <if test="organizateCodeNo != null">
+        ORGANIZATE_CODE_NO,
+      </if>
+      <if test="taxRegistrationScanner != null">
+        TAX_REGISTRATION_SCANNER,
+      </if>
+      <if test="taxRegistrationNo != null">
+        TAX_REGISTRATION_NO,
+      </if>
+      <if test="socialCreditCode != null">
+        SOCIAL_CREDIT_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wid != null">
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhid != null">
+        #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="xqfdwmc != null">
+        #{xqfdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="szdq != null">
+        #{szdq,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null">
+        #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="nc != null">
+        #{nc,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzjh != null">
+        #{sfzjh,jdbcType=VARCHAR},
+      </if>
+      <if test="gh != null">
+        #{gh,jdbcType=VARCHAR},
+      </if>
+      <if test="lxydzyx != null">
+        #{lxydzyx,jdbcType=VARCHAR},
+      </if>
+      <if test="zhye != null">
+        #{zhye,jdbcType=DECIMAL},
+      </if>
+      <if test="zhdjye != null">
+        #{zhdjye,jdbcType=DECIMAL},
+      </if>
+      <if test="czsj != null">
+        #{czsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="czzip != null">
+        #{czzip,jdbcType=VARCHAR},
+      </if>
+      <if test="shzt != null">
+        #{shzt,jdbcType=DECIMAL},
+      </if>
+      <if test="shyj != null">
+        #{shyj,jdbcType=VARCHAR},
+      </if>
+      <if test="xqflb != null">
+        #{xqflb,jdbcType=DECIMAL},
+      </if>
+      <if test="ssgs != null">
+        #{ssgs,jdbcType=VARCHAR},
+      </if>
+      <if test="ssywx != null">
+        #{ssywx,jdbcType=VARCHAR},
+      </if>
+      <if test="zpfjid != null">
+        #{zpfjid,jdbcType=VARCHAR},
+      </if>
+      <if test="qqh != null">
+        #{qqh,jdbcType=VARCHAR},
+      </if>
+      <if test="wxh != null">
+        #{wxh,jdbcType=VARCHAR},
+      </if>
+      <if test="zfbzh != null">
+        #{zfbzh,jdbcType=VARCHAR},
+      </if>
+      <if test="perProvince != null">
+        #{perProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="perCity != null">
+        #{perCity,jdbcType=VARCHAR},
+      </if>
+      <if test="perArea != null">
+        #{perArea,jdbcType=VARCHAR},
+      </if>
+      <if test="userRange != null">
+        #{userRange,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzzmztjid != null">
+        #{sfzzmztjid,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzfmztjid != null">
+        #{sfzfmztjid,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="companyMc != null">
+        #{companyMc,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseQualificateType != null">
+        #{enterpriseQualificateType,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicenceScanner != null">
+        #{businessLicenceScanner,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicenceNo != null">
+        #{businessLicenceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="organizateCodeScanner != null">
+        #{organizateCodeScanner,jdbcType=VARCHAR},
+      </if>
+      <if test="organizateCodeNo != null">
+        #{organizateCodeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRegistrationScanner != null">
+        #{taxRegistrationScanner,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRegistrationNo != null">
+        #{taxRegistrationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="socialCreditCode != null">
+        #{socialCreditCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.yhgl.XqfxxInfo">
+    update t_crowd_yhgl_xqfxx
+    <set>
+      <if test="yhid != null">
+        YHID = #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="xqfdwmc != null">
+        XQFDWMC = #{xqfdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="szdq != null">
+        SZDQ = #{szdq,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null">
+        XM = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="nc != null">
+        NC = #{nc,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzjh != null">
+        SFZJH = #{sfzjh,jdbcType=VARCHAR},
+      </if>
+      <if test="gh != null">
+        GH = #{gh,jdbcType=VARCHAR},
+      </if>
+      <if test="lxydzyx != null">
+        LXYDZYX = #{lxydzyx,jdbcType=VARCHAR},
+      </if>
+      <if test="zhye != null">
+        ZHYE = #{zhye,jdbcType=DECIMAL},
+      </if>
+      <if test="zhdjye != null">
+        ZHDJYE = #{zhdjye,jdbcType=DECIMAL},
+      </if>
+      <if test="czsj != null">
+        CZSJ = #{czsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="czzip != null">
+        CZZIP = #{czzip,jdbcType=VARCHAR},
+      </if>
+      <if test="shzt != null">
+        SHZT = #{shzt,jdbcType=DECIMAL},
+      </if>
+      <if test="shyj != null">
+        SHYJ = #{shyj,jdbcType=VARCHAR},
+      </if>
+      <if test="xqflb != null">
+        XQFLB = #{xqflb,jdbcType=DECIMAL},
+      </if>
+      <if test="ssgs != null">
+        SSGS = #{ssgs,jdbcType=VARCHAR},
+      </if>
+      <if test="ssywx != null">
+        SSYWX = #{ssywx,jdbcType=VARCHAR},
+      </if>
+      <if test="zpfjid != null">
+        zpfjid = #{zpfjid,jdbcType=VARCHAR},
+      </if>
+      <if test="qqh != null">
+        qqh = #{qqh,jdbcType=VARCHAR},
+      </if>
+      <if test="wxh != null">
+        wxh = #{wxh,jdbcType=VARCHAR},
+      </if>
+      <if test="zfbzh != null">
+        zfbzh = #{zfbzh,jdbcType=VARCHAR},
+      </if>
+      <if test="perProvince != null">
+        PER_PROVINCE = #{perProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="perCity != null">
+        PER_CITY = #{perCity,jdbcType=VARCHAR},
+      </if>
+      <if test="perArea != null">
+        PER_AREA = #{perArea,jdbcType=VARCHAR},
+      </if>
+      <if test="userRange != null">
+        USER_RANGE = #{userRange,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzzmztjid != null">
+        SFZZMZTJID = #{sfzzmztjid,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzfmztjid != null">
+        SFZFMZTJID = #{sfzfmztjid,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="companyMc != null">
+        COMPANY_MC = #{companyMc,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseQualificateType != null">
+        ENTERPRISE_QUALIFICATE_TYPE = #{enterpriseQualificateType,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicenceScanner != null">
+        BUSINESS_LICENCE_SCANNER = #{businessLicenceScanner,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicenceNo != null">
+        BUSINESS_LICENCE_NO = #{businessLicenceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="organizateCodeScanner != null">
+        ORGANIZATE_CODE_SCANNER = #{organizateCodeScanner,jdbcType=VARCHAR},
+      </if>
+      <if test="organizateCodeNo != null">
+        ORGANIZATE_CODE_NO = #{organizateCodeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRegistrationScanner != null">
+        TAX_REGISTRATION_SCANNER = #{taxRegistrationScanner,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRegistrationNo != null">
+        TAX_REGISTRATION_NO = #{taxRegistrationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="socialCreditCode != null">
+        SOCIAL_CREDIT_CODE = #{socialCreditCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.yhgl.XqfxxInfo">
+    update t_crowd_yhgl_xqfxx
+    set YHID = #{yhid,jdbcType=VARCHAR},
+      XQFDWMC = #{xqfdwmc,jdbcType=VARCHAR},
+      SZDQ = #{szdq,jdbcType=VARCHAR},
+      XM = #{xm,jdbcType=VARCHAR},
+      NC = #{nc,jdbcType=VARCHAR},
+      SFZJH = #{sfzjh,jdbcType=VARCHAR},
+      GH = #{gh,jdbcType=VARCHAR},
+      LXYDZYX = #{lxydzyx,jdbcType=VARCHAR},
+      ZHYE = #{zhye,jdbcType=DECIMAL},
+      ZHDJYE = #{zhdjye,jdbcType=DECIMAL},
+      CZSJ = #{czsj,jdbcType=TIMESTAMP},
+      CZZIP = #{czzip,jdbcType=VARCHAR},
+      SHZT = #{shzt,jdbcType=DECIMAL},
+      SHYJ = #{shyj,jdbcType=VARCHAR},
+      XQFLB = #{xqflb,jdbcType=DECIMAL},
+      SSGS = #{ssgs,jdbcType=VARCHAR},
+      SSYWX = #{ssywx,jdbcType=VARCHAR},
+      zpfjid = #{zpfjid,jdbcType=VARCHAR},
+      qqh = #{qqh,jdbcType=VARCHAR},
+      wxh = #{wxh,jdbcType=VARCHAR},
+      zfbzh = #{zfbzh,jdbcType=VARCHAR},
+      PER_PROVINCE = #{perProvince,jdbcType=VARCHAR},
+      PER_CITY = #{perCity,jdbcType=VARCHAR},
+      PER_AREA = #{perArea,jdbcType=VARCHAR},
+      USER_RANGE = #{userRange,jdbcType=VARCHAR},
+      SFZZMZTJID = #{sfzzmztjid,jdbcType=VARCHAR},
+      SFZFMZTJID = #{sfzfmztjid,jdbcType=VARCHAR},
+      VERSION = #{version,jdbcType=INTEGER},
+      COMPANY_MC = #{companyMc,jdbcType=VARCHAR},
+      ENTERPRISE_QUALIFICATE_TYPE = #{enterpriseQualificateType,jdbcType=VARCHAR},
+      BUSINESS_LICENCE_SCANNER = #{businessLicenceScanner,jdbcType=VARCHAR},
+      BUSINESS_LICENCE_NO = #{businessLicenceNo,jdbcType=VARCHAR},
+      ORGANIZATE_CODE_SCANNER = #{organizateCodeScanner,jdbcType=VARCHAR},
+      ORGANIZATE_CODE_NO = #{organizateCodeNo,jdbcType=VARCHAR},
+      TAX_REGISTRATION_SCANNER = #{taxRegistrationScanner,jdbcType=VARCHAR},
+      TAX_REGISTRATION_NO = #{taxRegistrationNo,jdbcType=VARCHAR},
+      SOCIAL_CREDIT_CODE = #{socialCreditCode,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.yhgl.extend.XqfxxInfoExtendMapper" >
+  <resultMap id="BaseDisplayResultMap" type="com.wisedu.crowd.entity.yhgl.extend.XqfxxInfoExtend" 
+  extends="com.wisedu.crowd.dao.yhgl.XqfxxInfoMapper.BaseResultMap">
+   
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_crowd_yhgl_xqfxx.WID, t_crowd_yhgl_xqfxx.YHID, t_crowd_yhgl_xqfxx.XQFDWMC, 
+    t_crowd_yhgl_xqfxx.SZDQ, t_crowd_yhgl_xqfxx.XM, t_crowd_yhgl_xqfxx.NC, 
+    t_crowd_yhgl_xqfxx.SFZJH, t_crowd_yhgl_xqfxx.GH, t_crowd_yhgl_xqfxx.LXYDZYX, 
+    t_crowd_yhgl_xqfxx.ZHYE, t_crowd_yhgl_xqfxx.ZHDJYE, t_crowd_yhgl_xqfxx.CZSJ, 
+    t_crowd_yhgl_xqfxx.CZZIP,t_crowd_yhgl_xqfxx.SHZT, t_crowd_yhgl_xqfxx.SHYJ, 
+    t_crowd_yhgl_xqfxx.XQFLB, t_crowd_yhgl_xqfxx.SSGS, t_crowd_yhgl_xqfxx.SSYWX, 
+    t_crowd_yhgl_xqfxx.zpfjid, t_crowd_yhgl_xqfxx.qqh, t_crowd_yhgl_xqfxx.wxh, 
+    t_crowd_yhgl_xqfxx.zfbzh
+  </sql>
+  <sql id="sqlWhere">
+  	<if test="query!=null">
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND t_crowd_yhgl_xqfxx.wid=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.yhid!=null and query.yhid!=""'>
+  			AND t_crowd_yhgl_xqfxx.YHID=#{query.yhid,jdbcType=VARCHAR}
+  		</if>
+  	</if>
+  </sql>
+  <select id="selectByCondition" resultMap="BaseDisplayResultMap" parameterType="com.wisedu.crowd.entity.yhgl.extend.XqfxxInfoExtend">
+  		SELECT
+  		<include refid="Base_Column_List"/>
+  		FROM T_CROWD_YHGL_XQFXX T_CROWD_YHGL_XQFXX
+  		<where>
+  			<include refid="sqlWhere"/>
+  		</where> 
+  </select>
+</mapper>

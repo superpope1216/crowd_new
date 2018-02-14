@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.xmgl.extend.RbxxNewInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.xmgl.RbxxNewInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="RWWID" property="rwwid" jdbcType="VARCHAR" />
+    <result column="KFZID" property="kfzid" jdbcType="VARCHAR" />
+    <result column="XM" property="xm" jdbcType="VARCHAR" />
+    <result column="RQ" property="rq" jdbcType="VARCHAR" />
+    <result column="SJD" property="sjd" jdbcType="DECIMAL" />
+    <result column="GZNRSM" property="gznrsm" jdbcType="VARCHAR" />
+    <result column="SJGZL" property="sjgzl" jdbcType="DECIMAL" />
+    <result column="BZ" property="bz" jdbcType="VARCHAR" />
+    <result column="TJSJ" property="tjsj" jdbcType="VARCHAR" />
+    <result column="TJZIP" property="tjzip" jdbcType="VARCHAR" />
+    <result column="RWBH" property="rwbh" jdbcType="VARCHAR" />
+    <result column="RWMC" property="rwmc" jdbcType="VARCHAR" />
+  </resultMap>
+  
+	<resultMap id="BaseDisplayResultMap" type="com.wisedu.crowd.entity.xmgl.extend.RbxxNewInfoExtend"
+	  	 extends="BaseResultMap">
+	   <result column="SJD_DISPLAY" property="sjdDisplay"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	
+  <sql id="Base_Column_List" >
+    t_crowd_xmgl_rwjbxx_rbxx_new.WID, t_crowd_xmgl_rwjbxx_rbxx_new.RWWID, t_crowd_xmgl_rwjbxx_rbxx_new.KFZID, 
+    t_crowd_xmgl_rwjbxx_rbxx_new.XM, t_crowd_xmgl_rwjbxx_rbxx_new.RQ, t_crowd_xmgl_rwjbxx_rbxx_new.SJD, 
+    t_crowd_xmgl_rwjbxx_rbxx_new.GZNRSM, t_crowd_xmgl_rwjbxx_rbxx_new.SJGZL, t_crowd_xmgl_rwjbxx_rbxx_new.BZ, 
+    t_crowd_xmgl_rwjbxx_rbxx_new.TJSJ, t_crowd_xmgl_rwjbxx_rbxx_new.TJZIP, t_crowd_xmgl_rwjbxx_rbxx_new.RWBH, 
+    t_crowd_xmgl_rwjbxx_rbxx_new.RWMC
+  </sql>
+  <sql id="Base_Display_Column_List">
+  <include refid="Base_Column_List"></include>
+      ,t_crowd_sjzd_sjd.LBMC as SJD_DISPLAY 
+  </sql>
+  <sql id="sqlWhere">
+   <if test="query!=null">
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND t_crowd_xmgl_rwjbxx_rbxx_new.wid=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.rwwid!=null and query.rwwid!=""'>
+  			AND t_crowd_xmgl_rwjbxx_rbxx_new.rwwid=#{query.rwwid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.kfzid!=null and query.kfzid!=""'>
+  			AND t_crowd_xmgl_rwjbxx_rbxx_new.kfzid=#{query.kfzid,jdbcType=VARCHAR}
+  		</if>
+  	</if>
+  </sql>
+  <select id="selectByCondition" resultMap="BaseDisplayResultMap" parameterType="com.wisedu.crowd.entity.xmgl.extend.RbxxNewInfoExtend">
+  		SELECT 
+  		<include refid="Base_Display_Column_List"/>
+  		FROM t_crowd_xmgl_rwjbxx_rbxx_new t_crowd_xmgl_rwjbxx_rbxx_new 
+  		
+  		   LEFT JOIN t_crowd_sjzd_sjd t_crowd_sjzd_sjd on
+        t_crowd_sjzd_sjd.LBDM=t_crowd_xmgl_rwjbxx_rbxx_new.SJD AND
+        t_crowd_sjzd_sjd.SFSY=1
+  		<where>
+  			<include refid="sqlWhere"/>
+  		</where>
+  		order by t_crowd_xmgl_rwjbxx_rbxx_new.rq desc
+  </select>
+  
+</mapper>

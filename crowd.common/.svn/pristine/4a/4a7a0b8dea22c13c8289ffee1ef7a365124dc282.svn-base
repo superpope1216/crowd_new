@@ -1,0 +1,15 @@
+package com.wisedu.crowd.common.util;
+
+
+public class ConstantsUtil {
+
+	/**
+	 * 用户基本信息
+	 */
+	public final static String SESSION_YHJBXX="SESSION_YHJBXX";
+    
+    /**
+     * 手机验证码 标识
+     */
+    public static final String PHONE_VERIFICATION="PHONEVERIFICATION";
+}

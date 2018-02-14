@@ -1,0 +1,24 @@
+package com.wisedu.crowd.entity.rwgl.extend;
+
+import java.io.Serializable;
+
+import com.wisedu.crowd.entity.rwgl.RwtbxxInfo;
+
+public class RwtbxxInfoExtend extends RwtbxxInfo implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private String zbztDisplay;
+
+	public String getZbztDisplay() {
+		return zbztDisplay;
+	}
+
+	public void setZbztDisplay(String zbztDisplay) {
+		this.zbztDisplay = zbztDisplay;
+	}
+
+}

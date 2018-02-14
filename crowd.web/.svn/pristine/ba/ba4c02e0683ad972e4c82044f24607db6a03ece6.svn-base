@@ -1,0 +1,64 @@
+package com.wisedu.crowd.controller.center;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.github.pagehelper.Page;
+import com.wisedu.crowd.common.code.DictionaryEnum;
+import com.wisedu.crowd.common.util.PageUtil;
+import com.wisedu.crowd.common.util.StringUtil;
+import com.wisedu.crowd.controller.BaseController;
+import com.wisedu.crowd.entity.dictionary.DictionaryInfo;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.entity.dto.PageInfo;
+import com.wisedu.crowd.entity.dto.QueryCondition;
+import com.wisedu.crowd.entity.rwgl.RwjbxxInfo;
+import com.wisedu.crowd.entity.rwgl.extend.RwjbxxInfoExtend;
+import com.wisedu.crowd.service.dictionary.DictionaryService;
+import com.wisedu.crowd.service.rwgl.RwjbxxInfoService;
+
+@Controller
+@RequestMapping("center")
+public class CenterController extends BaseController{
+	@Autowired
+	private DictionaryService dictionaryService;
+	
+	@Autowired
+	private RwjbxxInfoService rwjbxxInfoService; 
+	@RequestMapping("index")
+	public ModelAndView index() throws Exception{
+		List<DictionaryInfo> rwxsList=dictionaryService.selectByCondtion(DictionaryEnum.T_CROWD_SJZD_RWXS, null);
+		List<DictionaryInfo> ywxList=dictionaryService.selectByCondtion(DictionaryEnum.T_CROWD_SJZD_YWXLB, null);
+		List<DictionaryInfo> rwkjList=dictionaryService.selectByCondtion(DictionaryEnum.T_CROWD_SJZD_RWKFKJ, null);
+		ModelAndView mv=new ModelAndView();
+	
+		mv.setViewName("center/center");
+		mv.addObject("rwxs", rwxsList);
+		mv.addObject("ywx", ywxList);
+		mv.addObject("kfkj", rwkjList);
+		return mv;
+	}
+	
+	@RequestMapping("query")
+	@ResponseBody
+	public DataResult<List<RwjbxxInfoExtend>> queryList(String rwxs,String rwbh,String kfkj,String rwmc,String rwjd,String ywxlb,Integer startPage,Integer pageSize){
+		QueryCondition<RwjbxxInfoExtend> condition=new QueryCondition<>();
+		PageInfo page=PageUtil.cratePageInfo(startPage, pageSize);
+		condition.setPageInfo(page);
+		RwjbxxInfoExtend queryRwjbxxInfoExtend=new RwjbxxInfoExtend();
+		queryRwjbxxInfoExtend.setRwxs(rwxs);
+		queryRwjbxxInfoExtend.setRwbh(rwbh);
+		queryRwjbxxInfoExtend.setRwmc(rwmc);
+		queryRwjbxxInfoExtend.setKfkj(kfkj);
+		queryRwjbxxInfoExtend.setRwjd(rwjd);
+		queryRwjbxxInfoExtend.setYwxlb(ywxlb);
+		condition.setQuery(queryRwjbxxInfoExtend);
+		return rwjbxxInfoService.selectForCenter(condition);
+		
+	}
+}

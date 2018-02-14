@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.rwgl.extend.BugZrrInfoExtendMapper" >
+  <resultMap id="BaseDisplayResultMap" type="com.wisedu.crowd.entity.rwgl.extend.BugZrrInfoExtend"
+  extends= "com.wisedu.crowd.dao.rwgl.BugZrrInfoMapper.BaseResultMap">
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_crowd_xmgl_rwjbxx_bugzrr.WID, t_crowd_xmgl_rwjbxx_bugzrr.KFZID, 
+    t_crowd_xmgl_rwjbxx_bugzrr.RWID, t_crowd_xmgl_rwjbxx_bugzrr.SHR, 
+    t_crowd_xmgl_rwjbxx_bugzrr.SHSJ, t_crowd_xmgl_rwjbxx_bugzrr.QRLY, 
+    t_crowd_xmgl_rwjbxx_bugzrr.BGXGR, t_crowd_xmgl_rwjbxx_bugzrr.BGZRRGH, 
+    t_crowd_xmgl_rwjbxx_bugzrr.BGZRRXM, t_crowd_xmgl_rwjbxx_bugzrr.JSGSBM, 
+    t_crowd_xmgl_rwjbxx_bugzrr.JSZT, t_crowd_xmgl_rwjbxx_bugzrr.JSRQ, 
+    t_crowd_xmgl_rwjbxx_bugzrr.SFXYTP,t_crowd_xmgl_rwjbxx_bugzrr.TPZT, 
+    t_crowd_xmgl_rwjbxx_bugzrr.ZZSHZRR, t_crowd_xmgl_rwjbxx_bugzrr.SHBTGYY,t_crowd_xmgl_rwjbxx_bugzrr.BUGFL, 
+    t_crowd_xmgl_rwjbxx_bugzrr.SFMQZRR, t_crowd_xmgl_rwjbxx_bugzrr.SFMQSBUG
+  </sql>
+  <sql id="sqlWhere">
+  	<if test="query!=null">
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND t_crowd_xmgl_rwjbxx_bugzrr.WID=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.rwid!=null and query.rwid!=""'>
+  			AND t_crowd_xmgl_rwjbxx_bugzrr.RWID=#{query.rwid,jdbcType=VARCHAR}
+  		</if>
+  	</if>
+  </sql>
+  <select id="selectByCondition" resultMap="BaseDisplayResultMap" parameterType="com.wisedu.crowd.entity.dto.QueryCondition" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_xmgl_rwjbxx_bugzrr
+    <where>
+    	<include refid="sqlWhere"/>
+    </where>
+  </select>
+</mapper>

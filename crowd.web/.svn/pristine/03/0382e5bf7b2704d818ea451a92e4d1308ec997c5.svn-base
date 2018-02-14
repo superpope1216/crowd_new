@@ -1,0 +1,112 @@
+/**
+ * 
+ */
+define(function(require, exports, module) {
+	var $ = jQuery = require('jquery');
+	require('plugins/vendor/upload');
+	require('plugins/vendor/bootstrap/validator/entrance');
+	$('#formBasicInfo').bootstrapValidator();
+	$(".nav-tabs li a").click(function(){
+		if($(this).attr("id")=="aBasic"){
+			$("#ulCardInfo").hide();
+			$("#ulResumeInfo").hide();
+			$("#ulBasicInfo").show();
+			
+		}else if($(this).attr("id")=="aResume"){
+			$("#ulBasicInfo").hide();
+			$("#ulCardInfo").hide();
+			$("#ulResumeInfo").show();
+		}else if($(this).attr("id")=="aCard"){
+			$("#ulBasicInfo").hide();
+			$("#ulResumeInfo").hide();
+			$("#ulCardInfo").show();
+		}
+	})
+	
+	$("#btnBasicNext").click(function(){
+		// var bootstrapValidator = $('#formBasicInfo').data('bootstrapValidator');
+		// $('#formBasicInfo').bootstrapValidator();
+		// if(bootstrapValidator.isValid()){
+			 $(".nav-tabs li a").removeClass("active");
+				$("#aResume").addClass("active");
+				$("#ulBasicInfo").hide();
+				$("#ulResumeInfo").show();
+		// }
+		
+	});
+	
+	$("#btnResumePre").click(function(){
+		$(".nav-tabs li a").removeClass("active");
+		$("#aBasic").addClass("active");
+		$("#ulResumeInfo").hide();
+		$("#ulBasicInfo").show();
+	});
+	
+	$("#btnResumeNext").click(function(){
+		
+				$(".nav-tabs li a").removeClass("active");
+				$("#aCard").addClass("active");
+				$("#ulResumeInfo").hide();
+				$("#ulCardInfo").show();
+		
+	
+	});
+	//初始化
+	doPostBack("../kfzSupply/queryKfzxxInfo","",function(data){
+		if(data.success&&isNotEmpty(data.datas)){
+		  
+			$("#kfzxxWid").val(data.datas[0].wid);
+			$("input[name='nc']").val(data.datas[0].nc);
+			$("input[name='csrq']").val(data.datas[0].csrq);
+			$("input[name='qq']").val(data.datas[0].qq);
+			$("input[name='wxh']").val(data.datas[0].wxh);
+			$("input[name='qtjn'").val(data.datas[0].qtjn);
+			$("textarea[name='gzjl']").text(data.datas[0].gzjl);
+			$("textarea[name='xmjy']").text(data.datas[0].xmjy);
+			$("input[name='zslj'").val(data.datas[0].zslj);
+			$("input[name='xm'").val(data.datas[0].xm);
+			$("input[name='sfzjh'").val(data.datas[0].sfzjh);
+            if(isNotEmpty(data.datas[0].sfytd)){
+            	$("select[name='sfytd']").val(data.datas[0].sfytd);
+            }
+            if(isNotEmpty(data.datas[0].gzlbdm)){
+            	$("select[name='gzlbdm']").val(data.datas[0].gzlbdm);
+            }
+            if(isNotEmpty(data.datas[0].scjsdm)){
+            	$("select[name='scjsdm']").val(data.datas[0].scjsdm);
+            }
+            if(isNotEmpty(data.datas[0].gzxz)){
+            	$("select[name='gzxz']").val(data.datas[0].gzxz);
+            }
+            if(isNotEmpty(data.datas[0].jygznx)){
+            	$("select[name='jygznx']").val(data.datas[0].jygznx);
+            }
+            if(isNotEmpty(data.datas[0].gznx)){
+            	$("select[name='gznx']").val(data.datas[0].gznx);
+            }
+            	
+            	
+
+		}
+	});
+	
+	
+	$("#saveKfzxxInfo").click(function(){
+			    var basicData=$("#formBasicInfo").serializeArray();
+				var resumeData=$("#formResumeInfo").serializeArray();
+				var cardData=$("#formCardInfo").serializeArray();
+				for(var i=0;i<resumeData.length;i++){
+					basicData.push(resumeData[i]);
+				}
+				for(var i=0;i<cardData.length;i++){
+					basicData.push(cardData[i]);
+				}
+			  //alert(JSON.stringify(basicData));
+				doPostBack(basePath+"/kfzSupply/saveOrUpdateKfzxxInfo",basicData,function(data){
+			       	  window.location.href=basePath+"/kfzSupply/index";
+		          });
+		    
+		
+	});
+	
+});

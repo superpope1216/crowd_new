@@ -1,0 +1,210 @@
+package com.wisedu.crowd.entity.rwgl.extend;
+
+import java.io.Serializable;
+import java.util.List;
+
+import com.wisedu.crowd.entity.rwgl.RwjbxxInfo;
+
+public class RwjbxxInfoExtend extends RwjbxxInfo implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * 任务进度
+	 */
+	private String rwjd;
+	
+	private List<String> xmzts;
+	/**
+	 * 项目组业务线
+	 */
+	private String xmzywx;
+	/**
+	 * 项目组业务线名称
+	 */
+	private String xmzywxDisplay;
+
+	
+
+	private String rwjdDisplay;
+	
+	private String kfkjDisplay;
+	
+	private String xmztDisplay;
+	
+	private String rwxsDisplay;
+	
+	private String rwlxDisplay;
+	
+	private String rwnydDisplay;
+	
+	private String dzjbDisplay;
+	
+	private String ywxlbDisplay;
+	/**
+	 *是否需要查询需求方信息
+	 */
+	private Boolean needXqfxx;
+	/**
+	 * 需求方昵称
+	 */
+	private String xqfnc;
+	
+	/**
+	 * 是否需要查询开发者信息
+	 */
+	private Boolean needKfzxx;
+	
+	
+	private RwtbxxInfoExtend rwtbxxInfoExtend; 
+
+	
+
+	public RwtbxxInfoExtend getRwtbxxInfoExtend() {
+		return rwtbxxInfoExtend;
+	}
+
+	public void setRwtbxxInfoExtend(RwtbxxInfoExtend rwtbxxInfoExtend) {
+		this.rwtbxxInfoExtend = rwtbxxInfoExtend;
+	}
+
+	public Boolean getNeedXqfxx() {
+		return needXqfxx;
+	}
+
+	public Boolean getNeedKfzxx() {
+		return needKfzxx;
+	}
+
+	/**
+	 * 开发者昵称
+	 */
+	private String kfznc;
+	
+	public String getXmzywx() {
+		return xmzywx;
+	}
+
+	public void setXmzywx(String xmzywx) {
+		this.xmzywx = xmzywx;
+	}
+
+	public String getXmzywxDisplay() {
+		return xmzywxDisplay;
+	}
+
+	public void setXmzywxDisplay(String xmzywxDisplay) {
+		this.xmzywxDisplay = xmzywxDisplay;
+	}
+
+	
+
+	public void setNeedXqfxx(Boolean needXqfxx) {
+		this.needXqfxx = needXqfxx;
+	}
+
+	public String getXqfnc() {
+		return xqfnc;
+	}
+
+	public void setXqfnc(String xqfnc) {
+		this.xqfnc = xqfnc;
+	}
+
+	public void setNeedKfzxx(Boolean needKfzxx) {
+		this.needKfzxx = needKfzxx;
+	}
+
+	public String getKfznc() {
+		return kfznc;
+	}
+
+	public void setKfznc(String kfznc) {
+		this.kfznc = kfznc;
+	}
+
+	public List<String> getXmzts() {
+		return xmzts;
+	}
+
+	public void setXmzts(List<String> xmzts) {
+		this.xmzts = xmzts;
+	}
+	public String getYwxlbDisplay() {
+		return ywxlbDisplay;
+	}
+
+	public void setYwxlbDisplay(String ywxlbDisplay) {
+		this.ywxlbDisplay = ywxlbDisplay;
+	}
+
+	public String getDzjbDisplay() {
+		return dzjbDisplay;
+	}
+
+	public void setDzjbDisplay(String dzjbDisplay) {
+		this.dzjbDisplay = dzjbDisplay;
+	}
+
+	public String getRwxsDisplay() {
+		return rwxsDisplay;
+	}
+
+	public void setRwxsDisplay(String rwxsDisplay) {
+		this.rwxsDisplay = rwxsDisplay;
+	}
+
+	public String getRwlxDisplay() {
+		return rwlxDisplay;
+	}
+
+	public void setRwlxDisplay(String rwlxDisplay) {
+		this.rwlxDisplay = rwlxDisplay;
+	}
+
+	public String getRwnydDisplay() {
+		return rwnydDisplay;
+	}
+
+	public void setRwnydDisplay(String rwnydDisplay) {
+		this.rwnydDisplay = rwnydDisplay;
+	}
+
+	public String getRwjd() {
+		return rwjd;
+	}
+
+	public void setRwjd(String rwjd) {
+		this.rwjd = rwjd;
+	}
+
+	public String getRwjdDisplay() {
+		return rwjdDisplay;
+	}
+
+	public void setRwjdDisplay(String rwjdDisplay) {
+		this.rwjdDisplay = rwjdDisplay;
+	}
+
+	public String getKfkjDisplay() {
+		return kfkjDisplay;
+	}
+
+	public void setKfkjDisplay(String kfkjDisplay) {
+		this.kfkjDisplay = kfkjDisplay;
+	}
+
+	public String getXmztDisplay() {
+		return xmztDisplay;
+	}
+
+	public void setXmztDisplay(String xmztDisplay) {
+		this.xmztDisplay = xmztDisplay;
+	}
+	
+	
+
+}

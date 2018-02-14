@@ -1,0 +1,17 @@
+/**
+ * 
+ */
+
+$(document).ready(function(){
+	$(".column-side li a[data-toggle='collapse']").click(function() {
+		if($(this).find("i.icon").hasClass("wb-chevron-down")){
+			
+			//$(".column-side ol li a").css("padding","24px 18px 5px");
+			$(this).find("i.icon").removeClass("wb-chevron-down").addClass("wb-chevron-up");
+		}else{
+			//$(".column-side ol li a").css("padding","24px 18px");
+			$(this).find("i.icon").removeClass("wb-chevron-up").addClass("wb-chevron-down");
+		}
+	});
+	
+});

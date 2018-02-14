@@ -1,0 +1,39 @@
+package com.wisedu.crowd.service.rwgl.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.dao.rwgl.RwztbglsInfoMapper;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.entity.log.CustomOperateLog;
+import com.wisedu.crowd.entity.rwgl.RwztbglsInfo;
+import com.wisedu.crowd.service.rwgl.RwztbglsInfoService;
+
+@Service("rwztbglsInfoService")
+public class RwztbglsInfoServiceImpl implements RwztbglsInfoService {
+
+	@Autowired
+	private RwztbglsInfoMapper rwztbglsInfoMapper;
+	@Override
+	public DataResult<Integer> deleteByPrimaryKey(String wid, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(rwztbglsInfoMapper.deleteByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<Integer> insertSelective(RwztbglsInfo record, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(rwztbglsInfoMapper.insertSelective(record));
+	}
+
+	@Override
+	public DataResult<RwztbglsInfo> selectByPrimaryKey(String wid, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(rwztbglsInfoMapper.selectByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<Integer> updateByPrimaryKeySelective(RwztbglsInfo record, CustomOperateLog log)
+			throws ServiceException {
+		return DataResult.success(rwztbglsInfoMapper.updateByPrimaryKeySelective(record));
+	}
+
+}

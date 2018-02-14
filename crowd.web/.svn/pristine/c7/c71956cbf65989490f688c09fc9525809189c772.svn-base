@@ -1,0 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <div class="ui fixed borderless menu">
+        <div class="ui container">
+            <a href="#" class="header item"> 
+            <img class="logo" src="assets/images/logo.png">Campuscrowd首页</a> 
+            <a href="<%=request.getContextPath()%>/login/login" class="item">请登录</a><a href="<%=request.getContextPath()%>/register/main" class="item">注册</a>
+            <div class="right menu">
+                <a href="#" class="item">我的订单</a> <a href="#" class="item">我</a>
+                <a href="#" class="item">收藏夹</a> <a href="#" class="item">账户设置</a>
+                <a href="#" class="item">消息</a> <a href="#" class="item">在线帮助</a>
+            </div>
+        </div>
+    </div>

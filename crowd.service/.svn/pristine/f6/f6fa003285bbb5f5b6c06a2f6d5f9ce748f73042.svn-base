@@ -1,0 +1,39 @@
+package com.wisedu.crowd.service.cwgl.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.dao.cwgl.XqfzhmxInfoMapper;
+import com.wisedu.crowd.entity.cwgl.XqfzhmxInfo;
+import com.wisedu.crowd.entity.log.CustomOperateLog;
+import com.wisedu.crowd.service.cwgl.XqfzhmxInfoService;
+import com.wisedu.crowd.service.dto.DataResult;
+
+@Service("xqfzhmxInfoService")
+public class XqfzhmxInfoServicemImpl implements XqfzhmxInfoService{
+
+	@Autowired
+	private XqfzhmxInfoMapper xqfzhmxInfoMapper;
+	@Override
+	public DataResult<Integer> deleteByPrimaryKey(String id, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(xqfzhmxInfoMapper.deleteByPrimaryKey(id));
+	}
+
+	@Override
+	public DataResult<Integer> insertSelective(XqfzhmxInfo record, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(xqfzhmxInfoMapper.insertSelective(record));
+	}
+
+	@Override
+	public DataResult<XqfzhmxInfo> selectByPrimaryKey(String id, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(xqfzhmxInfoMapper.selectByPrimaryKey(id));
+	}
+
+	@Override
+	public DataResult<Integer> updateByPrimaryKeySelective(XqfzhmxInfo record, CustomOperateLog log)
+			throws ServiceException {
+		return DataResult.success(xqfzhmxInfoMapper.updateByPrimaryKeySelective(record));
+	}
+
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="com.wisedu.crowd.dao.statics.extend.KfzAreaDataInfoExtendMapper">
+	<resultMap id="BaseResultMap"
+		type="com.wisedu.crowd.entity.statics.extend.KfzAreaDataInfoExtend"
+		extends="com.wisedu.crowd.dao.statics.KfzAreaDataInfoMapper.BaseResultMap">
+		<result column="AREA_DISPLAY" property="areaDisplay" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		T_CROWD_STATICS_DEV_AREA.WID, T_CROWD_STATICS_DEV_AREA.AREA, T_CROWD_STATICS_DEV_AREA.NUM
+	</sql>
+	<sql id="sqlUpdateWhere">
+		<if test='wid!=null and wid!=""'>
+			and T_CROWD_STATICS_DEV_AREA.wid=#{wid,jdbcType=VARCHAR}
+		</if>
+		<if test='area!=null and area!=""'>
+			and T_CROWD_STATICS_DEV_AREA.area=#{area,jdbcType=VARCHAR}
+		</if>
+	</sql>
+	<sql id="sqlWhere">
+		<if test='query!=null'>
+			<if test='query.wid!=null and query.wid!=""'>
+				and T_CROWD_STATICS_DEV_AREA.wid=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.area!=null and query.area!=""'>
+				and T_CROWD_STATICS_DEV_AREA.area=#{query.area,jdbcType=VARCHAR}
+			</if>
+		</if>
+	</sql>
+	<delete id="deleteByCondition" parameterType="com.wisedu.crowd.entity.statics.KfzAreaDataInfo">
+		DELETE FROM T_CROWD_STATICS_DEV_AREA
+		<where>
+			<include refid="sqlUpdateWhere" />
+		</where>
+	</delete>
+
+	<select id="selectDisplayByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		,T_CROWD_SJZD_AREA.lbmc as areaDisplay
+		FROM T_CROWD_STATICS_DEV_AREA
+		LEFT JOIN T_CROWD_SJZD_AREA ON T_CROWD_SJZD_AREA.LBDM=
+		T_CROWD_STATICS_DEV_AREA.AREA
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+		order by T_CROWD_STATICS_DEV_AREA.NUM DESC
+	</select>
+</mapper>

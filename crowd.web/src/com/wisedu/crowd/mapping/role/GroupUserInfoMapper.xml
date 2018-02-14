@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisedu.crowd.dao.role.GroupUserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.role.GroupUserInfo">
+    <id column="WID" jdbcType="VARCHAR" property="wid" />
+    <result column="YHID" jdbcType="VARCHAR" property="yhid" />
+    <result column="YHLB" jdbcType="DECIMAL" property="yhlb" />
+    <result column="YHZID" jdbcType="VARCHAR" property="yhzid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    WID, YHID, YHLB, YHZID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_CROWD_GROUP_USER
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from T_CROWD_GROUP_USER
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.role.GroupUserInfo">
+    insert into T_CROWD_GROUP_USER (WID, YHID, YHLB, 
+      YHZID)
+    values (#{wid,jdbcType=VARCHAR}, #{yhid,jdbcType=VARCHAR}, #{yhlb,jdbcType=DECIMAL}, 
+      #{yhzid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.role.GroupUserInfo">
+    insert into T_CROWD_GROUP_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wid != null">
+        WID,
+      </if>
+      <if test="yhid != null">
+        YHID,
+      </if>
+      <if test="yhlb != null">
+        YHLB,
+      </if>
+      <if test="yhzid != null">
+        YHZID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wid != null">
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhid != null">
+        #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhlb != null">
+        #{yhlb,jdbcType=DECIMAL},
+      </if>
+      <if test="yhzid != null">
+        #{yhzid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.role.GroupUserInfo">
+    update T_CROWD_GROUP_USER
+    <set>
+      <if test="yhid != null">
+        YHID = #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhlb != null">
+        YHLB = #{yhlb,jdbcType=DECIMAL},
+      </if>
+      <if test="yhzid != null">
+        YHZID = #{yhzid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.role.GroupUserInfo">
+    update T_CROWD_GROUP_USER
+    set YHID = #{yhid,jdbcType=VARCHAR},
+      YHLB = #{yhlb,jdbcType=DECIMAL},
+      YHZID = #{yhzid,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.role.GroupUserInfo">
+    <id column="WID" jdbcType="VARCHAR" property="wid" />
+    <result column="YHID" jdbcType="VARCHAR" property="yhid" />
+    <result column="YHLB" jdbcType="DECIMAL" property="yhlb" />
+    <result column="YHZID" jdbcType="VARCHAR" property="yhzid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    WID, YHID, YHLB, YHZID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_CROWD_GROUP_USER
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from T_CROWD_GROUP_USER
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.role.GroupUserInfo">
+    insert into T_CROWD_GROUP_USER (WID, YHID, YHLB, 
+      YHZID)
+    values (#{wid,jdbcType=VARCHAR}, #{yhid,jdbcType=VARCHAR}, #{yhlb,jdbcType=DECIMAL}, 
+      #{yhzid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.role.GroupUserInfo">
+    insert into T_CROWD_GROUP_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wid != null">
+        WID,
+      </if>
+      <if test="yhid != null">
+        YHID,
+      </if>
+      <if test="yhlb != null">
+        YHLB,
+      </if>
+      <if test="yhzid != null">
+        YHZID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wid != null">
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhid != null">
+        #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhlb != null">
+        #{yhlb,jdbcType=DECIMAL},
+      </if>
+      <if test="yhzid != null">
+        #{yhzid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.role.GroupUserInfo">
+    update T_CROWD_GROUP_USER
+    <set>
+      <if test="yhid != null">
+        YHID = #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhlb != null">
+        YHLB = #{yhlb,jdbcType=DECIMAL},
+      </if>
+      <if test="yhzid != null">
+        YHZID = #{yhzid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.role.GroupUserInfo">
+    update T_CROWD_GROUP_USER
+    set YHID = #{yhid,jdbcType=VARCHAR},
+      YHLB = #{yhlb,jdbcType=DECIMAL},
+      YHZID = #{yhzid,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

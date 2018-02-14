@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.cwgl.extend.KfzzhmxInfoExtendMapper">
+	<resultMap id="BaseResultMap"
+		type="com.wisedu.crowd.entity.cwgl.extend.KfzzhmxInfoExtend" extends="com.wisedu.crowd.dao.cwgl.KfzzhmxInfoMapper.BaseResultMap">
+		<result column="rwbh" property="rwbh" jdbcType="VARCHAR" />
+		<result column="szlbDisplay" property="szlbDisplay" jdbcType="VARCHAR" />
+		<result column="jyztDisplay" property="jyztDisplay" jdbcType="VARCHAR" />
+		<result column="jsztDisplay" property="jsztDisplay" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		t_crowd_cwgl_kfzzhmx.WID, t_crowd_cwgl_kfzzhmx.KFZID,
+		t_crowd_cwgl_kfzzhmx.SZLBID, t_crowd_cwgl_kfzzhmx.LYXMID,
+		t_crowd_cwgl_kfzzhmx.FYSM, t_crowd_cwgl_kfzzhmx.JE,
+		t_crowd_cwgl_kfzzhmx.ZHYE, t_crowd_cwgl_kfzzhmx.DJZJE,
+		t_crowd_cwgl_kfzzhmx.ZFBZH, t_crowd_cwgl_kfzzhmx.SZSJ,
+		t_crowd_cwgl_kfzzhmx.ZDID, t_crowd_cwgl_kfzzhmx.ZDIP,
+		t_crowd_cwgl_kfzzhmx.JYZT,t_crowd_cwgl_kfzzhmx.ZZCZRID,
+		t_crowd_cwgl_kfzzhmx.ZZCZSJ,
+		t_crowd_cwgl_kfzzhmx.JSZT,
+		t_crowd_cwgl_kfzzhmx.XMZT, t_crowd_cwgl_kfzzhmx.JSRY,
+		t_crowd_cwgl_kfzzhmx.JSSJ,t_crowd_cwgl_kfzzhmx.YKGS
+	</sql>
+	<sql id="sqlOrder">
+		<choose>
+			<when test="orderBy!=null">
+				order by
+				<foreach collection="orderBy" close="" open="" item="item"
+					separator=",">
+					${item}
+				</foreach>
+			</when>
+			<otherwise>
+				order by t_crowd_cwgl_kfzzhmx.SZSJ desc
+			</otherwise>
+		</choose>
+	</sql>
+	<sql id="sqlWhere">
+		<if test="query!=null">
+			<if test='query.wid!=null and query.wid!=""'>
+				AND
+				t_crowd_cwgl_kfzzhmx.wid=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.szlbid!=null and query.szlbid!=""'>
+				AND
+				t_crowd_cwgl_kfzzhmx.szlbid=#{query.szlbid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.kfzid!=null and query.kfzid!=""'>
+				AND
+				t_crowd_cwgl_kfzzhmx.kfzid=#{query.kfzid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.minMonth!=null and query.minMonth!=""'>
+				AND DATE_FORMAT(t_crowd_cwgl_kfzzhmx.SZSJ,'%Y-%m')<![CDATA[>=]]>#{query.minMonth}
+			</if>
+			<if test='query.maxMonth!=null and query.maxMonth!=""'>
+				AND DATE_FORMAT(t_crowd_cwgl_kfzzhmx.SZSJ,'%Y-%m')<![CDATA[<=]]>#{query.maxMonth}
+			</if>
+			<if test='query.jyzt!=null'>
+				AND
+				t_crowd_cwgl_kfzzhmx.JYZT=#{query.jyzt,jdbcType=DECIMAL}
+			</if>
+			<if test='query.jszt!=null'>
+				AND
+				t_crowd_cwgl_kfzzhmx.JSZT=#{query.jszt,jdbcType=DECIMAL}
+			</if>
+			<if test='query.sfytd!=null'>
+				AND
+				t_crowd_yhgl_kfzxx.sfytd=#{query.sfytd,jdbcType=INTEGER}
+			</if>
+		</if>
+	</sql>
+	<select id="selectDisplayTotalMoney" resultType="map"
+		parameterType="com.wisedu.crowd.entity.dto.QueryCondition">
+		SELECT t_crowd_cwgl_kfzzhmx.kfzid, t_crowd_yhgl_kfzxx.nc,
+		SUM(t_crowd_cwgl_kfzzhmx.JE) AS je FROM t_crowd_cwgl_kfzzhmx LEFT JOIN
+		t_crowd_yhgl_kfzxx ON t_crowd_yhgl_kfzxx.wid =
+		t_crowd_cwgl_kfzzhmx.kfzid
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+		GROUP BY t_crowd_cwgl_kfzzhmx.kfzid, t_crowd_yhgl_kfzxx.nc
+		<include refid="sqlOrder" />
+	</select>
+	<select id="selectTotalMoney" resultType="java.lang.Double"
+		parameterType="com.wisedu.crowd.entity.dto.QueryCondition">
+		SELECT SUM(JE) FROM t_crowd_cwgl_kfzzhmx
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+		group by kfzid
+		<include refid="sqlOrder" />
+	</select>
+	<select id="selectTotalMoneyByMonth" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultType="map">
+		SELECT DATE_FORMAT(t_crowd_cwgl_kfzzhmx.SZSJ,'%Y-%m') as month,
+		SUM(JE) as je,sum(ykgs) as ykgs FROM t_crowd_cwgl_kfzzhmx
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+		group by kfzid,DATE_FORMAT(t_crowd_cwgl_kfzzhmx.SZSJ,'%Y-%m')
+		order by
+		DATE_FORMAT(t_crowd_cwgl_kfzzhmx.SZSJ,'%Y-%m')
+	</select>
+
+	<select id="selectDisplayByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		,t_crowd_xmgl_rwjbxx.rwbh
+		,t_crowd_sjzd_kfzzhszlb.lbmc as szlbDisplay
+		,t_crowd_sjzd_zjjyzt.lbmc as jyztDisplay,
+		t_crowd_sjzd_jszt.lbmc as
+		jsztDisplay
+		FROM t_crowd_cwgl_kfzzhmx t_crowd_cwgl_kfzzhmx
+		left join t_crowd_xmgl_rwjbxx t_crowd_xmgl_rwjbxx on
+		t_crowd_cwgl_kfzzhmx.LYXMID= t_crowd_xmgl_rwjbxx.wid
+		left join t_crowd_sjzd_kfzzhszlb t_crowd_sjzd_kfzzhszlb on
+		t_crowd_sjzd_kfzzhszlb.lbdm=t_crowd_cwgl_kfzzhmx.SZLBID
+		left join t_crowd_sjzd_zjjyzt t_crowd_sjzd_zjjyzt on
+		t_crowd_sjzd_zjjyzt.lbdm=t_crowd_cwgl_kfzzhmx.jyzt
+		left join t_crowd_sjzd_jszt t_crowd_sjzd_jszt on
+		t_crowd_sjzd_jszt.lbdm=t_crowd_cwgl_kfzzhmx.jszt
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+		<include refid="sqlOrder" />
+	</select>
+</mapper>

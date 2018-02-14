@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.train.extend.TrainPlanInfoExtendMapper">
+	<resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.train.extend.TrainPlanInfoExtend"
+	extends="com.wisedu.crowd.dao.train.TrainPlanInfoMapper.BaseResultMap">
+		<id column="WID" property="wid" jdbcType="VARCHAR" />
+		<result column="PXID" property="pxid" jdbcType="VARCHAR" />
+		<result column="PXKSSJ" property="pxkssj" jdbcType="VARCHAR" />
+		<result column="PXJSSJ" property="pxjssj" jdbcType="VARCHAR" />
+		<result column="BMKSSJ" property="bmkssj" jdbcType="VARCHAR" />
+		<result column="BMJSSJ" property="bmjssj" jdbcType="VARCHAR" />
+		<result column="FJ" property="fj" jdbcType="VARCHAR" />
+		<result column="JCNLJCDZ" property="jcnljcdz" jdbcType="VARCHAR" />
+		<result column="CZR" property="czr" jdbcType="VARCHAR" />
+		<result column="CZSJ" property="czsj" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.wisedu.crowd.entity.train.extend.TrainPlanInfoExtend"
+		extends="com.wisedu.crowd.dao.train.TrainPlanInfoMapper.ResultMapWithBLOBs">
+		<result column="PXAP" property="pxap" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		t_crowd_train_plan.WID, t_crowd_train_plan.PXID,
+		t_crowd_train_plan.PXKSSJ, t_crowd_train_plan.PXJSSJ,
+		t_crowd_train_plan.BMKSSJ, t_crowd_train_plan.BMJSSJ,
+		t_crowd_train_plan.FJ, t_crowd_train_plan.JCNLJCDZ,
+		t_crowd_train_plan.CZR, t_crowd_train_plan.CZSJ
+	</sql>
+	<sql id="Blob_Column_List">
+		t_crowd_train_plan.PXAP
+	</sql>
+	<sql id="sqlWhere">
+		<if test='query!=null'>
+			<if test='query.wid!=null and query.wid!=""'>
+				AND t_crowd_train_plan.wid=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.pxid!=null'>
+				AND t_crowd_train_plan.pxid=#{query.pxid,jdbcType=VARCHAR}
+			</if>
+		</if>
+	</sql>
+	<sql id="sqlOrder">
+		ORDER BY
+		<choose>
+			<when test="orderBy!=null">
+				<foreach collection="orderBy" item="item" open=" " close=" "
+					separator=",">
+					${item}
+				</foreach>
+			</when>
+			<otherwise>
+				t_crowd_train_plan.czsj desc
+			</otherwise>
+		</choose>
+	</sql>
+	<select id="selectByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="ResultMapWithBLOBs">
+		SELECT
+		<include refid="Base_Column_List" />
+		,<include refid="Blob_Column_List"/>
+		FROM t_crowd_train_plan
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+		<include refid="sqlOrder"/>
+	</select>
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisedu.crowd.dao.yhgl.extend.XqfxyjfxqInfoExtendMapper">
+  <resultMap id="BaseDisplayResultMap" type="com.wisedu.crowd.entity.yhgl.extend.XqfxyjfxqInfoExtend"
+  	extends="com.wisedu.crowd.dao.yhgl.XqfxyjfxqInfoMapper.BaseResultMap">
+  </resultMap>
+  <sql id="Base_Column_List">
+    T_CROWD_YHGL_XQFDF_DETAIL.WID, T_CROWD_YHGL_XQFDF_DETAIL.XQFID, 
+    T_CROWD_YHGL_XQFDF_DETAIL.RWID, T_CROWD_YHGL_XQFDF_DETAIL.SCORE_CLASSIFY, 
+    T_CROWD_YHGL_XQFDF_DETAIL.SCORE, T_CROWD_YHGL_XQFDF_DETAIL.CONTENT, 
+    T_CROWD_YHGL_XQFDF_DETAIL.TOTAL_SCORE, T_CROWD_YHGL_XQFDF_DETAIL.CJSJ
+  </sql>
+  <sql id="sqlWhere">
+   <if test="query!=null">
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND T_CROWD_YHGL_XQFDF_DETAIL.WID=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.xqfid!=null and query.xqfid!=""'>
+  			AND T_CROWD_YHGL_XQFDF_DETAIL.XQFID=#{query.xqfid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.rwid!=null and query.rwid!=""'>
+  			AND T_CROWD_YHGL_XQFDF_DETAIL.RWID=#{query.rwid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.scoreClassify!=null and query.scoreClassify!=""'>
+  			AND T_CROWD_YHGL_XQFDF_DETAIL.SCORE_CLASSIFY=#{query.scoreClassify,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.scoreClassifys!=null'>
+			AND T_CROWD_YHGL_XQFDF_DETAIL.SCORE_CLASSIFY IN
+			<foreach index="index" item="item" collection="query.scoreClassifys"
+				open="(" close=")" separator=",">
+				${item}
+			</foreach>
+		</if>
+  	</if>
+  </sql>
+  <select id="selectByCondition" resultMap="BaseDisplayResultMap" parameterType="com.wisedu.crowd.entity.yhgl.extend.XqfxyjfxqInfoExtend">
+  		SELECT 
+  		<include refid="Base_Column_List"/>
+  		FROM T_CROWD_YHGL_XQFDF_DETAIL
+  		<where>
+  			<include refid="sqlWhere"/>
+  		</where>
+  		ORDER BY T_CROWD_YHGL_XQFDF_DETAIL.CJSJ DESC
+  </select>
+</mapper>

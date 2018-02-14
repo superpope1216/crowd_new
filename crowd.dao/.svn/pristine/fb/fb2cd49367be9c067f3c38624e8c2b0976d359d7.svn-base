@@ -1,0 +1,10 @@
+package com.wisedu.crowd.dao.yhgl.extend;
+
+import java.util.List;
+
+import com.wisedu.crowd.entity.yhgl.extend.KfzxxInfoExtend;
+
+public interface KfzxxInfoExtendMapper {
+   
+	List<KfzxxInfoExtend>  selectByCondition(KfzxxInfoExtend record);
+}

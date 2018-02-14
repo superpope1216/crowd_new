@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.yhgl.extend.KfzxxInfoExtendMapper" >
+ <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.yhgl.KfzxxInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="YHID" property="yhid" jdbcType="VARCHAR" />
+    <result column="XM" property="xm" jdbcType="VARCHAR" />
+    <result column="NC" property="nc" jdbcType="VARCHAR" />
+    <result column="SFZJH" property="sfzjh" jdbcType="VARCHAR" />
+    <result column="XB" property="xb" jdbcType="VARCHAR" />
+    <result column="CSRQ" property="csrq" jdbcType="VARCHAR" />
+    <result column="SZDQ" property="szdq" jdbcType="VARCHAR" />
+    <result column="DZYX" property="dzyx" jdbcType="VARCHAR" />
+    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+    <result column="WXH" property="wxh" jdbcType="VARCHAR" />
+    <result column="ZFBZH" property="zfbzh" jdbcType="VARCHAR" />
+    <result column="GZLBDM" property="gzlbdm" jdbcType="VARCHAR" />
+    <result column="GZLBMC" property="gzlbmc" jdbcType="VARCHAR" />
+    <result column="SCJSDM" property="scjsdm" jdbcType="VARCHAR" />
+    <result column="SCJSMC" property="scjsmc" jdbcType="VARCHAR" />
+    <result column="SFJSTJ" property="sfjstj" jdbcType="INTEGER" />
+    <result column="GZNX" property="gznx" jdbcType="VARCHAR" />
+    <result column="GZJL" property="gzjl" jdbcType="VARCHAR" />
+    <result column="XMJY" property="xmjy" jdbcType="VARCHAR" />
+    <result column="ZSLJ" property="zslj" jdbcType="VARCHAR" />
+    <result column="KXSJID" property="kxsjid" jdbcType="VARCHAR" />
+    <result column="GZXZ" property="gzxz" jdbcType="VARCHAR" />
+    <result column="SHZT" property="shzt" jdbcType="VARCHAR" />
+    <result column="SHYJ" property="shyj" jdbcType="VARCHAR" />
+    <result column="SFZZMZTJID" property="sfzzmztjid" jdbcType="VARCHAR" />
+    <result column="SFZFMZTJID" property="sfzfmztjid" jdbcType="VARCHAR" />
+    <result column="SQSZPFJID" property="sqszpfjid" jdbcType="VARCHAR" />
+    <result column="GRZPFJID" property="grzpfjid" jdbcType="VARCHAR" />
+    <result column="SFYTD" property="sfytd" jdbcType="INTEGER" />
+    <result column="SFTYKFZXY" property="sftykfzxy" jdbcType="INTEGER" />
+    <result column="TDRS" property="tdrs" jdbcType="INTEGER" />
+    <result column="CZSJ" property="czsj" jdbcType="VARCHAR" />
+    <result column="CZZIP" property="czzip" jdbcType="VARCHAR" />
+    <result column="ZHYE" property="zhye" jdbcType="DECIMAL" />
+    <result column="KFZLB" property="kfzlb" jdbcType="VARCHAR" />
+    <result column="QTJN" property="qtjn" jdbcType="VARCHAR" />
+    <result column="DJYE" property="djye" jdbcType="DECIMAL" />
+    <result column="JYGZNX" property="jygznx" jdbcType="VARCHAR" />
+    <result column="SSYWX" property="ssywx" jdbcType="INTEGER" />
+    <result column="GH" property="gh" jdbcType="VARCHAR" />
+    <result column="SSFGS" property="ssfgs" jdbcType="VARCHAR" />
+    <result column="KFZLX" property="kfzlx" jdbcType="VARCHAR" />
+    <result column="SFCYGZJS" property="sfcygzjs" jdbcType="VARCHAR" />
+    <result column="SSKFZX" property="sskfzx" jdbcType="VARCHAR" />
+    <result column="RYXZ" property="ryxz" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, YHID, XM, NC, SFZJH, XB, CSRQ, SZDQ, DZYX, QQ, WXH, ZFBZH, GZLBDM, GZLBMC, SCJSDM, 
+    SCJSMC, SFJSTJ, GZNX, GZJL, XMJY, ZSLJ, KXSJID, GZXZ, SHZT, SHYJ, SFZZMZTJID, SFZFMZTJID, 
+    SQSZPFJID, GRZPFJID, SFYTD, SFTYKFZXY, TDRS, CZSJ, CZZIP, ZHYE, KFZLB, QTJN, DJYE, 
+    JYGZNX, SSYWX, GH, SSFGS, KFZLX, SFCYGZJS, SSKFZX, RYXZ
+  </sql>
+  <resultMap id="BaseDisplayResultMap" type="com.wisedu.crowd.entity.yhgl.extend.KfzxxInfoExtend"  
+  extends="BaseResultMap"></resultMap>
+  <sql id="sqlWhere">
+  		<if test='wid!=null and wid!=""'>
+  			AND t_crowd_yhgl_kfzxx.WID=#{wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='yhid!=null and yhid!=""'>
+  			AND t_crowd_yhgl_kfzxx.yhid=#{yhid,jdbcType=VARCHAR}
+  		</if>
+  </sql>
+  <select id="selectByCondition" resultMap="BaseDisplayResultMap" parameterType="com.wisedu.crowd.entity.yhgl.extend.KfzxxInfoExtend">
+  		SELECT 
+  		<include refid="Base_Column_List"/>
+  		FROM t_crowd_yhgl_kfzxx t_crowd_yhgl_kfzxx 
+  		<where>
+  			<include refid="sqlWhere"/>
+  		</where>
+  		order by wid
+  </select>
+  
+</mapper>

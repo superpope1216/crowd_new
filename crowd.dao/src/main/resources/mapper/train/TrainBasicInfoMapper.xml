@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.train.TrainBasicInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.train.TrainBasicInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="PXRWBH" property="pxrwbh" jdbcType="VARCHAR" />
+    <result column="XMBH" property="xmbh" jdbcType="VARCHAR" />
+    <result column="SQR" property="sqr" jdbcType="VARCHAR" />
+    <result column="PXKC" property="pxkc" jdbcType="DECIMAL" />
+    <result column="PXLX" property="pxlx" jdbcType="DECIMAL" />
+    <result column="PXRS" property="pxrs" jdbcType="DECIMAL" />
+    <result column="SFWXSPX" property="sfwxspx" jdbcType="DECIMAL" />
+    <result column="PXDD" property="pxdd" jdbcType="VARCHAR" />
+    <result column="PXJHSJ" property="pxjhsj" jdbcType="VARCHAR" />
+    <result column="JGYS" property="jgys" jdbcType="DECIMAL" />
+    <result column="PXYQ" property="pxyq" jdbcType="VARCHAR" />
+    <result column="SQSJ" property="sqsj" jdbcType="VARCHAR" />
+    <result column="PXZT" property="pxzt" jdbcType="DECIMAL" />
+    <result column="SHBZ" property="shbz" jdbcType="VARCHAR" />
+    <result column="SHR" property="shry" jdbcType="VARCHAR" />
+    <result column="PXJG" property="pxjg" jdbcType="DECIMAL" />
+    <result column="SHSJ" property="shsj" jdbcType="VARCHAR" />
+    <result column="BMZT" property="bmzt" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, PXRWBH, XMBH, SQR, PXKC, PXLX, PXRS, SFWXSPX, PXDD, PXJHSJ, JGYS, PXYQ, SQSJ, 
+    PXZT, SHBZ, SHR, PXJG, SHSJ,BMZT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_train_basicinfo
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_train_basicinfo
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.train.TrainBasicInfo" >
+    insert into t_crowd_train_basicinfo (WID, PXRWBH, XMBH, 
+      SQR, PXKC, PXLX, PXRS, 
+      SFWXSPX, PXDD, PXJHSJ, 
+      JGYS, PXYQ, SQSJ, PXZT, 
+      SHBZ, SHR, PXJG, SHSJ,BMZT
+      )
+    values (#{wid,jdbcType=VARCHAR}, #{pxrwbh,jdbcType=VARCHAR}, #{xmbh,jdbcType=VARCHAR}, 
+      #{sqr,jdbcType=VARCHAR}, #{pxkc,jdbcType=DECIMAL}, #{pxlx,jdbcType=DECIMAL}, #{pxrs,jdbcType=DECIMAL}, 
+      #{sfwxspx,jdbcType=DECIMAL}, #{pxdd,jdbcType=VARCHAR}, #{pxjhsj,jdbcType=VARCHAR}, 
+      #{jgys,jdbcType=DECIMAL}, #{pxyq,jdbcType=VARCHAR}, #{sqsj,jdbcType=VARCHAR}, #{pxzt,jdbcType=DECIMAL}, 
+      #{shbz,jdbcType=VARCHAR}, #{shry,jdbcType=VARCHAR}, #{pxjg,jdbcType=DECIMAL}, #{shsj,jdbcType=VARCHAR}
+      , #{bmzt,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.train.TrainBasicInfo" >
+    insert into t_crowd_train_basicinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="pxrwbh != null" >
+        PXRWBH,
+      </if>
+      <if test="xmbh != null" >
+        XMBH,
+      </if>
+      <if test="sqr != null" >
+        SQR,
+      </if>
+      <if test="pxkc != null" >
+        PXKC,
+      </if>
+      <if test="pxlx != null" >
+        PXLX,
+      </if>
+      <if test="pxrs != null" >
+        PXRS,
+      </if>
+      <if test="sfwxspx != null" >
+        SFWXSPX,
+      </if>
+      <if test="pxdd != null" >
+        PXDD,
+      </if>
+      <if test="pxjhsj != null" >
+        PXJHSJ,
+      </if>
+      <if test="jgys != null" >
+        JGYS,
+      </if>
+      <if test="pxyq != null" >
+        PXYQ,
+      </if>
+      <if test="sqsj != null" >
+        SQSJ,
+      </if>
+      <if test="pxzt != null" >
+        PXZT,
+      </if>
+      <if test="shbz != null" >
+        SHBZ,
+      </if>
+      <if test="shry != null" >
+        SHR,
+        
+      </if>
+      <if test="pxjg != null" >
+        PXJG,
+      </if>
+      <if test="shsj != null" >
+        SHSJ,
+      </if>
+      <if test="bmzt != null" >
+        BMZT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="pxrwbh != null" >
+        #{pxrwbh,jdbcType=VARCHAR},
+      </if>
+      <if test="xmbh != null" >
+        #{xmbh,jdbcType=VARCHAR},
+      </if>
+      <if test="sqr != null" >
+        #{sqr,jdbcType=VARCHAR},
+      </if>
+      <if test="pxkc != null" >
+        #{pxkc,jdbcType=DECIMAL},
+      </if>
+      <if test="pxlx != null" >
+        #{pxlx,jdbcType=DECIMAL},
+      </if>
+      <if test="pxrs != null" >
+        #{pxrs,jdbcType=DECIMAL},
+      </if>
+      <if test="sfwxspx != null" >
+        #{sfwxspx,jdbcType=DECIMAL},
+      </if>
+      <if test="pxdd != null" >
+        #{pxdd,jdbcType=VARCHAR},
+      </if>
+      <if test="pxjhsj != null" >
+        #{pxjhsj,jdbcType=VARCHAR},
+      </if>
+      <if test="jgys != null" >
+        #{jgys,jdbcType=DECIMAL},
+      </if>
+      <if test="pxyq != null" >
+        #{pxyq,jdbcType=VARCHAR},
+      </if>
+      <if test="sqsj != null" >
+        #{sqsj,jdbcType=VARCHAR},
+      </if>
+      <if test="pxzt != null" >
+        #{pxzt,jdbcType=DECIMAL},
+      </if>
+      <if test="shbz != null" >
+        #{shbz,jdbcType=VARCHAR},
+      </if>
+      <if test="shry!= null" >
+        #{shry,jdbcType=VARCHAR},
+      </if>
+      <if test="pxjg != null" >
+        #{pxjg,jdbcType=DECIMAL},
+      </if>
+      <if test="shsj != null" >
+        #{shsj,jdbcType=VARCHAR},
+      </if>
+      <if test="bmzt != null" >
+        #{bmzt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.train.TrainBasicInfo" >
+    update t_crowd_train_basicinfo
+    <set >
+      <if test="pxrwbh != null" >
+        PXRWBH = #{pxrwbh,jdbcType=VARCHAR},
+      </if>
+      <if test="xmbh != null" >
+        XMBH = #{xmbh,jdbcType=VARCHAR},
+      </if>
+      <if test="sqr != null" >
+        SQR = #{sqr,jdbcType=VARCHAR},
+      </if>
+      <if test="pxkc != null" >
+        PXKC = #{pxkc,jdbcType=DECIMAL},
+      </if>
+      <if test="pxlx != null" >
+        PXLX = #{pxlx,jdbcType=DECIMAL},
+      </if>
+      <if test="pxrs != null" >
+        PXRS = #{pxrs,jdbcType=DECIMAL},
+      </if>
+      <if test="sfwxspx != null" >
+        SFWXSPX = #{sfwxspx,jdbcType=DECIMAL},
+      </if>
+      <if test="pxdd != null" >
+        PXDD = #{pxdd,jdbcType=VARCHAR},
+      </if>
+      <if test="pxjhsj != null" >
+        PXJHSJ = #{pxjhsj,jdbcType=VARCHAR},
+      </if>
+      <if test="jgys != null" >
+        JGYS = #{jgys,jdbcType=DECIMAL},
+      </if>
+      <if test="pxyq != null" >
+        PXYQ = #{pxyq,jdbcType=VARCHAR},
+      </if>
+      <if test="sqsj != null" >
+        SQSJ = #{sqsj,jdbcType=VARCHAR},
+      </if>
+      <if test="pxzt != null" >
+        PXZT = #{pxzt,jdbcType=DECIMAL},
+      </if>
+      <if test="shbz != null" >
+        SHBZ = #{shbz,jdbcType=VARCHAR},
+      </if>
+      <if test="shry != null" >
+        SHR = #{shry,jdbcType=VARCHAR},
+      </if>
+      <if test="pxjg != null" >
+        PXJG = #{pxjg,jdbcType=DECIMAL},
+      </if>
+      <if test="shsj != null" >
+        SHSJ = #{shsj,jdbcType=VARCHAR},
+      </if>
+      <if test="bmzt != null" >
+        BMZT = #{bmzt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.train.TrainBasicInfo" >
+    update t_crowd_train_basicinfo
+    set PXRWBH = #{pxrwbh,jdbcType=VARCHAR},
+      XMBH = #{xmbh,jdbcType=VARCHAR},
+      SQR = #{sqr,jdbcType=VARCHAR},
+      PXKC = #{pxkc,jdbcType=DECIMAL},
+      PXLX = #{pxlx,jdbcType=DECIMAL},
+      PXRS = #{pxrs,jdbcType=DECIMAL},
+      SFWXSPX = #{sfwxspx,jdbcType=DECIMAL},
+      PXDD = #{pxdd,jdbcType=VARCHAR},
+      PXJHSJ = #{pxjhsj,jdbcType=VARCHAR},
+      JGYS = #{jgys,jdbcType=DECIMAL},
+      PXYQ = #{pxyq,jdbcType=VARCHAR},
+      SQSJ = #{sqsj,jdbcType=VARCHAR},
+      PXZT = #{pxzt,jdbcType=DECIMAL},
+      SHBZ = #{shbz,jdbcType=VARCHAR},
+      SHR = #{shry,jdbcType=VARCHAR},
+      PXJG = #{pxjg,jdbcType=DECIMAL},
+      SHSJ = #{shsj,jdbcType=VARCHAR},
+      BMZT = #{bmzt,jdbcType=VARCHAR},
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

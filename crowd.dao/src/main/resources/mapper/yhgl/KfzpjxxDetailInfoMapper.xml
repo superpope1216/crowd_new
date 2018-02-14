@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.yhgl.KfzpjxxDetailInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.yhgl.KfzpjxxDetailInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="KFZID" property="kfzid" jdbcType="VARCHAR" />
+    <result column="ZBID" property="zbid" jdbcType="VARCHAR" />
+    <result column="DF" property="df" jdbcType="REAL" />
+    <result column="PJNR" property="pjnr" jdbcType="VARCHAR" />
+    <result column="SSXMID" property="ssxmid" jdbcType="VARCHAR" />
+    <result column="CPXQFID" property="cpxqfid" jdbcType="VARCHAR" />
+    <result column="CPSJ" property="cpsj" jdbcType="TIMESTAMP" />
+    <result column="CPZIP" property="cpzip" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, KFZID, ZBID, DF, PJNR, SSXMID, CPXQFID, CPSJ, CPZIP
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_yhgl_zbdfmx
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_yhgl_zbdfmx
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.yhgl.KfzpjxxDetailInfo" >
+    insert into t_crowd_yhgl_zbdfmx (WID, KFZID, ZBID, 
+      DF, PJNR, SSXMID, CPXQFID, 
+      CPSJ, CPZIP)
+    values (#{wid,jdbcType=VARCHAR}, #{kfzid,jdbcType=VARCHAR}, #{zbid,jdbcType=VARCHAR}, 
+      #{df,jdbcType=REAL}, #{pjnr,jdbcType=VARCHAR}, #{ssxmid,jdbcType=VARCHAR}, #{cpxqfid,jdbcType=VARCHAR}, 
+      #{cpsj,jdbcType=TIMESTAMP}, #{cpzip,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.yhgl.KfzpjxxDetailInfo" >
+    insert into t_crowd_yhgl_zbdfmx
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="kfzid != null" >
+        KFZID,
+      </if>
+      <if test="zbid != null" >
+        ZBID,
+      </if>
+      <if test="df != null" >
+        DF,
+      </if>
+      <if test="pjnr != null" >
+        PJNR,
+      </if>
+      <if test="ssxmid != null" >
+        SSXMID,
+      </if>
+      <if test="cpxqfid != null" >
+        CPXQFID,
+      </if>
+      <if test="cpsj != null" >
+        CPSJ,
+      </if>
+      <if test="cpzip != null" >
+        CPZIP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="kfzid != null" >
+        #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="zbid != null" >
+        #{zbid,jdbcType=VARCHAR},
+      </if>
+      <if test="df != null" >
+        #{df,jdbcType=REAL},
+      </if>
+      <if test="pjnr != null" >
+        #{pjnr,jdbcType=VARCHAR},
+      </if>
+      <if test="ssxmid != null" >
+        #{ssxmid,jdbcType=VARCHAR},
+      </if>
+      <if test="cpxqfid != null" >
+        #{cpxqfid,jdbcType=VARCHAR},
+      </if>
+      <if test="cpsj != null" >
+        #{cpsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cpzip != null" >
+        #{cpzip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.yhgl.KfzpjxxDetailInfo" >
+    update t_crowd_yhgl_zbdfmx
+    <set >
+      <if test="kfzid != null" >
+        KFZID = #{kfzid,jdbcType=VARCHAR},
+      </if>
+      <if test="zbid != null" >
+        ZBID = #{zbid,jdbcType=VARCHAR},
+      </if>
+      <if test="df != null" >
+        DF = #{df,jdbcType=REAL},
+      </if>
+      <if test="pjnr != null" >
+        PJNR = #{pjnr,jdbcType=VARCHAR},
+      </if>
+      <if test="ssxmid != null" >
+        SSXMID = #{ssxmid,jdbcType=VARCHAR},
+      </if>
+      <if test="cpxqfid != null" >
+        CPXQFID = #{cpxqfid,jdbcType=VARCHAR},
+      </if>
+      <if test="cpsj != null" >
+        CPSJ = #{cpsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cpzip != null" >
+        CPZIP = #{cpzip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.yhgl.KfzpjxxDetailInfo" >
+    update t_crowd_yhgl_zbdfmx
+    set KFZID = #{kfzid,jdbcType=VARCHAR},
+      ZBID = #{zbid,jdbcType=VARCHAR},
+      DF = #{df,jdbcType=REAL},
+      PJNR = #{pjnr,jdbcType=VARCHAR},
+      SSXMID = #{ssxmid,jdbcType=VARCHAR},
+      CPXQFID = #{cpxqfid,jdbcType=VARCHAR},
+      CPSJ = #{cpsj,jdbcType=TIMESTAMP},
+      CPZIP = #{cpzip,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

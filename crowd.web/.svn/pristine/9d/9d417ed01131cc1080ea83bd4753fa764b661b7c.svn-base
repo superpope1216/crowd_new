@@ -1,0 +1,105 @@
+package com.wisedu.crowd.entity.yhgl;
+
+public class XqfxxExtInfo {
+    /**
+     * WID
+     */
+    private String wid;
+
+    /**
+     * 需求方ID
+     */
+    private String xqfid;
+
+    /**
+     * 信誉分
+     */
+    private Integer score;
+
+    /**
+     * 版本
+     */
+    private Integer version;
+
+    /**
+     * WID
+     * @return WID WID
+     */
+    public String getWid() {
+        return wid;
+    }
+
+    /**
+     * WID
+     * @param wid WID
+     */
+    public void setWid(String wid) {
+        this.wid = wid == null ? null : wid.trim();
+    }
+
+    /**
+     * 需求方ID
+     * @return XQFID 需求方ID
+     */
+    public String getXqfid() {
+        return xqfid;
+    }
+
+    /**
+     * 需求方ID
+     * @param xqfid 需求方ID
+     */
+    public void setXqfid(String xqfid) {
+        this.xqfid = xqfid == null ? null : xqfid.trim();
+    }
+
+    /**
+     * 信誉分
+     * @return SCORE 信誉分
+     */
+    public Integer getScore() {
+        return score;
+    }
+
+    /**
+     * 信誉分
+     * @param score 信誉分
+     */
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
+    /**
+     * 版本
+     * @return VERSION 版本
+     */
+    public Integer getVersion() {
+        return version;
+    }
+
+    /**
+     * 版本
+     * @param version 版本
+     */
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    /**
+     *
+     * @mbggenerated 2017-11-23
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", wid=").append(wid);
+        sb.append(", xqfid=").append(xqfid);
+        sb.append(", score=").append(score);
+        sb.append(", version=").append(version);
+        sb.append("]");
+        return sb.toString();
+    }
+}

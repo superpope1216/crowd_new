@@ -1,0 +1,55 @@
+package com.wisedu.crowd.service.yhgl.impl;
+
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.common.util.DateUtil;
+import com.wisedu.crowd.common.util.StringUtil;
+import com.wisedu.crowd.dao.yhgl.KfzxxInfoMapper;
+import com.wisedu.crowd.dao.yhgl.extend.KfzxxInfoExtendMapper;
+import com.wisedu.crowd.entity.datacode.ExamineStateEnum;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.entity.log.CustomOperateLog;
+import com.wisedu.crowd.entity.yhgl.KfzxxInfo;
+import com.wisedu.crowd.entity.yhgl.extend.KfzxxInfoExtend;
+import com.wisedu.crowd.service.yhgl.KfzxxInfoService;
+@Service("kfzxxInfoService")
+@Transactional
+public class KfzxxInfoServiceImpl implements KfzxxInfoService{
+
+	@Autowired
+	private  KfzxxInfoMapper kfzxxInfoMapper;
+	
+	@Autowired
+	private KfzxxInfoExtendMapper kfzxxInfoExtendMapper;
+
+	@Override
+	public DataResult<KfzxxInfo> selectByPrimaryKey(String wid) throws ServiceException {
+		return DataResult.success(kfzxxInfoMapper.selectByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<KfzxxInfo> saveOrUpdateKfzxxInfo(KfzxxInfo record, CustomOperateLog log) throws ServiceException {
+		if(StringUtils.isEmpty(record.getWid())){
+			record.setWid(StringUtil.getUuId());
+			record.setCzsj(DateUtil.getCurrentDate());
+			record.setCzzip(log.getCustomIp());
+			record.setShzt(ExamineStateEnum.CG.getCode());
+			kfzxxInfoMapper.insertSelective(record);
+		}else{
+			kfzxxInfoMapper.updateByPrimaryKeySelective(record);
+		}
+		return DataResult.success(record);
+	}
+
+	@Override
+	public DataResult<List<KfzxxInfoExtend>> selectByCondition(KfzxxInfoExtend record) throws ServiceException {
+		return DataResult.success(kfzxxInfoExtendMapper.selectByCondition(record));
+	} 
+    
+}

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.kcgl.extend.FinishCoursesExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.kcgl.FinishCourses" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="COUNT" property="count" jdbcType="VARCHAR" />
+    <result column="USERID" property="userid" jdbcType="VARCHAR" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="COURSEID" property="courseid" jdbcType="VARCHAR" />
+    <result column="COURSENAME" property="coursename" jdbcType="VARCHAR" />
+    <result column="COURSEOPENID" property="courseopenid" jdbcType="VARCHAR" />
+    <result column="OPENCOURSENAME" property="opencoursename" jdbcType="VARCHAR" />
+    <result column="ITEMID" property="itemid" jdbcType="VARCHAR" />
+    <result column="ITEMNAME" property="itemname" jdbcType="VARCHAR" />
+    <result column="ITEMTYPE" property="itemtype" jdbcType="VARCHAR" />
+    <result column="ITEMTYPENAME" property="itemtypename" jdbcType="VARCHAR" />
+    <result column="FIRSTDATE" property="firstdate" jdbcType="VARCHAR" />
+    <result column="ISOVER" property="isover" jdbcType="VARCHAR" />
+    <result column="FIRSTTIMEDATE" property="firsttimedate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, ID, COUNT, USERID, USERNAME, COURSEID, COURSENAME, COURSEOPENID, OPENCOURSENAME, 
+    ITEMID, ITEMNAME, ITEMTYPE, ITEMTYPENAME, FIRSTDATE, ISOVER, FIRSTTIMEDATE
+  </sql>
+  
+  
+  	<resultMap id="BaseDisplayResultMap" type="com.wisedu.crowd.entity.kcgl.extend.FinishCoursesExtend"
+	  	 extends="BaseResultMap">
+	</resultMap>
+	
+	
+ <sql id="Base_Display_Column_List">
+  <include refid="Base_Column_List"></include>
+  </sql>
+ 
+ <delete id="deleteAllFinishCourses" > 
+     delete from t_crowd_kcgl_finish_courses
+ </delete>
+ 
+  
+  
+  <sql id="sqlWhere">
+   <if test="query!=null">
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND t_crowd_kcgl_finish_courses.WID=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.id!=null and query.id!=""'>
+  			AND t_crowd_kcgl_finish_courses.ID=#{query.id,jdbcType=VARCHAR}
+  		</if>
+  	</if>
+  </sql>
+  <select id="selectByDisplayCondition" resultMap="BaseDisplayResultMap" parameterType="com.wisedu.crowd.entity.kcgl.extend.FinishCoursesExtend">
+  		SELECT 
+  		<include refid="Base_Display_Column_List"/>
+  		FROM t_crowd_kcgl_finish_courses t_crowd_kcgl_finish_courses 
+  		<where>
+  			<include refid="sqlWhere"/>
+  		</where>
+  </select>
+ 
+</mapper>

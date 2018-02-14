@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.yhgl.XqfxxInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.yhgl.XqfxxInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="YHID" property="yhid" jdbcType="VARCHAR" />
+    <result column="XQFDWMC" property="xqfdwmc" jdbcType="VARCHAR" />
+    <result column="SZDQ" property="szdq" jdbcType="VARCHAR" />
+    <result column="XM" property="xm" jdbcType="VARCHAR" />
+    <result column="NC" property="nc" jdbcType="VARCHAR" />
+    <result column="SFZJH" property="sfzjh" jdbcType="VARCHAR" />
+    <result column="GH" property="gh" jdbcType="VARCHAR" />
+    <result column="LXYDZYX" property="lxydzyx" jdbcType="VARCHAR" />
+    <result column="ZHYE" property="zhye" jdbcType="DECIMAL" />
+    <result column="ZHDJYE" property="zhdjye" jdbcType="DECIMAL" />
+    <result column="CZSJ" property="czsj" jdbcType="TIMESTAMP" />
+    <result column="CZZIP" property="czzip" jdbcType="VARCHAR" />
+    <result column="SHZT" property="shzt" jdbcType="DECIMAL" />
+    <result column="SHYJ" property="shyj" jdbcType="VARCHAR" />
+    <result column="XQFLB" property="xqflb" jdbcType="DECIMAL" />
+    <result column="SSGS" property="ssgs" jdbcType="VARCHAR" />
+    <result column="SSYWX" property="ssywx" jdbcType="VARCHAR" />
+    <result column="zpfjid" property="zpfjid" jdbcType="VARCHAR" />
+    <result column="qqh" property="qqh" jdbcType="VARCHAR" />
+    <result column="wxh" property="wxh" jdbcType="VARCHAR" />
+    <result column="zfbzh" property="zfbzh" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, YHID, XQFDWMC, SZDQ, XM, NC, SFZJH, GH, LXYDZYX, ZHYE, ZHDJYE, CZSJ, CZZIP, 
+    SHZT, SHYJ, XQFLB, SSGS, SSYWX, zpfjid, qqh, wxh, zfbzh
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_yhgl_xqfxx
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_yhgl_xqfxx
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.yhgl.XqfxxInfo" >
+    insert into t_crowd_yhgl_xqfxx (WID, YHID, XQFDWMC, 
+      SZDQ, XM, NC, SFZJH, 
+      GH, LXYDZYX, ZHYE, 
+      ZHDJYE, CZSJ, CZZIP, 
+      SHZT, SHYJ, XQFLB, 
+      SSGS, SSYWX, zpfjid, 
+      qqh, wxh, zfbzh)
+    values (#{wid,jdbcType=VARCHAR}, #{yhid,jdbcType=VARCHAR}, #{xqfdwmc,jdbcType=VARCHAR}, 
+      #{szdq,jdbcType=VARCHAR}, #{xm,jdbcType=VARCHAR}, #{nc,jdbcType=VARCHAR}, #{sfzjh,jdbcType=VARCHAR}, 
+      #{gh,jdbcType=VARCHAR}, #{lxydzyx,jdbcType=VARCHAR}, #{zhye,jdbcType=DECIMAL}, 
+      #{zhdjye,jdbcType=DECIMAL}, #{czsj,jdbcType=TIMESTAMP}, #{czzip,jdbcType=VARCHAR}, 
+      #{shzt,jdbcType=DECIMAL}, #{shyj,jdbcType=VARCHAR}, #{xqflb,jdbcType=DECIMAL}, 
+      #{ssgs,jdbcType=VARCHAR}, #{ssywx,jdbcType=VARCHAR}, #{zpfjid,jdbcType=VARCHAR}, 
+      #{qqh,jdbcType=VARCHAR}, #{wxh,jdbcType=VARCHAR}, #{zfbzh,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.yhgl.XqfxxInfo" >
+    insert into t_crowd_yhgl_xqfxx
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="yhid != null" >
+        YHID,
+      </if>
+      <if test="xqfdwmc != null" >
+        XQFDWMC,
+      </if>
+      <if test="szdq != null" >
+        SZDQ,
+      </if>
+      <if test="xm != null" >
+        XM,
+      </if>
+      <if test="nc != null" >
+        NC,
+      </if>
+      <if test="sfzjh != null" >
+        SFZJH,
+      </if>
+      <if test="gh != null" >
+        GH,
+      </if>
+      <if test="lxydzyx != null" >
+        LXYDZYX,
+      </if>
+      <if test="zhye != null" >
+        ZHYE,
+      </if>
+      <if test="zhdjye != null" >
+        ZHDJYE,
+      </if>
+      <if test="czsj != null" >
+        CZSJ,
+      </if>
+      <if test="czzip != null" >
+        CZZIP,
+      </if>
+      <if test="shzt != null" >
+        SHZT,
+      </if>
+      <if test="shyj != null" >
+        SHYJ,
+      </if>
+      <if test="xqflb != null" >
+        XQFLB,
+      </if>
+      <if test="ssgs != null" >
+        SSGS,
+      </if>
+      <if test="ssywx != null" >
+        SSYWX,
+      </if>
+      <if test="zpfjid != null" >
+        zpfjid,
+      </if>
+      <if test="qqh != null" >
+        qqh,
+      </if>
+      <if test="wxh != null" >
+        wxh,
+      </if>
+      <if test="zfbzh != null" >
+        zfbzh,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhid != null" >
+        #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="xqfdwmc != null" >
+        #{xqfdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="szdq != null" >
+        #{szdq,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="nc != null" >
+        #{nc,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzjh != null" >
+        #{sfzjh,jdbcType=VARCHAR},
+      </if>
+      <if test="gh != null" >
+        #{gh,jdbcType=VARCHAR},
+      </if>
+      <if test="lxydzyx != null" >
+        #{lxydzyx,jdbcType=VARCHAR},
+      </if>
+      <if test="zhye != null" >
+        #{zhye,jdbcType=DECIMAL},
+      </if>
+      <if test="zhdjye != null" >
+        #{zhdjye,jdbcType=DECIMAL},
+      </if>
+      <if test="czsj != null" >
+        #{czsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="czzip != null" >
+        #{czzip,jdbcType=VARCHAR},
+      </if>
+      <if test="shzt != null" >
+        #{shzt,jdbcType=DECIMAL},
+      </if>
+      <if test="shyj != null" >
+        #{shyj,jdbcType=VARCHAR},
+      </if>
+      <if test="xqflb != null" >
+        #{xqflb,jdbcType=DECIMAL},
+      </if>
+      <if test="ssgs != null" >
+        #{ssgs,jdbcType=VARCHAR},
+      </if>
+      <if test="ssywx != null" >
+        #{ssywx,jdbcType=VARCHAR},
+      </if>
+      <if test="zpfjid != null" >
+        #{zpfjid,jdbcType=VARCHAR},
+      </if>
+      <if test="qqh != null" >
+        #{qqh,jdbcType=VARCHAR},
+      </if>
+      <if test="wxh != null" >
+        #{wxh,jdbcType=VARCHAR},
+      </if>
+      <if test="zfbzh != null" >
+        #{zfbzh,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.yhgl.XqfxxInfo" >
+    update t_crowd_yhgl_xqfxx
+    <set >
+      <if test="yhid != null" >
+        YHID = #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="xqfdwmc != null" >
+        XQFDWMC = #{xqfdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="szdq != null" >
+        SZDQ = #{szdq,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        XM = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="nc != null" >
+        NC = #{nc,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzjh != null" >
+        SFZJH = #{sfzjh,jdbcType=VARCHAR},
+      </if>
+      <if test="gh != null" >
+        GH = #{gh,jdbcType=VARCHAR},
+      </if>
+      <if test="lxydzyx != null" >
+        LXYDZYX = #{lxydzyx,jdbcType=VARCHAR},
+      </if>
+      <if test="zhye != null" >
+        ZHYE = #{zhye,jdbcType=DECIMAL},
+      </if>
+      <if test="zhdjye != null" >
+        ZHDJYE = #{zhdjye,jdbcType=DECIMAL},
+      </if>
+      <if test="czsj != null" >
+        CZSJ = #{czsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="czzip != null" >
+        CZZIP = #{czzip,jdbcType=VARCHAR},
+      </if>
+      <if test="shzt != null" >
+        SHZT = #{shzt,jdbcType=DECIMAL},
+      </if>
+      <if test="shyj != null" >
+        SHYJ = #{shyj,jdbcType=VARCHAR},
+      </if>
+      <if test="xqflb != null" >
+        XQFLB = #{xqflb,jdbcType=DECIMAL},
+      </if>
+      <if test="ssgs != null" >
+        SSGS = #{ssgs,jdbcType=VARCHAR},
+      </if>
+      <if test="ssywx != null" >
+        SSYWX = #{ssywx,jdbcType=VARCHAR},
+      </if>
+      <if test="zpfjid != null" >
+        zpfjid = #{zpfjid,jdbcType=VARCHAR},
+      </if>
+      <if test="qqh != null" >
+        qqh = #{qqh,jdbcType=VARCHAR},
+      </if>
+      <if test="wxh != null" >
+        wxh = #{wxh,jdbcType=VARCHAR},
+      </if>
+      <if test="zfbzh != null" >
+        zfbzh = #{zfbzh,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.yhgl.XqfxxInfo" >
+    update t_crowd_yhgl_xqfxx
+    set YHID = #{yhid,jdbcType=VARCHAR},
+      XQFDWMC = #{xqfdwmc,jdbcType=VARCHAR},
+      SZDQ = #{szdq,jdbcType=VARCHAR},
+      XM = #{xm,jdbcType=VARCHAR},
+      NC = #{nc,jdbcType=VARCHAR},
+      SFZJH = #{sfzjh,jdbcType=VARCHAR},
+      GH = #{gh,jdbcType=VARCHAR},
+      LXYDZYX = #{lxydzyx,jdbcType=VARCHAR},
+      ZHYE = #{zhye,jdbcType=DECIMAL},
+      ZHDJYE = #{zhdjye,jdbcType=DECIMAL},
+      CZSJ = #{czsj,jdbcType=TIMESTAMP},
+      CZZIP = #{czzip,jdbcType=VARCHAR},
+      SHZT = #{shzt,jdbcType=DECIMAL},
+      SHYJ = #{shyj,jdbcType=VARCHAR},
+      XQFLB = #{xqflb,jdbcType=DECIMAL},
+      SSGS = #{ssgs,jdbcType=VARCHAR},
+      SSYWX = #{ssywx,jdbcType=VARCHAR},
+      zpfjid = #{zpfjid,jdbcType=VARCHAR},
+      qqh = #{qqh,jdbcType=VARCHAR},
+      wxh = #{wxh,jdbcType=VARCHAR},
+      zfbzh = #{zfbzh,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

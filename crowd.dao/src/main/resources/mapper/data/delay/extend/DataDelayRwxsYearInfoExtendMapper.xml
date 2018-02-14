@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.data.delay.extend.DataDelayRwxsYearInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.data.delay.extend.DataDelayRwxsYearInfoExtend" 
+  extends="com.wisedu.crowd.dao.data.delay.DataDelayRwxsYearInfoMapper.BaseResultMap">
+  </resultMap>
+  <sql id="Base_Column_List" >
+    T_CROWD_DATA_DELAY_RWXS_Y.WID, T_CROWD_DATA_DELAY_RWXS_Y.RWXS, 
+    T_CROWD_DATA_DELAY_RWXS_Y.YEAR, T_CROWD_DATA_DELAY_RWXS_Y.DELAY_DAY, 
+    T_CROWD_DATA_DELAY_RWXS_Y.ZBJE, T_CROWD_DATA_DELAY_RWXS_Y.YJSJE, 
+    T_CROWD_DATA_DELAY_RWXS_Y.DELAY_ALL_DAY, T_CROWD_DATA_DELAY_RWXS_Y.DELAY_SCORE
+  </sql>
+  <sql id="sqlWhere">
+  	<if test="query!=null">
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND T_CROWD_DATA_DELAY_RWXS_Y.WID=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.rwxs!=null and query.rwxs!=""'>
+  			AND T_CROWD_DATA_DELAY_RWXS_Y.rwxs=#{query.rwxs,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.month!=null and query.month!=""'>
+  			AND T_CROWD_DATA_DELAY_RWXS_Y.month=#{query.month,jdbcType=VARCHAR}
+  		</if>
+  	</if>
+  </sql>
+  <delete id="deleteByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition">
+  	DELETE FROM T_CROWD_DATA_DELAY_RWXS_Y
+  	<where>
+  		<include refid="sqlWhere"/>
+  	</where>
+  </delete>
+  <select id="selectByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+  resultMap="BaseResultMap">
+  		SELECT 
+  		<include refid="Base_Column_List"/>
+  		from T_CROWD_DATA_DELAY_RWXS_Y
+  			<where>
+  		<include refid="sqlWhere"/>
+  	</where>
+  </select>
+  <select id="selectDisplayByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+  resultMap="BaseResultMap">
+  		SELECT 
+  		<include refid="Base_Column_List"/>
+  		from T_CROWD_DATA_DELAY_RWXS_Y
+  			<where>
+  		<include refid="sqlWhere"/>
+  	</where>
+  </select>
+</mapper>

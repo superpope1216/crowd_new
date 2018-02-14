@@ -1,0 +1,109 @@
+package com.wisedu.crowd.entity.rwgl.extend;
+
+import java.io.Serializable;
+
+import com.wisedu.crowd.entity.rwgl.RwjbxxInfo;
+
+public class RwjbxxInfoExtend extends RwjbxxInfo implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * 任务进度
+	 */
+	private String rwjd;
+	
+	private String rwjdDisplay;
+	
+	private String kfkjDisplay;
+	
+	private String xmztDisplay;
+	
+	private String rwxsDisplay;
+	
+	private String rwlxDisplay;
+	
+	private String rwnydDisplay;
+	
+	private String dzjbDisplay;
+	
+	private String ywxlbDisplay;
+
+	public String getYwxlbDisplay() {
+		return ywxlbDisplay;
+	}
+
+	public void setYwxlbDisplay(String ywxlbDisplay) {
+		this.ywxlbDisplay = ywxlbDisplay;
+	}
+
+	public String getDzjbDisplay() {
+		return dzjbDisplay;
+	}
+
+	public void setDzjbDisplay(String dzjbDisplay) {
+		this.dzjbDisplay = dzjbDisplay;
+	}
+
+	public String getRwxsDisplay() {
+		return rwxsDisplay;
+	}
+
+	public void setRwxsDisplay(String rwxsDisplay) {
+		this.rwxsDisplay = rwxsDisplay;
+	}
+
+	public String getRwlxDisplay() {
+		return rwlxDisplay;
+	}
+
+	public void setRwlxDisplay(String rwlxDisplay) {
+		this.rwlxDisplay = rwlxDisplay;
+	}
+
+	public String getRwnydDisplay() {
+		return rwnydDisplay;
+	}
+
+	public void setRwnydDisplay(String rwnydDisplay) {
+		this.rwnydDisplay = rwnydDisplay;
+	}
+
+	public String getRwjd() {
+		return rwjd;
+	}
+
+	public void setRwjd(String rwjd) {
+		this.rwjd = rwjd;
+	}
+
+	public String getRwjdDisplay() {
+		return rwjdDisplay;
+	}
+
+	public void setRwjdDisplay(String rwjdDisplay) {
+		this.rwjdDisplay = rwjdDisplay;
+	}
+
+	public String getKfkjDisplay() {
+		return kfkjDisplay;
+	}
+
+	public void setKfkjDisplay(String kfkjDisplay) {
+		this.kfkjDisplay = kfkjDisplay;
+	}
+
+	public String getXmztDisplay() {
+		return xmztDisplay;
+	}
+
+	public void setXmztDisplay(String xmztDisplay) {
+		this.xmztDisplay = xmztDisplay;
+	}
+	
+	
+
+}

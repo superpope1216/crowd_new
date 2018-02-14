@@ -1,0 +1,132 @@
+/**
+ * 
+ */
+
+$(document).ready(function(){
+	queryNewRwxx();
+	function queryNewRwxx(){
+		doGet(basePath+"/first/queryList","",function(data){
+			if(data && data.datas){
+				var html="";
+				for(var i=0;i<data.datas.length;i++){
+					var _data=data.datas[i];
+					html+='<li class="groom-cut-slide">';
+					html+='		<a class=""	href="'+basePath+'/rwxxDetail/index?rwid='+_data.wid+'"	title="" target="_self">';
+					html+='			<img src="'+basePath+'/statics/images/home/'+getImagePath(_data.rwxs,_data.kfkj)+'.png"	alt="" style="margin-top: 10px">';
+					html+='				<span> ';
+					html+='					<b	style="text-align: left">'+_data.rwmc+'</b>';
+					html+='					<p style="overflow: auto;">';
+					html+='						<span	style="text-align: left; float: left; display: inline-block; font-size: 16px;">￥'+_data.xmysje+'元</span>';
+					html+='						<span	style="text-align: center; float: right; display: inline-block; width: 40px; background-color: #ddd; border: none; font-size: 12px; border-radius: 3px; cursor: pointer; display: inline-block; background-color: #65C279; color: #FFF;">'+_data.rwjdDisplay+'</span>';
+					html+='					</p>';
+					html+='					<p	style="overflow: auto; border-top: solid 1px #ddd; color: #999; padding-top: 4px;">';
+					html+='						<span	style="text-align: left; float: left; display: inline-block;">'+_data.kfkjDisplay+'</span>';
+					html+='						<span	style="text-align: center; float: right; cursor: pointer; display: inline-block;">'+_data.zbzq+'天</span>';
+					html+='					</p>';
+					html+='				</span>';
+					html+='		</a>';
+					html+='</li>';
+				}
+				$("#ulNewRwjbxx").html(html);
+			}
+		})
+	}
+	
+	$("#ulMoneyTab li").click(function(){
+		$("#ulMoneyTab li").removeClass("active");
+		$(this).addClass("active");
+		var _option=$(this).attr("data-option");
+		if(_option=="person"){
+			$("#ulPserson").show();
+			$("#ulCompany").hide();
+		}else{
+			$("#ulPserson").hide();
+			$("#ulCompany").show();
+		}
+	});
+	getPerson();
+	function getPerson(){
+		doGet(basePath+"/publishing/selectPerson","",function(data){
+			 if(data && data.datas){
+				 var html="";
+				 for(var i=0;i<data.datas.length;i++){
+					 html+=' <li class="info-cut-slide">';
+					 html+='	<a	href="javascript:void(0);"	 target="_self">';
+					 html+='		<img	src="'+basePath+'/image/preView?wid='+data.datas[i].kfzid+'">';
+					 html+='		<span>';
+					 html+='			<p></p>';
+					 html+='			<i>累计收入<em>'+data.datas[i].je+'元</em></i>';
+					 html+='			<b>'+data.datas[i].nc+'</b>';
+					 html+='	    </span>';
+					 html+='	</a>';
+					 html+='</li>';
+				 }
+				 $("#ulPserson").html(html);
+			 }
+		});
+	}
+	
+	getCompany();
+	function getCompany(){
+		doGet(basePath+"/publishing/selectCompany","",function(data){
+			 if(data && data.datas){
+				 var html="";
+				 for(var i=0;i<data.datas.length;i++){
+					 html+=' <li class="info-cut-slide">';
+					 html+='	<a	href="javascript:void(0);"	 target="_self">';
+					 html+='		<img	src="'+basePath+'/image/preView?wid='+data.datas[i].kfzid+'">';
+					 html+='		<span>';
+					 html+='			<p></p>';
+					 html+='			<i>累计收入<em>'+data.datas[i].je+'元</em></i>';
+					 html+='			<b>'+data.datas[i].nc+'</b>';
+					 html+='	    </span>';
+					 html+='	</a>';
+					 html+='</li>';
+				 }
+				 $("#ulCompany").html(html);
+			 }
+		});
+	}
+	getTotalMoney();
+	function getTotalMoney(){
+		doGet(basePath+"/first/getTotalMoney","",function(data){
+			 if(data && data.datas){
+				 $("#pTotalMoney").html(data.datas);
+				 $("#pTotalMoney").attr("data-animatetarget",data.datas);
+				 $('#pTotalMoney').running();
+				 
+			 }
+		});
+	}
+	getTotalCount();
+	function getTotalCount(){
+		doGet(basePath+"/first/getTotalCount","",function(data){
+			 if(data && data.datas){
+				 $("#pTotalCount").html(data.datas);
+				 $("#pTotalCount").attr("data-animatetarget",data.datas);
+				 $('#pTotalCount').running();
+			 }
+		});
+	}
+	getKfzCount();
+	function getKfzCount(){
+		doGet(basePath+"/first/getKfzCount","",function(data){
+			 if(data && data.datas){
+				 $("#pTotalKfz").html(data.datas);
+				 $("#pTotalKfz").attr("data-animatetarget",data.datas);
+				 $('#pTotalKfz').running();
+			 }
+		});
+	}
+	getXqfCount();
+	function getXqfCount(){
+		doGet(basePath+"/first/getXqfCount","",function(data){
+			 if(data && data.datas){
+				 $("#pTotalXqf").html(data.datas);
+				 $("#pTotalXqf").attr("data-animatetarget",data.datas);
+				 $('#pTotalXqf').running();
+			 }
+		});
+	}
+	
+});

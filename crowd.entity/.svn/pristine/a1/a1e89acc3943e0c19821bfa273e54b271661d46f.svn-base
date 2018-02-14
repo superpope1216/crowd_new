@@ -1,0 +1,18 @@
+package com.wisedu.crowd.entity.yhgl.extend;
+
+import java.io.Serializable;
+
+import com.wisedu.crowd.entity.yhgl.KfzxxInfo;
+
+/**
+ * 开发者 信息
+ * @author wisedu
+ *
+ */
+public class KfzxxInfoExtend extends KfzxxInfo implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+}

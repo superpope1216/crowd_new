@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.xtgl.extend.YwxShryInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.xtgl.extend.YwxShryInfoExtend" extends="com.wisedu.crowd.dao.xtgl.YwxShryInfoMapper.BaseResultMap">
+   		 <result column="kfzxm" property="kfzxm" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_crowd_xmgl_ywx_shry.WID, t_crowd_xmgl_ywx_shry.KFZID, 
+    t_crowd_xmgl_ywx_shry.YWXID, t_crowd_xmgl_ywx_shry.SFTJGZL
+  </sql>
+  <sql id="sqlWhere">
+  		<if test="query!=null">
+  			<if test='query.wid!=null and query.wid!=""'>
+  				AND t_crowd_xmgl_ywx_shry.WID=#{query.wid,jdbcType=VARCHAR}
+  			</if>
+  			<if test='query.ywxid!=null and query.ywxid!=""'>
+  				AND t_crowd_xmgl_ywx_shry.YWXID=#{query.ywxid,jdbcType=VARCHAR}
+  			</if>
+  		</if>
+  </sql>
+  <select id="selectDisplayByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+  resultMap="BaseResultMap">
+  	SELECT 
+  	<include refid="Base_Column_List"/>
+  	,nvl(t_crowd_yhgl_kfzxx.xm, t_crowd_yhgl_xqfxx.xm) as kfzxm,
+  	nvl(t_crowd_yhgl_kfzxx.gh, t_crowd_yhgl_xqfxx.gh) as gh
+  	 from t_crowd_xmgl_ywx_shry
+  	 left join t_crowd_yhgl_kfzxx on t_crowd_yhgl_kfzxx.yhid= t_crowd_xmgl_ywx_shry.kfzid
+  	 left join t_crowd_yhgl_xqfxx on t_crowd_yhgl_xqfxx.yhid= t_crowd_xmgl_ywx_shry.kfzid
+  	 <where>
+  	 	<include refid="sqlWhere"></include>
+  	 </where>
+  	 
+  </select>
+  
+</mapper>

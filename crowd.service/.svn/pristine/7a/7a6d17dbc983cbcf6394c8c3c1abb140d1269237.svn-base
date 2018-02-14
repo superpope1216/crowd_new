@@ -1,0 +1,1107 @@
+package com.wisedu.crowd.service.rwgl.impl;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.wisedu.crowd.common.code.JyztEnum;
+import com.wisedu.crowd.common.code.NwbEnum;
+import com.wisedu.crowd.common.code.PjClassifyEnum;
+import com.wisedu.crowd.common.code.PjResultEnum;
+import com.wisedu.crowd.common.code.RwtbztEnum;
+import com.wisedu.crowd.common.code.RwxqlxEnum;
+import com.wisedu.crowd.common.code.RwxsEnum;
+import com.wisedu.crowd.common.code.RwztStateEnum;
+import com.wisedu.crowd.common.code.SzlbEnum;
+import com.wisedu.crowd.common.code.XtcsEnum;
+import com.wisedu.crowd.common.code.YesNoEnum;
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.common.util.CommonUtil;
+import com.wisedu.crowd.common.util.ConditionUtil;
+import com.wisedu.crowd.common.util.DateUtil;
+import com.wisedu.crowd.common.util.DecimalUtil;
+import com.wisedu.crowd.common.util.PageUtil;
+import com.wisedu.crowd.common.util.StringUtil;
+import com.wisedu.crowd.dao.rwgl.RwjbxxInfoMapper;
+import com.wisedu.crowd.dao.rwgl.extend.RwjbxxInfoExtendMapper;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.entity.cwgl.KfzzhmxInfo;
+import com.wisedu.crowd.entity.cwgl.XqfzhmxInfo;
+import com.wisedu.crowd.entity.cwgl.YyfzhszmxInfo;
+import com.wisedu.crowd.entity.cwgl.YyfzhxxInfo;
+import com.wisedu.crowd.entity.datacode.xtgl.XtcsbTypeEnum;
+import com.wisedu.crowd.entity.dto.QueryCondition;
+import com.wisedu.crowd.entity.log.CustomOperateLog;
+import com.wisedu.crowd.entity.rwgl.RwjbxxExtInfo;
+import com.wisedu.crowd.entity.rwgl.RwjbxxInfo;
+import com.wisedu.crowd.entity.rwgl.RwtbxxInfo;
+import com.wisedu.crowd.entity.rwgl.RwztbglsInfo;
+import com.wisedu.crowd.entity.rwgl.extend.RwjbxxExtInfoExtend;
+import com.wisedu.crowd.entity.rwgl.extend.RwjbxxInfoExtend;
+import com.wisedu.crowd.entity.rwgl.extend.RwtbxxInfoExtend;
+import com.wisedu.crowd.entity.xtgl.XtcsbInfo;
+import com.wisedu.crowd.entity.xtgl.extend.XtcsbInfoExtend;
+import com.wisedu.crowd.entity.yhgl.KfzpjxxDetailInfo;
+import com.wisedu.crowd.entity.yhgl.KfzpjxxInfo;
+import com.wisedu.crowd.entity.yhgl.KfzxxInfo;
+import com.wisedu.crowd.entity.yhgl.XqfxxInfo;
+import com.wisedu.crowd.service.cwgl.KfzzhmxInfoService;
+import com.wisedu.crowd.service.cwgl.XqfzhmxInfoService;
+import com.wisedu.crowd.service.cwgl.YyfzhszmxInfoService;
+import com.wisedu.crowd.service.cwgl.YyfzhxxInfoService;
+import com.wisedu.crowd.service.dictionary.DictionaryService;
+import com.wisedu.crowd.service.rwgl.RwjbxxExtInfoService;
+import com.wisedu.crowd.service.rwgl.RwjbxxInfoService;
+import com.wisedu.crowd.service.rwgl.RwtbxxInfoService;
+import com.wisedu.crowd.service.rwgl.RwztbglsInfoService;
+import com.wisedu.crowd.service.xtgl.XtcsbInfoService;
+import com.wisedu.crowd.service.yhgl.KfzpjxxDetailInfoService;
+import com.wisedu.crowd.service.yhgl.KfzpjxxInfoService;
+import com.wisedu.crowd.service.yhgl.KfzxxInfoService;
+import com.wisedu.crowd.service.yhgl.XqfxxInfoService;
+
+@Service("rwjbxxInfoService")
+@Transactional
+public class RwjbxxInfoServiceImpl implements RwjbxxInfoService {
+
+	@Autowired
+	private RwjbxxInfoMapper rwjbxxInfoMapper;
+
+	@Autowired
+	private RwjbxxInfoExtendMapper rwjbxxInfoExtendMapper;
+
+	@Autowired
+	private RwjbxxExtInfoService rwjbxxExtInfoService;
+
+	@Autowired
+	private DictionaryService dictionaryService;
+
+	@Autowired
+	private RwztbglsInfoService rwztbglsInfoService;
+
+	@Autowired
+	private RwtbxxInfoService rwtbxxInfoService;
+	@Autowired
+	private XtcsbInfoService xtcsbInfoService;
+	
+	@Autowired
+	private KfzpjxxInfoService kfzpjxxInfoService;
+	@Autowired
+	private KfzpjxxDetailInfoService kfzpjxxDetailInfoService;
+	@Autowired
+	private KfzzhmxInfoService kfzzhmxInfoService;
+	
+	@Autowired
+	private XqfzhmxInfoService xqfzhmxInfoService;
+	
+	@Autowired
+	private YyfzhxxInfoService yyfzhxxInfoService;
+	@Autowired
+	private YyfzhszmxInfoService yyfzhszmxInfoService; 
+	
+	@Autowired
+	private KfzxxInfoService kfzxxInfoService;
+	
+	@Autowired
+	private XqfxxInfoService xqfxxInfoService;
+
+	@Override
+	public DataResult<Integer> deleteByPrimaryKey(String wid) throws ServiceException {
+		return DataResult.success(rwjbxxInfoMapper.deleteByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<Integer> insertSelective(RwjbxxInfo record) throws ServiceException {
+		return DataResult.success(rwjbxxInfoMapper.insertSelective(record));
+	}
+
+	@Override
+	public DataResult<RwjbxxInfo> selectByPrimaryKey(String wid) throws ServiceException {
+		return DataResult.success(rwjbxxInfoMapper.selectByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<Integer> updateByPrimaryKeySelective(RwjbxxInfo record) throws ServiceException {
+		return DataResult.success(rwjbxxInfoMapper.updateByPrimaryKeySelective(record));
+	}
+
+	/**
+	 * 需求必填项检测
+	 * 
+	 * @param rwjbxxInfo
+	 * @throws ServiceException
+	 */
+	private void checkRwjbxx(RwjbxxInfo rwjbxxInfo) throws ServiceException {
+		if (rwjbxxInfo == null) {
+			throw new ServiceException("需求不能为空，请重新确认！");
+		}
+		if (StringUtil.isEmpty(rwjbxxInfo.getRwmc())) {
+			throw new ServiceException("需求名称不能为空，请重新确认！");
+		}
+		if (StringUtil.isEmpty(rwjbxxInfo.getRwxs())) {
+			throw new ServiceException("需求分类不能为空，请重新确认！");
+		}
+		// 开发性质的任务
+		if (rwjbxxInfo.getRwxs().equals(RwxsEnum.KF.getCode())) {
+			if (StringUtil.isEmpty(rwjbxxInfo.getRwlx())) {
+				throw new ServiceException("需求类型不能为空，请重新确认！");
+			}
+			if (StringUtil.isEmpty(rwjbxxInfo.getSfjj())) {
+				throw new ServiceException("是否紧急不能为空，请重新确认！");
+			}
+			if (RwxqlxEnum.XQ.getCode().equals(rwjbxxInfo.getRwlx())) {
+				if (StringUtil.toInt(rwjbxxInfo.getXmysje()) <= 0) {
+					throw new ServiceException("需求预算金额不能小于0，请重新确认");
+				}
+			}
+		} else {
+			if (StringUtil.toInt(rwjbxxInfo.getXmysje()) <= 0) {
+				throw new ServiceException("需求预算金额不能小于0，请重新确认");
+			}
+		}
+		if (StringUtil.isEmpty(rwjbxxInfo.getXmgs())) {
+			throw new ServiceException("需求描述不能为空，请重新确认！");
+		}
+		long zbzq = DateUtil.getDaysBetween(DateUtil.getCurrentDateStr(), DateUtil.formatDate(rwjbxxInfo.getZbjzrq()));
+		if (zbzq < 0) {
+			throw new ServiceException("招标截至日期不能小于当前日期，请重新确认！");
+		}
+		long jfzq = DateUtil.getDaysBetween(DateUtil.formatDate(rwjbxxInfo.getZbjzrq()), rwjbxxInfo.getJfrq());
+		if (jfzq < 0) {
+			throw new ServiceException("交付日期日期不能小于招标截至日期，请重新确认！");
+		}
+
+	}
+
+	@Override
+	/**
+	 * 
+	 * @param rwjbxxInfo
+	 * @param rwjbxxExtInfo
+	 * @param flag
+	 *            1保存草稿 2 发布
+	 * @param log
+	 * @return
+	 * @throws ServiceException
+	 */
+	public DataResult<Integer> publishing(RwjbxxInfo rwjbxxInfo, RwjbxxExtInfo rwjbxxExtInfo, String flag,
+			CustomOperateLog log) throws ServiceException {
+		checkRwjbxx(rwjbxxInfo);
+		RwjbxxInfo saveRwjbxxInfo = new RwjbxxInfo();
+		String rwid = "", rwbh = "";
+		// 新建
+		if (StringUtil.isEmpty(rwjbxxInfo.getWid())) {
+			rwid = StringUtil.getUuId();
+			rwbh = "123123";
+			saveRwjbxxInfo.setCjsj(DateUtil.getCurrentDate());
+			saveRwjbxxInfo.setCjzip(log.getCustomIp());
+		} else {
+			RwjbxxInfo oldRwjbxxInfo = rwjbxxInfoMapper.selectByPrimaryKey(rwjbxxInfo.getWid());
+			if (!log.getXqfId().equals(oldRwjbxxInfo.getXqfid())) {
+				throw new ServiceException("该需求不是当前用户的需求，请重新确认");
+			}
+			// 发布
+			if ("1".equals(flag)) {
+				if (StringUtil.toInt(oldRwjbxxInfo.getXmzt()) > RwztStateEnum.CG.getCode()) {
+					throw new ServiceException("该需求状态不满足发布需求状态，请重新确认");
+				}
+
+			} else {
+				if (StringUtil.toInt(oldRwjbxxInfo.getXmzt()) != RwztStateEnum.CG.getCode()) {
+					throw new ServiceException("该需求状态不满足保存草稿需求状态，请重新确认");
+				}
+			}
+			rwid = rwjbxxInfo.getWid();
+			rwbh = oldRwjbxxInfo.getRwbh();
+		}
+		saveRwjbxxInfo.setWid(rwid);
+		saveRwjbxxInfo.setRwbh(rwbh);
+		saveRwjbxxInfo.setRwmc(rwjbxxInfo.getRwmc());
+		saveRwjbxxInfo.setRwxs(rwjbxxInfo.getRwxs());
+		saveRwjbxxInfo.setRwlx(rwjbxxInfo.getRwlx());
+		saveRwjbxxInfo.setSfjj(rwjbxxInfo.getSfjj());
+		saveRwjbxxInfo.setKfkj(rwjbxxInfo.getKfkj());
+		saveRwjbxxInfo.setZbjzrq(rwjbxxInfo.getZbjzrq());
+		saveRwjbxxInfo.setJfrq(rwjbxxInfo.getJfrq());
+		saveRwjbxxInfo.setXmysje(rwjbxxInfo.getXmysje());
+		saveRwjbxxInfo.setXmgs(rwjbxxInfo.getXmgs());
+
+		saveRwjbxxInfo.setYwxlb(rwjbxxExtInfo.getYwxbm());
+		saveRwjbxxInfo.setXqfid(log.getXqfId());
+		saveRwjbxxInfo.setFb(rwjbxxExtInfo.getFb());
+		saveRwjbxxInfo
+				.setZbzq(DateUtil.getDaysBetween(DateUtil.formatDate(rwjbxxInfo.getZbjzrq()), rwjbxxInfo.getJfrq()));
+		// 不是开发任务
+		if (!saveRwjbxxInfo.getRwxs().equals(RwxsEnum.KF.getCode())) {
+			saveRwjbxxInfo.setRwlx(StringUtil.toShort(RwxqlxEnum.XQ.getCode()));
+			saveRwjbxxInfo.setKfkj(null);
+			saveRwjbxxInfo.setSfjj(YesNoEnum.NO.getCode());
+		}
+		// BUG类型的需求项目预算金额默认为0
+		if (saveRwjbxxInfo.getRwlx().equals(RwxqlxEnum.BUG.getCode())) {
+			saveRwjbxxInfo.setXmysje(0L);
+		}
+		Map<String, Object> rwxsMap = dictionaryService.selectRwxsByBm(saveRwjbxxInfo.getRwxs());
+		Integer xmzt = StringUtil.toInt(RwztStateEnum.CG.getCode());
+		if ("1".equals(flag)) {
+			if (YesNoEnum.YES.getCode().equals(StringUtil.toStr(rwxsMap.get("SFXQRWLX")))) {
+				xmzt = StringUtil.toInt(RwztStateEnum.DSH.getCode());
+
+			} else {
+				xmzt = StringUtil.toInt(RwztStateEnum.ZBZ.getCode());
+			}
+		} else {
+			xmzt = StringUtil.toInt(RwztStateEnum.CG.getCode());
+		}
+		saveRwjbxxInfo.setXmzt(xmzt);
+		rwjbxxExtInfo.setRwid(rwid);
+		if (StringUtil.isEmpty(rwjbxxInfo.getWid())) {
+			rwjbxxExtInfo.setWid(StringUtil.getUuId());
+			rwjbxxInfoMapper.insertSelective(saveRwjbxxInfo);
+			rwjbxxExtInfoService.insertSelective(rwjbxxExtInfo);
+		} else {
+			rwjbxxInfoMapper.updateByPrimaryKeySelective(saveRwjbxxInfo);
+			rwjbxxExtInfoService.updateByPrimaryKeySelective(rwjbxxExtInfo);
+		}
+
+		// 任务状态变更日志
+		RwztbglsInfo rwztbglsInfo = new RwztbglsInfo();
+		rwztbglsInfo.setWid(StringUtil.getUuId());
+		rwztbglsInfo.setCzrip(log.getCustomIp());
+		rwztbglsInfo.setCzrxm(log.getXm());
+		rwztbglsInfo.setCzsj(DateUtil.getCurrentDate());
+		rwztbglsInfo.setShyy("发布需求");
+		rwztbglsInfo.setXmid(rwid);
+		rwztbglsInfo.setXqfid(log.getXqfId());
+		rwztbglsInfo.setZt(StringUtil.toShort(xmzt));
+		rwztbglsInfoService.insertSelective(rwztbglsInfo, log);
+		return DataResult.success(1);
+	}
+
+	/**
+	 * 大厅众包专用
+	 * 
+	 * @param record
+	 * @return
+	 */
+	public DataResult<List<RwjbxxInfoExtend>> selectForCenter(QueryCondition<RwjbxxInfoExtend> record)
+			throws ServiceException {
+		if (record.getPageInfo() != null) {
+			Page<RwjbxxInfoExtend> page = PageHelper.startPage(record.getPageInfo().getPageNum(),
+					record.getPageInfo().getPageSize());
+			List<RwjbxxInfoExtend> datas = rwjbxxInfoExtendMapper.selectForCenter(record);
+
+			DataResult<List<RwjbxxInfoExtend>> dataResult = DataResult.success(datas);
+			dataResult.setPageInfo(PageUtil.changePageInfo(page));
+			return dataResult;
+		} else {
+			return DataResult.success(rwjbxxInfoExtendMapper.selectForCenter(record));
+
+		}
+	}
+
+	@Override
+	public DataResult<List<RwjbxxInfoExtend>> selectDisplayByCondition(QueryCondition<RwjbxxInfoExtend> record)
+			throws ServiceException {
+		if (record.getPageInfo() != null) {
+			Page<RwjbxxInfoExtend> page = PageHelper.startPage(record.getPageInfo().getPageNum(),
+					record.getPageInfo().getPageSize());
+			List<RwjbxxInfoExtend> datas = rwjbxxInfoExtendMapper.selectDisplayByCondition(record);
+
+			DataResult<List<RwjbxxInfoExtend>> dataResult = DataResult.success(datas);
+			dataResult.setPageInfo(PageUtil.changePageInfo(page));
+			return dataResult;
+		} else {
+			return DataResult.success(rwjbxxInfoExtendMapper.selectDisplayByCondition(record));
+
+		}
+	}
+
+	@Override
+	public DataResult<Integer> selectCountByCondition(QueryCondition<RwjbxxInfoExtend> record, CustomOperateLog log)
+			throws ServiceException {
+		return DataResult.success(rwjbxxInfoExtendMapper.selectCountByCondition(record));
+	}
+
+	@Override
+	public DataResult<Integer> reback(String rwid, String shly, CustomOperateLog log) throws ServiceException {
+		DataResult<RwjbxxInfo> rwjbxxInfoData = this.selectByPrimaryKey(rwid);
+		if (StringUtil.toStr(shly).equals("")) {
+			throw new ServiceException("收回需求的理由不能为空，请重新确认");
+		}
+		if (rwjbxxInfoData.getDatas() == null) {
+			throw new ServiceException("该需求不存在，请重新确认");
+		}
+		RwjbxxInfo rwjbxxInfoOld = rwjbxxInfoData.getDatas();
+		if (StringUtil.toInt(rwjbxxInfoOld.getXmzt()) != RwztStateEnum.DSH.getCode()) {
+			throw new ServiceException("该需求状态不是待审核装惕啊，无法收回该需求");
+		}
+		if (!log.getXqfId().equals(rwjbxxInfoOld.getXqfid())) {
+			throw new ServiceException("该需求状态不是您发布的需求，无法收回该需求");
+		}
+
+		RwjbxxInfo rwjbxxInfoSave = new RwjbxxInfo();
+		rwjbxxInfoSave.setWid(rwid);
+		rwjbxxInfoSave.setCjsj(DateUtil.getCurrentDate());
+		rwjbxxInfoSave.setCjzip(log.getCustomIp());
+		rwjbxxInfoSave.setXmzt(RwztStateEnum.CG.getCode());
+		this.updateByPrimaryKeySelective(rwjbxxInfoSave);
+		// 任务状态变更日志
+		RwztbglsInfo rwztbglsInfo = new RwztbglsInfo();
+		rwztbglsInfo.setWid(StringUtil.getUuId());
+		rwztbglsInfo.setCzrip(log.getCustomIp());
+		rwztbglsInfo.setCzrxm(log.getXm());
+		rwztbglsInfo.setCzsj(DateUtil.getCurrentDate());
+		rwztbglsInfo.setShyy("收回需求：" + shly);
+		rwztbglsInfo.setXmid(rwid);
+		rwztbglsInfo.setXqfid(log.getXqfId());
+		rwztbglsInfo.setZt(StringUtil.toShort(RwztStateEnum.CG.getCode()));
+		rwztbglsInfoService.insertSelective(rwztbglsInfo, log);
+		return DataResult.success(1);
+	}
+
+	@Override
+	public DataResult<Integer> modifyDate(String rwid, String zbjzrq, String jfrq, CustomOperateLog log)
+			throws ServiceException {
+		DataResult<RwjbxxInfo> rwjbxxInfoData = this.selectByPrimaryKey(rwid);
+		if (rwjbxxInfoData.getDatas() == null) {
+			throw new ServiceException("该需求不存在，请重新确认");
+		}
+
+		RwjbxxInfo rwjbxxInfo = rwjbxxInfoData.getDatas();
+		if (!log.getXqfId().equals(rwjbxxInfo.getXqfid())) {
+			throw new ServiceException("该需求状态不是您发布的需求，无法收回该需求");
+		}
+
+		long zbzq = DateUtil.getDaysBetween(DateUtil.getCurrentDateStr(), DateUtil.formatDate(rwjbxxInfo.getZbjzrq()));
+		if (zbzq < 0) {
+			throw new ServiceException("招标截至日期不能小于当前日期，请重新确认！");
+		}
+		long jfzq = DateUtil.getDaysBetween(DateUtil.formatDate(rwjbxxInfo.getZbjzrq()), rwjbxxInfo.getJfrq());
+		if (jfzq < 0) {
+			throw new ServiceException("交付日期日期不能小于招标截至日期，请重新确认！");
+		}
+
+		RwjbxxInfo saveRwjbxxInfo = new RwjbxxInfo();
+		saveRwjbxxInfo.setWid(rwid);
+		saveRwjbxxInfo.setZbjzrq(DateUtil.parseDate(zbjzrq));
+		saveRwjbxxInfo.setJfrq(jfrq);
+		this.updateByPrimaryKeySelective(saveRwjbxxInfo);
+		return DataResult.success(1);
+	}
+
+	@Override
+	public DataResult<Integer> delete(String rwid, CustomOperateLog log) throws ServiceException {
+		DataResult<RwjbxxInfo> rwjbxxInfoData = this.selectByPrimaryKey(rwid);
+		if (rwjbxxInfoData.getDatas() == null) {
+			throw new ServiceException("该需求不存在，请重新确认");
+		}
+
+		RwjbxxInfo rwjbxxInfo = rwjbxxInfoData.getDatas();
+		if (!log.getXqfId().equals(rwjbxxInfo.getXqfid())) {
+			throw new ServiceException("该需求状态不是您发布的需求，无法删除该需求");
+		}
+
+		if (RwztStateEnum.CG.getCode() != StringUtil.toInt(rwjbxxInfo.getXmzt())) {
+			throw new ServiceException("该需求状态不是草稿状态，无法删除该需求");
+		}
+		return this.deleteByPrimaryKey(rwid);
+	}
+
+	@Override
+	public DataResult<Integer> doTb(String rwid, CustomOperateLog log) throws ServiceException {
+		if (StringUtil.isEmpty(rwid)) {
+			throw new ServiceException("需求WID不能为空，请重新确认");
+		}
+		DataResult<RwjbxxInfo> rwjbxxInfoDatas = this.selectByPrimaryKey(rwid);
+		if (rwjbxxInfoDatas.getDatas() == null) {
+			throw new ServiceException("该需求已不存在，请重新确认！");
+		}
+		if (rwjbxxInfoDatas.getDatas().getXqfid().equals(log.getXqfId())) {
+			throw new ServiceException("您不能投标自己发布的需求，请重新确认");
+		}
+		return DataResult.success(1);
+
+	}
+
+	@Override
+	public DataResult<Integer> toTb(RwtbxxInfo rwtbxxInfo, CustomOperateLog log) throws ServiceException {
+		if (StringUtil.isEmpty(rwtbxxInfo.getRwid())) {
+			throw new ServiceException("需求WID不能为空，请重新确认");
+		}
+		DataResult<RwjbxxInfo> rwjbxxInfoDatas = this.selectByPrimaryKey(rwtbxxInfo.getRwid());
+		if (rwjbxxInfoDatas.getDatas() == null) {
+			throw new ServiceException("该需求已不存在，请重新确认！");
+		}
+		if (rwjbxxInfoDatas.getDatas().getXqfid().equals(log.getXqfId())) {
+			throw new ServiceException("您不能投标自己发布的需求，请重新确认");
+		}
+		if (RwztStateEnum.ZBZ.getCode() != rwjbxxInfoDatas.getDatas().getXmzt()) {
+			throw new ServiceException("该需求不在招标中，请重新确认！");
+		}
+		XtcsbInfoExtend queryXtcsbInfoExtend = new XtcsbInfoExtend();
+		queryXtcsbInfoExtend.setCsmc(XtcsbTypeEnum.XMGL_TBJGHDBL.getCode());
+		DataResult<List<XtcsbInfoExtend>> xtcsbInfoDatas = xtcsbInfoService.selectByCondition(queryXtcsbInfoExtend);
+		// 上下浮动金额
+		long sxfdje = rwjbxxInfoDatas.getDatas().getXmysje()
+				* StringUtil.toLong(xtcsbInfoDatas.getDatas().get(0).getCsz()) / 100;
+		long maxTbje = rwjbxxInfoDatas.getDatas().getXmysje() + sxfdje;
+		long minTbje = rwjbxxInfoDatas.getDatas().getXmysje() - sxfdje;
+		if (rwtbxxInfo.getTbje().longValue() > maxTbje || rwtbxxInfo.getTbje().longValue() < minTbje) {
+			throw new ServiceException("投标金额只能在[" + minTbje + "," + maxTbje + "]之间，请重新确认！");
+		}
+		RwtbxxInfoExtend queryRwtbxxInfoExtend = new RwtbxxInfoExtend();
+		queryRwtbxxInfoExtend.setKfzid(log.getKfzId());
+		queryRwtbxxInfoExtend.setRwid(rwtbxxInfo.getRwid());
+
+		DataResult<Integer> countData = rwtbxxInfoService
+				.selectCountByCondition(ConditionUtil.createCondition(queryRwtbxxInfoExtend));
+		if (StringUtil.toInt(countData.getDatas()) > 0) {
+			throw new ServiceException("您已投标，无法重复投标！");
+		}
+		RwtbxxInfo saveRwtbxxInfo = new RwtbxxInfo();
+		saveRwtbxxInfo.setWid(StringUtil.getUuId());
+		saveRwtbxxInfo.setRwid(rwtbxxInfo.getRwid());
+		saveRwtbxxInfo.setSfjskfzxy(YesNoEnum.YES.getCode());
+		saveRwtbxxInfo.setTbcs(rwtbxxInfo.getTbcs());
+		saveRwtbxxInfo.setTbje(rwtbxxInfo.getTbje());
+		saveRwtbxxInfo.setKfzid(log.getKfzId());
+		saveRwtbxxInfo.setTbrip(log.getCustomIp());
+		saveRwtbxxInfo.setTbsj(DateUtil.getCurrentDate());
+		saveRwtbxxInfo.setZbzt(RwtbztEnum.DPB.getCode());
+		rwtbxxInfoService.insertSelective(saveRwtbxxInfo);
+		return DataResult.success(1);
+	}
+
+	@Override
+	public DataResult<Integer> selectTb(String tbid, CustomOperateLog log) throws ServiceException {
+		DataResult<RwtbxxInfo> rwtbxxInfoDatas = rwtbxxInfoService.selectByPrimaryKey(tbid);
+		
+		if (rwtbxxInfoDatas.getDatas() == null) {
+			throw new ServiceException("该投标信息已不存在，请重新确认！");
+		}
+		DataResult<RwjbxxInfo> rwjbxxInfoDatas = this.selectByPrimaryKey(rwtbxxInfoDatas.getDatas().getRwid());
+		if (rwjbxxInfoDatas.getDatas() == null) {
+			throw new ServiceException("该需求信息已不存在，请重新确认！");
+		}
+		if (!rwjbxxInfoDatas.getDatas().getXqfid().equals(log.getXqfId())) {
+			throw new ServiceException("该需求信息不是您发布的需求，请重新确认！");
+		}
+		if (RwztStateEnum.ZBZ.getCode() != StringUtil.toInt(rwjbxxInfoDatas.getDatas().getXmzt())) {
+			throw new ServiceException("该需求信息不在招标中，请重新确认！");
+		}
+		XqfxxInfo xqfxxInfo=xqfxxInfoService.selectByPrimaryKey(rwjbxxInfoDatas.getDatas().getXqfid(), log).getDatas();
+		BigDecimal zje=DecimalUtil.add(rwtbxxInfoDatas.getDatas().getTbje(),DecimalUtil.toDecimal(StringUtil.toStr(rwjbxxInfoDatas.getDatas().getJjbzje())));
+		if(zje.compareTo(xqfxxInfo.getZhye())==1){
+			throw new ServiceException("你的账户余额不足"+zje+"元，请先去充值！");
+		}
+		
+		
+		RwtbxxInfo saveRwtbxxInfo = new RwtbxxInfo();
+		saveRwtbxxInfo.setRwid(rwjbxxInfoDatas.getDatas().getWid());
+		saveRwtbxxInfo.setZbzt(RwtbztEnum.WZB.getCode());
+		rwtbxxInfoService.updateByCondition(saveRwtbxxInfo);
+		saveRwtbxxInfo.setWid(tbid);
+		saveRwtbxxInfo.setRwid(null);
+	
+		saveRwtbxxInfo.setZbzt(RwtbztEnum.YZB.getCode());
+		rwtbxxInfoService.updateByPrimaryKeySelective(saveRwtbxxInfo);
+
+		RwjbxxInfo saveRwjbxxInfo = new RwjbxxInfo();
+		saveRwjbxxInfo.setXmzt(RwztStateEnum.KFZ.getCode());
+		saveRwjbxxInfo.setKfzid(rwtbxxInfoDatas.getDatas().getKfzid());
+		saveRwjbxxInfo.setZbsj(DateUtil.getCurrentDate());
+		saveRwjbxxInfo.setWid(rwtbxxInfoDatas.getDatas().getRwid());
+		saveRwjbxxInfo.setZbje(DecimalUtil.changeNull(rwtbxxInfoDatas.getDatas().getTbje()).longValue());
+		this.updateByPrimaryKeySelective(saveRwjbxxInfo);
+
+		// 任务状态变更日志
+		RwztbglsInfo rwztbglsInfo = new RwztbglsInfo();
+		rwztbglsInfo.setWid(StringUtil.getUuId());
+		rwztbglsInfo.setCzrip(log.getCustomIp());
+		rwztbglsInfo.setCzrxm(log.getXm());
+		rwztbglsInfo.setCzsj(DateUtil.getCurrentDate());
+		rwztbglsInfo.setShyy("选择投标人");
+		rwztbglsInfo.setXmid(rwjbxxInfoDatas.getDatas().getWid());
+		rwztbglsInfo.setXqfid(log.getXqfId());
+		rwztbglsInfo.setKfzid(rwtbxxInfoDatas.getDatas().getKfzid());
+		rwztbglsInfo.setZt(StringUtil.toShort(RwztStateEnum.KFZ.getCode()));
+		rwztbglsInfoService.insertSelective(rwztbglsInfo, log);
+		
+		XqfxxInfo saveXqfxxInfo=new XqfxxInfo();
+		saveXqfxxInfo.setWid(xqfxxInfo.getWid());
+		saveXqfxxInfo.setZhdjye(DecimalUtil.add(xqfxxInfo.getZhdjye(),zje));
+		saveXqfxxInfo.setZhye(DecimalUtil.sub(xqfxxInfo.getZhye(), zje));
+		saveXqfxxInfo.setVersion(xqfxxInfo.getVersion());
+		
+		//更新需求方账户信息(防止出现脏数据)
+		for(int i=0;i<4;i++){
+			Integer updateCount=xqfxxInfoService.updateByVersion(saveXqfxxInfo, log).getDatas();
+			if(i==3){
+				throw new ServiceException("选标失败，请联系系统管理员！");
+			}
+			if(updateCount==null || updateCount==0){
+				xqfxxInfo=xqfxxInfoService.selectByPrimaryKey(rwjbxxInfoDatas.getDatas().getXqfid(), log).getDatas();
+				saveXqfxxInfo.setZhdjye(DecimalUtil.add(xqfxxInfo.getZhdjye(),zje));
+				saveXqfxxInfo.setZhye(DecimalUtil.sub(xqfxxInfo.getZhye(), zje));
+				saveXqfxxInfo.setVersion(xqfxxInfo.getVersion());
+				continue;
+			}else{
+				break;
+			}
+		}
+		
+		//更新需求方账户明细
+		XqfzhmxInfo saveSqfzhmxInfo=new XqfzhmxInfo();
+		saveSqfzhmxInfo.setDjzje(saveXqfxxInfo.getZhdjye());
+		saveSqfzhmxInfo.setFysm("选中投标人，平台冻结需求费用");
+		saveSqfzhmxInfo.setId(StringUtil.getUuId());
+		saveSqfzhmxInfo.setJe(StringUtil.toFloat(zje));
+		saveSqfzhmxInfo.setJyzt(StringUtil.toShort(JyztEnum.YZB.getCode()));
+		saveSqfzhmxInfo.setLyxmid(rwtbxxInfoDatas.getDatas().getRwid());
+		saveSqfzhmxInfo.setSzlbid(SzlbEnum.PTTG.getCode());
+		saveSqfzhmxInfo.setSzsj(DateUtil.getCurrentDate());
+		saveSqfzhmxInfo.setXqfid(rwjbxxInfoDatas.getDatas().getXqfid());
+		saveSqfzhmxInfo.setZdid(log.getUserId());
+		saveSqfzhmxInfo.setZdip(log.getCustomIp());
+		saveSqfzhmxInfo.setZhye(StringUtil.toFloat(saveXqfxxInfo.getZhye()));
+		saveSqfzhmxInfo.setZzczrid(log.getUserId());
+		saveSqfzhmxInfo.setZzczrip(DateUtil.getCurrentDate());
+		return DataResult.success(1);
+	}
+
+	@Override
+	public DataResult<Integer> applyAccept(String rwid, CustomOperateLog log) throws ServiceException {
+		DataResult<RwjbxxInfo> rwjbxxInfoDatas = this.selectByPrimaryKey(rwid);
+		if (rwjbxxInfoDatas.getDatas() == null) {
+			throw new ServiceException("该需求信息已不存在，请重新确认！");
+		}
+		if (!rwjbxxInfoDatas.getDatas().getKfzid().equals(log.getKfzId())) {
+			throw new ServiceException("该需求信息不是您投标的需求，请重新确认！");
+		}
+		if (RwztStateEnum.KFZ.getCode() != StringUtil.toInt(rwjbxxInfoDatas.getDatas().getXmzt())&&
+				RwztStateEnum.YSBTG.getCode() != StringUtil.toInt(rwjbxxInfoDatas.getDatas().getXmzt())) {
+			throw new ServiceException("该需求信息不在开发中(验收不通过)，无法申请验收，请重新确认！");
+		}
+		RwjbxxInfo saveRwjbxxInfo = new RwjbxxInfo();
+		saveRwjbxxInfo.setXmzt(RwztStateEnum.YSZ.getCode());
+		saveRwjbxxInfo.setWid(rwid);
+		this.updateByPrimaryKeySelective(saveRwjbxxInfo);
+		
+		// 任务状态变更日志
+		RwztbglsInfo rwztbglsInfo = new RwztbglsInfo();
+		rwztbglsInfo.setWid(StringUtil.getUuId());
+		rwztbglsInfo.setCzrip(log.getCustomIp());
+		rwztbglsInfo.setCzrxm(log.getXm());
+		rwztbglsInfo.setCzsj(DateUtil.getCurrentDate());
+		rwztbglsInfo.setShyy("申请验收");
+		rwztbglsInfo.setXmid(rwjbxxInfoDatas.getDatas().getWid());
+		rwztbglsInfo.setKfzid(rwjbxxInfoDatas.getDatas().getKfzid());
+		rwztbglsInfo.setZt(StringUtil.toShort(RwztStateEnum.YSZ.getCode()));
+		rwztbglsInfoService.insertSelective(rwztbglsInfo, log);
+		return DataResult.success(1);
+	}
+
+	@Override
+	/**
+	 * 验收确认
+	 */
+	public DataResult<Integer> accept(String rwid, String pjjg, String bz, Float kfzl, Float fwzl, Float xysd,CustomOperateLog log)
+			throws ServiceException {
+		
+		if("".equals(rwid)){
+			throw new ServiceException("rwid不能为空，请重新确认！");
+		}
+		DataResult<RwjbxxInfo> rwjbxxInfoDatas = this.selectByPrimaryKey(rwid);
+		if (rwjbxxInfoDatas.getDatas() == null) {
+			throw new ServiceException("该需求信息已不存在，请重新确认！");
+		}
+		if (!rwjbxxInfoDatas.getDatas().getXqfid().equals(log.getXqfId())) {
+			throw new ServiceException("该需求信息不是您发布的需求，请重新确认！");
+		}
+		if(rwjbxxInfoDatas.getDatas().getXmzt()!=RwztStateEnum.YSZ.getCode()){
+			throw new ServiceException("该需求状态不在验收中，请重新确认！");
+		}
+		xqfAccpetOrSaleEn(rwjbxxInfoDatas.getDatas(),pjjg,bz,kfzl,fwzl,xysd,log,1);
+		return DataResult.success(1);
+	}
+	/**
+	 * 售后确认
+	 */
+	public DataResult<Integer> saleEnd(String rwid, String pjjg, String bz, Float kfzl, Float fwzl, Float xysd,CustomOperateLog log)
+			throws ServiceException {
+		
+		if("".equals(rwid)){
+			throw new ServiceException("rwid不能为空，请重新确认！");
+		}
+		DataResult<RwjbxxInfo> rwjbxxInfoDatas = this.selectByPrimaryKey(rwid);
+		if (rwjbxxInfoDatas.getDatas() == null) {
+			throw new ServiceException("该需求信息已不存在，请重新确认！");
+		}
+		if (!rwjbxxInfoDatas.getDatas().getXqfid().equals(log.getXqfId())) {
+			throw new ServiceException("该需求信息不是您发布的需求，请重新确认！");
+		}
+		if(rwjbxxInfoDatas.getDatas().getXmzt()!=RwztStateEnum.SHJSDQR.getCode()){
+			throw new ServiceException("该需求状态不在申请售后中，请重新确认！");
+		}
+		xqfAccpetOrSaleEn(rwjbxxInfoDatas.getDatas(),pjjg,bz,kfzl,fwzl,xysd,log,2);
+		return DataResult.success(1);
+	}
+	/**
+	 * 
+	 * @param rwjbxxInfo
+	 * @param pjjg
+	 * @param bz
+	 * @param kfzl
+	 * @param fwzl
+	 * @param xysd
+	 * @param log
+	 * @param flag  1验收  2售后
+	 * @throws ServiceException
+	 */
+	private void xqfAccpetOrSaleEn(RwjbxxInfo rwjbxxInfo, String pjjg, String bz, Float kfzl, Float fwzl, Float xysd,CustomOperateLog log,int flag)
+	throws ServiceException{
+		String message="验收";
+		if(flag==2){
+			message="售后";
+		}
+		Integer xmzt=RwztStateEnum.SHJSDQR.getCode();
+		if(flag==1){
+			if(YesNoEnum.YES.getCode().equals(pjjg)){
+				xmzt=RwztStateEnum.SHJSDQR.getCode();
+			}else{
+				xmzt=RwztStateEnum.YSBTG.getCode();
+			}
+		}else{
+			if(YesNoEnum.YES.getCode().equals(pjjg)){
+				xmzt=RwztStateEnum.DPJ.getCode();
+			}else{
+				xmzt=RwztStateEnum.SHBTG.getCode();
+			}
+		}
+		RwjbxxInfo saveRwjbxxInfo=new RwjbxxInfo();
+		RwztbglsInfo rwztbglsInfo = new RwztbglsInfo();
+		rwztbglsInfo.setCzrip(log.getCustomIp());
+		rwztbglsInfo.setCzrxm(log.getXm());
+		rwztbglsInfo.setCzsj(DateUtil.getCurrentDate());
+		rwztbglsInfo.setShyy(bz);
+		rwztbglsInfo.setWid(StringUtil.getUuId());
+		rwztbglsInfo.setXmid(rwjbxxInfo.getWid());
+		rwztbglsInfo.setXqfid(rwjbxxInfo.getXqfid());
+		saveRwjbxxInfo.setWid(rwjbxxInfo.getWid());
+		
+		if(YesNoEnum.YES.getCode().equals(pjjg)){
+			saveRwjbxxInfo.setXmzt(xmzt);
+			rwztbglsInfo.setZt(StringUtil.toShort(xmzt));
+			if(kfzl==null|| kfzl==0){
+				throw new ServiceException("开发质量不能为空，请重新确认！");
+			}
+			if(fwzl==null|| fwzl==0){
+				throw new ServiceException("服务质量不能为空，请重新确认！");
+			}
+			if(xysd==null|| xysd==0){
+				throw new ServiceException("响应速度不能为空，请重新确认！");
+			}
+			//获取需求方对开发者的评价明细
+			KfzpjxxDetailInfo queryKfzpjxxDetailInfo=new KfzpjxxDetailInfo();
+			queryKfzpjxxDetailInfo.setSsxmid(rwjbxxInfo.getWid());
+			DataResult<List<KfzpjxxDetailInfo>>  kfzpjxxDetailInfoDatas=kfzpjxxDetailInfoService.selectByCondition(ConditionUtil.createCondition(queryKfzpjxxDetailInfo), log);
+			saveKfzpjxxDetailInfo(kfzpjxxDetailInfoDatas.getDatas(),rwjbxxInfo,PjClassifyEnum.KFZL.getCode(),kfzl,log);
+			saveKfzpjxxDetailInfo(kfzpjxxDetailInfoDatas.getDatas(),rwjbxxInfo,PjClassifyEnum.FWZL.getCode(),fwzl,log);
+			saveKfzpjxxDetailInfo(kfzpjxxDetailInfoDatas.getDatas(),rwjbxxInfo,PjClassifyEnum.XYSU.getCode(),xysd,log);
+			//获取需求方对开发者的评价结果
+			KfzpjxxInfo queryKfzpjxxInfo=new KfzpjxxInfo();
+			queryKfzpjxxInfo.setSsxmid(rwjbxxInfo.getWid());
+			DataResult<List<KfzpjxxInfo>> kfzpjxxInfoDatas= kfzpjxxInfoService.selectByCondition(ConditionUtil.createCondition(queryKfzpjxxInfo), log);
+			KfzpjxxInfo saveKfzpjxxInfo=new KfzpjxxInfo();
+			saveKfzpjxxInfo.setCpsj(DateUtil.getCurrentDate());
+			saveKfzpjxxInfo.setCpzip(log.getCustomIp());
+			saveKfzpjxxInfo.setKfzid(rwjbxxInfo.getKfzid());
+			saveKfzpjxxInfo.setCpxqfid(rwjbxxInfo.getXqfid());
+			if((kfzl+fwzl+xysd)>=15){
+				saveKfzpjxxInfo.setPjjg(PjResultEnum.YX.getCode());	
+			}else if((kfzl+fwzl+xysd)<=3){
+				saveKfzpjxxInfo.setPjjg(PjResultEnum.CHA.getCode());
+			}else {
+				saveKfzpjxxInfo.setPjjg(PjResultEnum.LH.getCode());
+			}
+			
+			saveKfzpjxxInfo.setPjnr(bz);
+			saveKfzpjxxInfo.setSsxmid(rwjbxxInfo.getWid());
+			saveKfzpjxxInfo.setKfzid(rwjbxxInfo.getKfzid());
+			if(CommonUtil.isNotEmptyList(kfzpjxxInfoDatas.getDatas())){
+				saveKfzpjxxInfo.setWid(kfzpjxxInfoDatas.getDatas().get(0).getWid());
+				kfzpjxxInfoService.updateByPrimaryKeySelective(saveKfzpjxxInfo, log);
+			}else{
+				saveKfzpjxxInfo.setWid(StringUtil.getUuId());
+				kfzpjxxInfoService.insertSelective(saveKfzpjxxInfo, log);
+			}
+			boolean needSh=checkNeedSh(rwjbxxInfo);
+			
+			DataResult<KfzxxInfo> kfzxxInfoDatas=kfzxxInfoService.selectByPrimaryKey(rwjbxxInfo.getKfzid(), log);
+			DataResult<XqfxxInfo> xqfxxInfoDatas=xqfxxInfoService.selectByPrimaryKey(rwjbxxInfo.getXqfid(), log);
+			
+			XtcsbInfoExtend queryXtcsbInfoExtend1=new XtcsbInfoExtend();
+				XtcsbInfoExtend queryXtcsbInfoExtend2=new XtcsbInfoExtend();
+				if(NwbEnum.NB.getCode().equals(kfzxxInfoDatas.getDatas().getKfzlb())){//内部开发者
+					queryXtcsbInfoExtend1.setCsmc(XtcsEnum.NBKFZ_XMGL_XMYSJDFKBL.getCode());
+					queryXtcsbInfoExtend2.setCsmc(XtcsEnum.NBKFZ_XMGL_YYPTYJSQBL.getCode());
+				}else{
+					queryXtcsbInfoExtend1.setCsmc(XtcsEnum.WBKFZ_XMGL_XMYSJDFKBL.getCode());
+					queryXtcsbInfoExtend2.setCsmc(XtcsEnum.WBKFZ_XMGL_YYPTYJSQBL.getCode());
+			}
+			DataResult<List<XtcsbInfoExtend>> xmyssqblDatas=xtcsbInfoService.selectByCondition(queryXtcsbInfoExtend1);
+			DataResult<List<XtcsbInfoExtend>> yyptsqblDatas=xtcsbInfoService.selectByCondition(queryXtcsbInfoExtend2);
+				
+			//需求方账户明细
+			saveYsXqfzhmxInfo(needSh,rwjbxxInfo,xmyssqblDatas.getDatas().get(0),xqfxxInfoDatas.getDatas(),log,flag,message);
+			//开发者账户明细
+			saveYsKfzzhmxInfo( needSh,rwjbxxInfo,xmyssqblDatas.getDatas().get(0),yyptsqblDatas.getDatas().get(0),kfzxxInfoDatas.getDatas(),log,flag,message);
+			
+			
+		}else if(YesNoEnum.NO.getCode().equals(pjjg)){
+			if(StringUtil.toStr(bz).equals("")){
+				throw new ServiceException(message+"不通过理由不能为空，请重新确认！");
+			}
+			saveRwjbxxInfo.setXmzt(RwztStateEnum.YSBTG.getCode());
+			rwztbglsInfo.setZt(StringUtil.toShort(RwztStateEnum.YSBTG.getCode()));
+		}
+		this.updateByPrimaryKeySelective(saveRwjbxxInfo);
+		this.rwztbglsInfoService.insertSelective(rwztbglsInfo, log);
+	}
+
+	/**
+	 * 判断是否需要售后
+	 * @param rwjbxxInfo
+	 * @return
+	 */
+	private boolean checkNeedSh(RwjbxxInfo rwjbxxInfo){
+		Map<String,Object> rwxsMap=dictionaryService.selectRwxsByBm(rwjbxxInfo.getRwxs());
+		boolean needSh=false;
+		if(StringUtil.toStr(rwxsMap.get("SFXQRWLX")).equals(YesNoEnum.YES.getCode())){
+			needSh=true;
+		}
+		if(needSh){
+			if(RwxqlxEnum.BUG.getCode().equals(StringUtil.toStr(rwjbxxInfo.getRwlx()))){//BUG类不需要售后
+				needSh=false;
+			}
+		}
+		if(needSh){
+			XtcsbInfoExtend queryXtcsbInfoExtend=new XtcsbInfoExtend();
+			queryXtcsbInfoExtend.setCsmc(XtcsEnum.NOT_NEED_SH.getCode());
+			DataResult<List<XtcsbInfoExtend>> notNeedShDatas=xtcsbInfoService.selectByCondition(queryXtcsbInfoExtend);
+			if(CommonUtil.isNotEmptyList(notNeedShDatas.getDatas())){
+				if(rwjbxxInfo.getXmysje()<=StringUtil.toLong(notNeedShDatas.getDatas().get(0).getCsz())){
+					needSh=false;
+				}
+			}
+		}
+		return needSh;
+	}
+	/**
+	 * 保存需求方账户明细
+	 * @param needSh
+	 * @param rwjbxxInfo
+	 * @param xmyssqbl
+	 * @param xqfxxInfo
+	 * @param log
+	 * @throws ServiceException
+	 */
+	private void saveYsXqfzhmxInfo(boolean needSh,RwjbxxInfo rwjbxxInfo,XtcsbInfoExtend xmyssqbl,XqfxxInfo xqfxxInfo,CustomOperateLog log,int flag,String message) throws ServiceException{
+		XqfzhmxInfo xqfzhmxInfo=new XqfzhmxInfo();
+		BigDecimal je=DecimalUtil.toDecimal(StringUtil.toStr(rwjbxxInfo.getZbje()));//招标金额
+		BigDecimal ptsqje=DecimalUtil.toDecimal(StringUtil.toStr(rwjbxxInfo.getJjbzje()));//平台收取金额
+		BigDecimal ysje=je;
+		
+		
+		if(needSh){
+			if(flag==1){
+				ysje=DecimalUtil.div(DecimalUtil.mul(ysje, DecimalUtil.toDecimal(xmyssqbl.getCsz())),DecimalUtil.toDecimal("100"));
+				ptsqje=DecimalUtil.div(DecimalUtil.mul(ptsqje, DecimalUtil.toDecimal(xmyssqbl.getCsz())),DecimalUtil.toDecimal("100"));
+			}else{
+				ysje=DecimalUtil.sub(ysje, DecimalUtil.div(DecimalUtil.mul(ysje, DecimalUtil.toDecimal(xmyssqbl.getCsz())),DecimalUtil.toDecimal("100")));
+				
+				ptsqje=DecimalUtil.sub(ptsqje,DecimalUtil.div(DecimalUtil.mul(ptsqje, DecimalUtil.toDecimal(xmyssqbl.getCsz())),DecimalUtil.toDecimal("100")));
+			}
+			
+		}
+		BigDecimal bcdjje=DecimalUtil.add(ysje, ptsqje);
+		
+		XqfxxInfo saveXqfxxInfo=new XqfxxInfo();
+		saveXqfxxInfo.setWid(xqfxxInfo.getWid());
+		saveXqfxxInfo.setZhdjye(DecimalUtil.sub(xqfxxInfo.getZhdjye(), bcdjje));
+		saveXqfxxInfo.setVersion(xqfxxInfo.getVersion());
+		
+		//更新需求方账户信息(防止出现脏数据)
+		for(int i=0;i<4;i++){
+			Integer updateCount=xqfxxInfoService.updateByVersion(saveXqfxxInfo, log).getDatas();
+			if(i==3){
+				throw new ServiceException(message+"失败，请联系系统管理员！");
+			}
+			if(updateCount==null || updateCount==0){
+				xqfxxInfo=xqfxxInfoService.selectByPrimaryKey(rwjbxxInfo.getXqfid(), log).getDatas();
+				saveXqfxxInfo.setZhdjye(DecimalUtil.sub(xqfxxInfo.getZhdjye(), bcdjje));
+				saveXqfxxInfo.setVersion(xqfxxInfo.getVersion());
+				continue;
+			}else{
+				break;
+			}
+		}	
+		if(StringUtil.toLong(rwjbxxInfo.getJjbzje())>0){
+			YyfzhszmxInfo yyfzhszmxInfo=new YyfzhszmxInfo();
+			DataResult<List<YyfzhxxInfo>> yyfzhxxInfoDatas= yyfzhxxInfoService.selectByCondition(null, log);
+			if(CommonUtil.isEmptyList(yyfzhxxInfoDatas.getDatas())){
+				throw new ServiceException("运营方账户不存在，请联系系统管理员！");
+			}
+			yyfzhszmxInfo.setFysm("项目验收平台收取加急等额外费用"+ptsqje+"元");
+			yyfzhszmxInfo.setJe(StringUtil.toFloat(ptsqje));
+			yyfzhszmxInfo.setJyzt(StringUtil.toShort(JyztEnum.YZB.getCode()));
+			yyfzhszmxInfo.setLyxmid(rwjbxxInfo.getWid());
+			yyfzhszmxInfo.setSzlbid(SzlbEnum.XMSR.getCode());
+			yyfzhszmxInfo.setSzsj(DateUtil.getCurrentDate());
+			yyfzhszmxInfo.setWid(StringUtil.getUuId());
+			yyfzhszmxInfo.setYyfzhid(yyfzhxxInfoDatas.getDatas().get(0).getWid());
+			yyfzhszmxInfo.setZdid(log.getUserId());
+			yyfzhszmxInfo.setZdip(log.getCustomIp());
+			yyfzhszmxInfo.setZfbzh(yyfzhxxInfoDatas.getDatas().get(0).getZfbzh());
+			yyfzhszmxInfo.setZzczrid(log.getUserId());
+			yyfzhszmxInfo.setZzczrip(DateUtil.getCurrentDate());
+			yyfzhszmxInfoService.insertSelective(yyfzhszmxInfo, log);
+		}
+		xqfzhmxInfo.setFysm("项目"+message+"支付"+ysje+"元");
+		xqfzhmxInfo.setId(StringUtil.getUuId());
+		xqfzhmxInfo.setJe(DecimalUtil.add(ptsqje, ysje).floatValue());
+		xqfzhmxInfo.setDjzje(saveXqfxxInfo.getZhdjye());
+		xqfzhmxInfo.setZhye(DecimalUtil.changeNull(xqfxxInfo.getZhye()).floatValue());
+		xqfzhmxInfo.setJyzt(StringUtil.toShort(JyztEnum.YZB.getCode()));
+		xqfzhmxInfo.setXqfid(rwjbxxInfo.getXqfid());
+		xqfzhmxInfo.setLyxmid(rwjbxxInfo.getWid());
+		xqfzhmxInfo.setSzlbid(SzlbEnum.XMZF.getCode());
+		xqfzhmxInfo.setSzsj(DateUtil.getCurrentDate());
+		xqfzhmxInfo.setZdid(log.getUserId());
+		xqfzhmxInfo.setZdip(log.getCustomIp());
+		xqfzhmxInfo.setZzczrid(log.getUserId());
+		xqfzhmxInfo.setZzczrip(DateUtil.getCurrentDate());
+		xqfzhmxInfoService.insertSelective(xqfzhmxInfo, log);
+		
+		
+		
+	}
+	/**
+	 * 保存验收时候的开发者账户明细
+	 */
+	private void  saveYsKfzzhmxInfo(boolean needSh,RwjbxxInfo rwjbxxInfo,XtcsbInfoExtend xmyssqbl,XtcsbInfoExtend ptsqbl,KfzxxInfo kfzxxInfo,CustomOperateLog log,int flag,String message) throws ServiceException{
+		KfzzhmxInfo kfzzhmxInfo=new KfzzhmxInfo();
+		BigDecimal je=DecimalUtil.toDecimal(StringUtil.toStr(rwjbxxInfo.getZbje()));
+		BigDecimal ptsqje=DecimalUtil.toDecimal("0");
+		BigDecimal ysje=je;
+		if(needSh){
+			//验收金额
+			if(flag==1){
+				ysje=DecimalUtil.div(DecimalUtil.mul(je, DecimalUtil.toDecimal(xmyssqbl.getCsz())),DecimalUtil.toDecimal("100"));
+			}else{
+				ysje=DecimalUtil.sub(je,DecimalUtil.div(DecimalUtil.mul(je, DecimalUtil.toDecimal(xmyssqbl.getCsz())),DecimalUtil.toDecimal("100")));
+			}
+			
+		}
+		if(StringUtil.toInt(ptsqbl.getCsz())>0){
+			
+			ptsqje=DecimalUtil.div(DecimalUtil.mul(ysje, DecimalUtil.toDecimal(ptsqbl.getCsz())), DecimalUtil.toDecimal("100"));
+			
+			
+			ysje=DecimalUtil.sub(ysje, ptsqje);
+			kfzzhmxInfo.setFysm("项目"+message+"费用收入,其中平台收取费用"+ptsqje+"元");
+			//运营账户收入
+			YyfzhszmxInfo yyfzhszmxInfo=new YyfzhszmxInfo();
+			DataResult<List<YyfzhxxInfo>> yyfzhxxInfoDatas= yyfzhxxInfoService.selectByCondition(null, log);
+			if(CommonUtil.isEmptyList(yyfzhxxInfoDatas.getDatas())){
+				throw new ServiceException("运营方账户不存在，请联系系统管理员！");
+			}
+			yyfzhszmxInfo.setFysm("项目"+message+"平台收取费用"+ptsqje+"元");
+			yyfzhszmxInfo.setJe(ptsqje.floatValue());
+			yyfzhszmxInfo.setJyzt(StringUtil.toShort(JyztEnum.YZB.getCode()));
+			yyfzhszmxInfo.setLyxmid(rwjbxxInfo.getWid());
+			yyfzhszmxInfo.setSzlbid(SzlbEnum.XMSR.getCode());
+			yyfzhszmxInfo.setSzsj(DateUtil.getCurrentDate());
+			yyfzhszmxInfo.setWid(StringUtil.getUuId());
+			yyfzhszmxInfo.setYyfzhid(yyfzhxxInfoDatas.getDatas().get(0).getWid());
+			yyfzhszmxInfo.setZdid(log.getUserId());
+			yyfzhszmxInfo.setZdip(log.getCustomIp());
+			yyfzhszmxInfo.setZfbzh(yyfzhxxInfoDatas.getDatas().get(0).getZfbzh());
+			yyfzhszmxInfo.setZzczrid(log.getUserId());
+			yyfzhszmxInfo.setZzczrip(DateUtil.getCurrentDate());
+			yyfzhszmxInfoService.insertSelective(yyfzhszmxInfo, log);
+			
+		}else{
+			kfzzhmxInfo.setFysm("项目"+message+"费用收入");
+		}
+		KfzxxInfo saveKfzxxInfo=new KfzxxInfo();
+		saveKfzxxInfo.setWid(kfzxxInfo.getWid());
+		saveKfzxxInfo.setZhye(DecimalUtil.add(kfzxxInfo.getZhye(), ysje));
+		saveKfzxxInfo.setVersion(kfzxxInfo.getVersion());
+		
+		//更新需求方账户信息(防止出现脏数据)
+		for(int i=0;i<4;i++){
+			Integer updateCount=kfzxxInfoService.updateByVersion(saveKfzxxInfo, log).getDatas();
+			if(i==3){
+				throw new ServiceException(message+"失败，请联系系统管理员！");
+			}
+			if(updateCount==null || updateCount==0){
+				kfzxxInfo=kfzxxInfoService.selectByPrimaryKey(rwjbxxInfo.getKfzid(), log).getDatas();
+				saveKfzxxInfo.setZhye(DecimalUtil.add(kfzxxInfo.getZhye(), ysje));
+				saveKfzxxInfo.setVersion(kfzxxInfo.getVersion());
+				continue;
+			}else{
+				break;
+			}
+		}
+		kfzzhmxInfo.setWid(StringUtil.getUuId());
+		kfzzhmxInfo.setJe(ysje);
+		kfzzhmxInfo.setZhye(saveKfzxxInfo.getZhye());
+		kfzzhmxInfo.setDjzje(DecimalUtil.changeNull(saveKfzxxInfo.getDjye()));
+		kfzzhmxInfo.setJyzt(StringUtil.toShort(JyztEnum.YZB.getCode()));
+		kfzzhmxInfo.setKfzid(rwjbxxInfo.getKfzid());
+		kfzzhmxInfo.setLyxmid(rwjbxxInfo.getWid());
+		kfzzhmxInfo.setSzlbid(SzlbEnum.XMSR.getCode());
+		kfzzhmxInfo.setSzsj(DateUtil.getCurrentDate());
+		kfzzhmxInfo.setWid(StringUtil.getUuId());
+		kfzzhmxInfo.setXmzt(StringUtil.toStr(RwztStateEnum.SHJSDQR.getCode()));
+		kfzzhmxInfo.setZdid(log.getUserId());
+		kfzzhmxInfo.setZdip(log.getCustomIp());
+		kfzzhmxInfo.setZzczrid(log.getUserId());
+		kfzzhmxInfo.setZzczsj(DateUtil.getCurrentDate());
+		kfzzhmxInfo.setZfbzh(kfzxxInfo.getZfbzh());
+		kfzzhmxInfoService.insertSelective(kfzzhmxInfo, log);
+		
+		
+		
+		
+		
+	}
+	private void saveKfzpjxxDetailInfo(List<KfzpjxxDetailInfo> kfzpjxxDetailInfos,
+			RwjbxxInfo rwjbxxInfo,String pjClassify,float df,CustomOperateLog log){
+		KfzpjxxDetailInfo saveKfzpjxxDetailInfo=new KfzpjxxDetailInfo();
+		saveKfzpjxxDetailInfo.setCpsj(DateUtil.getCurrentDate());
+		saveKfzpjxxDetailInfo.setCpxqfid(rwjbxxInfo.getXqfid());
+		saveKfzpjxxDetailInfo.setCpzip(log.getCustomIp());
+		saveKfzpjxxDetailInfo.setKfzid(rwjbxxInfo.getKfzid());
+		saveKfzpjxxDetailInfo.setSsxmid(rwjbxxInfo.getWid());
+		saveKfzpjxxDetailInfo.setDf(df);
+		saveKfzpjxxDetailInfo.setZbid(pjClassify);
+		if(CommonUtil.isNotEmptyList(kfzpjxxDetailInfos)){
+			boolean find=false;
+			for(int i=0;i<kfzpjxxDetailInfos.size();i++){
+				if(kfzpjxxDetailInfos.get(i).getZbid().equals(pjClassify)){
+					saveKfzpjxxDetailInfo.setWid(kfzpjxxDetailInfos.get(i).getWid());
+					find=true;
+					kfzpjxxDetailInfoService.updateByPrimaryKeySelective(saveKfzpjxxDetailInfo, log);
+				}
+			}
+			if(!find){
+				saveKfzpjxxDetailInfo.setWid(StringUtil.getUuId());
+				kfzpjxxDetailInfoService.insertSelective(saveKfzpjxxDetailInfo, log);
+			}
+			
+		}else{
+			saveKfzpjxxDetailInfo.setWid(StringUtil.getUuId());
+			kfzpjxxDetailInfoService.insertSelective(saveKfzpjxxDetailInfo, log);
+		}
+	}
+
+	@Override
+	public DataResult<BigDecimal> selectSumMoney() throws ServiceException {
+		return DataResult.success(rwjbxxInfoExtendMapper.selectSumMoney());
+	}
+
+	@Override
+	public DataResult<Integer> publishingQuestion(String rwid,String rwmc, String xmgs, String jfrq, CustomOperateLog log)
+			throws ServiceException {
+		if(StringUtil.isEmpty(rwid)){
+			throw new ServiceException("rwid不能为空");
+		}
+		if(StringUtil.isEmpty(rwmc)){
+			throw new ServiceException("需求名称不能为空，请重新确认！");
+		}
+		if(StringUtil.isEmpty(xmgs)){
+			throw new ServiceException("需求描述不能为空，请重新确认！");
+		}
+		if(StringUtil.isEmpty(jfrq)){
+			throw new ServiceException("交付日期不能为空，请重新确认！");
+		}
+		long jfzq = DateUtil.getDaysBetween(DateUtil.getCurrentDateStr(), jfrq);
+		if (jfzq < 0) {
+			throw new ServiceException("交付日期日期不能小于当前日期，请重新确认！");
+		}
+		RwjbxxInfo rwjbxxInfo=this.selectByPrimaryKey(rwid).getDatas();
+		if(rwjbxxInfo.getXmzt()<RwztStateEnum.KFZ.getCode()
+				||rwjbxxInfo.getXmzt()==RwztStateEnum.YZZ.getCode() ||rwjbxxInfo.getXmzt()==RwztStateEnum.YGB.getCode()
+				|| rwjbxxInfo.getXmzt()==RwztStateEnum.YSC.getCode()){
+			throw new ServiceException("该需求状态不满足发布问题的条件，请重新确认！");
+		}
+		if(!rwjbxxInfo.getXqfid().equals(log.getXqfId())){
+			throw new ServiceException("该需求不是您发布的需求，请重新确认！");
+		}
+		RwjbxxExtInfoExtend queryRwjbxxExtInfoExtend=new RwjbxxExtInfoExtend();
+		queryRwjbxxExtInfoExtend.setRwid(rwid);
+		List<RwjbxxExtInfoExtend> rwjbxxExtInfoDatas=rwjbxxExtInfoService.selectByCondition(ConditionUtil.createCondition(queryRwjbxxExtInfoExtend)).getDatas();
+		RwjbxxInfo saveRwjbxxInfo = new RwjbxxInfo();
+		String newRwid=StringUtil.getUuId();
+		saveRwjbxxInfo.setWid(newRwid);
+		saveRwjbxxInfo.setRwmc(rwmc);
+		saveRwjbxxInfo.setXmgs(xmgs);
+		saveRwjbxxInfo.setJfrq(jfrq);
+		saveRwjbxxInfo.setZbjzrq(DateUtil.parseDate(jfrq));
+		saveRwjbxxInfo.setRwbh("123123");
+		saveRwjbxxInfo.setCjsj(DateUtil.getCurrentDate());
+		saveRwjbxxInfo.setCjzip(log.getCustomIp());
+		saveRwjbxxInfo.setRwxs(RwxsEnum.KF.getCode());
+		saveRwjbxxInfo.setRwlx(StringUtil.toShort(RwxqlxEnum.BUG.getCode()));
+		saveRwjbxxInfo.setSfjj(YesNoEnum.NO.getCode());
+		saveRwjbxxInfo.setKfkj(rwjbxxInfo.getKfkj());
+		saveRwjbxxInfo.setXmysje(0L);
+		saveRwjbxxInfo.setYwxlb(rwjbxxInfo.getYwxlb());
+		saveRwjbxxInfo.setXqfid(log.getXqfId());
+		saveRwjbxxInfo.setFb(saveRwjbxxInfo.getFb());
+		saveRwjbxxInfo.setZbzq(DateUtil.getDaysBetween(DateUtil.formatDate(rwjbxxInfo.getZbjzrq()), rwjbxxInfo.getJfrq()));
+		saveRwjbxxInfo.setParentId(rwid);
+		Map<String, Object> rwxsMap = dictionaryService.selectRwxsByBm(saveRwjbxxInfo.getRwxs());
+		Integer xmzt = StringUtil.toInt(RwztStateEnum.CG.getCode());
+	
+		if (YesNoEnum.YES.getCode().equals(StringUtil.toStr(rwxsMap.get("SFXQRWLX")))) {
+			xmzt = StringUtil.toInt(RwztStateEnum.DSH.getCode());
+
+		} else {
+			xmzt = StringUtil.toInt(RwztStateEnum.ZBZ.getCode());
+		}
+		saveRwjbxxInfo.setXmzt(xmzt);
+		if(CommonUtil.isNotEmptyList(rwjbxxExtInfoDatas)){
+				RwjbxxExtInfo rwjbxxExtInfo=new RwjbxxExtInfo();
+				rwjbxxExtInfo.setWid(StringUtil.getUuId());
+				rwjbxxExtInfo.setMkbh(rwjbxxExtInfoDatas.get(0).getMkbh());
+				rwjbxxExtInfo.setRwid(newRwid);
+				rwjbxxExtInfo.setXmbh(rwjbxxExtInfoDatas.get(0).getXmbh());
+				rwjbxxExtInfo.setYwxbm(rwjbxxExtInfoDatas.get(0).getYwxbm());
+				rwjbxxExtInfoService.insertSelective(rwjbxxExtInfo);
+		}
+		this.insertSelective(saveRwjbxxInfo);
+		// 任务状态变更日志
+		RwztbglsInfo rwztbglsInfo = new RwztbglsInfo();
+		rwztbglsInfo.setWid(StringUtil.getUuId());
+		rwztbglsInfo.setCzrip(log.getCustomIp());
+		rwztbglsInfo.setCzrxm(log.getXm());
+		rwztbglsInfo.setCzsj(DateUtil.getCurrentDate());
+		rwztbglsInfo.setShyy("发布问题");
+		rwztbglsInfo.setXmid(newRwid);
+		rwztbglsInfo.setXqfid(log.getXqfId());
+		rwztbglsInfo.setZt(StringUtil.toShort(xmzt));
+		rwztbglsInfoService.insertSelective(rwztbglsInfo, log);
+		
+		return DataResult.success(1);
+	}
+}

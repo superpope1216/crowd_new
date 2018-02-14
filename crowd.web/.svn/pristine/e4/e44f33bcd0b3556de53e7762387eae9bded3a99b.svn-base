@@ -1,0 +1,319 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" isELIgnored="false"%>
+<!DOCTYPE HTML>
+<html>
+<%@ include file="/jsp/top/top.jsp"%>
+<%@ include file="/jsp/top/other.jsp"%>
+<%@ include file="/jsp/param.jsp"%>
+<link rel='stylesheet'
+	href='<%=request.getContextPath()%>/statics/css/order.css'>
+<style>
+.blocks-4>li {
+	width: 16%;
+}
+</style>
+<!--[if lte IE 8]>
+<div class="text-xs-center m-b-0 bg-blue-grey-100 alert">
+    <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+        <span aria-hidden="true">×</span>
+    </button>
+    你正在使用一个 <strong>过时</strong> 的浏览器。请 <a href="http://browsehappy.com/" target="_blank">升级您的浏览器</a>，以提高您的体验。
+</div>
+<![endif]-->
+
+<body>
+
+	<%@ include file="/jsp/header.jsp"%>
+
+	<div class="page bg-pagebg1">
+		<div class="container">
+			<div class="page-content row">
+				<div class="col-lg-9">
+					<div class="panel m-b-0" boxmh-mh>
+						<div class="panel-body shop-order">
+
+
+							<div id="rwjbxx">
+								<form id="formPxxx" class="addr-edit-form met-form-validation">
+									<input type="hidden" name="wid"
+										value="<c:if test='${!empty rwjbxx}'>${rwjbxx.wid}</c:if>">
+									<div class="modal-body">
+										<div class="row my-mb-10"
+											style="border-bottom: 1px solid #999;">
+											<h3>
+												<i class="fa fa-edit my-text-color" aria-hidden="true"></i>培训申请
+											</h3>
+										</div>
+										<div class="well well-sm my-padding-8">申请流程</div>
+										<div class="pearls blocks-4">
+											<li class="pearl m-b-0 current">
+												<div class="pearl-icon">
+													<i class="icon wb-clipboard" aria-hidden="true"></i>
+												</div> <span class="pearl-title">申请</span>
+											</li>
+											<li class="pearl m-b-0 disabled">
+												<div class="pearl-icon">
+													<i class="icon wb-payment" aria-hidden="true"></i>
+												</div> <span class="pearl-title">安排
+													<p class="blue-grey-400 hidden-sm-down m-b-0"></p>
+											</span>
+											</li>
+											<li class="pearl m-b-0 disabled">
+												<div class="pearl-icon">
+													<i class="icon wb-check" aria-hidden="true"></i>
+												</div> <span class="pearl-title">报名</span>
+											</li>
+											<li class="pearl m-b-0 disabled">
+												<div class="pearl-icon">
+													<i class="icon wb-clipboard" aria-hidden="true"></i>
+												</div> <span class="pearl-title">培训</span>
+											</li>
+										</div>
+					
+										<div class="well well-sm my-padding-8">请完善培训申请的基本信息</div>
+										<div class="form-group select-linkage">
+											<input type="text" class="form-control"
+												name="xmbh" placeholder="请输入项目编号、学校名称,选择项目信息"
+												required data-fv-notempty-message="此项不能为空"
+												value="">
+										</div>
+										<div class="form-group">
+											<select class="form-control prov" name="pxkc" required
+												data-fv-notempty-message="此项不能为空">
+												<option value="">---请选择培训课程---</option>
+												<c:forEach items="${pxkc}" var="data">
+													<option value="${data.lbdm}">${data.lbmc}</option>
+												</c:forEach>
+											</select>
+										</div>
+
+										<div class="form-group">
+											<select class="form-control prov" name="pxlx" required
+												data-fv-notempty-message="此项不能为空">
+												<option value="">---请选择培训类型---</option>
+												<c:forEach items="${pxlx}" var="data">
+													<option value="${data.lbdm}">${data.lbmc}</option>
+												</c:forEach>
+											</select>
+										</div>
+										<div class="form-group">
+											<select class="form-control prov" name="pxrs" required
+												data-fv-notempty-message="此项不能为空">
+												<option value="" >---请选择培训规模---</option>
+												<c:forEach items="${pxrs}" var="data">
+													<option value="${data.lbdm}" >${data.lbmc}</option>
+												</c:forEach>
+											</select>
+										</div>
+										<div class="form-group">
+											<select class="form-control prov" name="sfwxspx" required
+												data-fv-notempty-message="此项不能为空">
+												<option value="" >---请选择培训方式---</option>
+												<c:forEach items="${pxfs}" var="data">
+													<option value="${data.lbdm}" >${data.lbmc}</option>
+												</c:forEach>
+											</select>
+										</div>
+										<div class="form-group">
+											<input type="text" class="form-control" name="pxdd"
+												placeholder="请输入培训地点" required
+												data-fv-notempty-message="此项不能为空" value="">
+										</div>
+
+										<div class="form-group">
+											<input class="form-control datepicker" type="text"
+												name="pxjhsj" placeholder="请输入培训计划时间" required
+												data-fv-notempty-message="此项不能为空" data-bv-date="true"
+												data-bv-date-format="YYYY-MM-DD"
+												data-bv-date-message="请输入正确的日期格式" value="" type="both" />
+											
+										</div>
+										<div class="form-group">
+											<input type="text" class="form-control" name="jgys"
+												placeholder="请输入预算金额(元)" required
+												data-fv-notempty-message="此项不能为空" pattern="^\+?[1-9]\d*$"
+												data-fv-regexp-message="请输入正确的正整数类型数字"
+												data-fv-stringlength="true" data-fv-stringlength-min="1"
+												data-fv-stringlength-max="6"
+												value="">
+										</div>
+										<div class="form-group">
+											<textarea class="form-control" rows="3"
+												name="pxyq" placeholder="请输入需求描述" required
+												data-fv-notempty-message="此项不能为空"></textarea>
+										</div>
+									</div>
+									<div class="modal-footer text-xs-left">
+										<button type="button" class="btn btn-primary btn-squared"
+											id="btnSaveSh">发起申请</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3">
+<!-- 					<div class="panel row m-b-15 m-r-15 hidden-md-down" boxmh-h>
+						<div class="panel-body">
+							<p>不会发布需求？来参考下</p>
+						</div>
+					</div> -->
+					<div class="panel row m-b-15 m-r-15 hidden-md-down" boxmh-h>
+						<div class="panel-body">
+							<h2 class="m-l-30 font-size-18 font-weight-unset">接包明星榜单</h2>
+							<ul class="nav nav-tabs nav-tabs-line m-b-0 shop-order-state"
+								id="ulPhb">
+								<li class='nav-item'><a class="nav-link active"
+									data-toggle="tab" href data-state="0">个人</a></li>
+								<li class='nav-item'><a class="nav-link" data-toggle="tab"
+									href="#state1" data-state="1">企业</a></li>
+							</ul>
+							<ul class="list-group list-group-bordered my-mt-10" id="ulPerson">
+
+
+							</ul>
+							<ul class="list-group list-group-bordered my-mt-10"
+								id="ulCompany" style="display: none;">
+
+
+							</ul>
+
+						</div>
+					</div>
+					<div class="panel row m-b-0 m-r-15 hidden-md-down" boxmh-h>
+						<div class="panel-body">
+							<h2 class="m-l-30 font-size-18 font-weight-unset">最新中标单</h2>
+							<ul class="list-group list-group-bordered my-mt-10" id="ulNewTb">
+
+
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="modal fade modal-primary in" id="templateModal"
+		aria-labelledby="ysqrModal" role="dialog" tabindex="-1">
+		<div class="modal-dialog modal-center">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title">需求模板</h4>
+				</div>
+				<div class="modal-body">
+					<div class="well well-sm my-padding-8" style="color: red;">需求必须按照下面的文档格式整理，否则，平台有权审核不通过，审核不通过直接影响发包人的信誉值。</div>
+					<div class="collapse navbar-collapse navbar-ex1-collapse">
+						<ul class="nav navbar-nav my-mt-30" id="header_navbar">
+
+							<li class="active pull-left" style="margin-right: 20px;"><a
+								href="<%=request.getContextPath()%>/template/bbl.pdf"
+								target="_blank">
+									<div class="text-center">
+										<i class="fa fa-dashboard fa-3x" data-original-title=""
+											title=""></i><br> 报表类模板
+									</div>
+							</a></li>
+							<li class="pull-left" style="margin-right: 20px;"><a
+								href="<%=request.getContextPath()%>/template/dzl.pdf"
+								target="_blank">
+									<div class="text-center">
+										<i class="fa fa-laptop fa-3x" data-original-title="" title=""></i><br>
+										定制类需求模板
+									</div>
+							</a></li>
+							<li class="pull-left" style="margin-right: 20px;"><a
+								href="<%=request.getContextPath()%>/template/qxapp-pc.pdf"
+								target="_blank">
+									<div class="text-center">
+										<i class="fa fa-list fa-3x" data-original-title="" title=""></i><br>
+										全新开发模板-PC端
+									</div>
+							</a></li>
+							<li class="pull-left" style="margin-right: 20px;"><a
+								href="<%=request.getContextPath()%>/template/qxapp-mobile.pdf"
+								target="_blank">
+									<div class="text-center">
+										<i class="fa fa-bar-chart-o fa-3x" data-original-title=""
+											title=""></i><br>全新开发模板-移动端
+									</div>
+							</a></li>
+
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade modal-primary in" id="dateModal"
+		aria-labelledby="ysqrModal" role="dialog" tabindex="-1">
+		<div class="modal-dialog modal-center">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title">日期规则</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-xs-12 gzzx-subheader">第一条 名词解释</div>
+						<div class="col-xs-12 gzxx-content">
+							<p>1、招标截止日期：表示需求在该日期之前，允许开发者投标，过期自动关闭需求。</p>
+							<p>2、交付日期：要求开发者在这之前（包括本日）提交需求验收。</p>
+
+						</div>
+						<div class="col-xs-12 gzzx-subheader">第二条 招标截止日期要求</div>
+						<div class="col-xs-12 gzxx-content">
+							<p>1、针对需求类型，预算费用在1200元以内的需求默认预留2个工作日的审核时间，1200元及以上需求的审核时间不超过5个工作日,预算费用在1200元以内的需求默认预留2个工作日的投标周期，1200元及以上需求的审核时间不超过3个工作日的投标周期。</p>
+							<p>2、针对BUG类型，BUG类任务审核周期为1个工作日，审核后BUG责任人应在24小时内解决，遇到复杂问题或工作量大无法在24小时内解决时，责任人需要给出计划解决时间。</p>
+						</div>
+						<div class="col-xs-12 gzzx-subheader">第三条 交付日期约定</div>
+						<div class="col-xs-12 gzxx-content">
+							<p>从需求中标日期起，大于需求标准开发人天，小于两倍标准开发人天的日期区间为需求的合理交付日期区间。需求审核人员有权根据开发资源状况在合理交付日期区间内调整交付日期，对于不在合理交付日期区间内的交付时间要求，由需求方与需求审核人进行协商并达成一致，无法达成一致时，需求方可向平台进行申诉。。</p>
+						</div>
+						<div class="col-xs-12 gzzx-subheader">第四条 约定解释权</div>
+						<div class="col-xs-12 gzxx-content">
+							<p>1、该解释权归属平台所有，自发布日期开始，立即生效，无需和发包方确认。</p>
+							<p>2、若任务确认紧急，请在发布任务的时候，选择紧急任务，平台审核方会和发包方确认，并收取合理的加急费用。</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade modal-primary" id="rbxx-edit-modal"
+		aria-hidden="true" aria-labelledby="rbxx-modal-title" role="dialog"
+		tabindex="-1">
+		<div class="modal-dialog modal-center modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title" id="rbxx-modal-title">日报编辑</h4>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- End Modal -->
+	<footer class="container met-footer">
+		<script type="text/javascript">
+			var page_type = "trainApply";
+			var _xmxx = "";
+			var date = "${date}";
+		</script>
+		<%@ include file="/jsp/bottom.jsp"%>
+		<%@ include file="/jsp/footer/footer2.jsp"%>
+
+	</footer>
+</body>
+</html>

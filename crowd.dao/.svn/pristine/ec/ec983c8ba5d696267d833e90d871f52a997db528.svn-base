@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.statics.extend.KfzjlWglInfoExtendMapper" >
+   <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.statics.extend.KfzjlWglInfoExtend" 
+   extends="com.wisedu.crowd.dao.statics.KfzjlWglInfoMapper.BaseResultMap">
+   	  <result column="ywxlbDisplay" property="ywxlbDisplay" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    T_CROWD_STATIC_WGL.WID, T_CROWD_STATIC_WGL.KFZID, T_CROWD_STATIC_WGL.YWX, 
+    T_CROWD_STATIC_WGL.MONTH, T_CROWD_STATIC_WGL.GZL, T_CROWD_STATIC_WGL.WGL
+  </sql>
+  <sql id="sqlWhere">
+	<!-- 	<if test="kfzid!=null and kfzid!=''">
+			AND KFZID=#{kfzid,jdbcType=VARCHAR}
+		</if> -->
+		<if test='query.ywx!=null and query.ywx!=""'>
+			AND T_CROWD_STATIC_WGL.YWX=#{query.ywx,jdbcType=VARCHAR}
+		</if>
+		<if test='query.beginMonth!=null and query.beginMonth!=""'>
+			AND T_CROWD_STATIC_WGL.MONTH<![CDATA[>=]]>#{query.beginMonth,jdbcType=VARCHAR}
+		</if>
+		<if test='query.endMonth!=null and query.endMonth!=""'>
+			AND T_CROWD_STATIC_WGL.MONTH<![CDATA[<=]]>#{query.endMonth,jdbcType=VARCHAR}
+		</if>
+		<if test='query.month!=null and query.month!=""'>
+			AND T_CROWD_STATIC_WGL.MONTH=#{query.month,jdbcType=VARCHAR}
+		</if>
+	</sql>
+	 <sql id="sqlOrder">
+  	order by
+  	<choose>
+  		<when test="orderBy!=null and orderBy.size>0">
+  			<foreach collection="orderBy" close=" " open=" " separator="," item="item">
+  				${item}
+  			</foreach>
+  		</when>
+  		<otherwise>
+  			T_CROWD_STATIC_WGL.MONTH 
+  		</otherwise>
+  	</choose>
+  </sql>
+	<select id="selectStaticsKfzjlWglInfo" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseResultMap">
+		SELECT
+		  <include refid="Base_Column_List"></include>
+		  from T_CROWD_STATIC_WGL
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+		<include refid="sqlOrder"/>
+	</select>
+	<select id="selectStaticsKfzjlWglMonthInfo" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultType="map">
+		SELECT MONTH AS MC,SUM(WGL) AS WGL FROM T_CROWD_STATIC_WGL 
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+		GROUP BY MONTH
+		ORDER BY MONTH
+	</select>
+	<select id="selectStaticsYwxwglInfo" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List"/>
+		,T_CROWD_SJZD_YWXLB.LBMC as ywxlbDisplay
+		FROM T_CROWD_STATIC_WGL
+		LEFT JOIN T_CROWD_SJZD_YWXLB ON T_CROWD_STATIC_WGL.YWX = T_CROWD_SJZD_YWXLB.LBDM AND T_CROWD_SJZD_YWXLB.SFSY = 1 
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+		ORDER BY T_CROWD_STATIC_WGL.YWX
+	</select>
+</mapper>

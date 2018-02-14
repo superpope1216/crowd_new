@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.rwgl.extend.RwcfxxInfoExtendMapper">
+	<resultMap id="BaseResultMap"
+		type="com.wisedu.crowd.entity.rwgl.extend.RwcfxxInfoExtend" extends="com.wisedu.crowd.dao.rwgl.RwcfxxInfoMapper.BaseResultMap">
+		<result column="kfzXm" property="kfzXm" jdbcType="VARCHAR" />
+		<result column="kfzNc" property="kfzNc" jdbcType="VARCHAR" />
+		<result column="rwztDisplay" property="rwztDisplay" jdbcType="VARCHAR" />
+		<result column="rwbh" property="rwbh" jdbcType="VARCHAR" />
+		<result column="rwmc" property="rwmc" jdbcType="VARCHAR" />
+		<result column="xqfid" property="xqfid" jdbcType="VARCHAR" />
+		<result column="xqfNc" property="xqfNc" jdbcType="VARCHAR" />
+		<result column="xqfXm" property="xqfXm" jdbcType="VARCHAR" />
+		<result column="jfrq" property="jfrq" jdbcType="VARCHAR" />
+		<result column="kfkj" property="kfkj" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		t_crowd_xmgl_rwjbxx_rwcfxx.WID, t_crowd_xmgl_rwjbxx_rwcfxx.RWID,
+		t_crowd_xmgl_rwjbxx_rwcfxx.KFZID, t_crowd_xmgl_rwjbxx_rwcfxx.RWJG,
+		t_crowd_xmgl_rwjbxx_rwcfxx.BZGZL, t_crowd_xmgl_rwjbxx_rwcfxx.RWNR,
+		t_crowd_xmgl_rwjbxx_rwcfxx.RWZT, t_crowd_xmgl_rwjbxx_rwcfxx.XQWDFJID,
+		t_crowd_xmgl_rwjbxx_rwcfxx.BZ, t_crowd_xmgl_rwjbxx_rwcfxx.CJSJ,t_crowd_xmgl_rwjbxx_rwcfxx.sfsqfy
+	</sql>
+	<sql id="sqlWhere">
+		<if test="query!=null">
+			<if test='query.wid!=null and query.wid!=""'>
+				AND t_crowd_xmgl_rwjbxx_rwcfxx.WID=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.rwid!=null and query.rwid!=""'>
+				AND t_crowd_xmgl_rwjbxx_rwcfxx.RWID=#{query.rwid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.kfzid!=null and query.kfzid!=""'>
+				AND t_crowd_xmgl_rwjbxx_rwcfxx.KFZID=#{query.kfzid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.rwzt!=null'>
+				AND t_crowd_xmgl_rwjbxx_rwcfxx.RWZT=#{query.rwzt,jdbcType=DECIMAL}
+			</if>
+		</if>
+	</sql>
+	<select id="selectByCondition" resultMap="BaseResultMap"
+		parameterType="com.wisedu.crowd.entity.dto.QueryCondition">
+		select
+		<include refid="Base_Column_List" />
+		
+		<if test="query!=null and query.needRwjbxx!=null and query.needRwjbxx==true">
+			,T_CROWD_XMGL_RWJBXX.XQFID
+			,T_CROWD_XMGL_RWJBXX.RWBH
+			,T_CROWD_XMGL_RWJBXX.RWMC
+			,T_CROWD_XMGL_RWJBXX.JFRQ
+			,T_CROWD_XMGL_RWJBXX.xqfNc
+			,T_CROWD_XMGL_RWJBXX.xqfXm
+			,T_CROWD_XMGL_RWJBXX.kfkj
+		</if>
+
+		,T_CROWD_YHGL_KFZXX.XM AS kfzXm
+		,T_CROWD_YHGL_KFZXX.NC AS kfzNc
+		,T_CROWD_SJZD_CFRWZT.LBMC AS rwztDisplay
+
+
+		from t_crowd_xmgl_rwjbxx_rwcfxx t_crowd_xmgl_rwjbxx_rwcfxx
+		LEFT JOIN T_CROWD_YHGL_KFZXX T_CROWD_YHGL_KFZXX ON
+		T_CROWD_YHGL_KFZXX.WID=t_crowd_xmgl_rwjbxx_rwcfxx.KFZID
+		LEFT JOIN T_CROWD_SJZD_CFRWZT T_CROWD_SJZD_CFRWZT ON
+		T_CROWD_SJZD_CFRWZT.LBDM=t_crowd_xmgl_rwjbxx_rwcfxx.RWZT
+		<if test="query!=null and query.needRwjbxx!=null and query.needRwjbxx==true">
+			LEFT JOIN (
+			SELECT T_CROWD_XMGL_RWJBXX.WID,T_CROWD_XMGL_RWJBXX.kfkj,T_CROWD_XMGL_RWJBXX.KFZID AS XQFID,T_CROWD_XMGL_RWJBXX.RWBH,T_CROWD_XMGL_RWJBXX.RWMC,T_CROWD_XMGL_RWJBXX.JFRQ,T_CROWD_YHGL_KFZXX.nc as xqfNc,T_CROWD_YHGL_KFZXX.xm as xqfXm FROM
+			T_CROWD_XMGL_RWJBXX T_CROWD_XMGL_RWJBXX LEFT JOIN T_CROWD_YHGL_KFZXX
+			T_CROWD_YHGL_KFZXX
+			ON T_CROWD_XMGL_RWJBXX.KFZID=T_CROWD_YHGL_KFZXX.WID)
+			T_CROWD_XMGL_RWJBXX  ON T_CROWD_XMGL_RWJBXX.WID=
+			t_crowd_xmgl_rwjbxx_rwcfxx.rwid
+		</if>
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+	</select>
+
+	<select id="selectCountByCondition" resultType="java.lang.Integer"
+		parameterType="com.wisedu.crowd.entity.dto.QueryCondition">
+		SELECT COUNT(0) FROM t_crowd_xmgl_rwjbxx_rwcfxx
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+	</select>
+
+</mapper>

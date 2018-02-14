@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.yhgl.extend.XqfxxInfoExtendMapper" >
+
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.yhgl.XqfxxInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="YHID" property="yhid" jdbcType="VARCHAR" />
+    <result column="XQFDWMC" property="xqfdwmc" jdbcType="VARCHAR" />
+    <result column="SZDQ" property="szdq" jdbcType="VARCHAR" />
+    <result column="XM" property="xm" jdbcType="VARCHAR" />
+    <result column="NC" property="nc" jdbcType="VARCHAR" />
+    <result column="SFZJH" property="sfzjh" jdbcType="VARCHAR" />
+    <result column="LXYDZYX" property="lxydzyx" jdbcType="VARCHAR" />
+    <result column="ZHYE" property="zhye" jdbcType="DECIMAL" />
+    <result column="CZSJ" property="czsj" jdbcType="DATE" />
+    <result column="CZZIP" property="czzip" jdbcType="VARCHAR" />
+    <result column="SHZT" property="shzt" jdbcType="VARCHAR" />
+    <result column="XQFLB" property="xqflb" jdbcType="VARCHAR" />
+    <result column="ZPFJID" property="zpfjid" jdbcType="VARCHAR" />
+    <result column="ZHDJYE" property="zhdjye" jdbcType="DECIMAL" />
+    <result column="SHYJ" property="shyj" jdbcType="VARCHAR" />
+    <result column="QQH" property="qqh" jdbcType="VARCHAR" />
+    <result column="WXH" property="wxh" jdbcType="VARCHAR" />
+    <result column="ZFBZH" property="zfbzh" jdbcType="VARCHAR" />
+    <result column="GH" property="gh" jdbcType="VARCHAR" />
+    <result column="SSGS" property="ssgs" jdbcType="VARCHAR" />
+    <result column="SSYWX" property="ssywx" jdbcType="VARCHAR" />
+    <result column="PER_PROVINCE" property="perProvince" jdbcType="VARCHAR" />
+    <result column="PER_CITY" property="perCity" jdbcType="VARCHAR" />
+    <result column="PER_AREA" property="perArea" jdbcType="VARCHAR" />
+    <result column="USER_RANGE" property="userRange" jdbcType="VARCHAR" />
+    <result column="SFZZMZTJID" property="sfzzmztjid" jdbcType="VARCHAR" />
+    <result column="SFZFMZTJID" property="sfzfmztjid" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="BaseDisplayResultMap" type="com.wisedu.crowd.entity.yhgl.extend.XqfxxInfoExtend" 
+   extends="BaseResultMap">
+     <result column="USER_RANAGE_DISPLAY" property="userRangeDisplay"
+	   jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_crowd_yhgl_xqfxx.WID, t_crowd_yhgl_xqfxx.YHID, t_crowd_yhgl_xqfxx.XQFDWMC, 
+    t_crowd_yhgl_xqfxx.SZDQ, t_crowd_yhgl_xqfxx.XM, t_crowd_yhgl_xqfxx.NC, 
+    t_crowd_yhgl_xqfxx.SFZJH, t_crowd_yhgl_xqfxx.GH, t_crowd_yhgl_xqfxx.LXYDZYX, 
+    t_crowd_yhgl_xqfxx.ZHYE, t_crowd_yhgl_xqfxx.ZHDJYE, t_crowd_yhgl_xqfxx.CZSJ, 
+    t_crowd_yhgl_xqfxx.CZZIP,t_crowd_yhgl_xqfxx.SHZT, t_crowd_yhgl_xqfxx.SHYJ, 
+    t_crowd_yhgl_xqfxx.XQFLB, t_crowd_yhgl_xqfxx.SSGS, t_crowd_yhgl_xqfxx.SSYWX, 
+    t_crowd_yhgl_xqfxx.zpfjid, t_crowd_yhgl_xqfxx.qqh, t_crowd_yhgl_xqfxx.wxh, 
+    t_crowd_yhgl_xqfxx.zfbzh,t_crowd_yhgl_xqfxx.PER_PROVINCE,t_crowd_yhgl_xqfxx.PER_CITY,
+    t_crowd_yhgl_xqfxx.PER_AREA,t_crowd_yhgl_xqfxx.USER_RANGE,
+    t_crowd_yhgl_xqfxx.SFZZMZTJID,t_crowd_yhgl_xqfxx.SFZFMZTJID
+  </sql>
+    <sql id="Base_Display_Column_List" >
+      <include refid="Base_Column_List"></include>
+       ,t_crowd_sjzd_user_range.LBMC as USER_RANAGE_DISPLAY 
+    </sql>
+  <sql id="sqlWhere">
+  	<if test="query!=null">
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND t_crowd_yhgl_xqfxx.wid=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.yhid!=null and query.yhid!=""'>
+  			AND t_crowd_yhgl_xqfxx.YHID=#{query.yhid,jdbcType=VARCHAR}
+  		</if>
+  	</if>
+  </sql>
+  <select id="selectByCondition" resultMap="BaseDisplayResultMap" parameterType="com.wisedu.crowd.entity.yhgl.extend.XqfxxInfoExtend">
+  		SELECT
+  		<include refid="Base_Display_Column_List"/>
+  		FROM t_crowd_yhgl_xqfxx t_crowd_yhgl_xqfxx
+  		
+  		 LEFT JOIN t_crowd_sjzd_user_range t_crowd_sjzd_user_range on
+         t_crowd_sjzd_user_range.LBDM=t_crowd_yhgl_xqfxx.USER_RANGE AND
+         t_crowd_sjzd_user_range.SFSY=1
+         
+  		<where>
+  			<include refid="sqlWhere"/>
+  		</where> 
+  </select>
+</mapper>

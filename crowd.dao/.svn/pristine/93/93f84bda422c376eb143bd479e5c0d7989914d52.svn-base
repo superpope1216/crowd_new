@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.statics.TrainEnrolDataInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.statics.TrainEnrolDataInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="KHYF" property="khyf" jdbcType="VARCHAR" />
+    <result column="TGRS" property="tgrs" jdbcType="DECIMAL" />
+    <result column="BTGRS" property="btgrs" jdbcType="DECIMAL" />
+    <result column="ZRS" property="zrs" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, KHYF, TGRS, BTGRS, ZRS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_CROWD_STATICS_ENROL_DATA
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_CROWD_STATICS_ENROL_DATA
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.statics.TrainEnrolDataInfo" >
+    insert into T_CROWD_STATICS_ENROL_DATA (WID, KHYF, TGRS, 
+      BTGRS, ZRS)
+    values (#{wid,jdbcType=VARCHAR}, #{khyf,jdbcType=VARCHAR}, #{tgrs,jdbcType=DECIMAL}, 
+      #{btgrs,jdbcType=DECIMAL}, #{zrs,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.statics.TrainEnrolDataInfo" >
+    insert into T_CROWD_STATICS_ENROL_DATA
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="khyf != null" >
+        KHYF,
+      </if>
+      <if test="tgrs != null" >
+        TGRS,
+      </if>
+      <if test="btgrs != null" >
+        BTGRS,
+      </if>
+      <if test="zrs != null" >
+        ZRS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="khyf != null" >
+        #{khyf,jdbcType=VARCHAR},
+      </if>
+      <if test="tgrs != null" >
+        #{tgrs,jdbcType=DECIMAL},
+      </if>
+      <if test="btgrs != null" >
+        #{btgrs,jdbcType=DECIMAL},
+      </if>
+      <if test="zrs != null" >
+        #{zrs,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.statics.TrainEnrolDataInfo" >
+    update T_CROWD_STATICS_ENROL_DATA
+    <set >
+      <if test="khyf != null" >
+        KHYF = #{khyf,jdbcType=VARCHAR},
+      </if>
+      <if test="tgrs != null" >
+        TGRS = #{tgrs,jdbcType=DECIMAL},
+      </if>
+      <if test="btgrs != null" >
+        BTGRS = #{btgrs,jdbcType=DECIMAL},
+      </if>
+      <if test="zrs != null" >
+        ZRS = #{zrs,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.statics.TrainEnrolDataInfo" >
+    update T_CROWD_STATICS_ENROL_DATA
+    set KHYF = #{khyf,jdbcType=VARCHAR},
+      TGRS = #{tgrs,jdbcType=DECIMAL},
+      BTGRS = #{btgrs,jdbcType=DECIMAL},
+      ZRS = #{zrs,jdbcType=DECIMAL}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

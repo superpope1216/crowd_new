@@ -1,0 +1,421 @@
+package com.wisedu.crowd.entity.train;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+public class TrainBasicInfo implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+     * WID
+     */
+    private String wid;
+
+    /**
+     * 培训任务编号
+     */
+    private String pxrwbh;
+
+    /**
+     * 项目编号
+     */
+    private String xmbh;
+
+    /**
+     * 申请人
+     */
+    private String sqr;
+
+    /**
+     * 培训课程
+     */
+    private Integer pxkc;
+
+    /**
+     * 培训类型
+     */
+    private Integer pxlx;
+
+    /**
+     * 培训人数
+     */
+    private Integer pxrs;
+
+    /**
+     * 是否为线上培训
+     */
+    private Short sfwxspx;
+
+    /**
+     * 培训地点
+     */
+    private String pxdd;
+
+    /**
+     * 培训计划时间
+     */
+    private String pxjhsj;
+
+    /**
+     * 价格预算
+     */
+    private BigDecimal jgys;
+
+    /**
+     * 培训要求
+     */
+    private String pxyq;
+
+    /**
+     * 申请时间
+     */
+    private String sqsj;
+
+    /**
+     * 培训状态
+     */
+    private Short pxzt;
+
+    /**
+     * 审核备注
+     */
+    private String shbz;
+
+    /**
+     * 审核人
+     */
+    private String shry;
+
+    /**
+     * 培训价格
+     */
+    private BigDecimal pxjg;
+
+    /**
+     * 审核时间
+     */
+    private String shsj;
+
+    /**
+     * WID
+     * @return WID WID
+     */
+    public String getWid() {
+        return wid;
+    }
+
+    /**
+     * WID
+     * @param wid WID
+     */
+    public void setWid(String wid) {
+        this.wid = wid == null ? null : wid.trim();
+    }
+
+    /**
+     * 培训任务编号
+     * @return PXRWBH 培训任务编号
+     */
+    public String getPxrwbh() {
+        return pxrwbh;
+    }
+
+    /**
+     * 培训任务编号
+     * @param pxrwbh 培训任务编号
+     */
+    public void setPxrwbh(String pxrwbh) {
+        this.pxrwbh = pxrwbh == null ? null : pxrwbh.trim();
+    }
+
+    /**
+     * 项目编号
+     * @return XMBH 项目编号
+     */
+    public String getXmbh() {
+        return xmbh;
+    }
+
+    /**
+     * 项目编号
+     * @param xmbh 项目编号
+     */
+    public void setXmbh(String xmbh) {
+        this.xmbh = xmbh == null ? null : xmbh.trim();
+    }
+
+    /**
+     * 申请人
+     * @return SQR 申请人
+     */
+    public String getSqr() {
+        return sqr;
+    }
+
+    /**
+     * 申请人
+     * @param sqr 申请人
+     */
+    public void setSqr(String sqr) {
+        this.sqr = sqr == null ? null : sqr.trim();
+    }
+
+    /**
+     * 培训课程
+     * @return PXKC 培训课程
+     */
+    public Integer getPxkc() {
+        return pxkc;
+    }
+
+    /**
+     * 培训课程
+     * @param pxkc 培训课程
+     */
+    public void setPxkc(Integer pxkc) {
+        this.pxkc = pxkc;
+    }
+
+    /**
+     * 培训类型
+     * @return PXLX 培训类型
+     */
+    public Integer getPxlx() {
+        return pxlx;
+    }
+
+    /**
+     * 培训类型
+     * @param pxlx 培训类型
+     */
+    public void setPxlx(Integer pxlx) {
+        this.pxlx = pxlx;
+    }
+
+    /**
+     * 培训人数
+     * @return PXRS 培训人数
+     */
+    public Integer getPxrs() {
+        return pxrs;
+    }
+
+    /**
+     * 培训人数
+     * @param pxrs 培训人数
+     */
+    public void setPxrs(Integer pxrs) {
+        this.pxrs = pxrs;
+    }
+
+    /**
+     * 是否为线上培训
+     * @return SFWXSPX 是否为线上培训
+     */
+    public Short getSfwxspx() {
+        return sfwxspx;
+    }
+
+    /**
+     * 是否为线上培训
+     * @param sfwxspx 是否为线上培训
+     */
+    public void setSfwxspx(Short sfwxspx) {
+        this.sfwxspx = sfwxspx;
+    }
+
+    /**
+     * 培训地点
+     * @return PXDD 培训地点
+     */
+    public String getPxdd() {
+        return pxdd;
+    }
+
+    /**
+     * 培训地点
+     * @param pxdd 培训地点
+     */
+    public void setPxdd(String pxdd) {
+        this.pxdd = pxdd == null ? null : pxdd.trim();
+    }
+
+    /**
+     * 培训计划时间
+     * @return PXJHSJ 培训计划时间
+     */
+    public String getPxjhsj() {
+        return pxjhsj;
+    }
+
+    /**
+     * 培训计划时间
+     * @param pxjhsj 培训计划时间
+     */
+    public void setPxjhsj(String pxjhsj) {
+        this.pxjhsj = pxjhsj == null ? null : pxjhsj.trim();
+    }
+
+    /**
+     * 价格预算
+     * @return JGYS 价格预算
+     */
+    public BigDecimal getJgys() {
+        return jgys;
+    }
+
+    /**
+     * 价格预算
+     * @param jgys 价格预算
+     */
+    public void setJgys(BigDecimal jgys) {
+        this.jgys = jgys;
+    }
+
+    /**
+     * 培训要求
+     * @return PXYQ 培训要求
+     */
+    public String getPxyq() {
+        return pxyq;
+    }
+
+    /**
+     * 培训要求
+     * @param pxyq 培训要求
+     */
+    public void setPxyq(String pxyq) {
+        this.pxyq = pxyq == null ? null : pxyq.trim();
+    }
+
+    /**
+     * 申请时间
+     * @return SQSJ 申请时间
+     */
+    public String getSqsj() {
+        return sqsj;
+    }
+
+    /**
+     * 申请时间
+     * @param sqsj 申请时间
+     */
+    public void setSqsj(String sqsj) {
+        this.sqsj = sqsj == null ? null : sqsj.trim();
+    }
+
+    /**
+     * 培训状态
+     * @return PXZT 培训状态
+     */
+    public Short getPxzt() {
+        return pxzt;
+    }
+
+    /**
+     * 培训状态
+     * @param pxzt 培训状态
+     */
+    public void setPxzt(Short pxzt) {
+        this.pxzt = pxzt;
+    }
+
+    /**
+     * 审核备注
+     * @return SHBZ 审核备注
+     */
+    public String getShbz() {
+        return shbz;
+    }
+
+    /**
+     * 审核备注
+     * @param shbz 审核备注
+     */
+    public void setShbz(String shbz) {
+        this.shbz = shbz == null ? null : shbz.trim();
+    }
+
+    /**
+     * 审核人
+     * @return shryy 审核人
+     */
+    public String getShry() {
+        return shry;
+    }
+
+    /**
+     * 审核人
+     * @param shr 审核人
+     */
+    public void setShry(String shry) {
+        this.shry = shry == null ? null : shry.trim();
+    }
+
+    /**
+     * 培训价格
+     * @return PXJG 培训价格
+     */
+    public BigDecimal getPxjg() {
+        return pxjg;
+    }
+
+    /**
+     * 培训价格
+     * @param pxjg 培训价格
+     */
+    public void setPxjg(BigDecimal pxjg) {
+        this.pxjg = pxjg;
+    }
+
+    /**
+     * 审核时间
+     * @return SHSJ 审核时间
+     */
+    public String getShsj() {
+        return shsj;
+    }
+
+    /**
+     * 审核时间
+     * @param shsj 审核时间
+     */
+    public void setShsj(String shsj) {
+        this.shsj = shsj == null ? null : shsj.trim();
+    }
+
+    /**
+     *
+     * @mbggenerated 2017-12-29
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", wid=").append(wid);
+        sb.append(", pxrwbh=").append(pxrwbh);
+        sb.append(", xmbh=").append(xmbh);
+        sb.append(", sqr=").append(sqr);
+        sb.append(", pxkc=").append(pxkc);
+        sb.append(", pxlx=").append(pxlx);
+        sb.append(", pxrs=").append(pxrs);
+        sb.append(", sfwxspx=").append(sfwxspx);
+        sb.append(", pxdd=").append(pxdd);
+        sb.append(", pxjhsj=").append(pxjhsj);
+        sb.append(", jgys=").append(jgys);
+        sb.append(", pxyq=").append(pxyq);
+        sb.append(", sqsj=").append(sqsj);
+        sb.append(", pxzt=").append(pxzt);
+        sb.append(", shbz=").append(shbz);
+        sb.append(", shry=").append(shry);
+        sb.append(", pxjg=").append(pxjg);
+        sb.append(", shsj=").append(shsj);
+        sb.append("]");
+        return sb.toString();
+    }
+}

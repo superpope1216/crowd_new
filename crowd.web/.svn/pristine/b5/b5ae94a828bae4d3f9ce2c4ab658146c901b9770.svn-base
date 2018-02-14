@@ -1,0 +1,112 @@
+package com.wisedu.crowd.controller.kfzxx;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.wisedu.crowd.common.code.RwtbztEnum;
+import com.wisedu.crowd.common.code.RwztStateEnum;
+import com.wisedu.crowd.common.util.ConditionUtil;
+import com.wisedu.crowd.common.util.StringUtil;
+import com.wisedu.crowd.controller.BaseController;
+import com.wisedu.crowd.entity.dto.PageInfo;
+import com.wisedu.crowd.entity.dto.QueryCondition;
+import com.wisedu.crowd.entity.rwgl.extend.RwjbxxInfoExtend;
+import com.wisedu.crowd.entity.rwgl.extend.RwtbxxInfoExtend;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.service.rwgl.RwjbxxInfoService;
+
+@Controller
+@RequestMapping("kfzOrder")
+public class KfzOrderController extends BaseController {
+	@Autowired
+	private RwjbxxInfoService rwjbxxInfoService;
+	@RequestMapping("index")
+	public ModelAndView index() throws Exception{
+		ModelAndView mv=new ModelAndView();
+		RwjbxxInfoExtend queryRwjbxxInfoExtend=new RwjbxxInfoExtend();
+		//开发中的学校
+		QueryCondition<RwjbxxInfoExtend> condition=ConditionUtil.createCondition(queryRwjbxxInfoExtend);
+		queryRwjbxxInfoExtend.setXmzt(RwztStateEnum.KFZ.getCode());
+		queryRwjbxxInfoExtend.setKfzid(this.getKfzxx().getWid());
+		mv.addObject("kfz",rwjbxxInfoService.selectCountByCondition(condition, this.createCustomOperateLog()).getDatas());
+		
+		queryRwjbxxInfoExtend.setXmzt(null);
+		queryRwjbxxInfoExtend.setMinXmzt(RwztStateEnum.JCZ.getCode());
+		queryRwjbxxInfoExtend.setMaxXmzt(RwztStateEnum.DPJ.getCode());
+		mv.addObject("jxz",rwjbxxInfoService.selectCountByCondition(condition, this.createCustomOperateLog()).getDatas());
+		queryRwjbxxInfoExtend.setMinXmzt(RwztStateEnum.YJX.getCode());
+		queryRwjbxxInfoExtend.setMaxXmzt(null);
+		queryRwjbxxInfoExtend.setXmzt(null);
+		mv.addObject("yjs",rwjbxxInfoService.selectCountByCondition(condition, this.createCustomOperateLog()).getDatas());
+		
+		queryRwjbxxInfoExtend.setKfzid(null);
+		queryRwjbxxInfoExtend.setXmzt(RwztStateEnum.ZBZ.getCode());
+		queryRwjbxxInfoExtend.setMinXmzt(null);
+		queryRwjbxxInfoExtend.setMaxXmzt(null);
+		RwtbxxInfoExtend queryRwtbxxInfoExtend=new RwtbxxInfoExtend();
+		queryRwtbxxInfoExtend.setKfzid(this.getKfzxx().getWid());
+		queryRwjbxxInfoExtend.setRwtbxxInfoExtend(queryRwtbxxInfoExtend);
+		mv.addObject("zbz",rwjbxxInfoService.selectCountByCondition(condition, this.createCustomOperateLog()).getDatas());
+		
+		queryRwjbxxInfoExtend.setXmzt(null);
+		queryRwjbxxInfoExtend.setMinXmzt(RwztStateEnum.KFZ.getCode());
+		queryRwtbxxInfoExtend.setZbzt(RwtbztEnum.WZB.getCode());
+		queryRwtbxxInfoExtend.setKfzid(this.getKfzxx().getWid());
+		
+		mv.addObject("wzb",rwjbxxInfoService.selectCountByCondition(condition, this.createCustomOperateLog()).getDatas());
+		
+		mv.setViewName("kfzgl/rwgl/order");
+		return mv;
+	}
+	
+	@RequestMapping("orders")
+	@ResponseBody
+	public DataResult<List<RwjbxxInfoExtend>> queryOrders(String state,Integer pageNum,Integer pageSize){
+		RwjbxxInfoExtend queryRwjbxxInfoExtend=new RwjbxxInfoExtend();
+		
+		queryRwjbxxInfoExtend.setNeedXqfxx(true);
+		if("1".equals(state)){//开发中
+			queryRwjbxxInfoExtend.setKfzid(this.getKfzxx().getWid());
+			queryRwjbxxInfoExtend.setXmzt(RwztStateEnum.KFZ.getCode());
+		}else if("2".equals(state)){//进行中
+			queryRwjbxxInfoExtend.setKfzid(this.getKfzxx().getWid());
+			queryRwjbxxInfoExtend.setMinXmzt(RwztStateEnum.JCZ.getCode());
+			queryRwjbxxInfoExtend.setMaxXmzt(RwztStateEnum.DPJ.getCode());
+		}else if("3".equals(state)){//已结束
+			queryRwjbxxInfoExtend.setKfzid(this.getKfzxx().getWid());
+			List<String> xmzts=new ArrayList<String>();
+			queryRwjbxxInfoExtend.setMaxXmzt(RwztStateEnum.YGB.getCode());
+			queryRwjbxxInfoExtend.setMinXmzt(RwztStateEnum.YJX.getCode());
+			queryRwjbxxInfoExtend.setXmzts(xmzts);
+		}else if("4".equals(state)){//招标中
+			queryRwjbxxInfoExtend.setXmzt(RwztStateEnum.ZBZ.getCode());
+			RwtbxxInfoExtend queryRwtbxxInfoExtend=new RwtbxxInfoExtend();
+			queryRwtbxxInfoExtend.setKfzid(this.getKfzxx().getWid());
+			queryRwjbxxInfoExtend.setRwtbxxInfoExtend(queryRwtbxxInfoExtend);
+		}else if("5".equals(state)){//未中标
+			queryRwjbxxInfoExtend.setMinXmzt(RwztStateEnum.KFZ.getCode());
+			RwtbxxInfoExtend queryRwtbxxInfoExtend=new RwtbxxInfoExtend();
+			queryRwtbxxInfoExtend.setZbzt(RwtbztEnum.WZB.getCode());
+			queryRwtbxxInfoExtend.setKfzid(this.getKfzxx().getWid());
+			queryRwjbxxInfoExtend.setRwtbxxInfoExtend(queryRwtbxxInfoExtend);
+		}
+		
+		
+		QueryCondition<RwjbxxInfoExtend> condition=ConditionUtil.createCondition(queryRwjbxxInfoExtend);
+		PageInfo pageInfo=new PageInfo();
+		if(pageNum!=null){
+			pageInfo.setPageNum(pageNum);
+		}
+		if(pageSize!=null){
+			pageInfo.setPageSize(pageSize);
+		}
+		condition.setPageInfo(pageInfo);
+		return rwjbxxInfoService.selectDisplayByCondition(condition);
+	}
+}

@@ -1,0 +1,17 @@
+package com.wisedu.crowd.entity.yhgl.extend;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+
+import com.wisedu.crowd.entity.yhgl.XqfxxInfo;
+
+
+public class XqfxxInfoExtend extends XqfxxInfo implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+   
+}

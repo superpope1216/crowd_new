@@ -1,0 +1,18 @@
+/**
+ * 
+ */
+$(document).ready(function(){
+	var d= new Swiper('.groom-cut', {
+        wrapperClass: 'groom-cut-wraper',
+        slideClass: 'groom-cut-slide',
+        slidesPerView: IE9 ? 5 : 'auto',
+        autoplay: 3800,
+        watchSlidesProgress: true,
+        watchSlidesVisibility: true,
+        prevButton: '.groom-box .fa-chevron-left',
+        nextButton: '.groom-box .fa-chevron-right',
+        observer: true,
+        observeParents: true
+    });
+    $('.groom-cut img[data-original]').lazyload();
+});

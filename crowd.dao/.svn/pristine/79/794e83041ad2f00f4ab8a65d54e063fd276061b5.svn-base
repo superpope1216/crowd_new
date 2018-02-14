@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.zygl.VpnInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.zygl.VpnInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="VPNZH" property="vpnzh" jdbcType="VARCHAR" />
+    <result column="VPNMM" property="vpnmm" jdbcType="VARCHAR" />
+    <result column="VPNDZ" property="vpndz" jdbcType="VARCHAR" />
+    <result column="ZYSQID" property="zysqid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, VPNZH, VPNMM, VPNDZ, ZYSQID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_zygl_vpn
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_zygl_vpn
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.zygl.VpnInfo" >
+    insert into t_crowd_zygl_vpn (WID, VPNZH, VPNMM, 
+      VPNDZ, ZYSQID)
+    values (#{wid,jdbcType=VARCHAR}, #{vpnzh,jdbcType=VARCHAR}, #{vpnmm,jdbcType=VARCHAR}, 
+      #{vpndz,jdbcType=VARCHAR}, #{zysqid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.zygl.VpnInfo" >
+    insert into t_crowd_zygl_vpn
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="vpnzh != null" >
+        VPNZH,
+      </if>
+      <if test="vpnmm != null" >
+        VPNMM,
+      </if>
+      <if test="vpndz != null" >
+        VPNDZ,
+      </if>
+      <if test="zysqid != null" >
+        ZYSQID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="vpnzh != null" >
+        #{vpnzh,jdbcType=VARCHAR},
+      </if>
+      <if test="vpnmm != null" >
+        #{vpnmm,jdbcType=VARCHAR},
+      </if>
+      <if test="vpndz != null" >
+        #{vpndz,jdbcType=VARCHAR},
+      </if>
+      <if test="zysqid != null" >
+        #{zysqid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.zygl.VpnInfo" >
+    update t_crowd_zygl_vpn
+    <set >
+      <if test="vpnzh != null" >
+        VPNZH = #{vpnzh,jdbcType=VARCHAR},
+      </if>
+      <if test="vpnmm != null" >
+        VPNMM = #{vpnmm,jdbcType=VARCHAR},
+      </if>
+      <if test="vpndz != null" >
+        VPNDZ = #{vpndz,jdbcType=VARCHAR},
+      </if>
+      <if test="zysqid != null" >
+        ZYSQID = #{zysqid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.zygl.VpnInfo" >
+    update t_crowd_zygl_vpn
+    set VPNZH = #{vpnzh,jdbcType=VARCHAR},
+      VPNMM = #{vpnmm,jdbcType=VARCHAR},
+      VPNDZ = #{vpndz,jdbcType=VARCHAR},
+      ZYSQID = #{zysqid,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

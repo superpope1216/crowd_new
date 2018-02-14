@@ -1,0 +1,41 @@
+package com.wisedu.crowd.dao.statics;
+
+import com.wisedu.crowd.entity.statics.RwjbxxDataInfo;
+
+public interface RwjbxxDataInfoMapper {
+    /**
+     *
+     * @mbggenerated 2018-01-25
+     */
+    int deleteByPrimaryKey(String wid);
+
+    /**
+     *
+     * @mbggenerated 2018-01-25
+     */
+    int insert(RwjbxxDataInfo record);
+
+    /**
+     *
+     * @mbggenerated 2018-01-25
+     */
+    int insertSelective(RwjbxxDataInfo record);
+
+    /**
+     *
+     * @mbggenerated 2018-01-25
+     */
+    RwjbxxDataInfo selectByPrimaryKey(String wid);
+
+    /**
+     *
+     * @mbggenerated 2018-01-25
+     */
+    int updateByPrimaryKeySelective(RwjbxxDataInfo record);
+
+    /**
+     *
+     * @mbggenerated 2018-01-25
+     */
+    int updateByPrimaryKey(RwjbxxDataInfo record);
+}

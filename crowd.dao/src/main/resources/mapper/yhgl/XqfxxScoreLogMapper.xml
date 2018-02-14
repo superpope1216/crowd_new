@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.yhgl.XqfxxScoreLogMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.yhgl.XqfxxScoreLog" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="XQFID" property="xqfid" jdbcType="VARCHAR" />
+    <result column="CLASSIFY" property="classify" jdbcType="VARCHAR" />
+    <result column="SCORE" property="score" jdbcType="INTEGER" />
+    <result column="YSCORE" property="yscore" jdbcType="INTEGER" />
+    <result column="XSCORE" property="xscore" jdbcType="INTEGER" />
+    <result column="CJSJ" property="cjsj" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, XQFID, CLASSIFY, SCORE, YSCORE, XSCORE, CJSJ, CONTENT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_yhgl_xqfxx_score_log
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_yhgl_xqfxx_score_log
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.yhgl.XqfxxScoreLog" >
+    insert into t_crowd_yhgl_xqfxx_score_log (WID, XQFID, CLASSIFY, 
+      SCORE, YSCORE, XSCORE, 
+      CJSJ, CONTENT)
+    values (#{wid,jdbcType=VARCHAR}, #{xqfid,jdbcType=VARCHAR}, #{classify,jdbcType=VARCHAR}, 
+      #{score,jdbcType=INTEGER}, #{yscore,jdbcType=INTEGER}, #{xscore,jdbcType=INTEGER}, 
+      #{cjsj,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.yhgl.XqfxxScoreLog" >
+    insert into t_crowd_yhgl_xqfxx_score_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="xqfid != null" >
+        XQFID,
+      </if>
+      <if test="classify != null" >
+        CLASSIFY,
+      </if>
+      <if test="score != null" >
+        SCORE,
+      </if>
+      <if test="yscore != null" >
+        YSCORE,
+      </if>
+      <if test="xscore != null" >
+        XSCORE,
+      </if>
+      <if test="cjsj != null" >
+        CJSJ,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="xqfid != null" >
+        #{xqfid,jdbcType=VARCHAR},
+      </if>
+      <if test="classify != null" >
+        #{classify,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="yscore != null" >
+        #{yscore,jdbcType=INTEGER},
+      </if>
+      <if test="xscore != null" >
+        #{xscore,jdbcType=INTEGER},
+      </if>
+      <if test="cjsj != null" >
+        #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.yhgl.XqfxxScoreLog" >
+    update t_crowd_yhgl_xqfxx_score_log
+    <set >
+      <if test="xqfid != null" >
+        XQFID = #{xqfid,jdbcType=VARCHAR},
+      </if>
+      <if test="classify != null" >
+        CLASSIFY = #{classify,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        SCORE = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="yscore != null" >
+        YSCORE = #{yscore,jdbcType=INTEGER},
+      </if>
+      <if test="xscore != null" >
+        XSCORE = #{xscore,jdbcType=INTEGER},
+      </if>
+      <if test="cjsj != null" >
+        CJSJ = #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.yhgl.XqfxxScoreLog" >
+    update t_crowd_yhgl_xqfxx_score_log
+    set XQFID = #{xqfid,jdbcType=VARCHAR},
+      CLASSIFY = #{classify,jdbcType=VARCHAR},
+      SCORE = #{score,jdbcType=INTEGER},
+      YSCORE = #{yscore,jdbcType=INTEGER},
+      XSCORE = #{xscore,jdbcType=INTEGER},
+      CJSJ = #{cjsj,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

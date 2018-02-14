@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.data.delay.extend.DataDelayRwxsMonthInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.data.delay.extend.DataDelayRwxsMonthInfoExtend" 
+  extends="com.wisedu.crowd.dao.data.delay.DataDelayRwxsMonthInfoMapper.BaseResultMap">
+  </resultMap>
+  <sql id="Base_Column_List" >
+   T_CROWD_DATA_DELAY_RWXS_M.WID, T_CROWD_DATA_DELAY_RWXS_M.RWXS, 
+   T_CROWD_DATA_DELAY_RWXS_M.MONTH, T_CROWD_DATA_DELAY_RWXS_M.DELAY_DAY, 
+   T_CROWD_DATA_DELAY_RWXS_M.ZBJE, T_CROWD_DATA_DELAY_RWXS_M.YJSJE, 
+   T_CROWD_DATA_DELAY_RWXS_M.DELAY_ALL_DAY, T_CROWD_DATA_DELAY_RWXS_M.DELAY_SCORE
+  </sql>
+  <sql id="sqlWhere">
+  	<if test="query!=null">
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND T_CROWD_DATA_DELAY_RWXS_M.WID=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.rwxs!=null and query.rwxs!=""'>
+  			AND T_CROWD_DATA_DELAY_RWXS_M.rwxs=#{query.rwxs,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.month!=null and query.month!=""'>
+  			AND T_CROWD_DATA_DELAY_RWXS_M.month=#{query.month,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.minMonth!=null and query.minMonth!=""'>
+  			AND T_CROWD_DATA_DELAY_RWXS_M.MONTH<![CDATA[>=]]>#{query.minMonth,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.maxMonth!=null and query.maxMonth!=""'>
+  			AND T_CROWD_DATA_DELAY_RWXS_M.MONTH<![CDATA[<=]]>#{query.maxMonth,jdbcType=VARCHAR}
+  		</if>
+  	</if>
+  </sql>
+  <delete id="deleteByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition">
+  	DELETE FROM T_CROWD_DATA_DELAY_RWXS_M
+  	<where>
+  		<include refid="sqlWhere"/>
+  	</where>
+  </delete>
+  <select id="selectByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+  resultMap="BaseResultMap">
+  		SELECT 
+  		<include refid="Base_Column_List"/>
+  		from T_CROWD_DATA_DELAY_RWXS_M
+  			<where>
+  		<include refid="sqlWhere"/>
+  	</where>
+  </select>
+  <select id="selectDisplayByCondition" parameterType="com.wisedu.crowd.entity.dto.QueryCondition"
+  resultMap="BaseResultMap">
+  		SELECT 
+  		<include refid="Base_Column_List"/>
+  		from T_CROWD_DATA_DELAY_RWXS_M
+  			<where>
+  		<include refid="sqlWhere"/>
+  	</where>
+  </select>
+</mapper>

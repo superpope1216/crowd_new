@@ -1,0 +1,328 @@
+/**
+ * Project Name:crowd.service
+ * File Name:KfzxyjfxqIndoServiceImpl.java
+ * Package Name:com.wisedu.crowd.service.yhgl.impl
+ * Date:2018年1月24日下午1:58:04
+ * Copyright (c) 2018, 01113232@wisedu.com All Rights Reserved.
+ *
+*/
+
+package com.wisedu.crowd.service.yhgl.impl;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.wisedu.crowd.common.code.KfzxyjflxEnum;
+import com.wisedu.crowd.common.code.PjClassifyEnum;
+import com.wisedu.crowd.common.code.PjResultEnum;
+import com.wisedu.crowd.common.code.RwxqlxEnum;
+import com.wisedu.crowd.common.code.RwztStateEnum;
+import com.wisedu.crowd.common.exception.ServiceException;
+import com.wisedu.crowd.common.util.CommonUtil;
+import com.wisedu.crowd.common.util.ConditionUtil;
+import com.wisedu.crowd.common.util.DateUtil;
+import com.wisedu.crowd.common.util.StringUtil;
+import com.wisedu.crowd.dao.rwgl.extend.BugZrrInfoExtendMapper;
+import com.wisedu.crowd.dao.rwgl.extend.RwztbglsInfoExtendMapper;
+import com.wisedu.crowd.dao.yhgl.KfzxyjfInfoMapper;
+import com.wisedu.crowd.dao.yhgl.KfzxyjfxqInfoMapper;
+import com.wisedu.crowd.dao.yhgl.extend.KfzxxInfoExtendMapper;
+import com.wisedu.crowd.dao.yhgl.extend.KfzxyjfInfoExtendMapper;
+import com.wisedu.crowd.dao.yhgl.extend.KfzxyjfxqInfoExtendMapper;
+import com.wisedu.crowd.entity.log.CustomOperateLog;
+import com.wisedu.crowd.entity.rwgl.RwjbxxInfo;
+import com.wisedu.crowd.entity.rwgl.extend.BugZrrInfoExtend;
+import com.wisedu.crowd.entity.rwgl.extend.RwztbglsInfoExtend;
+import com.wisedu.crowd.entity.yhgl.KfzxyjfInfo;
+import com.wisedu.crowd.entity.yhgl.KfzxyjfxqInfo;
+import com.wisedu.crowd.entity.yhgl.extend.KfzxxInfoExtend;
+import com.wisedu.crowd.entity.yhgl.extend.KfzxyjfInfoExtend;
+import com.wisedu.crowd.entity.yhgl.extend.KfzxyjfxqInfoExtend;
+import com.wisedu.crowd.service.dto.DataResult;
+import com.wisedu.crowd.service.yhgl.KfzxyjfxqInfoService;
+
+/**
+ * ClassName:KfzxyjfxqIndoServiceImpl <br/>
+ * Function: TODO ADD FUNCTION. <br/>
+ * Reason:	 TODO ADD REASON. <br/>
+ * Date:     2018年1月24日 下午1:58:04 <br/>
+ * @author   dell
+ * @version  
+ * @since    JDK 1.6
+ * @see 	 
+ */
+@Service("kfzxyjfxqInfoService")
+@Transactional
+public class KfzxyjfxqInfoServiceImpl implements KfzxyjfxqInfoService{
+
+	@Autowired
+	private KfzxyjfInfoMapper kfzxyjfInfoMapper;
+	@Autowired
+	private KfzxyjfInfoExtendMapper kfzxyjfInfoExtendMapper;
+	@Autowired
+	private KfzxyjfxqInfoMapper kfzxyjfxqInfoMapper;
+	@Autowired
+	private KfzxyjfxqInfoExtendMapper kfzxyjfxqInfoExtendMapper;
+	@Autowired
+	private RwztbglsInfoExtendMapper rwztbglsInfoExtendMapper;
+	@Autowired
+	private BugZrrInfoExtendMapper bugZrrInfoExtendMapper;
+	@Autowired
+	private KfzxxInfoExtendMapper kfzxxInfoExtendMapper;
+
+	@Override
+	public DataResult<Integer> deleteByPrimaryKey(String wid, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(kfzxyjfxqInfoMapper.deleteByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<Integer> insertSelective(KfzxyjfxqInfo record, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(kfzxyjfxqInfoMapper.insertSelective(record));
+	}
+
+	@Override
+	public DataResult<KfzxyjfxqInfo> selectByPrimaryKey(String wid, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(kfzxyjfxqInfoMapper.selectByPrimaryKey(wid));
+	}
+
+	@Override
+	public DataResult<Integer> updateByPrimaryKeySelective(KfzxyjfxqInfo record, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(kfzxyjfxqInfoMapper.updateByPrimaryKeySelective(record));
+	}
+
+	@Override
+	public DataResult<Integer> saveKfzxyjfxq(RwjbxxInfo rwjbxxInfo) throws ServiceException {
+		String rwid = rwjbxxInfo.getWid();
+		String kfzid = rwjbxxInfo.getKfzid();
+		String rwlx = StringUtil.toStr(rwjbxxInfo.getRwlx());
+		Integer count = 0;
+		int xmzt = rwjbxxInfo.getXmzt();
+		if(xmzt == 8){
+			
+		}else if(xmzt == 9){
+			count = saveKfzYsxyjf(rwid, kfzid, false, rwlx);
+		}else if(xmzt == 11){
+			count = saveKfzYsxyjf(rwid, kfzid, true, rwlx);
+		}else if(xmzt == 12){
+			
+		}else if(xmzt == 13){
+			
+		}
+		return DataResult.success(count);
+	}
+	
+	/**
+	 * 保存验收得分信息
+	 * @author dell
+	 * @param rwid  任务ID
+	 * @param kfzid  开发者ID
+	 * @param pass  是否通过
+	 * @return
+	 * @since JDK 1.6
+	 */
+	protected Integer saveKfzYsxyjf(String rwid, String kfzid, boolean pass, String rwlx){
+		//查询开发者的信誉积分信息
+		Integer xyjf = 0; 
+		Integer xyjfxq = 0;
+		int score = 0;
+		String xyjfWid = null;
+		KfzxyjfInfoExtend queryKfzxyjfInfoExtend = new KfzxyjfInfoExtend();
+		queryKfzxyjfInfoExtend.setKfzid(kfzid);
+		List<KfzxyjfInfoExtend> kfzxyjfInfoLst = kfzxyjfInfoExtendMapper
+				.selectByCondition(ConditionUtil.createCondition(queryKfzxyjfInfoExtend));
+		if(CommonUtil.isNotEmptyList(kfzxyjfInfoLst)){
+			score = StringUtil.toInt(kfzxyjfInfoLst.get(0).getScore());
+			xyjfWid = StringUtil.toStr(kfzxyjfInfoLst.get(0).getWid());
+		}
+		//获取该任务之前验收不通过记录
+		RwztbglsInfoExtend queryRwztbglsInfoExtend = new RwztbglsInfoExtend();
+		queryRwztbglsInfoExtend.setXmid(rwid);
+		queryRwztbglsInfoExtend.setZt(StringUtil.toShort(RwztStateEnum.YSBTG.getCode()));
+		List<RwztbglsInfoExtend> ztbglsLst = rwztbglsInfoExtendMapper
+				.selectByCondition(ConditionUtil.createCondition(queryRwztbglsInfoExtend));
+		if(CommonUtil.isNotEmptyList(ztbglsLst)){//之前有验收不通过记录
+			if(!pass){//验收通过不计分；验收不通过-5分
+				xyjfxq = saveKfzxyjfxq(kfzid, rwid, KfzxyjflxEnum.DCYSBTG.getCode(), KfzxyjflxEnum.DCYSBTG.getName(),
+						KfzxyjflxEnum.DCYSBTG.getScore(), score);
+				xyjf = saveOrUpdateKfzxyjf(kfzid, KfzxyjflxEnum.DCYSBTG.getScore(), score, xyjfWid);
+			}
+		}else{//之前未验收不通过
+			if(pass){//验收通过+1分
+				xyjfxq = saveKfzxyjfxq(kfzid, rwid, KfzxyjflxEnum.DYCYSTG.getCode(), KfzxyjflxEnum.DYCYSTG.getName(),
+						KfzxyjflxEnum.DYCYSTG.getScore(), score);
+				xyjf = saveOrUpdateKfzxyjf(kfzid, KfzxyjflxEnum.DYCYSTG.getScore(), score, xyjfWid);
+				if(RwxqlxEnum.BUG.getCode().equals(rwlx)){//判断是否是BUG，如果是BUG则计算BUG得分
+					xyjf = saveKfzBugdf(rwid);
+				}
+			}else{//验收不通过-2分
+				xyjfxq = saveKfzxyjfxq(kfzid, rwid, KfzxyjflxEnum.DYCYSBTG.getCode(), KfzxyjflxEnum.DYCYSBTG.getName(),
+						KfzxyjflxEnum.DYCYSBTG.getScore(), score);
+				xyjf = saveOrUpdateKfzxyjf(kfzid, KfzxyjflxEnum.DYCYSBTG.getScore(), score, xyjfWid);
+			}
+		}
+		return xyjf + xyjfxq;
+	}
+	
+	/**
+	 * 新建或更新开发者信誉积分信息
+	 * @author dell
+	 * @param kfzid   开发者ID
+	 * @param score   得分
+	 * @param oldScore 原来总分
+	 * @param xyjfWid 信誉积分WID
+	 * @return
+	 * @since JDK 1.6
+	 */
+	protected Integer saveOrUpdateKfzxyjf(String kfzid, int score, int oldScore, String xyjfWid){
+		KfzxyjfInfo kfzxyjfInfo = new KfzxyjfInfo();
+		kfzxyjfInfo.setCjsj(DateUtil.getCurrentDateTimeStr());
+		kfzxyjfInfo.setKfzid(kfzid);
+		kfzxyjfInfo.setVersion(new BigDecimal(0));
+		kfzxyjfInfo.setScore(new BigDecimal(score + oldScore));
+		if(StringUtil.isEmpty(xyjfWid)){
+			kfzxyjfInfo.setWid(StringUtil.getUuId());
+			kfzxyjfInfo.setIntegral(new BigDecimal(0));
+			return kfzxyjfInfoMapper.insertSelective(kfzxyjfInfo);
+		}else{
+			kfzxyjfInfo.setWid(xyjfWid);
+			return kfzxyjfInfoMapper.updateByPrimaryKeySelective(kfzxyjfInfo);
+		}
+	}
+	
+	/**
+	 * 保存开发者信誉积分详情
+	 * @author dell
+	 * @param kfzid  开发者ID
+	 * @param rwid   任务ID
+	 * @param classify  得分类型
+	 * @param content   备注说明
+	 * @param score     得分
+	 * @return
+	 * @since JDK 1.6
+	 */
+	protected Integer saveKfzxyjfxq(String kfzid, String rwid, String classify, String content,
+			int score, int oldScore) {
+		// 获取信誉积分详情信息
+		KfzxyjfxqInfo insertKfzxyjfxqInfo = new KfzxyjfxqInfo();
+		insertKfzxyjfxqInfo.setWid(StringUtil.getUuId());
+		insertKfzxyjfxqInfo.setKfzid(kfzid);
+		insertKfzxyjfxqInfo.setRwid(rwid);
+		insertKfzxyjfxqInfo.setScoreClassify(classify);
+		insertKfzxyjfxqInfo.setScore(new BigDecimal(score));
+		insertKfzxyjfxqInfo.setContent(content);
+		insertKfzxyjfxqInfo.setTotalScore(new BigDecimal(score + oldScore));
+		insertKfzxyjfxqInfo.setCjsj(DateUtil.getCurrentDateTimeStr());
+		return kfzxyjfxqInfoMapper.insertSelective(insertKfzxyjfxqInfo);
+	}
+	
+	/**
+	 * 计算BUG得分
+	 * @author dell
+	 * @param rwid
+	 * @return
+	 * @since JDK 1.6
+	 */
+	protected Integer saveKfzBugdf(String rwid){
+		String kfzid = null;
+		int score = 0;
+		String xyjfWid = null;
+		Integer xyjf = 0; 
+		Integer xyjfxq = 0;
+		BugZrrInfoExtend queryBugZrrInfoExtend = new BugZrrInfoExtend();
+		queryBugZrrInfoExtend.setRwid(rwid);
+		List<BugZrrInfoExtend> bugzrrLst = bugZrrInfoExtendMapper
+				.selectByCondition(ConditionUtil.createCondition(queryBugZrrInfoExtend));
+		if(CommonUtil.isNotEmptyList(bugzrrLst)){
+			BugZrrInfoExtend bugZrrInfoExtend = bugzrrLst.get(0);
+			kfzid = bugZrrInfoExtend.getKfzid();
+			if("-999999999".equals(kfzid)){
+				String bgzrrgh = bugZrrInfoExtend.getBgzrrgh();
+				KfzxxInfoExtend queryKfzxxInfoExtend = new KfzxxInfoExtend();
+				queryKfzxxInfoExtend.setGh(bgzrrgh);
+				List<KfzxxInfoExtend> kfzLst = kfzxxInfoExtendMapper
+						.selectByCondition(ConditionUtil.createCondition(queryKfzxxInfoExtend));
+				if(CommonUtil.isNotEmptyList(kfzLst)){
+					KfzxxInfoExtend kfzxxInfoExtend = kfzLst.get(0);
+					kfzid = kfzxxInfoExtend.getWid();
+				}
+			}
+			if(!StringUtil.isEmpty(kfzid)){
+				KfzxyjfInfoExtend queryKfzxyjfInfoExtend = new KfzxyjfInfoExtend();
+				queryKfzxyjfInfoExtend.setKfzid(kfzid);
+				List<KfzxyjfInfoExtend> kfzxyjfInfoLst = kfzxyjfInfoExtendMapper
+						.selectByCondition(ConditionUtil.createCondition(queryKfzxyjfInfoExtend));
+				if(CommonUtil.isNotEmptyList(kfzxyjfInfoLst)){
+					score = StringUtil.toInt(kfzxyjfInfoLst.get(0).getScore());
+					xyjfWid = StringUtil.toStr(kfzxyjfInfoLst.get(0).getWid());
+				}
+				xyjfxq = saveKfzxyjfxq(kfzid, rwid, KfzxyjflxEnum.BUGDF.getCode(), KfzxyjflxEnum.BUGDF.getName(),
+						KfzxyjflxEnum.BUGDF.getScore(), score);
+				xyjf = saveOrUpdateKfzxyjf(kfzid, KfzxyjflxEnum.BUGDF.getScore(), score, xyjfWid);
+			}
+		}
+		return xyjf + xyjfxq;
+	}
+	
+	/**
+	 * 保存开发者评价得分
+	 * @author dell
+	 * @param rwid   任务ID
+	 * @param kfzid  开发者ID
+	 * @param pjjg   评价结果
+	 * @return
+	 * @since JDK 1.6
+	 */
+	protected Integer saveKfzPjdf(String rwid, String kfzid, String pjjg){
+		int oldScore = 0;
+		String xyjfWid = null;
+		Integer xyjf = 0; 
+		Integer xyjfxq = 0;
+		String classify = null;
+		String content = null;
+		int score = 0;
+		if(PjResultEnum.YX.getCode().equals(pjjg)){
+			classify = KfzxyjflxEnum.HPDF.getCode();
+			content = KfzxyjflxEnum.HPDF.getName();
+			score = KfzxyjflxEnum.HPDF.getScore();
+		}else if(PjResultEnum.LH.getCode().equals(pjjg)){
+			classify = KfzxyjflxEnum.ZPDF.getCode();
+			content = KfzxyjflxEnum.ZPDF.getName();
+			score = KfzxyjflxEnum.ZPDF.getScore();
+		}else{
+			classify = KfzxyjflxEnum.CPDF.getCode();
+			content = KfzxyjflxEnum.CPDF.getName();
+			score = KfzxyjflxEnum.CPDF.getScore();
+		}
+		KfzxyjfInfoExtend queryKfzxyjfInfoExtend = new KfzxyjfInfoExtend();
+		queryKfzxyjfInfoExtend.setKfzid(kfzid);
+		List<KfzxyjfInfoExtend> kfzxyjfInfoLst = kfzxyjfInfoExtendMapper
+				.selectByCondition(ConditionUtil.createCondition(queryKfzxyjfInfoExtend));
+		if(CommonUtil.isNotEmptyList(kfzxyjfInfoLst)){
+			oldScore = StringUtil.toInt(kfzxyjfInfoLst.get(0).getScore());
+			xyjfWid = StringUtil.toStr(kfzxyjfInfoLst.get(0).getWid());
+		}
+		KfzxyjfxqInfoExtend queryKfzxyjfxqInfoExtend = new KfzxyjfxqInfoExtend();
+		queryKfzxyjfxqInfoExtend.setRwid(rwid);
+		List<String> scoreClassifys = new ArrayList<String>();
+		scoreClassifys.add(KfzxyjflxEnum.HPDF.getCode());
+		scoreClassifys.add(KfzxyjflxEnum.ZPDF.getCode());
+		scoreClassifys.add(KfzxyjflxEnum.CPDF.getCode());
+		queryKfzxyjfxqInfoExtend.setScoreClassifys(scoreClassifys);
+		List<KfzxyjfxqInfoExtend> xyjfxqLst = kfzxyjfxqInfoExtendMapper
+				.selectByCondition(ConditionUtil.createCondition(queryKfzxyjfxqInfoExtend));
+		xyjfxq = saveKfzxyjfxq(kfzid, rwid, classify, content, score, oldScore);
+		if(CommonUtil.isNotEmptyList(xyjfxqLst)){//之前有做过评价--先减去之前的评价得分
+			int lstPjdf = xyjfxqLst.get(0).getScore().intValue();
+			xyjf = saveOrUpdateKfzxyjf(kfzid, score, oldScore-lstPjdf, xyjfWid);
+		}else{//之前未做评价
+			xyjf = saveOrUpdateKfzxyjf(kfzid, score, oldScore, xyjfWid);
+		}
+		return xyjf + xyjfxq;
+	}
+}
+

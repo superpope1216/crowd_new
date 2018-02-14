@@ -1,0 +1,216 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE HTML>
+<html>
+<%@ include file="/jsp/top/top.jsp"%>
+<%@ include file="/jsp/top/other.jsp"%>
+<%@ include file="/jsp/param.jsp"%>
+<link rel='stylesheet'
+	href='<%=request.getContextPath()%>/statics/css/order.css'>
+<!--[if lte IE 8]>
+<div class="text-xs-center m-b-0 bg-blue-grey-100 alert">
+    <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+        <span aria-hidden="true">×</span>
+    </button>
+    你正在使用一个 <strong>过时</strong> 的浏览器。请 <a href="http://browsehappy.com/" target="_blank">升级您的浏览器</a>，以提高您的体验。
+</div>
+<![endif]-->
+
+<body>
+	<%@include file="/jsp/header.jsp"%>
+
+	<div class="page bg-pagebg1">
+		<div class="container">
+			<div class="page-content row">
+				<div class="col-lg-3">
+					<%@include file="/jsp/kfzxx/left_menu.jsp"%>
+				</div>
+
+				<div class="col-lg-9">
+					<div class="panel m-b-0" boxmh-mh>
+						<div class="panel-body shop-order">
+							<div>
+								<ul class="nav nav-tabs nav-tabs-line m-b-0 shop-order-state">
+									<li class='nav-item active'><a class="nav-link" data-toggle="tab"
+										href="#state1" data-state="0">待确认(${dqr})</a></li>
+									<li class='nav-item'><a class="nav-link" data-toggle="tab"
+										href="#state0" data-state="1">开发中(${kfz})</a></li>
+									<li class='nav-item'><a class="nav-link" data-toggle="tab"
+										href="#state0" data-state="2">待验收(${dys})</a></li>
+									<li class='nav-item'><a class="nav-link" data-toggle="tab"
+										href="#state0" data-state="3">已完成(${ywc})</a></li>
+									<li class='nav-item'><a class="nav-link" data-toggle="tab"
+										href="#state0" data-state="4">已拒绝(${yjj})</a></li>
+										<li class='nav-item'><a class="nav-link" data-toggle="tab"
+										href="#state0" data-state="5">验收未通过(${yswtg})</a></li>
+								</ul>
+							</div>
+							<div class="shop-order-keyword m-y-20">
+								<div class="form-group">
+									<div class="input-search"  id="searchLikeRwjbxx">
+										<button type="button" class="input-search-btn">
+											<i class="icon wb-search" aria-hidden="true" style="cursor:pointer"></i>
+										</button>
+										<input type="text" class="form-control" name="keyword"
+											data-table-search="true" placeholder="需求编号、需求名称、项目编号、项目名称、学校名称">
+									</div>
+								</div>
+							</div>
+							<div class="shop-order-list" data-scale="1" id="ulOrders">
+									
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade modal-primary in" id="ddqrModal"
+		aria-labelledby="ddqrModal" role="dialog" tabindex="-1">
+		<div class="modal-dialog modal-center">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title">订单确认</h4>
+				</div>
+				<form action="" id="formDdqr">
+					<div class="modal-body">
+						<div class="form-group">
+							<input type="hidden" name="wid" value="">
+								<select class="form-control prov" name="sfjs" required
+									data-fv-notempty-message="此项不能为空" >
+									<option value="">---请选择是否接受该订单---</option>
+									<option value="1">是</option>
+									<option value="0">否</option> 
+								</select>
+						</div>
+					</div>
+					<div class="modal-footer text-xs-left">
+						<button type="button" class="btn btn-primary btn-squared"
+							id="btnSaveDdqr">保存</button>
+						<button type="button" class="btn btn-default btn-squared"
+							data-dismiss="modal">取消</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	<!-- 日报modal-->
+	<div class="modal fade modal-primary trans" id="rbxx-edit-modal" 
+		aria-hidden="true" aria-labelledby="rbxx-modal-title" role="dialog"
+		tabindex="-1">
+		<div class="modal-dialog modal-center modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title" id="rbxx-modal-title">日报编辑</h4>
+				</div>
+				<form id="formRbxxgl"
+					class="addr-edit-form met-form-validation" >
+					<input name="rwwid" type="hidden" id="rwwid">
+					<div class="modal-body">
+						<div class="form-group col-md-12">
+							<label class="col-sm-2 control-label" style="font-size: 14px;">任务编号</label>
+						    <div class="col-sm-10">
+							<input type="text" class="form-control" name="rwbh"
+								placeholder="任务编号"  data-bv-notempty="true"  
+			           	data-bv-notempty-message="此项不能为空" >
+							</div>
+						</div>
+						<div class="form-group col-md-12"  style="display:none">
+							<label class="col-sm-2 control-label" style="font-size: 14px;">任务名称</label>
+							<div class="col-sm-10">
+							<input type="text" class="form-control" name="rwmc"
+								placeholder="请输入任务名称" readonly >
+							</div>
+						</div>
+						
+							<div class="form-group col-md-12">
+							<label class="col-sm-2 control-label" style="font-size: 14px;">日期</label>
+							<div class="col-sm-10">
+							<input type="text" class="form-control datepicker" name="rq"
+								placeholder="请输入日期"  data-bv-date="true" 
+									data-bv-date-format="YYYY-MM-DD"
+									data-bv-date-message="请输入正确的日期格式" value="${date}"
+									data-bv-notempty="true"  
+			                       	data-bv-notempty-message="此项不能为空">
+							</div>
+						</div>
+                         
+						<div class="form-group select-linkage col-md-12">
+							<label class="col-sm-2 control-label" style="font-size: 14px;">时间段</label>
+						   <div class="col-sm-10">
+							<select class="form-control prov" name="sjd" data-bv-notempty="true"  
+			          	data-bv-notempty-message="此项不能为空" placeholder="请选择时间段">
+								 <option value="">请选择时间段</option>
+							    <c:forEach  items="${sjdList}" var="list">
+					             <option value="${list.lbdm}">${list.lbmc}</option>
+					            </c:forEach>
+							   </select>
+							   </div>
+						</div>
+						<div class="form-group col-md-12">
+							<label class="col-sm-2 control-label" style="font-size: 14px;">实际工作量</label>
+							 <div class="col-sm-10">
+						      <input type="text" class="form-control" name="sjgzl"
+								placeholder="请输入实际工作量(小时)" data-bv-notempty="true"  
+				     data-bv-notempty-message="此项不能为空"  data-bv-regexp="true" 
+			   data-bv-regexp-regexp="^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$" 
+			   data-bv-regexp-message="请输入正确的工作量">
+							 </div>
+						</div>
+						
+						<div class="form-group col-md-12">
+						<label class="col-sm-2 control-label" style="font-size: 14px;">工作内容说明</label>
+						    <div class="col-sm-10">
+							<textarea class="form-control" rows="3" name="gznrsm"
+								placeholder="请输入工作内容说明" 
+								data-bv-notempty="true"  
+			                	data-bv-notempty-message="此项不能为空"></textarea>
+								</div>
+						</div>
+						
+						<div class="form-group m-b-0 col-md-12">
+						<label class="col-sm-2 control-label" style="font-size: 14px;">备注</label>
+						 <div class="col-sm-10">
+							<textarea class="form-control" rows="3" name="bz"
+								placeholder="请输入备注"  
+								></textarea>
+						  </div>
+						</div>
+					</div>
+					<div class="modal-footer text-xs-left">
+						<button type="button" class="my-btn" id="btnSave">保存</button>
+						<button type="button" class="my-btn-default"
+							data-dismiss="modal">取消</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- End Modal -->
+	
+	
+	<script>
+	var page_type="kfzCfOrder";
+	var rwid="${rwid}";
+	</script>
+
+	<%@include file="/jsp/footer/footer2.jsp" %>
+	<button type="button"
+		class="btn btn-icon btn-primary btn-squared met-scroll-top" hidden>
+		<i class="icon wb-chevron-up" aria-hidden="true"></i>
+	</button>
+	<%@ include file="/jsp/bottom.jsp"%>
+</body>
+</html>

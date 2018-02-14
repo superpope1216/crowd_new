@@ -1,0 +1,49 @@
+package com.wisedu.crowd.controller.xqfxx;
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.wisedu.crowd.common.code.DictionaryEnum;
+import com.wisedu.crowd.common.util.StringUtil;
+import com.wisedu.crowd.controller.BaseController;
+import com.wisedu.crowd.entity.dictionary.DictionaryInfo;
+import com.wisedu.crowd.entity.dictionary.XzqhInfo;
+import com.wisedu.crowd.service.dictionary.DictionaryService;
+import com.wisedu.crowd.service.dictionary.XzqhInfoService;
+
+@Controller
+@RequestMapping("xqfConfrim")
+public class XqfConfirmController extends BaseController {
+	
+
+	
+	@Autowired
+	private DictionaryService  dictionaryService;
+	
+	@Autowired
+	private XzqhInfoService   xzqhInfoService;
+
+	@RequestMapping("index")
+	public String index(Model model){
+		
+		List<DictionaryInfo> rangeList=dictionaryService.selectAllByTable(DictionaryEnum.T_CROWD_SJZD_USER_RANGE);
+		model.addAttribute("rangeList", rangeList);
+		
+		XzqhInfo  xzqhInfo=new XzqhInfo();
+		xzqhInfo.setCc("1");
+		List<XzqhInfo>  provinceList=xzqhInfoService.selectByCondition(xzqhInfo);
+		model.addAttribute("provinceList", provinceList);
+		xzqhInfo.setCc("2");
+		List<XzqhInfo>  cityList=xzqhInfoService.selectByCondition(xzqhInfo);
+		model.addAttribute("cityList", cityList);
+		xzqhInfo.setCc("3");
+		List<XzqhInfo>  areaList=xzqhInfoService.selectByCondition(xzqhInfo);
+		model.addAttribute("areaList", areaList);
+		return "xqfgl/xqfxx/confirm";
+	}
+}

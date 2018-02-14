@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.cwgl.GrsdsInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.cwgl.GrsdsInfo" >
+    <id column="wid" property="wid" jdbcType="VARCHAR" />
+    <result column="jexx" property="jexx" jdbcType="INTEGER" />
+    <result column="jesx" property="jesx" jdbcType="INTEGER" />
+    <result column="sl" property="sl" jdbcType="INTEGER" />
+    <result column="sskcf" property="sskcf" jdbcType="INTEGER" />
+    <result column="qzd" property="qzd" jdbcType="INTEGER" />
+    <result column="sfsy" property="sfsy" jdbcType="INTEGER" />
+    <result column="px" property="px" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    wid, jexx, jesx, sl, sskcf, qzd, sfsy, px
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_crowd_cwgl_grsds
+    where wid = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_crowd_cwgl_grsds
+    where wid = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisedu.crowd.entity.cwgl.GrsdsInfo" >
+    insert into t_crowd_cwgl_grsds (wid, jexx, jesx, 
+      sl, sskcf, qzd, sfsy, 
+      px)
+    values (#{wid,jdbcType=VARCHAR}, #{jexx,jdbcType=INTEGER}, #{jesx,jdbcType=INTEGER}, 
+      #{sl,jdbcType=INTEGER}, #{sskcf,jdbcType=INTEGER}, #{qzd,jdbcType=INTEGER}, #{sfsy,jdbcType=INTEGER}, 
+      #{px,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisedu.crowd.entity.cwgl.GrsdsInfo" >
+    insert into t_crowd_cwgl_grsds
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        wid,
+      </if>
+      <if test="jexx != null" >
+        jexx,
+      </if>
+      <if test="jesx != null" >
+        jesx,
+      </if>
+      <if test="sl != null" >
+        sl,
+      </if>
+      <if test="sskcf != null" >
+        sskcf,
+      </if>
+      <if test="qzd != null" >
+        qzd,
+      </if>
+      <if test="sfsy != null" >
+        sfsy,
+      </if>
+      <if test="px != null" >
+        px,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="jexx != null" >
+        #{jexx,jdbcType=INTEGER},
+      </if>
+      <if test="jesx != null" >
+        #{jesx,jdbcType=INTEGER},
+      </if>
+      <if test="sl != null" >
+        #{sl,jdbcType=INTEGER},
+      </if>
+      <if test="sskcf != null" >
+        #{sskcf,jdbcType=INTEGER},
+      </if>
+      <if test="qzd != null" >
+        #{qzd,jdbcType=INTEGER},
+      </if>
+      <if test="sfsy != null" >
+        #{sfsy,jdbcType=INTEGER},
+      </if>
+      <if test="px != null" >
+        #{px,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisedu.crowd.entity.cwgl.GrsdsInfo" >
+    update t_crowd_cwgl_grsds
+    <set >
+      <if test="jexx != null" >
+        jexx = #{jexx,jdbcType=INTEGER},
+      </if>
+      <if test="jesx != null" >
+        jesx = #{jesx,jdbcType=INTEGER},
+      </if>
+      <if test="sl != null" >
+        sl = #{sl,jdbcType=INTEGER},
+      </if>
+      <if test="sskcf != null" >
+        sskcf = #{sskcf,jdbcType=INTEGER},
+      </if>
+      <if test="qzd != null" >
+        qzd = #{qzd,jdbcType=INTEGER},
+      </if>
+      <if test="sfsy != null" >
+        sfsy = #{sfsy,jdbcType=INTEGER},
+      </if>
+      <if test="px != null" >
+        px = #{px,jdbcType=INTEGER},
+      </if>
+    </set>
+    where wid = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisedu.crowd.entity.cwgl.GrsdsInfo" >
+    update t_crowd_cwgl_grsds
+    set jexx = #{jexx,jdbcType=INTEGER},
+      jesx = #{jesx,jdbcType=INTEGER},
+      sl = #{sl,jdbcType=INTEGER},
+      sskcf = #{sskcf,jdbcType=INTEGER},
+      qzd = #{qzd,jdbcType=INTEGER},
+      sfsy = #{sfsy,jdbcType=INTEGER},
+      px = #{px,jdbcType=INTEGER}
+    where wid = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.rwgl.extend.XmjbxxInfoExtendMapper">
+	<resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.rwgl.XmjbxxInfo">
+		<id column="WID" property="wid" jdbcType="VARCHAR" />
+		<result column="XMBH" property="xmbh" jdbcType="VARCHAR" />
+		<result column="XMMC" property="xmmc" jdbcType="VARCHAR" />
+		<result column="SZQY" property="szqy" jdbcType="VARCHAR" />
+		<result column="SSXX" property="ssxx" jdbcType="VARCHAR" />
+		<result column="LXRQ" property="lxrq" jdbcType="VARCHAR" />
+		<result column="QDRQ" property="qdrq" jdbcType="VARCHAR" />
+		<result column="CNYSRQ" property="cnysrq" jdbcType="VARCHAR" />
+		<result column="YSRQ" property="ysrq" jdbcType="VARCHAR" />
+		<result column="JXRQ" property="jxrq" jdbcType="VARCHAR" />
+		<result column="FZEBH" property="fzebh" jdbcType="VARCHAR" />
+		<result column="FZRMC" property="fzrmc" jdbcType="VARCHAR" />
+		<result column="SFSY" property="sfsy" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		WID, XMBH, XMMC, SZQY, SSXX, LXRQ, QDRQ, CNYSRQ, YSRQ, JXRQ, FZEBH, FZRMC,
+		SFSY
+	</sql>
+	<sql id="sqlWhere">
+		<if test='query!=null'>
+			<if test='query.wid!=null and query.wid!=""'>
+				AND WID=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.xmbh!=null and query.xmbh!=""'>
+				AND XMBH=#{xmbh,jdbcType=VARCHAR}
+			</if>
+			<if test='query.ssxx!=null and query.ssxx!=""'>
+				AND SSXX=#{query.ssxx,jdbcType=VARCHAR}
+			</if>
+			<if test='query.condition!=null and query.condition!=""'>
+				AND (upper(XMBH) like CONCAT('',#{query.condition},'%')
+				or upper(SSXX) like CONCAT('',#{query.condition},'%') )
+			</if>
+		</if>
+	</sql>
+	<select id="selectByCondition" resultMap="BaseResultMap"
+		parameterType="com.wisedu.crowd.entity.dto.QueryCondition">
+		select
+		<include refid="Base_Column_List" />
+		from t_crowd_xmgl_xmjbxx
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+		order by xmbh
+	</select>
+</mapper>

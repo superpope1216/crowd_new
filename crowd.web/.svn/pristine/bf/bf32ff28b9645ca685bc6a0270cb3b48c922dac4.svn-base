@@ -1,0 +1,16 @@
+package com.wisedu.crowd.controller.center;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.wisedu.crowd.controller.BaseController;
+
+@Controller
+@RequestMapping("publishing")
+public class PublishingController extends BaseController{
+
+	@RequestMapping("index")
+	public String index(){
+		return "center/publishing";
+	}
+}

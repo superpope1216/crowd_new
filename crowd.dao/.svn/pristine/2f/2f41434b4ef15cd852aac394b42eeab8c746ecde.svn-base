@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.yhgl.extend.KfzxxInfoExtendMapper" >
+
+	<resultMap id="BaseDisplayResultMap" type="com.wisedu.crowd.entity.yhgl.extend.KfzxxInfoExtend"
+	  	 extends="com.wisedu.crowd.dao.yhgl.KfzxxInfoMapper.BaseResultMap">
+	   <result column="GZLBDM_DISPLAY" property="gzlbdmDisplay"
+			jdbcType="VARCHAR" />
+	    <result column="SCJSDM_DISPLAY" property="scjsdmDisplay"
+	   jdbcType="VARCHAR" />
+	    <result column="GZNX_DISPLAY" property="gznxDisplay"
+	   jdbcType="VARCHAR" />
+	      <result column="JYGZNX_DISPLAY" property="jygznxDisplay"
+	   jdbcType="VARCHAR" />
+	     <result column="GZXZ_DISPLAY" property="gzxzDisplay"
+	   jdbcType="VARCHAR" />
+	     <result column="SFYTD_DISPLAY" property="sfytdDisplay"
+	   jdbcType="VARCHAR" />
+	
+	</resultMap>
+	
+  <sql id="Base_Column_List" >
+    t_crowd_yhgl_kfzxx.WID, t_crowd_yhgl_kfzxx.YHID, t_crowd_yhgl_kfzxx.XM, t_crowd_yhgl_kfzxx.NC, 
+    t_crowd_yhgl_kfzxx.SFZJH, t_crowd_yhgl_kfzxx.XB, t_crowd_yhgl_kfzxx.CSRQ, t_crowd_yhgl_kfzxx.SZDQ, t_crowd_yhgl_kfzxx.DZYX, 
+    t_crowd_yhgl_kfzxx.QQ, t_crowd_yhgl_kfzxx.WXH, t_crowd_yhgl_kfzxx.ZFBZH, t_crowd_yhgl_kfzxx.GZLBDM,
+    t_crowd_yhgl_kfzxx.GZLBMC, t_crowd_yhgl_kfzxx.SCJSDM, t_crowd_yhgl_kfzxx.SCJSMC, t_crowd_yhgl_kfzxx.SFJSTJ, 
+    t_crowd_yhgl_kfzxx.GZNX, t_crowd_yhgl_kfzxx.GZJL, t_crowd_yhgl_kfzxx.XMJY, t_crowd_yhgl_kfzxx.ZSLJ,
+    t_crowd_yhgl_kfzxx.KXSJID, t_crowd_yhgl_kfzxx.GZXZ, t_crowd_yhgl_kfzxx.SHZT, t_crowd_yhgl_kfzxx.SHYJ, 
+    t_crowd_yhgl_kfzxx.SFZZMZTJID, t_crowd_yhgl_kfzxx.SFZFMZTJID, t_crowd_yhgl_kfzxx.SQSZPFJID, t_crowd_yhgl_kfzxx.GRZPFJID, 
+    t_crowd_yhgl_kfzxx.SFYTD, t_crowd_yhgl_kfzxx.SFTYKFZXY, t_crowd_yhgl_kfzxx.TDRS, t_crowd_yhgl_kfzxx.CZSJ,
+    t_crowd_yhgl_kfzxx.CZZIP, t_crowd_yhgl_kfzxx.ZHYE, t_crowd_yhgl_kfzxx.KFZLB, t_crowd_yhgl_kfzxx.QTJN, t_crowd_yhgl_kfzxx.DJYE, 
+    t_crowd_yhgl_kfzxx.JYGZNX, t_crowd_yhgl_kfzxx.SSYWX, t_crowd_yhgl_kfzxx.GH, t_crowd_yhgl_kfzxx.SSFGS, 
+    t_crowd_yhgl_kfzxx.KFZLX, t_crowd_yhgl_kfzxx.SFCYGZJS, t_crowd_yhgl_kfzxx.SSKFZX, t_crowd_yhgl_kfzxx.RYXZ, 
+    t_crowd_yhgl_kfzxx.PER_PROVINCE, t_crowd_yhgl_kfzxx.PER_CITY,t_crowd_yhgl_kfzxx.PER_AREA,t_crowd_yhgl_kfzxx.version
+  </sql>
+  <sql id="Base_Display_Column_List">
+  <include refid="Base_Column_List"></include>
+  ,t_crowd_sjzd_kfzgzlx.LBMC as GZLBDM_DISPLAY 
+  ,t_crowd_sjzd_kfzscjs.LBMC as SCJSDM_DISPLAY  
+  ,t_crowd_sjzd_kfzgznx1.LBMC as GZNX_DISPLAY      
+  ,t_crowd_sjzd_kfzgznx2.LBMC as JYGZNX_DISPLAY
+  ,t_crowd_sjzd_gzxz.LBMC as GZXZ_DISPLAY
+  ,t_crowd_sjzd_user_range.LBMC as SFYTD_DISPLAY
+  </sql>
+  <sql id="sqlWhere">
+   <if test="query!=null">
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND t_crowd_yhgl_kfzxx.WID=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.yhid!=null and query.yhid!=""'>
+  			AND t_crowd_yhgl_kfzxx.yhid=#{query.yhid,jdbcType=VARCHAR}
+  		</if>
+  	</if>
+  </sql>
+  <select id="selectByCondition" resultMap="BaseDisplayResultMap" parameterType="com.wisedu.crowd.entity.yhgl.extend.KfzxxInfoExtend">
+  		SELECT 
+  		<include refid="Base_Display_Column_List"/>
+  		FROM t_crowd_yhgl_kfzxx t_crowd_yhgl_kfzxx 
+  		
+  		LEFT JOIN t_crowd_sjzd_kfzgzlx t_crowd_sjzd_kfzgzlx on
+        t_crowd_sjzd_kfzgzlx.LBDM=t_crowd_yhgl_kfzxx.GZLBDM AND
+        t_crowd_sjzd_kfzgzlx.SFSY=1
+        
+        LEFT JOIN t_crowd_sjzd_kfzscjs t_crowd_sjzd_kfzscjs on
+        t_crowd_sjzd_kfzscjs.LBDM=t_crowd_yhgl_kfzxx.SCJSDM AND
+        t_crowd_sjzd_kfzscjs.SFSY=1
+        
+          LEFT JOIN t_crowd_sjzd_kfzgznx t_crowd_sjzd_kfzgznx1 on
+        t_crowd_sjzd_kfzgznx1.LBDM=t_crowd_yhgl_kfzxx.GZNX AND
+        t_crowd_sjzd_kfzgznx1.SFSY=1
+        
+          LEFT JOIN t_crowd_sjzd_kfzgznx t_crowd_sjzd_kfzgznx2 on
+        t_crowd_sjzd_kfzgznx2.LBDM=t_crowd_yhgl_kfzxx.JYGZNX AND
+        t_crowd_sjzd_kfzgznx2.SFSY=1
+        
+          LEFT JOIN t_crowd_sjzd_gzxz t_crowd_sjzd_gzxz on
+        t_crowd_sjzd_gzxz.LBDM=t_crowd_yhgl_kfzxx.GZXZ AND
+        t_crowd_sjzd_gzxz.SFSY=1
+        
+          LEFT JOIN t_crowd_sjzd_user_range t_crowd_sjzd_user_range on
+        t_crowd_sjzd_user_range.LBDM=t_crowd_yhgl_kfzxx.SFYTD AND
+        t_crowd_sjzd_user_range.SFSY=1
+        
+  		<where>
+  			<include refid="sqlWhere"/>
+  		</where>
+  		order by wid
+  </select>
+  <update id="updateByVersion" parameterType="com.wisedu.crowd.entity.yhgl.KfzxxInfo" >
+    update t_crowd_yhgl_kfzxx
+    <set >
+      <if test="yhid != null" >
+        YHID = #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        XM = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="nc != null" >
+        NC = #{nc,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzjh != null" >
+        SFZJH = #{sfzjh,jdbcType=VARCHAR},
+      </if>
+      <if test="xb != null" >
+        XB = #{xb,jdbcType=VARCHAR},
+      </if>
+      <if test="csrq != null" >
+        CSRQ = #{csrq,jdbcType=DATE},
+      </if>
+      <if test="szdq != null" >
+        SZDQ = #{szdq,jdbcType=VARCHAR},
+      </if>
+      <if test="dzyx != null" >
+        DZYX = #{dzyx,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        QQ = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="wxh != null" >
+        WXH = #{wxh,jdbcType=VARCHAR},
+      </if>
+      <if test="zfbzh != null" >
+        ZFBZH = #{zfbzh,jdbcType=VARCHAR},
+      </if>
+      <if test="gzlbdm != null" >
+        GZLBDM = #{gzlbdm,jdbcType=VARCHAR},
+      </if>
+      <if test="gzlbmc != null" >
+        GZLBMC = #{gzlbmc,jdbcType=VARCHAR},
+      </if>
+      <if test="scjsdm != null" >
+        SCJSDM = #{scjsdm,jdbcType=VARCHAR},
+      </if>
+      <if test="scjsmc != null" >
+        SCJSMC = #{scjsmc,jdbcType=VARCHAR},
+      </if>
+      <if test="sfjstj != null" >
+        SFJSTJ = #{sfjstj,jdbcType=INTEGER},
+      </if>
+      <if test="gznx != null" >
+        GZNX = #{gznx,jdbcType=VARCHAR},
+      </if>
+      <if test="gzjl != null" >
+        GZJL = #{gzjl,jdbcType=VARCHAR},
+      </if>
+      <if test="xmjy != null" >
+        XMJY = #{xmjy,jdbcType=VARCHAR},
+      </if>
+      <if test="zslj != null" >
+        ZSLJ = #{zslj,jdbcType=VARCHAR},
+      </if>
+      <if test="kxsjid != null" >
+        KXSJID = #{kxsjid,jdbcType=VARCHAR},
+      </if>
+      <if test="gzxz != null" >
+        GZXZ = #{gzxz,jdbcType=VARCHAR},
+      </if>
+      <if test="shzt != null" >
+        SHZT = #{shzt,jdbcType=VARCHAR},
+      </if>
+      <if test="shyj != null" >
+        SHYJ = #{shyj,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzzmztjid != null" >
+        SFZZMZTJID = #{sfzzmztjid,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzfmztjid != null" >
+        SFZFMZTJID = #{sfzfmztjid,jdbcType=VARCHAR},
+      </if>
+      <if test="sqszpfjid != null" >
+        SQSZPFJID = #{sqszpfjid,jdbcType=VARCHAR},
+      </if>
+      <if test="grzpfjid != null" >
+        GRZPFJID = #{grzpfjid,jdbcType=VARCHAR},
+      </if>
+      <if test="sfytd != null" >
+        SFYTD = #{sfytd,jdbcType=INTEGER},
+      </if>
+      <if test="sftykfzxy != null" >
+        SFTYKFZXY = #{sftykfzxy,jdbcType=INTEGER},
+      </if>
+      <if test="tdrs != null" >
+        TDRS = #{tdrs,jdbcType=INTEGER},
+      </if>
+      <if test="czsj != null" >
+        CZSJ = #{czsj,jdbcType=DATE},
+      </if>
+      <if test="czzip != null" >
+        CZZIP = #{czzip,jdbcType=VARCHAR},
+      </if>
+      <if test="zhye != null" >
+        ZHYE = #{zhye,jdbcType=DECIMAL},
+      </if>
+      <if test="kfzlb != null" >
+        KFZLB = #{kfzlb,jdbcType=VARCHAR},
+      </if>
+      <if test="qtjn != null" >
+        QTJN = #{qtjn,jdbcType=VARCHAR},
+      </if>
+      <if test="djye != null" >
+        DJYE = #{djye,jdbcType=DECIMAL},
+      </if>
+      <if test="jygznx != null" >
+        JYGZNX = #{jygznx,jdbcType=VARCHAR},
+      </if>
+      <if test="ssywx != null" >
+        SSYWX = #{ssywx,jdbcType=INTEGER},
+      </if>
+      <if test="gh != null" >
+        GH = #{gh,jdbcType=VARCHAR},
+      </if>
+      <if test="ssfgs != null" >
+        SSFGS = #{ssfgs,jdbcType=VARCHAR},
+      </if>
+      <if test="kfzlx != null" >
+        KFZLX = #{kfzlx,jdbcType=VARCHAR},
+      </if>
+      <if test="sfcygzjs != null" >
+        SFCYGZJS = #{sfcygzjs,jdbcType=VARCHAR},
+      </if>
+      <if test="sskfzx != null" >
+        SSKFZX = #{sskfzx,jdbcType=VARCHAR},
+      </if>
+      <if test="ryxz != null" >
+        RYXZ = #{ryxz,jdbcType=VARCHAR},
+      </if>
+      <if test="perProvince != null" >
+        PER_PROVINCE = #{perProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="perCity != null" >
+        PER_CITY = #{perCity,jdbcType=VARCHAR},
+      </if>
+      <if test="perArea != null" >
+        PER_AREA = #{perArea,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        VERSION=#{version,jdbcType=INTEGER}+1,
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR} AND VERSION=#{version,jdbcType=INTEGER}
+  </update>
+</mapper>

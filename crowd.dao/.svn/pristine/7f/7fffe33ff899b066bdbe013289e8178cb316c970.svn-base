@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.rel.extend.KfzGzlbdmRelExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.rel.KfzGzlbdmRel" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="KFZID" property="kfzid" jdbcType="VARCHAR" />
+    <result column="YHID" property="yhid" jdbcType="VARCHAR" />
+    <result column="LBDM" property="lbdm" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, KFZID, YHID, LBDM
+  </sql>
+  
+  <insert id="addKfzGzlbdmRel" parameterType="java.util.List">  
+    insert into t_crowd_rel_kfzid_scjsdm (WID,KFZID,YHID,LBDM)   
+    values  
+    <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.wid},#{item.kfzid},#{item.yhid},#{item.lbdm})  
+    </foreach>  
+ </insert>  
+ 
+ 
+ <delete id="delKfzGzlbdmRel" parameterType="java.lang.String"> 
+     delete from t_crowd_rel_kfzid_scjsdm 
+     where KFZID= #{kfzid,jdbcType=VARCHAR}
+ </delete>
+ 
+</mapper>

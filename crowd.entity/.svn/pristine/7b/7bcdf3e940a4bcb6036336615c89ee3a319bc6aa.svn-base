@@ -1,0 +1,45 @@
+package com.wisedu.crowd.entity.dto;
+
+import java.io.Serializable;
+
+import com.wisedu.crowd.entity.datacode.HttpCodeEnum;
+
+public class DataResult<T> implements Serializable {
+
+    private static final long serialVersionUID = 8733472177254983171L;
+    
+    private PageInfo pageInfo;
+    
+
+	private T t;
+    
+    public DataResult(T t) {
+        this.t=t;
+    }
+
+    public DataResult(T t,PageInfo pageInfo) {
+        this.pageInfo=pageInfo;
+        this.t=t;
+    }
+
+    public DataResult() {
+    }
+    
+
+    public PageInfo getPageInfo() {
+		return pageInfo;
+	}
+
+	public void setPageInfo(PageInfo pageInfo) {
+		this.pageInfo = pageInfo;
+	}
+
+	public T getT() {
+		return t;
+	}
+
+	public void setT(T t) {
+		this.t = t;
+	}
+
+}

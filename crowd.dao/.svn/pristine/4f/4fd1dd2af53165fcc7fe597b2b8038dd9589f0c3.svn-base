@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.rwgl.extend.CpmlInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.rwgl.CpmlInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="BM" property="bm" jdbcType="VARCHAR" />
+    <result column="MC" property="mc" jdbcType="VARCHAR" />
+    <result column="YWXBM" property="ywxbm" jdbcType="VARCHAR" />
+    <result column="SFSY" property="sfsy" jdbcType="DECIMAL" />
+    <result column="PX" property="px" jdbcType="DECIMAL" />
+    <result column="LS" property="ls" jdbcType="VARCHAR" />
+    <result column="CC" property="cc" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap type="com.wisedu.crowd.entity.rwgl.extend.CpmlInfoExtend" id="BaseDisplayResultMap" extends="BaseResultMap">
+  	
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, BM, MC, YWXBM, SFSY, PX, LS, CC
+  </sql>
+  <select id="selectByCondition" resultMap="BaseDisplayResultMap" parameterType="com.wisedu.crowd.entity.rwgl.extend.CpmlInfoExtend" >
+    select 
+    <include refid="Base_Column_List" />
+    
+    from t_corwd_xmgl_cpml
+   WHERE SFSY=1
+    	<if test='wid!=null and wid!=""'>
+    		AND WID=#{wid,jdbcType=VARCHAR}
+    	</if>
+    	<if test='mc!=null and mc!=""'>
+    		AND MC LIKE CONCAT('%',mc,'%')
+    	</if>
+    	<if test='ywxbm!=null and ywxbm!=""'>
+    		AND YWXBM=#{ywxbm,jdbcType=VARCHAR}
+    	</if>
+    	<if test='cc!=null and cc!=""'>
+    		AND CC=#{cc,jdbcType=VARCHAR}
+    	</if>
+    	<if test='ccs!=null and ccs!=""'>
+    		AND CC IN 
+    		<foreach collection="ccs" item="item" index="index" close=")" open="(" separator=",">
+    			#{item,jdbcType=VARCHAR}
+    		</foreach>
+    	</if>
+   ORDER BY PX
+  </select>
+  
+</mapper>

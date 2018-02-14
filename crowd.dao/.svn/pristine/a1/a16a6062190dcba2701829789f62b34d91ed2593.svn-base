@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wisedu.crowd.dao.statics.extend.KfzxxDataExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.wisedu.crowd.entity.statics.extend.KfzxxDataExtend" 
+  extends="com.wisedu.crowd.dao.statics.KfzxxDataMapper.BaseResultMap">
+     <result column="PTRZJN_DISPLAY" property="ptrzjnDisplay" jdbcType="VARCHAR" />
+    <result column="PTRZDJ_DISPLAY" property="ptrzdjDisplay" jdbcType="VARCHAR" />
+    <result column="grzpfjid" property="grzpfjid" jdbcType="VARCHAR" />
+    
+  </resultMap>
+  <sql id="Base_Column_List" >
+    T_CROWD_STATIC_KFZXX_DATA.WID, T_CROWD_STATIC_KFZXX_DATA.KFZID, 
+    T_CROWD_STATIC_KFZXX_DATA.CYXM, T_CROWD_STATIC_KFZXX_DATA.PTRZJN, 
+    T_CROWD_STATIC_KFZXX_DATA.PTRZDJ, T_CROWD_STATIC_KFZXX_DATA.ZSR, 
+    T_CROWD_STATIC_KFZXX_DATA.ZDF, T_CROWD_STATIC_KFZXX_DATA.TBS
+  </sql>
+  <sql id="sqlUpdateWhere">
+  	<if test='wid!=null and wid!=""'>
+  		AND WID=#{wid,jdbcType=VARCHAR}
+  	</if>
+  	<if test='wid!=null and wid!=""'>
+  		AND KFZID=#{kfzid,jdbcType=VARCHAR}
+  	</if>
+  </sql>
+  <sql id="sqlWhere">
+  	<if test='query!=null'>
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND T_CROWD_STATIC_KFZXX_DATA.WID=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.kfzid!=null and query.kfzid!=""'>
+  			AND T_CROWD_STATIC_KFZXX_DATA.KFZID=#{query.kfzid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.needKfzxx!=null and query.needKfzxx==true'>
+  			<if test='query.sfytd!=null'>
+  				AND T_CROWD_YHGL_KFZXX.SFYTD=#{query.sfytd,jdbcType=INTEGER}
+  			</if>
+  		</if>
+  	</if>
+  </sql>
+  <sql id="sqlOrder">
+        ORDER BY
+  		<choose>
+  			<when test="orderBy!=null">
+  				<foreach collection="orderBy" close=" " open=" " item="item" separator=",">
+  					${item}
+  				</foreach>
+  			</when>
+  			<otherwise>
+  				T_CROWD_YHGL_KFZXX.cyxm DESC
+  			</otherwise>
+  		</choose>
+  </sql>
+  <delete id="deleteByCondition"  parameterType="com.wisedu.crowd.entity.statics.extend.KfzxxDataExtend" >
+    delete from T_CROWD_STATIC_KFZXX_DATA
+    <include refid="sqlUpdateWhere"/>
+  </delete>
+  
+  <select id="selectDisplayByCondition" resultMap="BaseResultMap" parameterType="com.wisedu.crowd.entity.dto.QueryCondition">
+  	SELECT <include refid="Base_Column_List"/>
+  	<if test='query.needKfzxx!=null and query.needKfzxx==true'>
+  		,T_CROWD_YHGL_KFZXX.NC AS kfzNc
+  		,T_CROWD_YHGL_KFZXX.XM AS kfzXm
+  		,T_CROWD_YHGL_KFZXX.grzpfjid
+  	</if>
+  	,T_CROWD_SJZD_KFZZZLB.LBMC AS PTRZJN_DISPLAY
+  	,T_CROWD_SJZD_KFZZZDJ.DJMC AS PTRZDJ_DISPLAY
+  	
+  	FROM T_CROWD_STATIC_KFZXX_DATA
+  	<if test='query.needKfzxx!=null and query.needKfzxx==true'>
+  		LEFT JOIN T_CROWD_YHGL_KFZXX ON T_CROWD_STATIC_KFZXX_DATA.KFZID=T_CROWD_YHGL_KFZXX.WID
+  	</if>
+  	LEFT JOIN T_CROWD_SJZD_KFZZZLB ON T_CROWD_SJZD_KFZZZLB.LBDM=T_CROWD_STATIC_KFZXX_DATA.PTRZJN
+  	LEFT JOIN T_CROWD_SJZD_KFZZZDJ ON T_CROWD_SJZD_KFZZZDJ.DJDM=T_CROWD_STATIC_KFZXX_DATA.PTRZDJ
+  	<where>
+  		<include refid="sqlWhere"/>
+  	</where>
+  	<include refid="sqlOrder"/>
+  </select>
+  
+</mapper>

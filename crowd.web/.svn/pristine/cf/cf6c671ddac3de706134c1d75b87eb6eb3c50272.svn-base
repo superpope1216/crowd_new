@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE generatorConfiguration
+    PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+  <generatorConfiguration>
+      <!-- <classPathEntry    location="ojdbc14.jar"/> -->
+      <context id="DB2Tables"    targetRuntime="MyBatis3">
+      <!-- 指定生成的java文件的编码,没有直接生成到项目时中文可能会乱码 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+          <commentGenerator type="com.wisedu.crowd.web.util.MyCommentGenerator">
+         </commentGenerator>
+         <!-- <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/crowd" userId="root" password="123456"> -->
+         <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@172.16.6.26:1521:URPDB" userId="crowd_test" password="wiseducrowd">
+          <property name="useInformationSchema" value="true"></property>
+             <!--  oracle <property name="remarksReporting" value="true"></property>-->
+         </jdbcConnection>
+         <!-- mysql配置 -->
+        <!--   <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                  connectionURL="jdbc:mysql://localhost:3306/bookshop" userId="root"
+                  password="root">
+                    针对mysql数据库
+                    <property name="useInformationSchema" value="true"></property>
+          </jdbcConnection> -->
+         <javaTypeResolver>
+             <property name="forceBigDecimals" value="false"/>
+         </javaTypeResolver>
+         <javaModelGenerator targetPackage="com.wisedu.crowd.entity.train" targetProject="src">
+             <property name="enableSubPackages" value="true"/>
+             <property name="trimStrings" value="true"/>
+         </javaModelGenerator>
+      <sqlMapGenerator targetPackage="com.wisedu.crowd.mapping.train" targetProject="src">
+             <property name="enableSubPackages" value="true"/>
+         </sqlMapGenerator>
+      <javaClientGenerator type="XMLMAPPER" targetPackage="com.wisedu.crowd.dao.train" targetProject="src">
+             <property name="enableSubPackages" value="true"/>
+         </javaClientGenerator>
+         
+         
+         <table  tableName="T_CROWD_TRAIN_ENROL" domainObjectName="TrainEnrolInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+         
+     </context>
+ </generatorConfiguration>
+ 

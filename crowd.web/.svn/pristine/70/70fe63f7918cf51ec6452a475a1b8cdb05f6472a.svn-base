@@ -1,0 +1,101 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE HTML>
+<html>
+<%@ include file="/jsp/top2.jsp"%>
+<%@ include file="/jsp/param.jsp"%>
+<link rel='stylesheet'
+	href='<%=request.getContextPath()%>/statics/css/yhgl/login.css'><style>
+.met-member {
+	background-color:;
+}
+
+.login_index {
+	background-color:;
+}
+</style>
+<body>
+	<%@include file="/jsp/header_not_login.jsp" %>
+
+	<div class="register_index met-member">
+		<div class="container">
+			<form class="form-register met-form" method="post"
+				action="">
+				<div class="form-group">
+				<h3 style="text-align: center">用户注册</h3>
+				</div>
+				
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-user"></i></span>
+						<input type="text" name="sjh" required class="form-control"
+							placeholder="手机号" data-bv-remote="false"
+							data-bv-remote-url=""
+							data-bv-remote-message="手机号已存在" data-bv-notempty="true"
+							data-bv-notempty-message="此项不能为空" data-bv-stringlength="true"
+							data-bv-stringlength-min="2" data-bv-stringlength-max="30"
+							data-bv-stringlength-message="用户名必须在2-30个字符之间" />
+
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
+						<input type="password" name="yhmm" required
+							class="form-control" placeholder="密码" data-bv-notempty="true"
+							data-bv-notempty-message="此项不能为空" data-bv-identical="true"
+							data-bv-identical-field="confirmYhmm"
+							data-bv-identical-message="两次密码输入不一致" data-bv-stringlength="true"
+							data-bv-stringlength-min="6" data-bv-stringlength-max="30"
+							data-bv-stringlength-message="密码必须在6-30个字符之间">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
+						<input type="password" name="confirmYhmm" required
+							data-password="password" class="form-control" placeholder="重复密码"
+							data-bv-identical="true" data-bv-identical-field="yhmm"
+							data-bv-identical-message="两次密码输入不一致"
+							data-bv-notempty-message="此项不能为空">
+
+					</div>
+				</div>
+
+				<div class="row login_code">
+					<div class="col-xs-8">
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-shield"></i></span>
+								<input type="text" value="" name="yzm" required class="form-control"
+									placeholder="验证码" data-bv-notempty="true"
+									data-bv-notempty-message="此项不能为空">
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-4 login_code_img">
+						
+						<input type="button" value="点击获取验证码" name="code"  class="form-control"  id="btnGetVerification">
+					</div>
+				</div>
+				<button class="btn btn-lg btn-primary btn-block" type="button" id="btnRegister">立即注册</button>
+				<div class="login_link">
+					<a
+						href="<%=request.getContextPath() %>/login/index">已有账号？</a>
+				</div>
+			</form>
+		</div>
+	</div>
+	<footer class="container met-footer">
+		<script  type="text/javascript">
+			var page_type="register";
+		</script>
+		<%@ include file="/jsp/bottom.jsp"%>
+		<%@ include file="/jsp/footer/footer_bq.jsp"%>
+		
+	</footer>
+</body>
+</html>

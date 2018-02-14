@@ -1,0 +1,66 @@
+package com.wisedu.crowd.controller.kfzxx;
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.wisedu.crowd.common.code.DictionaryEnum;
+import com.wisedu.crowd.controller.BaseController;
+import com.wisedu.crowd.entity.dictionary.DictionaryInfo;
+import com.wisedu.crowd.entity.dictionary.XzqhInfo;
+import com.wisedu.crowd.interceptor.AuthKfzAnnotation;
+import com.wisedu.crowd.service.dictionary.DictionaryService;
+import com.wisedu.crowd.service.dictionary.XzqhInfoService;
+
+@Controller
+@RequestMapping("kfzConfrim")
+public class KfzConfirmController extends BaseController{
+	
+
+	
+	@Autowired
+	private DictionaryService  dictionaryService;
+	
+	@Autowired
+	private XzqhInfoService   xzqhInfoService;
+
+	@RequestMapping("index")
+	@AuthKfzAnnotation
+	public String index(Model model){
+		
+		List<DictionaryInfo> booleanList=dictionaryService.selectAllByTable(DictionaryEnum.T_CROWD_SJZD_BOOLEAN);
+		model.addAttribute("booleanList", booleanList);
+		List<DictionaryInfo> gzxzList=dictionaryService.selectAllByTable(DictionaryEnum.T_CROWD_SJZD_GZXZ);
+		model.addAttribute("gzxzList", gzxzList);
+		List<DictionaryInfo> gzlxList=dictionaryService.selectAllByTable(DictionaryEnum.T_CROWD_SJZD_KFZGZLX);
+		model.addAttribute("gzlxList", gzlxList);
+		List<DictionaryInfo> scjsList=dictionaryService.selectAllByTable(DictionaryEnum.T_CROWD_SJZD_KFZSCJS);
+		model.addAttribute("scjsList", scjsList);
+		List<DictionaryInfo> gznxList=dictionaryService.selectAllByTable(DictionaryEnum.T_CROWD_SJZD_KFZGZNX);
+		model.addAttribute("gznxList", gznxList);
+		List<DictionaryInfo> rangeList=dictionaryService.selectAllByTable(DictionaryEnum.T_CROWD_SJZD_USER_RANGE);
+		model.addAttribute("rangeList", rangeList);
+		List<DictionaryInfo> kxsjList=dictionaryService.selectAllByTable(DictionaryEnum.T_CROWD_SJZD_KFZKXSJ);
+		model.addAttribute("kxsjList", kxsjList);
+		List<DictionaryInfo> rwxs=dictionaryService.selectAllByTable(DictionaryEnum.T_CROWD_SJZD_RWXS);
+		model.addAttribute("rwxsList", rwxs);
+		List<DictionaryInfo> rwkfkj=dictionaryService.selectAllByTable(DictionaryEnum.T_CROWD_SJZD_RWKFKJ);
+		model.addAttribute("rwkfkjList",rwkfkj);
+		
+		XzqhInfo  xzqhInfo=new XzqhInfo();
+		xzqhInfo.setCc("1");
+		List<XzqhInfo>  provinceList=xzqhInfoService.selectByCondition(xzqhInfo);
+		model.addAttribute("provinceList", provinceList);
+		xzqhInfo.setCc("2");
+		List<XzqhInfo>  cityList=xzqhInfoService.selectByCondition(xzqhInfo);
+		model.addAttribute("cityList", cityList);
+		xzqhInfo.setCc("3");
+		List<XzqhInfo>  areaList=xzqhInfoService.selectByCondition(xzqhInfo);
+		model.addAttribute("areaList", areaList);
+		return "kfzgl/kfzxx/confirm";
+	}
+}
